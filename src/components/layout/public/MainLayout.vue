@@ -32,7 +32,7 @@ const toggle = () => slim.value = !slim.value
   ;
 
   &.slim {
-    grid-template-columns: 80px 1fr;
+    grid-template-columns: 50px 1fr;
   }
 }
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   class: `row${string}` | `column${string}`
-  gap?: 16 | 24 | 32
+  gap?: "16" | "24" | "32"
 }>()
 
 const gap = `gap${props.gap ?? 8}`
