@@ -10,6 +10,6 @@
 <style scoped>
 #wrapper {
   display: flex;
-  margin: 0 auto
+  margin: 0 auto;
 }
 </style>
