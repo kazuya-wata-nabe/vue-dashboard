@@ -4,16 +4,23 @@ import FlexBox from "@/components/parts/FlexBox.vue";
 import InputForm from '@/components/parts/InputForm.vue';
 import TextInput from '@/components/parts/TextInput.vue';
 import TheButton from '@/components/parts/button/TheButton.vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { type AuthRepository } from "./model/repository";
 
+const props = defineProps<{ repository: AuthRepository }>()
 const router = useRouter()
-const onSubmit = () => {
-  return new Promise<void>(resolve => {
-    setTimeout(() => {
-      router.replace({ name: "home" })
-      resolve()
-    }, 1 * 1000)
-  })
+
+const id = ref("")
+const password = ref("")
+
+const onSubmit = async () => {
+  try {
+    await props.repository.login({ id: id.value, password: password.value });
+    await router.replace({ name: "home" });
+  } catch {
+    return alert("ng");
+  }
 }
 </script>
 
@@ -25,8 +32,8 @@ const onSubmit = () => {
           <h1>This is Header Area</h1>
         </FlexBox>
         <InputForm @submit.prevent id="form">
-          <TextInput label="id" />
-          <TextInput label="password" type="password" />
+          <TextInput label="id" v-model="id" />
+          <TextInput label="password" type="password" v-model="password" />
           <TheButton :command="onSubmit">submit</TheButton>
         </InputForm>
       </FlexBox>
@@ -39,4 +46,4 @@ const onSubmit = () => {
   height: 100px;
   place-content: center;
 }
-</style>
+</style>./model/repository
