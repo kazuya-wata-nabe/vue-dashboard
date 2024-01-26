@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PublicLayout } from '@/components/layout/public';
+import { PublicLayout } from '@/components/layout';
 import FlexBox from "@/components/parts/FlexBox.vue";
 import InputForm from '@/components/parts/InputForm.vue';
 import TextInput from '@/components/parts/TextInput.vue';
