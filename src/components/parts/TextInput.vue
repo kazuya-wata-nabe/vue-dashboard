@@ -7,4 +7,8 @@ defineProps<{ label: string }>()
   <input autocomplete="off" v-bind="$attrs" />
 </template>
 
-<style scoped></style>
+<style scoped>
+input {
+  line-height: 1.5rem;
+}
+</style>
