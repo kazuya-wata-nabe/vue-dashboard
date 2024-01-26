@@ -7,7 +7,7 @@ defineEmits<{ "toggle": [] }>()
 
 <template>
   <FlexBox class="column aside">
-    <FlexBox class="row menu-icon">
+    <FlexBox class="row menu-icon" :class="{ slim }">
       <span class="material-symbols-outlined" :class="{ slim }" @click="$emit('toggle')"></span>
     </FlexBox>
   </FlexBox>
@@ -21,8 +21,13 @@ defineEmits<{ "toggle": [] }>()
 }
 
 .menu-icon {
-  justify-content: end;
   padding: 0 8px;
+  justify-content: end;
+
+  &.slim {
+    padding: 0 0;
+    justify-content: center;
+  }
 }
 
 .material-symbols-outlined {
