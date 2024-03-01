@@ -53,4 +53,3 @@ const onSubmit = async () => {
   place-content: center;
 }
 </style>
-@/interface/auth-store-use-case
