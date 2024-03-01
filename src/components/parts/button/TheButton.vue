@@ -1,22 +1,20 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from "vue"
 
 const props = defineProps<{ command: () => Promise<void> }>()
 defineOptions({ inheritAttrs: false })
 
 const loading = ref(false)
 const handleSubmit = () => {
-  loading.value = true;
-  props.command()
-    .finally(() => loading.value = false)
+  loading.value = true
+  props.command().finally(() => (loading.value = false))
 }
 </script>
 
 <template>
   <div class="button-container" :class="{ loading }">
     <button @click="handleSubmit">
-      <div class=" loader" v-show="loading">
-      </div>
+      <div class="loader" v-show="loading"></div>
       <slot></slot>
     </button>
   </div>
@@ -53,9 +51,7 @@ button {
   aspect-ratio: 1;
   border-radius: 50%;
   background: white;
-  --_m:
-    conic-gradient(#0000 10%, #000),
-    linear-gradient(#000 0 0) content-box;
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
   mask: var(--_m);
   mask-composite: subtract;
   animation: spin 1s infinite linear;
@@ -63,7 +59,7 @@ button {
 
 @keyframes spin {
   to {
-    transform: rotate(1turn)
+    transform: rotate(1turn);
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import FlexBox from '@/components/parts/FlexBox.vue';
-import { useRouter } from 'vue-router';
+import FlexBox from "@/components/parts/FlexBox.vue"
+import { useRouter } from "vue-router"
 
 const router = useRouter()
 const onClickLogout = () => router.replace({ name: "login" })
@@ -10,12 +10,8 @@ const onClickLogout = () => router.replace({ name: "login" })
   <FlexBox class="row header">
     this is header
     <FlexBox class="row icons" gap="24">
-      <span class="material-symbols-outlined" @click="onClickLogout">
-        logout
-      </span>
-      <span class="material-symbols-outlined">
-        more_horiz
-      </span>
+      <span class="material-symbols-outlined" @click="onClickLogout"> logout </span>
+      <span class="material-symbols-outlined"> more_horiz </span>
     </FlexBox>
   </FlexBox>
 </template>

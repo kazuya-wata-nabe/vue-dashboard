@@ -1,6 +1,6 @@
 export type FetchParams = {
-  id: string;
-  password: string;
+  id: string
+  password: string
 }
 
 export interface AuthRepository {
