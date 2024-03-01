@@ -1,9 +1,15 @@
 <script lang="ts" setup>
+import { LocalStorage } from "@/infra/auth/storage/local-storage"
 import router from "@/router"
-import { isAuthenticated } from "./useAuth"
+import { provideAuth } from "./use-auth"
 
-router.beforeEach((to, _, next) => {
-  if (to.meta.requiresAuth && !isAuthenticated()) {
+const storage = new LocalStorage()
+// TODO: DIの場所を変えたい
+provideAuth(storage)
+
+router.beforeEach(async (to, _, next) => {
+  const isAuthenticated = await storage.load()
+  if (to.meta.requiresAuth && !isAuthenticated) {
     next({ name: "login" })
   } else {
     next()
