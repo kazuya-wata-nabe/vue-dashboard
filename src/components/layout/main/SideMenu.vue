@@ -17,7 +17,7 @@ defineEmits<{ toggle: [] }>()
 .aside {
   grid-area: aside;
   height: calc(100vh - v-bind(headerHeight));
-  background: lightsteelblue;
+  background: dimgray;
 }
 
 .menu-icon {
@@ -32,6 +32,7 @@ defineEmits<{ toggle: [] }>()
 
 .material-symbols-outlined {
   cursor: pointer;
+  color: lightgray;
 
   &::after {
     content: "menu";
