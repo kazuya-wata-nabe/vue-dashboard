@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
-import SideMenu from './SideMenu.vue';
-import TheHeader from './TheHeader.vue';
+import { ref } from "vue"
+import SideMenu from "./SideMenu.vue"
+import TheHeader from "./TheHeader.vue"
 
 const HEADER_HEIGHT = "50px"
 
 const slim = ref(false)
-const toggle = () => slim.value = !slim.value
+const toggle = () => (slim.value = !slim.value)
 </script>
 
 <template>
@@ -28,8 +28,7 @@ const toggle = () => slim.value = !slim.value
   grid-template-areas:
     "header header"
     "aside main"
-    "aside main"
-  ;
+    "aside main";
 
   &.slim {
     grid-template-columns: 50px 1fr;

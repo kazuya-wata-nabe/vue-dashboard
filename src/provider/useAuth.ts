@@ -1,4 +1,4 @@
-import { inject, provide } from "vue";
+import { inject, provide } from "vue"
 
 export const isAuthenticated = () => !!localStorage.getItem("auth")
 

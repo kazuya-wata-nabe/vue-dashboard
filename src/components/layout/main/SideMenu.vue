@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import FlexBox from '@/components/parts/FlexBox.vue';
+import FlexBox from "@/components/parts/FlexBox.vue"
 
-defineProps<{ headerHeight: string, slim: boolean }>()
-defineEmits<{ "toggle": [] }>()
+defineProps<{ headerHeight: string; slim: boolean }>()
+defineEmits<{ toggle: [] }>()
 </script>
 
 <template>

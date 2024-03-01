@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { PublicLayout } from '@/components/layout';
-import FlexBox from "@/components/parts/FlexBox.vue";
-import InputForm from '@/components/parts/InputForm.vue';
-import TextInput from '@/components/parts/TextInput.vue';
-import TheButton from '@/components/parts/button/TheButton.vue';
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { type AuthRepository } from "./model/repository";
+import { PublicLayout } from "@/components/layout"
+import FlexBox from "@/components/parts/FlexBox.vue"
+import InputForm from "@/components/parts/InputForm.vue"
+import TextInput from "@/components/parts/TextInput.vue"
+import TheButton from "@/components/parts/button/TheButton.vue"
+import { ref } from "vue"
+import { useRouter } from "vue-router"
+import { type AuthRepository } from "./model/repository"
 
 const props = defineProps<{ repository: AuthRepository }>()
 const router = useRouter()
@@ -16,10 +16,10 @@ const password = ref("")
 
 const onSubmit = async () => {
   try {
-    await props.repository.login({ id: id.value, password: password.value });
-    await router.replace({ name: "home" });
+    await props.repository.login({ id: id.value, password: password.value })
+    await router.replace({ name: "home" })
   } catch {
-    return alert("ng");
+    return alert("ng")
   }
 }
 </script>
@@ -46,4 +46,5 @@ const onSubmit = async () => {
   height: 100px;
   place-content: center;
 }
-</style>./model/repository
+</style>
+./model/repository
