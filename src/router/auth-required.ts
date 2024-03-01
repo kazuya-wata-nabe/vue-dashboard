@@ -6,5 +6,4 @@ export const authRequired = [
     name: "home",
     component: HomeView,
   },
-].map((route) => ({ ...route, meta: { requiresAuth: true } }))
-// TODO: nested routeに対応
+]

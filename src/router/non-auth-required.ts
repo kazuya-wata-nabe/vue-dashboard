@@ -9,5 +9,4 @@ export const nonAuthRequired = [
     props: { repository: new AuthRepositoryOnMemory() },
     component: Login,
   },
-].map((route) => ({ ...route, meta: { requiresAuth: false } }))
-// TODO: nested routeに対応
+]
