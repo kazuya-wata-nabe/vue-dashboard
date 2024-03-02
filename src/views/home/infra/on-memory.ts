@@ -5,7 +5,6 @@ const d = DateFormatter.parse
 export class BookRepositoryOnMemory implements BookRepository {
   async fetch() {
     await new Promise((resolve) => setTimeout(resolve, 1 * 1000))
-
     return [
       Book({
         id: "abc-1",
