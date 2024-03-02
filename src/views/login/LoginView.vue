@@ -4,13 +4,13 @@ import FlexBox from "@/components/parts/FlexBox.vue"
 import InputForm from "@/components/parts/InputForm.vue"
 import TextInput from "@/components/parts/TextInput.vue"
 import TheButton from "@/components/parts/button/TheButton.vue"
-import { useAuth } from "@/provider/use-auth"
+import { useAuth } from "@/provider/auth/use-auth"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
-import { type AuthRepository } from "./model/repository"
+import { type LoginRepository } from "./model"
 
 const props = defineProps<{
-  repository: AuthRepository
+  repository: LoginRepository
 }>()
 
 const router = useRouter()

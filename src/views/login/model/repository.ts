@@ -3,6 +3,6 @@ export type FetchParams = {
   password: string
 }
 
-export interface AuthRepository {
+export interface LoginRepository {
   login(params: FetchParams): Promise<boolean>
 }

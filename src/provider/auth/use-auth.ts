@@ -1,5 +1,5 @@
 import { inject, provide, type InjectionKey } from "vue"
-import type { AuthStorage } from "./interface"
+import type { AuthStorage } from "./model/storage"
 
 type AuthContext = {
   save(): Promise<void>

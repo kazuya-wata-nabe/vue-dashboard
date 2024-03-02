@@ -1,4 +1,4 @@
-import type { AuthStorage } from "@/provider/interface"
+import type { AuthStorage } from "@/provider/auth/model/storage"
 
 const KEY_AUTH = "auth"
 
