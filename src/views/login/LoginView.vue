@@ -33,8 +33,8 @@ const onSubmit = async () => {
 <template>
   <PublicLayout>
     <main>
-      <FlexBox class="column">
-        <FlexBox class="column header">
+      <FlexBox class="col">
+        <FlexBox class="col header">
           <h1>This is Header Area</h1>
         </FlexBox>
         <InputForm @submit.prevent>

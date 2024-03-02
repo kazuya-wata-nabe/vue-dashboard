@@ -37,5 +37,6 @@ const toggle = () => (slim.value = !slim.value)
 
 .main {
   grid-area: main;
+  padding: 16px;
 }
 </style>

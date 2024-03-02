@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  class: `row${string}` | `column${string}`
+  class: `row${string}` | `col${string}`
   gap?: "16" | "24" | "32"
 }>()
 
@@ -21,7 +21,7 @@ const gap = `gap${props.gap ?? 8}`
     flex-direction: row;
   }
 
-  &.column {
+  &.col {
     flex-direction: column;
   }
 

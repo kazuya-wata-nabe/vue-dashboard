@@ -6,7 +6,7 @@ defineEmits<{ toggle: [] }>()
 </script>
 
 <template>
-  <FlexBox class="column aside">
+  <FlexBox class="col aside">
     <FlexBox class="row menu-icon" :class="{ slim }">
       <span class="material-symbols-outlined" :class="{ slim }" @click="$emit('toggle')"></span>
     </FlexBox>
