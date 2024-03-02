@@ -9,7 +9,7 @@ const d = DateFormatter.parse
 const items = ref<Book[]>([
   Book({
     id: "abc-1",
-    title: "hogehoge",
+    title: "hogehogeaaaaaaaaahogehogeaaaaaaaaahogehogeaaaaaaaaahogehogeaaaaaaaaahogehogeaaaaaaaaa",
     borrowDate: d("2020-01-01"),
     returnDate: d("2020-02-01"),
   }),
@@ -33,9 +33,9 @@ const items = ref<Book[]>([
           <th>返却期限</th>
         </template>
         <template #record="{ item }">
-          <td>{{ item.title }}</td>
-          <td>{{ item.borrowDate }}</td>
-          <td>{{ item.returnDate }}</td>
+          <td class="title">{{ item.title }}</td>
+          <td class="date">{{ item.borrowDate }}</td>
+          <td class="date">{{ item.returnDate }}</td>
         </template>
       </BookTable>
     </div>
@@ -43,8 +43,12 @@ const items = ref<Book[]>([
 </template>
 
 <style scoped>
-th,
-td {
-  padding: 0 16px;
+.title {
+  min-width: 300px;
+  max-width: 300px;
+  overflow-wrap: break-word;
+}
+.date {
+  min-width: 100px;
 }
 </style>

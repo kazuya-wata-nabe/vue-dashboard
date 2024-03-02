@@ -27,6 +27,7 @@ table,
 :slotted(td) {
   border: 1px solid black;
   border-collapse: collapse;
+  padding: 8px 16px;
 }
 :slotted(th) {
   background: gainsboro;
