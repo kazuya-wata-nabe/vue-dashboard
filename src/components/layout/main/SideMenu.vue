@@ -1,23 +1,33 @@
 <script setup lang="ts">
 import { FlexBox } from "@/components/parts"
-import { RouterView } from "vue-router"
+import GoogleIcon from "@/components/parts/GoogleIcon.vue"
+import { RouterLink } from "vue-router"
 
 defineProps<{ headerHeight: string; slim: boolean }>()
 defineEmits<{ toggle: [] }>()
 
-const routes = [{ name: "Home", link: "home" }]
+const routes = [
+  { name: "Home", link: "home", icon: "home" },
+  // TODO: implements route
+  { name: "Book", link: "home", icon: "book" },
+  // TODO: implements route
+  { name: "WebSocket", link: "home", icon: "rocket" },
+]
 </script>
 
 <template>
   <FlexBox class="col aside">
     <FlexBox class="row menu-icon" :class="{ slim }">
-      <span class="material-symbols-outlined" :class="{ slim }" @click="$emit('toggle')"></span>
+      <GoogleIcon class="menu-toggle clickable" :class="{ slim }" @click="$emit('toggle')" />
     </FlexBox>
-    <FlexBox class="col">
-      <ul>
+    <FlexBox class="row" :class="{ slim }">
+      <ul class="menu-list" :class="{ slim }">
         <template v-for="route in routes" :key="route.name">
           <li class="menu-item">
-            <RouterView :to="route.link">{{ route.name }}</RouterView>
+            <RouterLink :to="{ name: route.link }" class="link">
+              <GoogleIcon class="clickable">{{ route.icon }}</GoogleIcon>
+              <span v-if="!slim">{{ route.name }}</span>
+            </RouterLink>
           </li>
         </template>
       </ul>
@@ -32,20 +42,24 @@ const routes = [{ name: "Home", link: "home" }]
   background: dimgray;
 }
 
+.slim {
+  padding: 0 0;
+  justify-content: center;
+}
+
 .menu-icon {
   padding: 0 8px;
   justify-content: end;
-
-  &.slim {
-    padding: 0 0;
-    justify-content: center;
-  }
 }
 
-.material-symbols-outlined {
+.clickable {
   cursor: pointer;
-  color: lightgray;
-
+}
+.link {
+  text-decoration: none;
+  color: whitesmoke;
+}
+.menu-toggle {
   &::after {
     content: "menu";
   }
@@ -62,7 +76,11 @@ const routes = [{ name: "Home", link: "home" }]
     }
   }
 }
-
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 .menu-item {
   color: whitesmoke;
   list-style: none;
