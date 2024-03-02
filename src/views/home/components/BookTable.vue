@@ -7,7 +7,7 @@ defineProps<{ items: Item<T>[] }>()
 </script>
 
 <template>
-  <table class="outline">
+  <table class="outline" v-if="items.length">
     <thead class="outline">
       <tr>
         <slot name="head"></slot>
