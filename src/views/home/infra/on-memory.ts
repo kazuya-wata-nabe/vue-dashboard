@@ -1,6 +1,5 @@
 import { DateFormatter } from "@/views/__shared__/date-formatter"
-import { Book } from "@/views/home/model/book"
-import type { BookRepository } from "@/views/home/model/repository"
+import { Book, type BookRepository } from "../model"
 
 const d = DateFormatter.parse
 export class BookRepositoryOnMemory implements BookRepository {

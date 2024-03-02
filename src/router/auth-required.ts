@@ -1,4 +1,4 @@
-import { BookRepositoryOnMemory } from "@/infra/book/on-memory"
+import { BookRepositoryOnMemory } from "@/views/home/infra/on-memory"
 
 const HomeView = () => import("@/views/home/HomeView.vue")
 

@@ -1,8 +1,8 @@
-import type { AuthRepository, FetchParams } from "@/views/login/model/repository"
+import type { FetchParams, LoginRepository } from "../model"
 
 const users = [{ id: "test1", password: "test1" }]
 
-export class AuthRepositoryOnMemory implements AuthRepository {
+export class AuthRepositoryOnMemory implements LoginRepository {
   async login(params: FetchParams) {
     await new Promise((resolve) => setTimeout(() => resolve(""), 1 * 1000))
 

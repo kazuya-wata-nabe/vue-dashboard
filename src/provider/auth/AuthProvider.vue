@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { LocalStorage } from "@/infra/auth/storage/local-storage"
 import router from "@/router"
+import { LocalStorage } from "./infra/local-storage"
 import { provideAuth } from "./use-auth"
 
 const storage = new LocalStorage()
