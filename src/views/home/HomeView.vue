@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { MainLayout } from "@/components/layout"
+import { useLoader } from "@/provider/app/use-loader"
 import { ref } from "vue"
 import BookTable from "./components/BookTable.vue"
 import { Book } from "./model/book"
@@ -9,12 +10,13 @@ const props = defineProps<{ repository: BookRepository }>()
 
 const items = ref<Book[]>([])
 
-// TODO: 共通化
-props.repository
-  .fetch()
-  .then((res) => (items.value = res))
-  .catch((e) => console.error(e))
-  .finally(() => console.debug("finish"))
+const { withLoader } = useLoader()
+
+withLoader(
+  () => props.repository.fetch(),
+  (data) => (items.value = data),
+  (err) => console.error(err),
+)
 </script>
 
 <template>
