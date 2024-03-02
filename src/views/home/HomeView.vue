@@ -1,25 +1,20 @@
 <script setup lang="ts">
 import { MainLayout } from "@/components/layout"
 import { ref } from "vue"
-import { DateFormatter } from "../__shared__/date-formatter"
 import BookTable from "./components/BookTable.vue"
 import { Book } from "./model/book"
+import type { BookRepository } from "./model/repository"
 
-const d = DateFormatter.parse
-const items = ref<Book[]>([
-  Book({
-    id: "abc-1",
-    title: "hogehogeaaaaaaaaahogehogeaaaaaaaaahogehogeaaaaaaaaahogehogeaaaaaaaaahogehogeaaaaaaaaa",
-    borrowDate: d("2020-01-01"),
-    returnDate: d("2020-02-01"),
-  }),
-  Book({
-    id: "abc-2",
-    title: "fugafuga",
-    borrowDate: d("2021-01-01"),
-    returnDate: d("2021-03-10"),
-  }),
-])
+const props = defineProps<{ repository: BookRepository }>()
+
+const items = ref<Book[]>([])
+
+// TODO: 共通化
+props.repository
+  .fetch()
+  .then((res) => (items.value = res))
+  .catch((e) => console.error(e))
+  .finally(() => console.debug("finish"))
 </script>
 
 <template>
