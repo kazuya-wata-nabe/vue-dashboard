@@ -1,14 +1,26 @@
 <script setup lang="ts">
-import FlexBox from "@/components/parts/FlexBox.vue"
+import { FlexBox } from "@/components/parts"
+import { RouterView } from "vue-router"
 
 defineProps<{ headerHeight: string; slim: boolean }>()
 defineEmits<{ toggle: [] }>()
+
+const routes = [{ name: "Home", link: "home" }]
 </script>
 
 <template>
   <FlexBox class="col aside">
     <FlexBox class="row menu-icon" :class="{ slim }">
       <span class="material-symbols-outlined" :class="{ slim }" @click="$emit('toggle')"></span>
+    </FlexBox>
+    <FlexBox class="col">
+      <ul>
+        <template v-for="route in routes" :key="route.name">
+          <li class="menu-item">
+            <RouterView :to="route.link">{{ route.name }}</RouterView>
+          </li>
+        </template>
+      </ul>
     </FlexBox>
   </FlexBox>
 </template>
@@ -49,5 +61,10 @@ defineEmits<{ toggle: [] }>()
       content: "arrow_forward";
     }
   }
+}
+
+.menu-item {
+  color: whitesmoke;
+  list-style: none;
 }
 </style>
