@@ -9,7 +9,7 @@ defineEmits<{ toggle: [] }>()
 const routes = [
   { name: "Home", link: "home", icon: "home" },
   // TODO: implements route
-  { name: "Book", link: "home", icon: "book" },
+  { name: "Book", link: "book", icon: "book" },
   // TODO: implements route
   { name: "WebSocket", link: "home", icon: "rocket" },
 ]

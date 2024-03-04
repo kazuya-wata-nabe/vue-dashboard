@@ -1,8 +1,8 @@
 import { DateFormatter } from "@/views/__shared__/date-formatter"
-import { Book, type BookRepository } from "../model"
+import { Book, type BookListQueryService } from "../model"
 
 const d = DateFormatter.parse
-export class BookRepositoryOnMemory implements BookRepository {
+export class BookQueryServiceOnMemory implements BookListQueryService {
   async fetch() {
     await new Promise((resolve) => setTimeout(resolve, 1 * 1000))
     return [

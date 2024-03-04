@@ -1,5 +1,5 @@
 import type { Book } from "./book"
 
-export interface BookRepository {
+export interface BookListQueryService {
   fetch(): Promise<Book[]>
 }

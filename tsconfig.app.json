@@ -9,5 +9,6 @@
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "plugins": [{ "name": "eslint-plugin-import-access" }]
 }

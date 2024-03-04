@@ -13,7 +13,7 @@ const handleSubmit = () => {
 
 <template>
   <div class="button-container" :class="{ loading }">
-    <button @click="handleSubmit">
+    <button @click="handleSubmit" :disabled="loading">
       <div class="loader" v-show="loading"></div>
       <slot></slot>
     </button>

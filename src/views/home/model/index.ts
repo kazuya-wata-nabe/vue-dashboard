@@ -1,2 +1,2 @@
 export * from "./book"
-export * from "./repository"
+export * from "./query-service"

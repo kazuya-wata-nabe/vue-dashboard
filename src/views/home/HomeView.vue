@@ -3,17 +3,17 @@ import { MainLayout } from "@/components/layout"
 import { useLoader } from "@/provider/app/use-loader"
 import { ref } from "vue"
 import BookTable from "./components/BookTable.vue"
+import type { BookQueryServiceOnMemory } from "./infra"
 import { Book } from "./model/book"
-import type { BookRepository } from "./model/repository"
 
-const props = defineProps<{ repository: BookRepository }>()
+const props = defineProps<{ queryService: BookQueryServiceOnMemory }>()
 
 const items = ref<Book[]>([])
 
 const { withLoader } = useLoader()
 
 withLoader(
-  () => props.repository.fetch(),
+  () => props.queryService.fetch(),
   (data) => (items.value = data),
   (err) => console.error(err),
 )
@@ -49,3 +49,4 @@ withLoader(
   min-width: 100px;
 }
 </style>
+./model/query-service
