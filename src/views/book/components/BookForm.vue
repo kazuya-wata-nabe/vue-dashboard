@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FlexBox, TextInput, TheButton } from "@/components/parts"
+import { FlexBox, InputField, TheButton } from "@/components/parts"
 import { toTypedSchema } from "@vee-validate/zod"
 import { useForm } from "vee-validate"
 import { schema } from "../model"
@@ -21,7 +21,7 @@ const command = handleSubmit(async (form) => {
   <FlexBox class="col">
     <p>本の登録</p>
     <FlexBox class="col input-container">
-      <TextInput
+      <InputField
         type="text"
         label="タイトル"
         name="title"
@@ -30,7 +30,7 @@ const command = handleSubmit(async (form) => {
       />
     </FlexBox>
     <FlexBox class="col input-container">
-      <TextInput
+      <InputField
         type="date"
         label="貸出日"
         name="borrow-date"
@@ -39,7 +39,7 @@ const command = handleSubmit(async (form) => {
       />
     </FlexBox>
     <FlexBox class="col input-container">
-      <TextInput
+      <InputField
         type="date"
         label="返却日"
         name="return-date"
