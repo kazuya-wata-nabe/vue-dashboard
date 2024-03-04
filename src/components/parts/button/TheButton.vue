@@ -6,8 +6,10 @@ defineOptions({ inheritAttrs: false })
 
 const loading = ref(false)
 const handleSubmit = () => {
-  loading.value = true
-  props.command().finally(() => (loading.value = false))
+  props
+    .command()
+    .then(() => (loading.value = true))
+    .finally(() => (loading.value = false))
 }
 </script>
 

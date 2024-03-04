@@ -9,8 +9,8 @@ const model = defineModel<T>({ required: true })
 </script>
 
 <template>
-  <label>{{ label }}</label>
-  <input autocomplete="off" v-bind="$attrs" v-model="model" />
+  <label :for="name">{{ label }}</label>
+  <input autocomplete="off" v-bind="$attrs" :id="name" v-model="model" />
   <p class="error-message">{{ errorMessage }}</p>
 </template>
 

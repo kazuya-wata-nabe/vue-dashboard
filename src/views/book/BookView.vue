@@ -1,52 +1,11 @@
 <script setup lang="ts">
 import MainLayout from "@/components/layout/main/MainLayout.vue"
-import { FlexBox, TextInput, TheButton } from "@/components/parts"
-import { toTypedSchema } from "@vee-validate/zod"
-import { useForm } from "vee-validate"
-import { schema } from "./model"
-
-const { handleSubmit, errors, defineField } = useForm({
-  validationSchema: toTypedSchema(schema),
-})
-
-const [title] = defineField("title")
-const [borrowDate] = defineField("borrowDate")
-const [returnDate] = defineField("returnDate")
-
-const command = handleSubmit((form) => {
-  console.debug(form)
-})
+import { BookForm } from "./components"
 </script>
 
 <template>
   <MainLayout>
-    <FlexBox class="col">
-      <p>本の登録</p>
-      <FlexBox class="col input-container">
-        <TextInput label="タイトル" name="title" v-model="title" :errorMessage="errors.title" />
-      </FlexBox>
-      <FlexBox class="col input-container">
-        <TextInput
-          type="date"
-          label="貸出日"
-          name="borrow-date"
-          v-model="borrowDate"
-          :errorMessage="errors.borrowDate"
-        />
-      </FlexBox>
-      <FlexBox class="col input-container">
-        <TextInput
-          type="date"
-          label="返却日"
-          name="return-date"
-          v-model="returnDate"
-          :errorMessage="errors.returnDate"
-        />
-      </FlexBox>
-      <FlexBox class="col input-container">
-        <TheButton :command="command">登録</TheButton>
-      </FlexBox>
-    </FlexBox>
+    <BookForm />
   </MainLayout>
 </template>
 

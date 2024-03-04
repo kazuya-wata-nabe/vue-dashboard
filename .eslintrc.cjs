@@ -16,7 +16,5 @@ module.exports = {
   rules: {
     "@typescript-eslint/no-explicit-any": "error",
     "prettier/prettier": "warn",
-    "import-access/jsdoc": ["warn"],
   },
-  plugins: ["import-access"],
 }
