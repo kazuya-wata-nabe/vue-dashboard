@@ -12,7 +12,7 @@ const [title] = defineField("title")
 const [borrowDate] = defineField("borrowDate")
 const [returnDate] = defineField("returnDate")
 
-const command = handleSubmit((form) => {
+const command = handleSubmit(async (form) => {
   console.debug(form)
 })
 </script>
@@ -21,7 +21,13 @@ const command = handleSubmit((form) => {
   <FlexBox class="col">
     <p>本の登録</p>
     <FlexBox class="col input-container">
-      <TextInput label="タイトル" name="title" v-model="title" :errorMessage="errors.title" />
+      <TextInput
+        type="text"
+        label="タイトル"
+        name="title"
+        v-model="title"
+        :errorMessage="errors.title"
+      />
     </FlexBox>
     <FlexBox class="col input-container">
       <TextInput

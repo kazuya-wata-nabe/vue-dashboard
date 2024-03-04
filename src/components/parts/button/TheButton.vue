@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from "vue"
 
-const props = defineProps<{ command: () => Promise<void> }>()
+const props = defineProps<{ command: () => Promise<Promise<void> | undefined> }>()
 defineOptions({ inheritAttrs: false })
 
 const loading = ref(false)

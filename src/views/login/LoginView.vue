@@ -5,8 +5,10 @@ import InputForm from "@/components/parts/InputForm.vue"
 import TextInput from "@/components/parts/TextInput.vue"
 import TheButton from "@/components/parts/button/TheButton.vue"
 import { useAuth } from "@/provider/auth/use-auth"
-import { ref } from "vue"
+import { toTypedSchema } from "@vee-validate/zod"
+import { useForm } from "vee-validate"
 import { useRouter } from "vue-router"
+import { loginSchema } from "./form"
 import { type LoginRepository } from "./model"
 
 const props = defineProps<{
@@ -16,18 +18,19 @@ const props = defineProps<{
 const router = useRouter()
 const authContext = useAuth()
 
-const id = ref("")
-const password = ref("")
+const { defineField, handleSubmit } = useForm({ validationSchema: toTypedSchema(loginSchema) })
+const [id] = defineField("id")
+const [password] = defineField("password")
 
-const onSubmit = async () => {
+const onSubmit = handleSubmit(async (form) => {
   try {
-    await props.repository.login({ id: id.value, password: password.value })
+    await props.repository.login({ ...form })
     await authContext.save()
     await router.replace({ name: "home" })
   } catch {
-    return alert("ng")
+    alert("ng")
   }
-}
+})
 </script>
 
 <template>
@@ -38,8 +41,14 @@ const onSubmit = async () => {
           <h1>This is Header Area</h1>
         </FlexBox>
         <InputForm @submit.prevent>
-          <TextInput label="id" v-model="id" />
-          <TextInput label="password" type="password" v-model="password" />
+          <TextInput type="text" label="id" name="id" v-model="id" error-message="" />
+          <TextInput
+            type="password"
+            label="password"
+            name="password"
+            v-model="password"
+            error-message=""
+          />
           <TheButton :command="onSubmit">submit</TheButton>
         </InputForm>
       </FlexBox>

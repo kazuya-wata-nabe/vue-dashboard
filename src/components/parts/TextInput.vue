@@ -1,5 +1,6 @@
 <script lang="ts" setup generic="T">
 defineProps<{
+  type: "text" | "password" | "date"
   label: string
   name: string
   errorMessage: string | undefined
@@ -10,7 +11,7 @@ const model = defineModel<T>({ required: true })
 
 <template>
   <label :for="name">{{ label }}</label>
-  <input autocomplete="off" v-bind="$attrs" :id="name" v-model="model" />
+  <input autocomplete="off" :type="type" :id="name" v-model="model" />
   <p class="error-message">{{ errorMessage }}</p>
 </template>
 
