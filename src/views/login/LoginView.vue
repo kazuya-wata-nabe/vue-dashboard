@@ -2,7 +2,7 @@
 import { useRouter } from "vue-router"
 
 import { PublicLayout } from "@/components/layout"
-import { FlexBox, InputField, InputForm, TheButton } from "@/components/parts"
+import { FlexBox, InputForm, TextInput, TheButton } from "@/components/parts"
 import { useAuth } from "@/provider/auth/use-auth"
 import { useCustomForm } from "@/views/__shared__/schema-helper"
 import { loginSchema } from "./form"
@@ -38,14 +38,8 @@ const onSubmit = handleSubmit(async (form) => {
           <h1>This is Header Area</h1>
         </FlexBox>
         <InputForm @submit.prevent>
-          <InputField type="text" label="id" name="id" v-model="id" error-message="" />
-          <InputField
-            type="password"
-            label="password"
-            name="password"
-            v-model="password"
-            error-message=""
-          />
+          <TextInput label="id" name="id" v-model="id" error-message="" />
+          <TextInput mask label="password" name="password" v-model="password" error-message="" />
           <TheButton :command="onSubmit">submit</TheButton>
         </InputForm>
       </FlexBox>
