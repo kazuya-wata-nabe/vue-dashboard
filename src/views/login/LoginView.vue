@@ -2,7 +2,8 @@
 import { useRouter } from "vue-router"
 
 import { PublicLayout } from "@/components/layout"
-import { FlexBox, InputForm, TextInput, TheButton } from "@/components/parts"
+import { FlexBox, InputForm, TextInput } from "@/components/parts"
+import { SubmitButton } from "@/components/parts/button"
 import { useAuth } from "@/provider/auth/use-auth"
 import { useCustomForm } from "@/views/__shared__/schema-helper"
 import { loginSchema } from "./form"
@@ -15,7 +16,7 @@ const props = defineProps<{
 const router = useRouter()
 const authContext = useAuth()
 
-const { defineField, handleSubmit } = useCustomForm(loginSchema)
+const { defineField, handleSubmit, isSubmitting } = useCustomForm(loginSchema)
 const [id] = defineField("id")
 const [password] = defineField("password")
 
@@ -40,7 +41,7 @@ const onSubmit = handleSubmit(async (form) => {
         <InputForm @submit.prevent>
           <TextInput label="id" name="id" v-model="id" error-message="" />
           <TextInput mask label="password" name="password" v-model="password" error-message="" />
-          <TheButton :command="onSubmit">submit</TheButton>
+          <SubmitButton :isSubmitting="isSubmitting" @click="onSubmit">submit</SubmitButton>
         </InputForm>
       </FlexBox>
     </main>
