@@ -22,13 +22,10 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 /** 基本の表示 */
-export const Primary: Story = {
-  args: {},
-}
+export const Primary: Story = {}
 
 /** ログイン成功 */
 export const LoginSuccess: Story = {
-  args: {},
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
 

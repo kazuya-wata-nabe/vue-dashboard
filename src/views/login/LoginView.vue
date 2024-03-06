@@ -30,7 +30,7 @@ const onSubmit = handleSubmit(async (form) => {
     await authContext.save()
     await router.replace({ name: "home" })
   } catch {
-    dialog.value?.showDialog()
+    dialog.value?.showDialog({ autoClose: true })
   }
 })
 </script>
@@ -49,9 +49,8 @@ const onSubmit = handleSubmit(async (form) => {
         </InputForm>
       </FlexBox>
     </main>
-    <AlertDialog v-slot="{ closeModal }" ref="dialog">
-      <div>aaaa</div>
-      <button @click="closeModal">close</button>
+    <AlertDialog ref="dialog">
+      <div>ログインに失敗しました</div>
     </AlertDialog>
   </PublicLayout>
 </template>
