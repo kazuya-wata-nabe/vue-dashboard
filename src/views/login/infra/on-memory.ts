@@ -7,6 +7,9 @@ export class AuthRepositoryOnMemory implements LoginRepository {
     await new Promise((resolve) => setTimeout(() => resolve(""), 1 * 1000))
 
     const user = users.find((user) => user.id === params.id && user.password === params.password)
-    return !!user
+    if (!user) {
+      throw new Error("ng")
+    }
+    return true
   }
 }

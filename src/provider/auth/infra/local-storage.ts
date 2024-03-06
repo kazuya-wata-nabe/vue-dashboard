@@ -9,4 +9,7 @@ export class LocalStorage implements AuthStorage {
   async save() {
     localStorage.setItem(KEY_AUTH, "ok")
   }
+  async remove() {
+    localStorage.removeItem(KEY_AUTH)
+  }
 }

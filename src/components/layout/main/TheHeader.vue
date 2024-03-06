@@ -1,9 +1,14 @@
 <script lang="ts" setup>
 import FlexBox from "@/components/parts/FlexBox.vue"
+import { useAuth } from "@/provider/auth/use-auth"
 import { useRouter } from "vue-router"
 
 const router = useRouter()
-const onClickLogout = () => router.replace({ name: "login" })
+const { logout } = useAuth()
+const onClickLogout = async () => {
+  await router.replace({ name: "login" })
+  await logout()
+}
 </script>
 
 <template>
