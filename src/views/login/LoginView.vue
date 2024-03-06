@@ -39,8 +39,8 @@ const onSubmit = handleSubmit(async (form) => {
           <h1>This is Header Area</h1>
         </FlexBox>
         <InputForm @submit.prevent>
-          <TextInput label="id" name="id" v-model="id" error-message="" />
-          <TextInput mask label="password" name="password" v-model="password" error-message="" />
+          <TextInput label="id" name="login-id" v-model="id" error-message="" />
+          <TextInput label="password" name="password" v-model="password" error-message="" />
           <SubmitButton :isSubmitting="isSubmitting" @click="onSubmit">submit</SubmitButton>
         </InputForm>
       </FlexBox>

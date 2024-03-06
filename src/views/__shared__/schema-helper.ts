@@ -13,12 +13,13 @@ export const optional = {
 export const makeSchema = <T extends z.ZodRawShape>(shape: T) => z.object(shape)
 
 export const useCustomForm = <T extends z.ZodRawShape>(schema: z.ZodObject<T>) => {
-  const { defineField, errors, handleSubmit } = useForm({
+  const { defineField, errors, handleSubmit, isSubmitting } = useForm({
     validationSchema: toTypedSchema(schema),
   })
 
   return {
     defineField,
+    isSubmitting,
     errors,
     handleSubmit,
   }

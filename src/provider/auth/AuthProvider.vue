@@ -4,7 +4,7 @@ import { LocalStorage } from "./infra/local-storage"
 import { provideAuth } from "./use-auth"
 
 const storage = new LocalStorage()
-// TODO: DIの場所を変えたい
+// TODO: pluginにしてもいいかも
 provideAuth(storage)
 
 router.beforeEach(async (to, _, next) => {
