@@ -14,8 +14,7 @@ const meta = {
   render: () => ({
     components: { LoginView, AuthProvider, PublicLayout },
     setup: (args) => args,
-    template:
-      "<AuthProvider><public-layout><LoginView v-bind='args' /></public-layout></AuthProvider>",
+    template: "<AuthProvider><LoginView v-bind='args' /></AuthProvider>",
   }),
 } satisfies Meta<typeof LoginView>
 
@@ -25,9 +24,14 @@ type Story = StoryObj<typeof meta>
 /** 基本の表示 */
 export const Primary: Story = {
   args: {},
+}
+
+/** ログイン成功 */
+export const LoginSuccess: Story = {
+  args: {},
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    // idはdom apiのidを被るのでxxx-id or aria-labelにするよう警告が出る
+
     await userEvent.type(canvas.getByLabelText("id"), "test1")
     await userEvent.type(canvas.getByLabelText("password"), "test1")
 

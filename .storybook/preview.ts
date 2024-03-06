@@ -12,7 +12,7 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [() => ({ template: `<div id="id"><story /></div>` })],
+  decorators: [() => ({ template: `<div id="app"><story /></div>` })],
 }
 
 export default preview
