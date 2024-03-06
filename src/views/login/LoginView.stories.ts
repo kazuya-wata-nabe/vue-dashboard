@@ -1,7 +1,8 @@
+import { PublicLayout } from "@/components/layout"
 import AuthProvider from "@/provider/auth/AuthProvider.vue"
 import { userEvent, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
-import LoginView from "./LoginView.vue"
+import { default as LoginView } from "./LoginView.vue"
 import { AuthRepositoryOnMemory } from "./infra/on-memory"
 
 const meta = {
@@ -11,9 +12,10 @@ const meta = {
     repository: new AuthRepositoryOnMemory(),
   },
   render: () => ({
-    components: { LoginView, AuthProvider },
+    components: { LoginView, AuthProvider, PublicLayout },
     setup: (args) => args,
-    template: "<AuthProvider><LoginView v-bind='args' /></AuthProvider>",
+    template:
+      "<AuthProvider><public-layout><LoginView v-bind='args' /></public-layout></AuthProvider>",
   }),
 } satisfies Meta<typeof LoginView>
 

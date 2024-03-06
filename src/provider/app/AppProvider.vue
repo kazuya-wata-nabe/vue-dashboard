@@ -24,11 +24,11 @@ provideLoader({ withLoader })
 
 <template>
   <slot></slot>
-  <div class="modal-overlay" v-show="isShownOverlay"></div>
+  <div class="load-overlay" v-show="isShownOverlay"></div>
 </template>
 
 <style scoped>
-.modal-overlay {
+.load-overlay {
   position: fixed;
   inset: 0;
   min-width: 100vw;

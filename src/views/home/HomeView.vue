@@ -49,4 +49,3 @@ withLoader(
   min-width: 100px;
 }
 </style>
-./model/query-service

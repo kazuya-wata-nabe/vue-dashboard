@@ -3,9 +3,11 @@ import { useRouter } from "vue-router"
 
 import { PublicLayout } from "@/components/layout"
 import { FlexBox, InputForm, TextInput } from "@/components/parts"
+import AlertDialog from "@/components/parts/AlertDialog.vue"
 import { SubmitButton } from "@/components/parts/button"
 import { useAuth } from "@/provider/auth/use-auth"
 import { useCustomForm } from "@/views/__shared__/schema-helper"
+import { ref } from "vue"
 import { loginSchema } from "./form"
 import { type LoginRepository } from "./model"
 
@@ -20,13 +22,15 @@ const { defineField, handleSubmit, isSubmitting } = useCustomForm(loginSchema)
 const [id] = defineField("id")
 const [password] = defineField("password")
 
+const dialog = ref<InstanceType<typeof AlertDialog>>()
+
 const onSubmit = handleSubmit(async (form) => {
   try {
     await props.repository.login({ ...form })
     await authContext.save()
     await router.replace({ name: "home" })
   } catch {
-    alert("ng")
+    dialog.value?.showDialog()
   }
 })
 </script>
@@ -45,6 +49,10 @@ const onSubmit = handleSubmit(async (form) => {
         </InputForm>
       </FlexBox>
     </main>
+    <AlertDialog v-slot="{ closeModal }" ref="dialog">
+      <div>aaaa</div>
+      <button @click="closeModal">close</button>
+    </AlertDialog>
   </PublicLayout>
 </template>
 
