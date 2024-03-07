@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router"
 
-import { PublicLayout } from "@/components/layout"
 import { FlexBox, InputForm, TextInput } from "@/components/parts"
 import AlertDialog from "@/components/parts/AlertDialog.vue"
 import { SubmitButton } from "@/components/parts/button"
@@ -36,23 +35,21 @@ const onSubmit = handleSubmit(async (form) => {
 </script>
 
 <template>
-  <PublicLayout>
-    <main>
-      <FlexBox class="col">
-        <FlexBox class="col header">
-          <h1>This is Header Area</h1>
-        </FlexBox>
-        <InputForm @submit.prevent>
-          <TextInput label="id" name="id" v-model="id" error-message="" />
-          <TextInput label="password" name="password" v-model="password" error-message="" />
-          <SubmitButton :isSubmitting="isSubmitting" @click="onSubmit">submit</SubmitButton>
-        </InputForm>
+  <main>
+    <FlexBox class="col">
+      <FlexBox class="col header">
+        <h1>This is Header Area</h1>
       </FlexBox>
-    </main>
-    <AlertDialog ref="dialog">
-      <div>ログインに失敗しました</div>
-    </AlertDialog>
-  </PublicLayout>
+      <InputForm @submit.prevent>
+        <TextInput label="id" name="id" v-model="id" error-message="" />
+        <TextInput mask label="password" name="password" v-model="password" error-message="" />
+        <SubmitButton :isSubmitting="isSubmitting" @click="onSubmit">submit</SubmitButton>
+      </InputForm>
+    </FlexBox>
+  </main>
+  <AlertDialog ref="dialog">
+    <div>ログインに失敗しました</div>
+  </AlertDialog>
 </template>
 
 <style scoped>

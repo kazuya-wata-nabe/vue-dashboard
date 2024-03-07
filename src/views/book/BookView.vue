@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import MainLayout from "@/components/layout/main/MainLayout.vue"
 import { BookForm } from "./components"
 </script>
 
 <template>
-  <MainLayout>
-    <BookForm />
-  </MainLayout>
+  <BookForm />
 </template>
 
 <style scoped>
