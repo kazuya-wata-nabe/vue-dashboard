@@ -1,6 +1,6 @@
 import { PublicLayout } from "@/components/layout"
 import AuthProvider from "@/provider/auth/AuthProvider.vue"
-import { userEvent, within } from "@storybook/test"
+import { expect, userEvent, waitFor, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
 import { default as LoginView } from "./LoginView.vue"
 import { AuthRepositoryOnMemory } from "./infra/on-memory"
@@ -26,14 +26,30 @@ export const Primary: Story = {}
 
 /** ログイン成功 */
 export const LoginSuccess: Story = {
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement)
 
-    await userEvent.type(canvas.getByLabelText("id"), "test1")
-    await userEvent.type(canvas.getByLabelText("password"), "test1")
+    await step("id input", async () => {
+      await userEvent.type(canvas.getByLabelText("id"), "test1")
+    })
 
-    await userEvent.type(canvas.getByRole("button"))
+    await step("password input", async () => {
+      await userEvent.type(canvas.getByLabelText("password"), "test1")
+    })
 
-    // expect(await canvas.findByText("必須項目です")).toBeInTheDocument()
+    await step("submit", async () => {
+      await userEvent.click(canvas.getByRole("button"))
+    })
+
+    await step("assert", async () => {
+      await waitFor(async () => {
+        await expect(args).toBeCalledWith(
+          {
+            username: "name",
+          },
+          expect.anything(),
+        )
+      })
+    })
   },
 }
