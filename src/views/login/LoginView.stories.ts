@@ -7,10 +7,10 @@ import { AuthRepositoryOnMemory } from "./infra/on-memory"
 
 const meta = {
   component: LoginView,
-  tags: ["autodocs"],
   args: {
     repository: new AuthRepositoryOnMemory(),
   },
+  tags: ["autodocs"],
   render: () => ({
     components: { LoginView, AuthProvider, PublicLayout },
     setup: (args) => args,
@@ -26,7 +26,7 @@ export const Primary: Story = {}
 
 /** ログイン成功 */
 export const LoginSuccess: Story = {
-  play: async ({ canvasElement, step, args }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     await step("id input", async () => {
