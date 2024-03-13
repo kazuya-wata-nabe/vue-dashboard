@@ -3,6 +3,8 @@ import router from "@/router"
 import { LocalStorage } from "./infra/local-storage"
 import { provideAuth } from "./use-auth"
 
+defineOptions({ inheritAttrs: false })
+
 const storage = new LocalStorage()
 // TODO: pluginにしてもいいかも
 provideAuth(storage)

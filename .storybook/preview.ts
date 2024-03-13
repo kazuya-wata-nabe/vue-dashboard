@@ -15,7 +15,6 @@ setup((app) => {
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -27,11 +26,7 @@ const preview: Preview = {
     () => ({
       template: `
         <div id="app">
-          <AppProvider>
-            <AuthProvider>
-              <story />
-            </AuthProvider>
-          </AppProvider>
+          <story />
         </div>`,
     }),
   ],

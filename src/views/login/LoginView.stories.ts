@@ -11,10 +11,12 @@ const meta = {
     repository: new AuthRepositoryOnMemory(),
   },
   tags: ["autodocs"],
-  render: () => ({
+  render: (args) => ({
     components: { LoginView, AuthProvider, PublicLayout },
-    setup: (args) => args,
-    template: "<AuthProvider><LoginView v-bind='args' /></AuthProvider>",
+    setup() {
+      return { args }
+    },
+    template: `<AuthProvider><LoginView v-bind="args" /></AuthProvider>`,
   }),
 } satisfies Meta<typeof LoginView>
 

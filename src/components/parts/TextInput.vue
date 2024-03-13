@@ -7,6 +7,7 @@ defineProps<{
 }>()
 
 const model = defineModel<T>({ required: true })
+defineOptions({ inheritAttrs: false })
 </script>
 
 <template>
