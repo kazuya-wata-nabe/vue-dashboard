@@ -26,8 +26,9 @@ const preview: Preview = {
       template: `
         <div id="app">
           <AppProvider>
-            <story />
-          </AppProvider>
+            <AuthProvider>
+              <story />
+            </AuthProvider>
         </div>`,
     }),
   ],

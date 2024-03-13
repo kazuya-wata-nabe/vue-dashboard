@@ -5,7 +5,7 @@ import { composeStory } from "@storybook/vue3"
 import { expect } from "@storybook/test"
 import { test, vi } from "vitest"
 import Meta, { Secondary } from "./HomeView.stories"
-import { fixture2 } from "./mock-repository"
+import { fixture2 } from "./__test__/fixture"
 
 test("Login View", async () => {
   const ViewOk = composeStory(Secondary, Meta)

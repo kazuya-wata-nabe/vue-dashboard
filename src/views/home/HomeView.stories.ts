@@ -1,17 +1,14 @@
-import { expect, fn, within } from "@storybook/test"
+import { apiMock, mainLayout } from "@/__test__/helper"
+import { expect, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
-import HomeView from "../HomeView.vue"
-import { BookQueryServiceOnMemory } from "../infra/on-memory"
-import type { Book } from "../model"
-import { fixture } from "./mock-repository"
+import HomeView from "./HomeView.vue"
+import { fixture } from "./__test__/fixture"
+import { BookQueryServiceOnMemory } from "./infra/on-memory"
 
-const queryService = new BookQueryServiceOnMemory()
 const meta = {
   component: HomeView,
-  args: {
-    queryService,
-  },
   tags: ["autodocs"],
+  decorators: [mainLayout],
 } satisfies Meta<typeof HomeView>
 
 export default meta
@@ -19,6 +16,9 @@ type Story = StoryObj<typeof meta>
 
 /** 基本の表示 */
 export const Primary: Story = {
+  args: {
+    queryService: new BookQueryServiceOnMemory(),
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
 
@@ -27,14 +27,9 @@ export const Primary: Story = {
   },
 }
 
-const mockHelper = (data: Book[]) =>
-  fn().mockImplementation(() => ({
-    fetch: async () => data,
-  }))()
-
 export const Secondary: Story = {
   args: {
-    queryService: mockHelper(fixture),
+    queryService: apiMock(fixture),
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
