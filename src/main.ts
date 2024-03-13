@@ -6,6 +6,7 @@ import router from "./router"
 
 const app = createApp(App)
 
+const hoge
 app.use(router)
 
 app.mount("#app")
