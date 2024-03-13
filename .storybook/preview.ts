@@ -7,8 +7,6 @@ import "../src/assets/main.css"
 import router from "../src/router"
 
 setup((app) => {
-  app.component("AppProvider", AppProvider)
-  app.component("AuthProvider", AuthProvider)
   app.component("MainLayout", MainLayout)
   app.use(router)
 })
@@ -24,9 +22,12 @@ const preview: Preview = {
   },
   decorators: [
     () => ({
+      components: { AppProvider, AuthProvider },
       template: `
         <div id="app">
-          <story />
+          <AppProvider>
+            <story />
+          </AppProvider>
         </div>`,
     }),
   ],

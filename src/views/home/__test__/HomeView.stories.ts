@@ -1,4 +1,3 @@
-import AppProvider from "@/provider/app/AppProvider.vue"
 import { expect, fn, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
 import HomeView from "../HomeView.vue"
@@ -13,17 +12,6 @@ const meta = {
     queryService,
   },
   tags: ["autodocs"],
-  render: (args) => ({
-    components: { AppProvider, HomeView },
-    setup() {
-      return { args }
-    },
-    template: `
-      <AppProvider>
-        <HomeView v-bind="args" />
-      </AppProvider>
-    `,
-  }),
 } satisfies Meta<typeof HomeView>
 
 export default meta
