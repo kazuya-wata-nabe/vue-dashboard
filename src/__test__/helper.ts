@@ -1,4 +1,4 @@
-import MainLayout from "@/components/layout/main/MainLayout.vue"
+import { MainLayout, PublicLayout } from "@/components/layout"
 import { fn } from "@storybook/test"
 
 export const sleep = async (sec: number) =>
@@ -10,6 +10,14 @@ export const mainLayout = () => ({
     <MainLayout>
       <story />
     </MainLayout>
+  `,
+})
+export const publicLayout = () => ({
+  components: { PublicLayout },
+  template: `
+    <PublicLayout>
+      <story />
+    </PublicLayout>
   `,
 })
 

@@ -1,5 +1,4 @@
-import { PublicLayout } from "@/components/layout"
-import AuthProvider from "@/provider/auth/AuthProvider.vue"
+import { publicLayout } from "@/__test__/helper"
 import { userEvent, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
 import { default as LoginView } from "./LoginView.vue"
@@ -11,13 +10,7 @@ const meta = {
     repository: new AuthRepositoryOnMemory(),
   },
   tags: ["autodocs"],
-  render: (args) => ({
-    components: { LoginView, AuthProvider, PublicLayout },
-    setup() {
-      return { args }
-    },
-    template: `<AuthProvider><LoginView v-bind="args" /></AuthProvider>`,
-  }),
+  decorators: [publicLayout],
 } satisfies Meta<typeof LoginView>
 
 export default meta

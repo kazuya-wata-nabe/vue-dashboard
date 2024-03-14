@@ -10,10 +10,20 @@ export const fixture = [
     returnDate: d("2021-03-10"),
   }),
 ]
+
 export const fixture2 = [
   Book({
     id: "abc-2",
     title: "fugafuga",
+    borrowDate: d("2021-01-01"),
+    returnDate: d("2021-03-10"),
+  }),
+]
+
+export const fixture3 = [
+  Book({
+    id: "abc-2",
+    title: "hogehoge",
     borrowDate: d("2021-01-01"),
     returnDate: d("2021-03-10"),
   }),
