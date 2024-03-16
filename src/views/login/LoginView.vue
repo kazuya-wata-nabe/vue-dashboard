@@ -11,7 +11,7 @@ import { loginSchema } from "./form"
 import { type LoginRepository } from "./model"
 
 const props = defineProps<{
-  /** hoge */
+  /** ログインAPIのインターフェース */
   repository: LoginRepository
 }>()
 

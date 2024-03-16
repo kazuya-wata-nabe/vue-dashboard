@@ -2,22 +2,21 @@
 import { useLoader } from "@/provider/app/use-loader"
 import type { Role } from "@/provider/auth/model/role"
 import { ref } from "vue"
+import { DateYMD } from "../__shared__/date-wrapper"
 import BookTable from "./components/BookTable.vue"
+import ReturnDate from "./components/ReturnDate.vue"
 import type { BookQueryServiceOnMemory } from "./infra"
 import { Book } from "./model/book"
 
 type Props = {
   /** hoge */
   queryService: BookQueryServiceOnMemory
-  /**
-   * The category of the component
-   *
-   * @since 8.0.0
-   */
+  /** テスト用 */
+  today: DateYMD
   role?: Role
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), { today: () => DateYMD.today() })
 
 const items = ref<Book[]>([])
 
@@ -43,7 +42,7 @@ withLoader(
       <template #record="{ item }">
         <td class="title">{{ item.title }}</td>
         <td class="date">{{ item.borrowDate }}</td>
-        <td class="date">{{ item.returnDate }}</td>
+        <ReturnDate :today="today" :return-date="item.returnDate" />
       </template>
     </BookTable>
   </div>
@@ -57,5 +56,8 @@ withLoader(
 }
 .date {
   min-width: 100px;
+}
+.over {
+  color: red;
 }
 </style>

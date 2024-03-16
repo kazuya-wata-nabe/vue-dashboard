@@ -15,6 +15,7 @@
     "format": "prettier --write src/",
     "storybook": "storybook dev -p 6006",
     "storybook:test": "test-storybook",
+    "storybook:docs": "storybook build --docs",
     "build-storybook": "storybook build"
   },
   "dependencies": {
@@ -28,6 +29,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^1.2.22",
     "@playwright/test": "^1.40.1",
     "@rushstack/eslint-patch": "^1.3.3",
     "@storybook/addon-essentials": "^8.0.0",

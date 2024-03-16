@@ -2,6 +2,7 @@ import { expect, userEvent, within } from "@storybook/test"
 import type { Meta, StoryObj } from "@storybook/vue3"
 import BookForm from "./BookForm.vue"
 
+/** 登録フォーム */
 const meta = {
   component: BookForm,
   tags: ["autodocs"],

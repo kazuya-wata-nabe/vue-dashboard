@@ -4,6 +4,7 @@ import { type Meta, type StoryObj } from "@storybook/vue3"
 import { default as LoginView } from "./LoginView.vue"
 import { AuthRepositoryOnMemory } from "./infra/on-memory"
 
+/** ログイン画面 */
 const meta = {
   component: LoginView,
   args: {
@@ -17,10 +18,20 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 /** 基本の表示 */
-export const Primary: Story = {}
+export const Primary: Story = {
+  name: "正常系",
+}
 
-/** ログイン成功 */
+/**
+ * mock環境では以下の場合にログイン成功となる
+ *
+ * |id|password|
+ * |---|---|
+ * |test1|test1|
+ * |test2|test2|
+ */
 export const LoginSuccess: Story = {
+  name: "ログイン成功",
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
@@ -35,16 +46,5 @@ export const LoginSuccess: Story = {
     await step("submit", async () => {
       await userEvent.click(canvas.getByRole("button"))
     })
-
-    // await step("assert", async () => {
-    //   await waitFor(async () => {
-    //     await expect(args).toBeCalledWith(
-    //       {
-    //         username: "name",
-    //       },
-    //       expect.anything(),
-    //     )
-    //   })
-    // })
   },
 }
