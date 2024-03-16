@@ -23,4 +23,4 @@ jobs:
     needs: setup
     steps:
       - name: run unit test
-        run: npm run test:unit -- --changed
+        run: npm run test:unit
