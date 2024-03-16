@@ -15,8 +15,8 @@ jobs:
           cache: "npm"
       - name: package install
         run: npm ci
-      # - name: Install Playwright
-      #   run: npx playwright install --with-deps
+      - name: Install Playwright
+        run: npx playwright install --with-deps
       - name: Build Storybook
         run: npm run storybook:build -- --quiet
       - name: Serve Storybook and run tests
