@@ -7,9 +7,9 @@ import AuthProvider from "./provider/auth/AuthProvider.vue"
 
 <template>
   <AppProvider>
-    <AuthProvider>
-      <AppLayout>
-        <RouterView />
+    <AuthProvider v-slot="{ role }">
+      <AppLayout :role="role">
+        <RouterView :role="role" />
       </AppLayout>
     </AuthProvider>
   </AppProvider>

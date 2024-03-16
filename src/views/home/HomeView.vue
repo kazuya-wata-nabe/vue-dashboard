@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { useLoader } from "@/provider/app/use-loader"
+import type { Role } from "@/provider/auth/model/role"
 import { ref } from "vue"
 import BookTable from "./components/BookTable.vue"
 import type { BookQueryServiceOnMemory } from "./infra"
 import { Book } from "./model/book"
 
-const props = defineProps<{ queryService: BookQueryServiceOnMemory }>()
+const props = defineProps<{
+  queryService: BookQueryServiceOnMemory
+  role: Role
+}>()
 
 const items = ref<Book[]>([])
 
