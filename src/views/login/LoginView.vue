@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import { ref } from "vue"
 import { useRouter } from "vue-router"
-
 import { FlexBox, InputForm, TextInput } from "@/components/parts"
 import AlertDialog from "@/components/parts/AlertDialog.vue"
 import { SubmitButton } from "@/components/parts/button"
 import { useAuth } from "@/provider/auth/use-auth"
 import { useCustomForm } from "@/views/__shared__/schema-helper"
-import { ref } from "vue"
 import { loginSchema } from "./form"
 import { type LoginRepository } from "./model"
 

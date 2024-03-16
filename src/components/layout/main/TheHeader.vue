@@ -1,9 +1,9 @@
 <script lang="ts" setup>
+import { useRouter } from "vue-router"
 import FlexBox from "@/components/parts/FlexBox.vue"
 import GoogleIcon from "@/components/parts/GoogleIcon.vue"
 import type { Role } from "@/provider/auth/model/role"
 import { useAuth } from "@/provider/auth/use-auth"
-import { useRouter } from "vue-router"
 
 defineProps<{
   role: Role

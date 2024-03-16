@@ -1,6 +1,6 @@
-import { publicLayout } from "@/__test__/helper"
 import { userEvent, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
+import { publicLayout } from "@/__test__/helper"
 import { default as LoginView } from "./LoginView.vue"
 import { AuthRepositoryOnMemory } from "./infra/on-memory"
 

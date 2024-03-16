@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import type { Role } from "@/provider/auth/model/role"
 import { ref } from "vue"
+import type { Role } from "@/provider/auth/model/role"
 import SideMenu from "./SideMenu.vue"
 import TheHeader from "./TheHeader.vue"
 

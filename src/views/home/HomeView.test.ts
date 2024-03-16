@@ -1,10 +1,8 @@
-import { render } from "@testing-library/vue"
-
-import { composeStory } from "@storybook/vue3"
-
-import { apiMock } from "@/__test__/helper"
 import { expect } from "@storybook/test"
+import { composeStory } from "@storybook/vue3"
+import { render } from "@testing-library/vue"
 import { test, vi } from "vitest"
+import { apiMock } from "@/__test__/helper"
 import Meta, { Secondary } from "./HomeView.stories"
 import { fixture2, fixture3 } from "./__test__/fixture"
 

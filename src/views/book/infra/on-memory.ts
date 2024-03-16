@@ -1,4 +1,5 @@
 import type { BookRepository, BookWriteModel } from "../model"
+
 /** @protected */
 export class BookRepositoryOnMemory implements BookRepository {
   async save(book: BookWriteModel) {

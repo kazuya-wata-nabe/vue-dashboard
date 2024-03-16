@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { FlexBox, TextInput, TheButton } from "@/components/parts"
 import { toTypedSchema } from "@vee-validate/zod"
 import { useForm } from "vee-validate"
+import { FlexBox, TextInput, TheButton } from "@/components/parts"
 import { schema } from "../model"
 
 const { handleSubmit, errors, defineField } = useForm({

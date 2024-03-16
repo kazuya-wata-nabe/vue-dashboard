@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import type { DateYMD } from "@/views/__shared__/date-wrapper"
 import { computed } from "vue"
+import type { DateYMD } from "@/views/__shared__/date-wrapper"
 import type { Book } from "../model"
 
 const props = defineProps<{
