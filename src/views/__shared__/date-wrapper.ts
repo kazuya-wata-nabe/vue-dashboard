@@ -21,6 +21,10 @@ export class DateYMD implements DateWrapper {
     return format(this.value, "yyyy/MM/dd")
   }
 
+  toISOString(): string {
+    return this.value.toISOString()
+  }
+
   isSame(date: DateYMD): boolean {
     return isSameDay(this.value, date.value)
   }

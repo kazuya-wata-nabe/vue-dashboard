@@ -1,10 +1,9 @@
 import { type Preview } from "@storybook/vue3"
+import { getCurrentInstance } from "vue"
+import "../src/assets/main.css"
 import AppProvider from "../src/provider/app/AppProvider.vue"
 import AuthProvider from "../src/provider/auth/AuthProvider.vue"
 import router from "../src/router"
-
-import { getCurrentInstance } from "vue"
-import "../src/assets/main.css"
 
 const preview: Preview = {
   parameters: {

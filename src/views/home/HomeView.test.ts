@@ -1,26 +1,37 @@
 import { expect } from "@storybook/test"
 import { composeStory } from "@storybook/vue3"
-import { render } from "@testing-library/vue"
-import { test, vi } from "vitest"
-import { apiMock } from "@/__test__/helper"
-import Meta, { Secondary } from "./HomeView.stories"
-import { fixture2, fixture3 } from "./__test__/fixture"
+import { cleanup, render } from "@testing-library/vue"
+import { afterEach, test, vi } from "vitest"
+import Meta, { Primary, Secondary } from "./HomeView.stories"
+import { fixture2 } from "./__test__/fixture"
 
-test("Login View", async () => {
-  const ViewOk = composeStory(Secondary, Meta)
-  vi.spyOn(ViewOk.args.queryService!, "fetch").mockResolvedValue(fixture2)
+afterEach(cleanup)
 
-  const { findByText } = render(ViewOk())
-
-  const actual = await findByText("fugafuga")
-  expect(actual).toBeInTheDocument()
-})
-
-test("Login View2", async () => {
-  const ViewOk = composeStory(Secondary, Meta)
-  const mock = apiMock(fixture3)
-  const { findByText } = render(ViewOk, { props: { queryService: mock } })
+test("storyの再利用サンプル", async () => {
+  const ViewOk = composeStory(Primary, Meta)
+  const { findByText } = render(ViewOk)
 
   const actual = await findByText("hogehoge")
   expect(actual).toBeInTheDocument()
+})
+
+test("apiのモックサンプル", async () => {
+  const ViewOk = composeStory(Primary, Meta)
+  const mock = vi.fn(() => ({ fetch: vi.fn().mockResolvedValue(fixture2) }))()
+
+  const { findByText } = render(ViewOk, { props: { queryService: mock } })
+
+  const actual = await findByText("piyopiyo")
+  expect(actual).toBeInTheDocument()
+})
+
+test("返却期限切れの場合は返却期限が赤文字で表示されること", async () => {
+  const ViewOk = composeStory(Secondary, Meta)
+
+  const { findByText } = render(ViewOk)
+
+  const actual = await findByText("fugafuga")
+  expect(actual).toBeInTheDocument()
+
+  await ViewOk.play?.()
 })

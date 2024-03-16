@@ -15,19 +15,12 @@ jobs:
         with:
           node-version-file: "package.json"
           cache: "npm"
+      - name: package install
+        run: npm ci
 
   test:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - name: package install
-        run: npm ci
-      - name: run lint
-        run: |
-          npm run lint
-        env:
-          NODE_ENV: production
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Apply Prettier Change
-          ref: ${{ github.head_ref }}
+      - name: run unit test
+        run: npm run test:unit -- --changed

@@ -6,15 +6,15 @@ const isShownOverlay = ref(false)
 
 const withLoader = async <T, U = unknown>(
   command: () => Promise<T>,
-  onSuccess: (data: T) => T,
-  onFailure: (err: unknown) => U,
+  onSuccess: (data: T) => void,
+  onFailure: (err: U) => void,
 ): Promise<void> => {
   isShownOverlay.value = true
   try {
     const data = await command()
     onSuccess(data)
   } catch (e) {
-    onFailure(e)
+    onFailure(e as U)
   }
   isShownOverlay.value = false
 }
