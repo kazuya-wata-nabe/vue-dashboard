@@ -18,7 +18,7 @@ router.beforeEach(async (to, _, next) => {
   if (to.meta.requiresAuth && !isAuthenticated) {
     next({ name: "login" })
   } else {
-    role.value = to.name === "home" ? ROLE.admin : ROLE.common
+    role.value = to.name === "home" ? ROLE.ADMIN : ROLE.COMMON
     next()
   }
 })

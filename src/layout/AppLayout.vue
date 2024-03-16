@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Role } from "@/provider/auth/model/role";
+import type { Role } from "@/provider/auth/model/role"
 
 defineProps<{
   role: Role | undefined
@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <component :is="$route.meta.layout">
+  <component :is="$route.meta.layout" :role="role">
     <slot :role="role"></slot>
   </component>
 </template>

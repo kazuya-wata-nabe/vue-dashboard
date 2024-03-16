@@ -1,8 +1,13 @@
 <script lang="ts" setup>
-import FlexBox from "@/components/parts/FlexBox.vue";
-import GoogleIcon from "@/components/parts/GoogleIcon.vue";
-import { useAuth } from "@/provider/auth/use-auth";
-import { useRouter } from "vue-router";
+import FlexBox from "@/components/parts/FlexBox.vue"
+import GoogleIcon from "@/components/parts/GoogleIcon.vue"
+import type { Role } from "@/provider/auth/model/role"
+import { useAuth } from "@/provider/auth/use-auth"
+import { useRouter } from "vue-router"
+
+defineProps<{
+  role: Role
+}>()
 
 const router = useRouter()
 const { logout } = useAuth()
@@ -14,7 +19,7 @@ const onClickLogout = async () => {
 
 <template>
   <FlexBox class="row header">
-    this is header
+    this is header, role is {{ role }}
     <FlexBox class="row icons" gap="24">
       <GoogleIcon dark @click="onClickLogout"> logout </GoogleIcon>
       <GoogleIcon dark> more_horiz </GoogleIcon>

@@ -1,6 +1,7 @@
-import { format, isAfter, isBefore, parse, startOfToday } from "date-fns"
+import { format, isAfter, isBefore, isSameDay, parse, startOfToday } from "date-fns"
 
 abstract class DateWrapper {
+  abstract isSame(date: DateWrapper): boolean
   abstract isBefore(date: DateWrapper): boolean
   abstract isAfter(date: DateWrapper): boolean
   abstract toString(): string
@@ -18,6 +19,10 @@ export class DateYMD implements DateWrapper {
 
   toString(): string {
     return format(this.value, "yyyy/MM/dd")
+  }
+
+  isSame(date: DateYMD): boolean {
+    return isSameDay(this.value, date.value)
   }
 
   isBefore(date: DateYMD): boolean {

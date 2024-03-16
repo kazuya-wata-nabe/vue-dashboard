@@ -1,4 +1,5 @@
 import { apiMock, mainLayout } from "@/__test__/helper"
+import { ROLE } from "@/provider/auth/model/role"
 import { expect, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
 import { DateYMD } from "../__shared__/date-wrapper"
@@ -10,7 +11,7 @@ import { BookQueryServiceOnMemory } from "./infra/on-memory"
 const meta = {
   component: HomeView,
   tags: ["autodocs"],
-  decorators: [mainLayout],
+  decorators: [mainLayout(ROLE.ADMIN)],
 } satisfies Meta<typeof HomeView>
 
 export default meta

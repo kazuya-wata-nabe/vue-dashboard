@@ -1,13 +1,17 @@
 import { MainLayout, PublicLayout } from "@/components/layout"
+import type { Role } from "@/provider/auth/model/role"
 import { fn } from "@storybook/test"
 
 export const sleep = async (sec: number) =>
   new Promise((resolve) => setTimeout(resolve, sec * 1000))
 
-export const mainLayout = () => ({
+export const mainLayout = (role: Role) => () => ({
   components: { MainLayout },
+  setup() {
+    return { role }
+  },
   template: `
-    <MainLayout>
+    <MainLayout :role="role">
       <story />
     </MainLayout>
   `,

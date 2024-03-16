@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useLoader } from "@/provider/app/use-loader"
+import { DateYMD } from "@/views/__shared__/date-wrapper"
 import { ref } from "vue"
-import { DateYMD } from "../__shared__/date-wrapper"
 import BookTable from "./components/BookTable.vue"
 import ReturnDate from "./components/ReturnDate.vue"
 import type { BookQueryServiceOnMemory } from "./infra"
