@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useLoader } from "@/provider/app/use-loader"
-import { DateUtils } from "../__shared__/date-utils"
+import { DateUtils } from "@/views/__shared__/date-utils"
 import BookTable from "./components/BookTable.vue"
 import type { BookQueryServiceOnMemory } from "./infra"
 import { makeBookViewModelFromBook, type BookViewModel } from "./model"

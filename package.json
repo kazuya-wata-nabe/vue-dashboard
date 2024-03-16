@@ -16,7 +16,7 @@
     "storybook": "storybook dev -p 6006",
     "storybook:test": "test-storybook",
     "storybook:docs": "storybook build --docs",
-    "build-storybook": "storybook build"
+    "storybook:build": "storybook build"
   },
   "dependencies": {
     "@vee-validate/zod": "^4.12.4",
