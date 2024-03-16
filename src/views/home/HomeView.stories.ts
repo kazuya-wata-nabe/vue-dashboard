@@ -1,4 +1,5 @@
 import { apiMock, mainLayout } from "@/__test__/helper"
+import { ROLE } from "@/provider/auth/model/role"
 import { expect, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
 import HomeView from "./HomeView.vue"
@@ -18,6 +19,7 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     queryService: new BookQueryServiceOnMemory(),
+    role: ROLE.admin,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -30,6 +32,7 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     queryService: apiMock(fixture),
+    role: ROLE.admin,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)

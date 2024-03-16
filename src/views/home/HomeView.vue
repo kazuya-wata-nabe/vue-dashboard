@@ -6,10 +6,18 @@ import BookTable from "./components/BookTable.vue"
 import type { BookQueryServiceOnMemory } from "./infra"
 import { Book } from "./model/book"
 
-const props = defineProps<{
+type Props = {
+  /** hoge */
   queryService: BookQueryServiceOnMemory
-  role: Role
-}>()
+  /**
+   * The category of the component
+   *
+   * @since 8.0.0
+   */
+  role?: Role
+}
+
+const props = defineProps<Props>()
 
 const items = ref<Book[]>([])
 
@@ -24,6 +32,7 @@ withLoader(
 
 <template>
   <h1>本の一覧</h1>
+  <p>role is {{ role }}</p>
   <div class="table-container">
     <BookTable :items="items">
       <template #head>
