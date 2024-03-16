@@ -1,5 +1,4 @@
 import type { Brand } from "@/views/__shared__/brand"
-import { DateUtils } from "@/views/__shared__/date-utils"
 import { DateYMD } from "@/views/__shared__/date-wrapper"
 
 type BookId = Brand<string, "BookId">
@@ -28,6 +27,22 @@ export type Book = {
   returnDate: DateYMD
 }
 
+type Params = {
+  id: string
+  title: string
+  borrowDate: string
+  returnDate: string
+}
+
+export const Book = (params: Params): Book => {
+  return {
+    id: BookId(params.id),
+    title: Title(params.title),
+    borrowDate: BorrowDate(params.borrowDate),
+    returnDate: ReturnDate(params.returnDate),
+  }
+}
+
 export type BookViewModel = {
   id: string
   title: string
@@ -42,22 +57,6 @@ export const makeBookViewModelFromBook = (book: Book, today: string): BookViewMo
     title: book.title,
     borrowDate: book.borrowDate.toString(),
     returnDate: book.returnDate.toString(),
-    isOverReturnDate: DateUtils.isAfter(today, book.returnDate.value),
-  }
-}
-
-type Params = {
-  id: string
-  title: string
-  borrowDate: string
-  returnDate: string
-}
-
-export const Book = (params: Params): Book => {
-  return {
-    id: BookId(params.id),
-    title: Title(params.title),
-    borrowDate: BorrowDate(params.borrowDate),
-    returnDate: ReturnDate(params.returnDate),
+    isOverReturnDate: DateYMD.valueOf(today).isAfter(book.returnDate),
   }
 }

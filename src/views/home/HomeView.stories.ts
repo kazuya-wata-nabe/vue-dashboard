@@ -6,7 +6,12 @@ import HomeView from "./HomeView.vue"
 import { fixture1 } from "./__test__/fixture"
 import { BookQueryServiceOnMemory } from "./infra/on-memory"
 
-/** ホーム画面 */
+/**
+ * ホーム画面
+ *
+ * 返却期限 > 本日の表示は期限超過と見なし<br>
+ * 返却期限を赤文字で表示する
+ */
 const meta = {
   component: HomeView,
   tags: ["autodocs"],
@@ -16,11 +21,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** 基本の表示 */
 export const Primary: Story = {
   args: {
     queryService: new BookQueryServiceOnMemory(),
-    today: "2021-03-01",
+    today: "2021-03-10",
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useLoader } from "@/provider/app/use-loader"
-import { DateUtils } from "@/views/__shared__/date-utils"
+import { DateUtils } from "../__shared__/date-utils"
 import BookTable from "./components/BookTable.vue"
 import type { BookQueryServiceOnMemory } from "./infra"
 import { makeBookViewModelFromBook, type BookViewModel } from "./model"
@@ -13,8 +13,7 @@ type Props = {
   today: string
 }
 
-const props = withDefaults(defineProps<Props>(), { today: () => DateUtils.today().toISOString() })
-
+const props = withDefaults(defineProps<Props>(), { today: DateUtils.format(DateUtils.today()) })
 const items = ref<BookViewModel[]>([])
 
 const { withLoader } = useLoader()
