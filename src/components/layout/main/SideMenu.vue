@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { FlexBox } from "@/components/parts"
-import GoogleIcon from "@/components/parts/GoogleIcon.vue"
-import { RouterLink } from "vue-router"
+import { FlexBox } from "@/components/parts";
+import GoogleIcon from "@/components/parts/GoogleIcon.vue";
+import { RouterLink } from "vue-router";
 
 defineProps<{ headerHeight: string; slim: boolean }>()
 defineEmits<{ toggle: [] }>()

@@ -1,5 +1,4 @@
 import { apiMock, mainLayout } from "@/__test__/helper"
-import { ROLE } from "@/provider/auth/model/role"
 import { expect, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
 import { DateYMD } from "../__shared__/date-wrapper"
@@ -21,7 +20,7 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     queryService: new BookQueryServiceOnMemory(),
-    role: ROLE.ADMIN,
+    today: DateYMD.valueOf("2021-03-01"),
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -35,7 +34,6 @@ export const Secondary: Story = {
   name: "返却期限切れ",
   args: {
     queryService: apiMock(fixture),
-    role: ROLE.ADMIN,
     today: DateYMD.valueOf("2021-03-11"),
   },
   play: async ({ canvasElement }) => {

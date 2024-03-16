@@ -1,7 +1,10 @@
 <script lang="ts" setup>
-import { ref } from "vue"
-import SideMenu from "./SideMenu.vue"
-import TheHeader from "./TheHeader.vue"
+import type { Role } from "@/provider/auth/model/role";
+import { ref } from "vue";
+import SideMenu from "./SideMenu.vue";
+import TheHeader from "./TheHeader.vue";
+
+defineProps<{ role: Role }>()
 
 const HEADER_HEIGHT = "50px"
 

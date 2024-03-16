@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useLoader } from "@/provider/app/use-loader"
-import type { Role } from "@/provider/auth/model/role"
 import { ref } from "vue"
 import { DateYMD } from "../__shared__/date-wrapper"
 import BookTable from "./components/BookTable.vue"
@@ -13,7 +12,6 @@ type Props = {
   queryService: BookQueryServiceOnMemory
   /** テスト用 */
   today: DateYMD
-  role?: Role
 }
 
 const props = withDefaults(defineProps<Props>(), { today: () => DateYMD.today() })
@@ -31,7 +29,6 @@ withLoader(
 
 <template>
   <h1>本の一覧</h1>
-  <p>role is {{ role }}</p>
   <div class="table-container">
     <BookTable :items="items">
       <template #head>
