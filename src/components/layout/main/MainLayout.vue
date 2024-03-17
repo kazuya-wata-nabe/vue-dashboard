@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import { ref } from "vue"
+import type { Role } from "@/provider/auth/model/role"
 import SideMenu from "./SideMenu.vue"
 import TheHeader from "./TheHeader.vue"
+
+defineProps<{ role: Role }>()
 
 const HEADER_HEIGHT = "50px"
 
@@ -11,10 +14,10 @@ const toggle = () => (slim.value = !slim.value)
 
 <template>
   <div id="wrapper" :class="{ slim }">
-    <TheHeader />
+    <TheHeader :role="role" />
     <SideMenu :header-height="HEADER_HEIGHT" :slim="slim" @toggle="toggle" />
     <div class="main">
-      <slot></slot>
+      <slot :role="role"></slot>
     </div>
   </div>
 </template>

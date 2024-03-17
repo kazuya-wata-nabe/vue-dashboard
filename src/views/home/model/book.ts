@@ -1,5 +1,5 @@
 import type { Brand } from "@/views/__shared__/brand"
-import { DateFormatter } from "@/views/__shared__/date-formatter"
+import { DateYMD } from "@/views/__shared__/date-wrapper"
 
 type BookId = Brand<string, "BookId">
 type Title = Brand<string, "Title">
@@ -17,28 +17,46 @@ const Title = (value: string) => {
   return value as Title
 }
 
-const BorrowDate = (value: Date) => DateFormatter.format(value) as BorrowDate
-const ReturnDate = (value: Date) => DateFormatter.format(value) as ReturnDate
+const BorrowDate = (value: string) => DateYMD.valueOf(value)
+const ReturnDate = (value: string) => DateYMD.valueOf(value)
 
 export type Book = {
   id: BookId
   title: Title
-  borrowDate: BorrowDate
-  returnDate: ReturnDate
+  borrowDate: DateYMD
+  returnDate: DateYMD
 }
 
 type Params = {
   id: string
   title: string
-  borrowDate: Date
-  returnDate: Date
+  borrowDate: string
+  returnDate: string
 }
 
-export const Book = (params: Params) => {
+export const Book = (params: Params): Book => {
   return {
     id: BookId(params.id),
     title: Title(params.title),
     borrowDate: BorrowDate(params.borrowDate),
     returnDate: ReturnDate(params.returnDate),
+  }
+}
+
+export type BookViewModel = {
+  id: string
+  title: string
+  borrowDate: string
+  returnDate: string
+  isOverReturnDate: boolean
+}
+
+export const makeBookViewModelFromBook = (book: Book, today: string): BookViewModel => {
+  return {
+    id: book.id,
+    title: book.title,
+    borrowDate: book.borrowDate.toString(),
+    returnDate: book.returnDate.toString(),
+    isOverReturnDate: DateYMD.valueOf(today).isAfter(book.returnDate),
   }
 }

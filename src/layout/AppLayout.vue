@@ -8,6 +8,6 @@ defineProps<{
 
 <template>
   <component :is="$route.meta.layout" :role="role">
-    <slot></slot>
+    <slot :role="role"></slot>
   </component>
 </template>

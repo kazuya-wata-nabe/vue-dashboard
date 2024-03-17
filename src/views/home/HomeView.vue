@@ -1,23 +1,26 @@
 <script setup lang="ts">
-import { useLoader } from "@/provider/app/use-loader"
-import type { Role } from "@/provider/auth/model/role"
 import { ref } from "vue"
+import { useLoader } from "@/provider/app/use-loader"
+import { DateUtils } from "@/views/__shared__/date-utils"
 import BookTable from "./components/BookTable.vue"
 import type { BookQueryServiceOnMemory } from "./infra"
-import { Book } from "./model/book"
+import { makeBookViewModelFromBook, type BookViewModel } from "./model"
 
-const props = defineProps<{
+type Props = {
+  /** hoge */
   queryService: BookQueryServiceOnMemory
-  role: Role
-}>()
+  /** テスト用 */
+  today: string
+}
 
-const items = ref<Book[]>([])
+const props = withDefaults(defineProps<Props>(), { today: DateUtils.format(DateUtils.today()) })
+const items = ref<BookViewModel[]>([])
 
 const { withLoader } = useLoader()
 
 withLoader(
   () => props.queryService.fetch(),
-  (data) => (items.value = data),
+  (data) => (items.value = data.map((book) => makeBookViewModelFromBook(book, props.today))),
   (err) => console.error(err),
 )
 </script>
@@ -34,7 +37,7 @@ withLoader(
       <template #record="{ item }">
         <td class="title">{{ item.title }}</td>
         <td class="date">{{ item.borrowDate }}</td>
-        <td class="date">{{ item.returnDate }}</td>
+        <td class="date" :class="{ 'is-over': item.isOverReturnDate }">{{ item.returnDate }}</td>
       </template>
     </BookTable>
   </div>
@@ -48,5 +51,11 @@ withLoader(
 }
 .date {
   min-width: 100px;
+}
+.over {
+  color: red;
+}
+.is-over {
+  color: red;
 }
 </style>

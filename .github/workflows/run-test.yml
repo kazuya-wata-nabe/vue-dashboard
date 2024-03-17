@@ -1,0 +1,21 @@
+name: unit test
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # TODO: 高速化したくなったらactions/cacheでnode_modulesをcache
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: "package.json"
+          cache: "npm"
+      - name: package install
+        run: npm ci
+      - name: run unit test
+        run: npm run test:unit

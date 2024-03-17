@@ -2,7 +2,7 @@ import { inject, provide, type InjectionKey } from "vue"
 
 type WithLoader = <T, U = unknown>(
   command: () => Promise<T>,
-  onSuccess: (data: T) => T,
+  onSuccess: (data: T) => void,
   onFailure: (err: unknown) => U,
 ) => Promise<void>
 

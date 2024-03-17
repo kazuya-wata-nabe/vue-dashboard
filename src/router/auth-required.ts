@@ -1,5 +1,5 @@
-import { BookQueryServiceOnMemory } from "@/views/home/infra/on-memory"
 import type { RouteRecordRaw } from "vue-router"
+import { BookQueryServiceOnMemory } from "@/views/home/infra/on-memory"
 import { BookRepositoryOnMemory } from "../views/book/infra"
 
 const HomeView = () => import("@/views/home/HomeView.vue")
