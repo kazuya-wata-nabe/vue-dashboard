@@ -11,10 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: "package.json"
-          cache: "npm"
+      - uses: ./.github/actions/setup-node
+        name: cache module
       # playwrightのcacheを保存して高速化
       - name: Get installed Playwright version
         id: playwright-version

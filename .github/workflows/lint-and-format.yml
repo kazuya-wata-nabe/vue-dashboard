@@ -15,12 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # TODO: 高速化したくなったらactions/cacheでnode_modulesをcache
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: "package.json"
-          cache: "npm"
-      - name: package install
-        run: npm ci
+      - name: cache module
+        uses: ./.github/actions/setup-node
       - name: run lint
         run: |
           npm run lint
