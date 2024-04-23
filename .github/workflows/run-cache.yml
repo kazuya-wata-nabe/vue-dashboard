@@ -1,15 +1,16 @@
 name: Install Module And Cache
 
 on: 
-  pull_request:
-    branches:
-      - main
-    types:
-      - closed
+  # pull_request:
+  #   branches:
+  #     - main
+  #   types:
+  #     - closed
+  workflow_dispatch:
 
 jobs:
   cache:
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     name: Cache NodeModules
     runs-on: ubuntu-latest
       
@@ -19,19 +20,21 @@ jobs:
         with:
           node-version-file: '.node-version'
 
-      - name: cache node-modules
-        id: cache-node-modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/.node-version') }}-${{ hashFiles('**/package-lock.json') }}
+      - name: Set Environment Variables
+        uses: ./.github/actions/set-up-env
+      # - name: cache node-modules
+      #   id: cache-node-modules
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: node_modules
+      #     key: ${{ runner.os }}-node-${{ hashFiles('**/.node-version') }}-${{ hashFiles('**/package-lock.json') }}
 
-      - name: clean-install if cache-hit
-        shell: bash
-        run: |
-          if [ "${{ steps.cache-node-modules.outputs.cache-hit }}" = "true" ]; then
-            echo "skip npm clean-install"
-          else
-            npm ci
-          fi
+      # - name: clean-install if cache-hit
+      #   shell: bash
+      #   run: |
+      #     if [ "${{ steps.cache-node-modules.outputs.cache-hit }}" = "true" ]; then
+      #       echo "skip npm clean-install"
+      #     else
+      #       npm ci
+      #     fi
   

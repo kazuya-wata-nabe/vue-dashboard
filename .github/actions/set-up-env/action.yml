@@ -1,0 +1,12 @@
+name: 'Setup Environment Variables'
+
+description: 'Setup Environment Variables for Django Project'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Add Environment Variables
+      shell: bash
+      run: |
+        echo ${{ runner.os }}-node-${{ hashFiles('**/.node-version') }}-${{ hashFiles('**/package-lock.json') }} \
+        >> $GITHUB_ENV
