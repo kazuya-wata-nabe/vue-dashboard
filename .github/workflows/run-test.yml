@@ -24,6 +24,7 @@ jobs:
         with:
           node-version-file: '.node-version' # https://qiita.com/hey_cube/items/676256d720a4e85ae6bc
           cache: 'npm'
+      - run: echo hello
       - run: npm ci
       - run: npm run lint
       - run: npm run test:unit
