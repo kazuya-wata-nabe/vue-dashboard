@@ -1,11 +1,11 @@
 name: Install Module And Cache
 
 on: 
-  # pull_request:
-  #   branches:
-  #     - main
-  #   types:
-  #     - closed
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
   workflow_dispatch:
 
 jobs:
