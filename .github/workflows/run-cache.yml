@@ -1,57 +1,37 @@
-name: Npm Cache
+name: Install Module And Cache
 
 on: 
   pull_request:
+    branches:
+      - main
     types:
-      - opened # default
-      - reopened # default
-      - synchronize # default
-      - ready_for_review
+      - closed
 
 jobs:
   cache:
-    if: github.event.pull_request.draft == false
-    name: Run prettier, lint, unitTest
+    if: github.event.pull_request.merged == true
+    name: Cache NodeModules
     runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-      - run: echo hello
-      - run: npm ci
       
-  setup:
-    name: setup
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version-file: '.node-version'
 
-      - name: cache node modules
+      - name: cache node-modules
         id: cache-node-modules
         uses: actions/cache@v4
-        env:
-          prefix: node-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('.node-version') }}-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/.node-version') }}-${{ hashFiles('**/package-lock.json') }}
 
-      # node_modules がキャッシュされてなければ npm ci
       - name: clean-install if cache-hit
         shell: bash
         run: |
-          if [ "${{ steps.npm-cache.outputs.cache-hit }}" = "true" ]; then
+          if [ "${{ steps.cache-node-modules.outputs.cache-hit }}" = "true" ]; then
             echo "skip npm clean-install"
           else
             npm ci
           fi
-
-      - run: npm run test:unit
-
   
