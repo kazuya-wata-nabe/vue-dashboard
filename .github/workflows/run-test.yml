@@ -1,21 +1,30 @@
-name: unit test
+name: Frontend CI
 
-on:
+on: 
   pull_request:
-    branches:
-      - main
+    types:
+      - opened # default
+      - reopened # default
+      - synchronize # default
+      - ready_for_review
 
 jobs:
-  setup:
+  build_and_test:
+    if: github.event.pull_request.draft == false
+    name: Run prettier, lint, unitTest
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      # TODO: 高速化したくなったらactions/cacheでnode_modulesをcache
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          node-version-file: "package.json"
-          cache: "npm"
-      - name: package install
-        run: npm ci
-      - name: run unit test
-        run: npm run test:unit
+          ref: ${{ github.head_ref }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version' # https://qiita.com/hey_cube/items/676256d720a4e85ae6bc
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test:unit
+      
