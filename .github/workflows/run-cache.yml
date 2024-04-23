@@ -18,6 +18,5 @@ jobs:
     runs-on: ubuntu-latest
       
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/set-up-env
+      - uses: .github/actions/setup-node
         name: cache module
