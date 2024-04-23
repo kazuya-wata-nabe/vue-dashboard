@@ -1,12 +1,27 @@
-name: 'Setup Environment Variables'
+name: Install Module And Cache
 
-description: 'Setup Environment Variables for Django Project'
+description: Setup Environment Variables for Django Project
 
 runs:
   using: 'composite'
   steps:
-    - name: Add Environment Variables
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version-file: '.node-version'
+
+    - name: cache node-modules
+      id: cache-node-modules
+      uses: actions/cache@v4
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/.node-version') }}-${{ hashFiles('**/package-lock.json') }}
+
+    - name: clean-install if cache-hit
       shell: bash
       run: |
-        echo ${{ runner.os }}-node-${{ hashFiles('**/.node-version') }}-${{ hashFiles('**/package-lock.json') }} \
-        >> $GITHUB_ENV
+        if [ "${{ steps.cache-node-modules.outputs.cache-hit }}" = "true" ]; then
+          echo "skip npm clean-install"
+        else
+          npm ci
+        fi
