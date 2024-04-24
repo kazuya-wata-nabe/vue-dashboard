@@ -18,6 +18,7 @@ jobs:
       # TODO: 高速化したくなったらactions/cacheでnode_modulesをcache
       - name: cache module
         uses: ./.github/actions/setup-node
+      - run: npm list --depth=0
       - name: run lint
         run: |
           npm run lint
