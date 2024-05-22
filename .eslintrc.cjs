@@ -9,11 +9,13 @@ module.exports = {
     "@vue/eslint-config-typescript",
     "@vue/eslint-config-prettier/skip-formatting",
     "plugin:storybook/recommended",
+    "neverthrow",
   ],
   parserOptions: {
     ecmaVersion: "latest",
   },
   rules: {
+    "neverthrow/must-use-result": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "prettier/prettier": "warn",
   },

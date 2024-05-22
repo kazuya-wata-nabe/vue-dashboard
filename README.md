@@ -2,11 +2,11 @@
 
 - 環境
 
-  - node: 20.11.0
+  - node: 20.13.0
 
 - 起動
 
-  - npm run dev
+  - pnpm run dev
 
 - その他
   - アイコン: [google font icon](https://fonts.google.com/icons)
