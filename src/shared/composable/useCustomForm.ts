@@ -1,7 +1,8 @@
 import { toTypedSchema } from "@vee-validate/zod"
 import {
-  useForm as _useForm,
+  useForm,
   type BaseFieldProps,
+  type FormContext,
   type GenericObject,
   type Path,
   type PathValue,
@@ -16,22 +17,18 @@ const toKebabCase = (str: string) => {
     .replace(/ *?[A-Z]/g, (allStr) => "-" + allStr.replace(/ /g, "").toLowerCase())
 }
 
-type Return<T extends GenericObject> = ReturnType<typeof _useForm<T>>
-type UserForm<T extends GenericObject> = {
-  resetForm: Return<T>["resetForm"]
-  setValues: Return<T>["setValues"]
-  validate: Return<T>["validate"]
-  setErrors: Return<T>["setErrors"]
-  defineField: (
-    path: Path<T>,
-  ) => readonly [
-    Ref<PathValue<T, Path<T>>>,
-    Ref<BaseFieldProps & { id: string; errorMessage: string | undefined }>,
-  ]
-  handleSubmit: Return<T>["handleSubmit"]
+type DefineFieldReturn<T extends GenericObject> = [
+  Ref<PathValue<T, Path<T>>>,
+  Ref<BaseFieldProps & { id: string; errorMessage: string | undefined }>,
+]
+type UserForm<T extends GenericObject> = Pick<
+  FormContext<T>,
+  "resetForm" | "setErrors" | "validate" | "handleSubmit" | "setValues" | "isSubmitting"
+> & {
+  defineField: (path: Path<T>) => DefineFieldReturn<T>
 }
 
-export const useForm = <T extends GenericObject>(schema: ZodSchema): UserForm<T> => {
+export const useCustomForm = <T extends GenericObject>(schema: ZodSchema): UserForm<T> => {
   const {
     defineField: _defineField,
     validate,
@@ -39,12 +36,13 @@ export const useForm = <T extends GenericObject>(schema: ZodSchema): UserForm<T>
     setErrors,
     resetForm,
     handleSubmit,
+    isSubmitting,
     errors,
-  } = _useForm<T>({
+  } = useForm<T>({
     validationSchema: toTypedSchema(schema),
   })
 
-  const defineField: UserForm<T>["defineField"] = (path: Path<T>) => {
+  const defineField = (path: Path<T>): DefineFieldReturn<T> => {
     const [model, attrs] = _defineField(path, {
       props: () => ({
         id: toKebabCase(path),
@@ -52,7 +50,7 @@ export const useForm = <T extends GenericObject>(schema: ZodSchema): UserForm<T>
       }),
     })
 
-    return [model, attrs] as const
+    return [model, attrs]
   }
 
   return {
@@ -61,6 +59,7 @@ export const useForm = <T extends GenericObject>(schema: ZodSchema): UserForm<T>
     setValues,
     validate,
     setErrors,
+    isSubmitting,
     handleSubmit,
   }
 }

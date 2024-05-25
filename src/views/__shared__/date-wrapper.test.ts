@@ -1,5 +1,5 @@
-import { describe, expect, test } from "vitest"
 import { DateYMD } from "./date-wrapper"
+import { describe, expect, test } from "vitest"
 
 describe("isBefore", () => {
   test("2021/03/01, 2021/03/02はtrue", () => {

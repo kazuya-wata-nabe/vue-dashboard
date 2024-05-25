@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { schema, type BookWriteModel } from "../model"
 import { FlexCol, TextField, SubmitButton, DatePicker } from "@/shared/components/parts"
-import { useForm } from "@/shared/composable/useForm"
+import { useCustomForm } from "@/shared/composable/useCustomForm"
 
 defineOptions({ name: "BookAdd" })
 
-const { handleSubmit, defineField } = useForm<BookWriteModel>(schema)
+const { handleSubmit, isSubmitting, defineField } = useCustomForm<BookWriteModel>(schema)
 
 const [title, titleAttrs] = defineField("title")
 const [borrowDate, borrowDateAttrs] = defineField("borrowDate")
@@ -41,7 +41,7 @@ const command = handleSubmit(async (form) => {
       v-model="returnDate"
       v-bind="returnDateAttrs"
     />
-    <SubmitButton :command="command">登録</SubmitButton>
+    <SubmitButton :isSubmitting="isSubmitting" :command="command">登録</SubmitButton>
   </FlexCol>
 </template>
 

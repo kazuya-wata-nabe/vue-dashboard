@@ -1,5 +1,5 @@
-import { describe, expect, test } from "vitest"
 import { DateUtils } from "./date-utils"
+import { describe, expect, test } from "vitest"
 
 describe("parse", () => {
   test("2021/03/01, 2021-03-01は同じ日時", () => {
