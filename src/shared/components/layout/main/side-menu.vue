@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router"
-import { FlexBox } from "@/shared/components/parts"
+import { FlexCol, FlexRow } from "@/shared/components/parts"
 import GoogleIcon from "@/shared/components/parts/google-icon.vue"
 
 defineProps<{ headerHeight: string; slim: boolean }>()
@@ -8,31 +8,26 @@ defineEmits<{ toggle: [] }>()
 
 const routes = [
   { name: "Home", link: "home", icon: "home" },
-  // TODO: implements route
-  { name: "Book", link: "book", icon: "book" },
-  // TODO: implements route
-  { name: "WebSocket", link: "home", icon: "rocket" },
+  { name: "Book", link: "book-list", icon: "book" },
 ]
 </script>
 
 <template>
-  <FlexBox class="col aside">
-    <FlexBox class="row menu-icon">
+  <FlexCol class="aside">
+    <FlexRow class="row menu-icon">
       <GoogleIcon class="menu-toggle clickable" @click="$emit('toggle')" />
-    </FlexBox>
-    <FlexBox class="row">
+    </FlexRow>
+    <FlexRow>
       <ul class="menu-list">
-        <template v-for="route in routes" :key="route.name">
-          <li class="menu-item">
-            <RouterLink :to="{ name: route.link }" class="link">
-              <GoogleIcon class="clickable">{{ route.icon }}</GoogleIcon>
-              <span v-if="!slim">{{ route.name }}</span>
-            </RouterLink>
-          </li>
-        </template>
+        <li class="menu-item" v-for="route in routes" :key="route.name">
+          <RouterLink :to="{ name: route.link }" class="link">
+            <GoogleIcon class="clickable">{{ route.icon }}</GoogleIcon>
+            <span v-if="!slim">{{ route.name }}</span>
+          </RouterLink>
+        </li>
       </ul>
-    </FlexBox>
-  </FlexBox>
+    </FlexRow>
+  </FlexCol>
 </template>
 
 <style scoped>

@@ -7,7 +7,7 @@ export const sleep = async (sec: number) =>
 
 export const mainLayout = (role: Role) => () => ({
   components: { MainLayout },
-  setup() {
+  setup: () => {
     return { role }
   },
   template: `

@@ -1,4 +1,4 @@
-import BookForm from "./book-form.vue"
+import BookForm from "./index.vue"
 import { expect, userEvent, within } from "@storybook/test"
 import type { Meta, StoryObj } from "@storybook/vue3"
 

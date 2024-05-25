@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { FlexBox } from "@/shared/components/parts"
+import { FlexCol } from "@/shared/components/parts"
 </script>
 
 <template>
-  <FlexBox class="col">
+  <FlexCol>
     <h1>ヘッダー</h1>
-  </FlexBox>
+  </FlexCol>
 </template>

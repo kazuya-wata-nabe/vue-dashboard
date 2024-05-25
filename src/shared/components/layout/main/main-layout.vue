@@ -4,7 +4,7 @@ import TheHeader from "./the-header.vue"
 import { ref } from "vue"
 import type { Role } from "@/app/provider/auth/model/role"
 
-defineProps<{ role: Role }>()
+withDefaults(defineProps<{ role: Role }>(), { role: "ADMIN" })
 
 const HEADER_HEIGHT = "50px"
 

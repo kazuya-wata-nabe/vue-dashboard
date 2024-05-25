@@ -5,7 +5,7 @@ import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useAuth } from "@/app/provider/auth/use-auth"
 import AlertDialog from "@/shared//components/parts/alert-dialog.vue"
-import { FlexBox, InputForm, TextInput } from "@/shared/components/parts"
+import { FlexCol, InputForm, TextField } from "@/shared/components/parts"
 import { SubmitButton } from "@/shared/components/parts/button"
 import { useCustomForm } from "@/views/__shared__/schema-helper"
 
@@ -36,16 +36,16 @@ const onSubmit = handleSubmit(async (form) => {
 
 <template>
   <main>
-    <FlexBox class="col">
-      <FlexBox class="col header">
+    <FlexCol>
+      <FlexCol class="header">
         <h1>This is Header Area</h1>
-      </FlexBox>
-      <InputForm @submit.prevent>
-        <TextInput label="id" name="id" v-model="id" error-message="" />
-        <TextInput mask label="password" name="password" v-model="password" error-message="" />
+      </FlexCol>
+      <InputForm>
+        <TextField size="m" label="id" v-model="id" error-message="" />
+        <TextField size="m" label="password" v-model="password" error-message="" />
         <SubmitButton :isSubmitting="isSubmitting" @click="onSubmit">submit</SubmitButton>
       </InputForm>
-    </FlexBox>
+    </FlexCol>
   </main>
   <AlertDialog ref="dialog">
     <div>ログインに失敗しました</div>
@@ -58,4 +58,3 @@ const onSubmit = handleSubmit(async (form) => {
   place-content: center;
 }
 </style>
-@/shared/components/parts/form

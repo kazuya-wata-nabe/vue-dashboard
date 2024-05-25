@@ -2,7 +2,7 @@
 import { useRouter } from "vue-router"
 import type { Role } from "@/app/provider/auth/model/role"
 import { useAuth } from "@/app/provider/auth/use-auth"
-import FlexBox from "@/shared/components/parts/flex-box.vue"
+import { FlexRow } from "@/shared/components/parts"
 import GoogleIcon from "@/shared/components/parts/google-icon.vue"
 
 defineProps<{
@@ -18,13 +18,13 @@ const onClickLogout = async () => {
 </script>
 
 <template>
-  <FlexBox class="row header">
+  <FlexRow class="header">
     this is header, role is {{ role }}
-    <FlexBox class="row icons" gap="24">
+    <FlexRow class="icons" gap="24">
       <GoogleIcon dark @click="onClickLogout"> logout </GoogleIcon>
       <GoogleIcon dark> more_horiz </GoogleIcon>
-    </FlexBox>
-  </FlexBox>
+    </FlexRow>
+  </FlexRow>
 </template>
 
 <style scoped>

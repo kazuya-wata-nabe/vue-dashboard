@@ -2,10 +2,11 @@
 const emits = defineEmits<{
   click: []
 }>()
+const id = Symbol().toString()
 </script>
 
 <template>
-  <form @submit.prevent id="form" @click="emits('click')">
+  <form @submit.prevent :id="id" @click="emits('click')">
     <slot></slot>
   </form>
 </template>
