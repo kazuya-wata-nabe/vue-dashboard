@@ -1,9 +1,5 @@
-import { type Preview } from "@storybook/vue3"
-import { getCurrentInstance } from "vue"
 import "../src/assets/main.css"
-import AppProvider from "../src/provider/app/AppProvider.vue"
-import AuthProvider from "../src/provider/auth/AuthProvider.vue"
-import router from "../src/router"
+import { type Preview } from "@storybook/vue3"
 
 const preview: Preview = {
   parameters: {
@@ -14,23 +10,6 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [
-    () => ({
-      setup() {
-        const { app } = getCurrentInstance()!.appContext
-        app.use(router)
-      },
-      components: { AppProvider, AuthProvider },
-      template: `
-        <div id="app">
-          <AppProvider>
-            <AuthProvider>
-              <story />
-            </AuthProvider>
-          </AppProvider>
-        </div>`,
-    }),
-  ],
 }
 
 export default preview

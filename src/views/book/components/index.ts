@@ -1,3 +1,3 @@
-import BookForm from "./BookForm.vue"
+import BookForm from "./book-form.vue"
 
 export { BookForm }

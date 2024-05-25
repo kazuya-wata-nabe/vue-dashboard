@@ -10,7 +10,6 @@
   "trailingComma": "all",
   "importOrder": [
     "^vue",
-    "^@/(.*)$",
-    "^[./]"
+    "^@/(.*)$"
   ]
 }

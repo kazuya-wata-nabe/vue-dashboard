@@ -9,14 +9,24 @@ module.exports = {
     "@vue/eslint-config-typescript",
     "@vue/eslint-config-prettier/skip-formatting",
     "plugin:storybook/recommended",
-    "neverthrow",
   ],
   parserOptions: {
     ecmaVersion: "latest",
   },
+  ignorePatterns: ["src/assets", "*.config.ts", "*.json"],
   rules: {
-    "neverthrow/must-use-result": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-non-null-assertion": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "prettier/prettier": "warn",
   },
+  overrides: [
+    {
+      files: ["**/*.test.ts", " **/*.stories.ts"],
+      rules: {
+        "@typescript-eslint/no-non-null-assertion": "off",
+      },
+    },
+  ],
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FlexBox } from "@/components/parts"
+import { FlexBox } from "@/shared/components/parts"
 </script>
 
 <template>

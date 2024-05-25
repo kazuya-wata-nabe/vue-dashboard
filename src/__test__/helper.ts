@@ -1,6 +1,6 @@
 import { fn } from "@storybook/test"
-import { MainLayout, PublicLayout } from "@/components/layout"
-import type { Role } from "@/provider/auth/model/role"
+import type { Role } from "@/app/provider/auth/model/role"
+import { MainLayout, PublicLayout } from "@/shared/components/layout"
 
 export const sleep = async (sec: number) =>
   new Promise((resolve) => setTimeout(resolve, sec * 1000))
