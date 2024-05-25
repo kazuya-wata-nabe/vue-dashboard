@@ -6,7 +6,9 @@ import { AppProvider, AuthProvider } from "@/app/provider"
 <template>
   <AppProvider>
     <AuthProvider v-slot="{ role }">
-      <RouterView :role="role" />
+      <Component :is="$route.meta.layout">
+        <RouterView :role="role" />
+      </Component>
     </AuthProvider>
   </AppProvider>
 </template>

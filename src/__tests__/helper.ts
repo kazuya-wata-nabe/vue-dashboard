@@ -16,6 +16,7 @@ export const mainLayout = (role: Role) => () => ({
     </MainLayout>
   `,
 })
+
 export const publicLayout = () => ({
   components: { PublicLayout },
   template: `

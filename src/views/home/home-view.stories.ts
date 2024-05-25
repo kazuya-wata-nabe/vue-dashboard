@@ -3,7 +3,7 @@ import HomeView from "./home-view.vue"
 import { BookQueryServiceOnMemory } from "./infra/on-memory"
 import { expect, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
-import { apiMock, mainLayout } from "@/__test__/helper"
+import { apiMock, mainLayout } from "@/__tests__/helper"
 import { ROLE } from "@/app/provider/auth/model/role"
 
 /**

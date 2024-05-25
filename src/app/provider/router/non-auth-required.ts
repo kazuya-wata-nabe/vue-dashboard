@@ -13,6 +13,6 @@ const routes: RouteRecordRaw[] = [
 ]
 
 export const nonAuthRequired = routes.map((route) => {
-  route.meta = { layout: "Public" }
+  route.meta = { layout: "public" }
   return route
 })

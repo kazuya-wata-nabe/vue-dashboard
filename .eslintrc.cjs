@@ -3,6 +3,7 @@ require("@rushstack/eslint-patch/modern-module-resolution")
 
 module.exports = {
   root: true,
+  plugins: ["prefer-arrow-functions"],
   extends: [
     "plugin:vue/vue3-essential",
     "eslint:recommended",
@@ -20,6 +21,7 @@ module.exports = {
     "@typescript-eslint/no-non-null-assertion": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "prettier/prettier": "warn",
+    "prefer-arrow-functions/prefer-arrow-functions": ["error"],
   },
   overrides: [
     {
