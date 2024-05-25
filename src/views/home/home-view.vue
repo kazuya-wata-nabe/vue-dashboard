@@ -4,7 +4,6 @@ import type { BookQueryServiceOnMemory } from "./infra"
 import { makeBookViewModelFromBook, type BookViewModel } from "./model"
 import { ref } from "vue"
 import { useLoader } from "@/app/provider/app/use-loader"
-import { DateUtils } from "@/views/__shared__/date-utils"
 
 type Props = {
   /** hoge */
@@ -13,7 +12,7 @@ type Props = {
   today: string
 }
 
-const props = withDefaults(defineProps<Props>(), { today: DateUtils.format(DateUtils.today()) })
+const props = defineProps<Props>()
 const items = ref<BookViewModel[]>([])
 
 const { withLoader } = useLoader()
