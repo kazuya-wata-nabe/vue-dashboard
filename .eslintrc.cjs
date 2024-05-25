@@ -28,5 +28,11 @@ module.exports = {
         "@typescript-eslint/no-non-null-assertion": "off",
       },
     },
+    {
+      files: [" **/*.stories.ts"],
+      rules: {
+        "prettier/prettier": "off",
+      },
+    },
   ],
 }
