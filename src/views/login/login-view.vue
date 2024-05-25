@@ -41,8 +41,8 @@ const onSubmit = handleSubmit(async (form) => {
         <h1>This is Header Area</h1>
       </FlexCol>
       <InputForm>
-        <TextField size="m" label="id" v-model="id" error-message="" />
-        <TextField size="m" label="password" v-model="password" error-message="" />
+        <TextField size="m" label="id" placeholder="" v-model="id" error-message="" />
+        <TextField size="m" label="password" placeholder="" v-model="password" error-message="" />
         <SubmitButton :isSubmitting="isSubmitting" @click="onSubmit">submit</SubmitButton>
       </InputForm>
     </FlexCol>

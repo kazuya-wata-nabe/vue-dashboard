@@ -3,8 +3,11 @@ import { RouterLink } from "vue-router"
 import { FlexCol, FlexRow } from "@/shared/components/parts"
 import GoogleIcon from "@/shared/components/parts/google-icon.vue"
 
-defineProps<{ headerHeight: string; slim: boolean }>()
-defineEmits<{ toggle: [] }>()
+defineProps<{
+  slim: boolean
+}>()
+
+const emits = defineEmits<{ toggle: [] }>()
 
 const routes = [
   { name: "Home", link: "home", icon: "home" },
@@ -13,15 +16,15 @@ const routes = [
 </script>
 
 <template>
-  <FlexCol class="aside">
-    <FlexRow class="row menu-icon">
-      <GoogleIcon class="menu-toggle clickable" @click="$emit('toggle')" />
+  <FlexCol :class="['aside', slim && 'aside-slim']">
+    <FlexRow class="menu-icon">
+      <GoogleIcon class="menu-toggle" clickable @click="emits('toggle')" />
     </FlexRow>
     <FlexRow>
       <ul class="menu-list">
         <li class="menu-item" v-for="route in routes" :key="route.name">
-          <RouterLink :to="{ name: route.link }" class="link">
-            <GoogleIcon class="clickable">{{ route.icon }}</GoogleIcon>
+          <RouterLink :to="{ name: route.link }" class="link" active-class="active">
+            <GoogleIcon clickable colorInherit> {{ route.icon }}</GoogleIcon>
             <span v-if="!slim">{{ route.name }}</span>
           </RouterLink>
         </li>
@@ -33,13 +36,8 @@ const routes = [
 <style scoped>
 .aside {
   grid-area: aside;
-  height: calc(100vh - v-bind(headerHeight));
+  height: calc(100vh - var(--header-height));
   background: dimgray;
-}
-
-.slim {
-  padding: 0 0;
-  justify-content: center;
 }
 
 .menu-icon {
@@ -47,13 +45,6 @@ const routes = [
   justify-content: end;
 }
 
-.clickable {
-  cursor: pointer;
-}
-.link {
-  text-decoration: none;
-  color: whitesmoke;
-}
 .menu-toggle {
   &::after {
     content: "menu";
@@ -64,20 +55,54 @@ const routes = [
       content: "arrow_back";
     }
   }
+}
 
-  &.slim:hover {
-    &::after {
-      content: "arrow_forward";
-    }
-  }
-}
 .menu-list {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  gap: 16px;
+  width: 100%;
+  padding: 0 0;
 }
+
 .menu-item {
   color: whitesmoke;
   list-style: none;
+  position: relative;
+  height: 60px;
+
+  &:has(> .active) {
+    background: lightgray;
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: whitesmoke;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  padding: 16px 13px;
+
+  &.active {
+    color: var(--color-text);
+  }
+}
+
+.aside-slim {
+  align-items: center;
+
+  .menu-toggle {
+    &:hover {
+      &::after {
+        content: "arrow_forward";
+      }
+    }
+  }
+
+  .link {
+    position: unset;
+  }
 }
 </style>

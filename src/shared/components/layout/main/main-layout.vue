@@ -6,8 +6,6 @@ import type { Role } from "@/app/provider/auth/model/role"
 
 withDefaults(defineProps<{ role: Role }>(), { role: "ADMIN" })
 
-const HEADER_HEIGHT = "50px"
-
 const slim = ref(false)
 const toggle = () => (slim.value = !slim.value)
 </script>
@@ -15,7 +13,7 @@ const toggle = () => (slim.value = !slim.value)
 <template>
   <div id="wrapper" :class="{ slim }">
     <TheHeader :role="role" />
-    <SideMenu :header-height="HEADER_HEIGHT" :slim="slim" @toggle="toggle" />
+    <SideMenu :slim="slim" @toggle="toggle" />
     <div class="main">
       <slot :role="role"></slot>
     </div>
@@ -26,15 +24,15 @@ const toggle = () => (slim.value = !slim.value)
 #wrapper {
   min-width: 100vw;
   display: grid;
-  grid-auto-rows: v-bind(HEADER_HEIGHT) 1fr;
-  grid-template-columns: 200px 1fr;
+  grid-auto-rows: var(--header-height) 1fr;
+  grid-template-columns: var(--aside-width-normal) 1fr;
   grid-template-areas:
     "header header"
     "aside main"
     "aside main";
 
   &.slim {
-    grid-template-columns: 50px 1fr;
+    grid-template-columns: var(--aside-width-slim) 1fr;
   }
 }
 

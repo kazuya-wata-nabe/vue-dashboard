@@ -6,6 +6,7 @@ defineOptions({ inheritAttrs: false })
 const props = defineProps<{
   size: "s" | "m" | "l"
   label: string
+  placeholder: string
   errorMessage: string | undefined
 }>()
 
@@ -18,20 +19,32 @@ const classes = computed(() => ({
   large: props.size === "l",
 }))
 
-const id = Symbol().toString()
+const id = `input-${crypto.randomUUID()}`
 </script>
 
 <template>
   <div class="input-container">
     <label :for="id">{{ label }}</label>
-    <input :id="id" :class="classes" type="text" v-model="model" v-bind="$attrs" />
+    <input
+      :id="id"
+      :class="classes"
+      :placeholder="placeholder"
+      type="text"
+      v-model="model"
+      v-bind="$attrs"
+    />
     <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
 </template>
 
 <style scoped>
 .input-container {
-  &.small {
+  display: flex;
+  flex-direction: column;
+}
+.text-input {
+  line-height: 1.5rem;
+  .small {
     width: 100px;
   }
   &.medium {
@@ -40,9 +53,6 @@ const id = Symbol().toString()
   &.large {
     width: 300px;
   }
-}
-.text-input {
-  line-height: 1.5rem;
 }
 .error-message {
   color: red;
