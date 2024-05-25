@@ -1,4 +1,1 @@
-import SubmitButton from "./submit-button.vue"
-import TheButton from "./the-button.vue"
-
-export { SubmitButton, TheButton }
+export { default as SubmitButton } from "@/shared/components/parts/button/submit-button.vue"

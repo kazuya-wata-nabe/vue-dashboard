@@ -1,25 +1,16 @@
 <script setup lang="ts">
-import { schema } from "../model"
-import { toTypedSchema } from "@vee-validate/zod"
-import { useForm } from "vee-validate"
-import { FlexCol, TextField, TheButton } from "@/shared/components/parts"
-import DatePicker from "@/shared/components/parts/date-picker/date-picker.vue"
+import { schema, type BookWriteModel } from "../model"
+import { FlexCol, TextField, SubmitButton, DatePicker } from "@/shared/components/parts"
+import { useForm } from "@/shared/composable/useForm"
 
 defineOptions({ name: "BookAdd" })
 
-const { handleSubmit, errors, defineField } = useForm({
-  validationSchema: toTypedSchema(schema),
-})
+const { handleSubmit, defineField } = useForm<BookWriteModel>(schema)
 
-const [title, titleAttrs] = defineField("title", {
-  props: () => ({ errorMessage: errors.value.title }),
-})
-const [borrowDate, borrowDateAttrs] = defineField("borrowDate", {
-  props: () => ({ errorMessage: errors.value.borrowDate }),
-})
-const [returnDate, returnDateAttrs] = defineField("returnDate", {
-  props: () => ({ errorMessage: errors.value.returnDate }),
-})
+const [title, titleAttrs] = defineField("title")
+const [borrowDate, borrowDateAttrs] = defineField("borrowDate")
+
+const [returnDate, returnDateAttrs] = defineField("returnDate")
 
 const command = handleSubmit(async (form) => {
   console.debug(form)
@@ -30,7 +21,6 @@ const command = handleSubmit(async (form) => {
   <FlexCol class="input-container" gap="8">
     <p>本の登録</p>
     <TextField
-      id="title"
       size="m"
       label="タイトル"
       placeholder="タイトル"
@@ -38,22 +28,20 @@ const command = handleSubmit(async (form) => {
       v-bind="titleAttrs"
     />
     <DatePicker
-      id="date-from"
-      label="貸出日"
       size="m"
+      label="貸出日"
       placeholder="日付を選択"
       v-model="borrowDate"
       v-bind="borrowDateAttrs"
     />
     <DatePicker
-      id="date-to"
-      label="返却日"
       size="m"
+      label="返却日"
       placeholder="日付を選択"
       v-model="returnDate"
       v-bind="returnDateAttrs"
     />
-    <TheButton :command="command">登録</TheButton>
+    <SubmitButton :command="command">登録</SubmitButton>
   </FlexCol>
 </template>
 

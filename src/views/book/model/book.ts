@@ -5,7 +5,7 @@ const required = {
 }
 
 export const schema = zod.object({
-  title: required.string().max(1, "必須項目です"),
+  title: required.string().max(1, "aaaa"),
   borrowDate: required.string(),
   returnDate: required.string(),
 })

@@ -1,8 +1,6 @@
 <script lang="ts" setup generic="T">
 import { computed } from "vue"
 
-defineOptions({ inheritAttrs: false })
-
 const props = defineProps<{
   size: "s" | "m" | "l"
   label: string

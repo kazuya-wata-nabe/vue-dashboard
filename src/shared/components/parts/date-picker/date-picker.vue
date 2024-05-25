@@ -10,7 +10,7 @@ const props = defineProps<{
   label: string
   placeholder: string
   size: "s" | "m" | "l"
-  errorMessage: string | undefined
+  errorMessage?: string | undefined
 }>()
 
 const WeekOfDay = {
@@ -36,7 +36,7 @@ const config = computed(
   }),
 )
 
-const model = defineModel<string | undefined>({ required: true })
+const model = defineModel<string | Date | undefined>({ required: true })
 
 const classes = computed(() => ({
   "date-picker": true,
@@ -73,7 +73,13 @@ const getDayClass = (date: Date) => {
 
     <template #dp-input="{ value }">
       <div class="input-container">
-        <input :class="classes" :placeholder="placeholder" :value="value" v-bind="$attrs" />
+        <input
+          :id="id"
+          :class="classes"
+          :placeholder="placeholder"
+          :value="value"
+          v-bind="$attrs"
+        />
         <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
       </div>
     </template>
