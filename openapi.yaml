@@ -1,0 +1,125 @@
+openapi: 3.0.2
+
+info:
+  title: Sample
+  description: |-
+    this is sample
+  version: 1.0.0
+
+tags:
+  - name: user
+    description: ""
+
+paths:
+  /me:
+    get:
+      tags:
+        - user
+      description: ""
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+
+  /books:
+    get:
+      parameters:
+        - in: query
+          name: title
+          schema:
+            type: string
+        - in: query
+          name: date-from
+          schema:
+            type: string
+        - in: query
+          name: date-to
+          schema:
+            type: string
+
+      tags:
+        - book
+      description: ""
+      responses:
+        "200":
+          $ref: "#/components/responses/BookSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
+    post:
+      tags:
+        - book
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/Book"
+      responses:
+        "200":
+          $ref: "#/components/schemas/Book"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
+components:
+  schemas:
+    Book:
+      type: object
+      required:
+        - id
+        - title
+        - borrowDate
+        - returnDate
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+          maximum: 50
+        borrowDate:
+          type: string
+          format: date
+        returnDate:
+          type: string
+          format: date
+
+    BadRequestError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        reason:
+          type: string
+
+  parameters:
+    BookListParams:
+      in: query
+      name: title
+      required: true
+      schema:
+        type: string
+
+  responses:
+    BookSuccess:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Book"
+
+    BadRequest:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BadRequestError"
+
+  requestBodies:
+    Book:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Book"

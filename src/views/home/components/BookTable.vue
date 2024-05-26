@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T">
 type Item<T> = {
-  id: string
+  id: string | number
 } & T
 
 defineProps<{ items: Item<T>[] }>()

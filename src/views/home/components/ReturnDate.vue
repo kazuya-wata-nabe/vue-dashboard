@@ -1,15 +1,13 @@
 <script lang="ts" setup>
 import { computed } from "vue"
-import { DateYMD } from "@/views/__shared__/date-wrapper"
-import type { Book } from "../model"
 
 const props = defineProps<{
-  today: string
-  returnDate: Book["returnDate"]
+  returnDate: string
+  isOver: boolean
 }>()
 
 const isOver = computed(() => ({
-  "is-over": DateYMD.valueOf(props.today).isAfter(props.returnDate),
+  "is-over": props.isOver,
 }))
 </script>
 

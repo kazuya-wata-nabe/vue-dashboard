@@ -18,14 +18,15 @@
     "storybook:docs": "storybook build --docs",
     "storybook:build": "storybook build",
     "prepare": "husky",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "gen:schema": "openapi-typescript ./openapi.yaml -o ./src/shared/api/v1.schema.ts --export-type"
   },
   "lint-staged": {
     "*.{vue,ts}": "prettier --write"
   },
   "dependencies": {
     "@vee-validate/zod": "^4.12.8",
-    "@vuepic/vue-datepicker": "8.4.0",
+    "@vuepic/vue-datepicker": "^8.7.0",
     "date-fns": "^3.6.0",
     "neverthrow": "^6.2.1",
     "openapi-fetch": "^0.9.7",
