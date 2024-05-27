@@ -6,7 +6,10 @@ const repeatInformationDummy = (n: number) => Array.from({ length: n }, (_, i) =
 describe("次へボタンの制御", () => {
   test("レコード数 > 1ページあたりの表示件数は次に進める", async () => {
     const dummy = repeatInformationDummy(11)
-    const { page, next } = usePageNation(() => dummy)
+    const {
+      page,
+      pageController: { next },
+    } = usePageNation(() => dummy)
 
     expect(page.value.from).toBe(1)
     expect(page.value.notHasNext).toBeFalsy()
@@ -18,7 +21,10 @@ describe("次へボタンの制御", () => {
 
   test("レコード数 = 1ページあたりの表示件数は次に進めない", async () => {
     const dummy = repeatInformationDummy(10)
-    const { page, next } = usePageNation(() => dummy)
+    const {
+      page,
+      pageController: { next },
+    } = usePageNation(() => dummy)
 
     expect(page.value.from).toBe(1)
     expect(page.value.notHasNext).toBeTruthy()
@@ -30,7 +36,10 @@ describe("次へボタンの制御", () => {
 
   test("レコード数 < 1ページあたりの表示件数は次に進めない", async () => {
     const dummy = repeatInformationDummy(9)
-    const { page, next } = usePageNation(() => dummy)
+    const {
+      page,
+      pageController: { next },
+    } = usePageNation(() => dummy)
 
     expect(page.value.from).toBe(1)
     expect(page.value.notHasNext).toBeTruthy()
@@ -44,7 +53,10 @@ describe("次へボタンの制御", () => {
 describe("前へボタンの制御", () => {
   test("レコード数 > 1ページあたりの表示件数は前に進める", async () => {
     const dummy = repeatInformationDummy(11)
-    const { page, next, prev } = usePageNation(() => dummy)
+    const {
+      page,
+      pageController: { next, prev },
+    } = usePageNation(() => dummy)
 
     expect(page.value.to).toBe(10)
 
@@ -59,7 +71,10 @@ describe("前へボタンの制御", () => {
 
   test("レコード数 = 1ページあたりの表示件数は前に進めない", async () => {
     const dummy = repeatInformationDummy(10)
-    const { page, next, prev } = usePageNation(() => dummy)
+    const {
+      page,
+      pageController: { next, prev },
+    } = usePageNation(() => dummy)
 
     expect(page.value.to).toBe(10)
 
@@ -74,7 +89,10 @@ describe("前へボタンの制御", () => {
 
   test("レコード数 < 1ページあたりの表示件数は次に進めない", async () => {
     const dummy = repeatInformationDummy(9)
-    const { page, next, prev } = usePageNation(() => dummy)
+    const {
+      page,
+      pageController: { next, prev },
+    } = usePageNation(() => dummy)
 
     expect(page.value.to).toBe(9)
 
@@ -122,7 +140,10 @@ describe("件数の表示", () => {
   })
 
   test("検索結果が11件の場合は2ページ目は11-11/11件", async () => {
-    const { page, next } = usePageNation(() => repeatInformationDummy(11))
+    const {
+      page,
+      pageController: { next },
+    } = usePageNation(() => repeatInformationDummy(11))
 
     expect(page.value.from).toBe(1)
     expect(page.value.to).toBe(10)
@@ -135,7 +156,10 @@ describe("件数の表示", () => {
   })
 
   test("検索結果が21件の場合は2ページ目は11-20/21件", async () => {
-    const { page, next } = usePageNation(() => repeatInformationDummy(21))
+    const {
+      page,
+      pageController: { next },
+    } = usePageNation(() => repeatInformationDummy(21))
 
     expect(page.value.from).toBe(1)
     expect(page.value.to).toBe(10)

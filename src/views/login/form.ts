@@ -1,5 +1,4 @@
-import { createSchema, required } from "@/shared/lib/schema-helper"
-import { type ToSchema } from "@/shared/lib/schema-helper/wrapper"
+import { createSchema, required, type ToSchema } from "@/shared/lib/schema-helper"
 
 export const loginSchema = createSchema({
   id: required.string(),

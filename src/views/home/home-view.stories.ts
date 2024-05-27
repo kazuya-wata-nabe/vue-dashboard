@@ -1,9 +1,7 @@
-import { fixture1 } from "./__test__/fixture"
 import HomeView from "./home-view.vue"
-import { BookQueryServiceOnMemory } from "./infra/on-memory"
 import { expect, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
-import { apiMock, mainLayout } from "@/__mocks__/helper"
+import { mainLayout } from "@/__mocks__/helper"
 import { ROLE } from "@/app/provider/auth/model/role"
 
 /**
@@ -22,10 +20,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
-  args: {
-    queryService: new BookQueryServiceOnMemory(),
-    today: "2021-03-10",
-  },
+  args: {},
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
 
@@ -36,10 +31,7 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
   name: "返却期限切れ",
-  args: {
-    queryService: apiMock(fixture1),
-    today: "2021-03-11",
-  },
+  args: {},
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
 

@@ -8,6 +8,6 @@ export {}
 
 declare module "vue-router" {
   interface RouteMeta {
-    layout: "public" | "main"
+    layout: Component
   }
 }

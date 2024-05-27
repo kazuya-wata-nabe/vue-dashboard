@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { loginSchema } from "./form"
+import { loginSchema, type LoginSchema } from "./form"
 import { type LoginRepository } from "./model"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
@@ -7,7 +7,7 @@ import { useAuth } from "@/app/provider/auth/use-auth"
 import AlertDialog from "@/shared//components/parts/alert-dialog.vue"
 import { FlexCol, InputForm, TextField } from "@/shared/components/parts"
 import { SubmitButton } from "@/shared/components/parts/button"
-import { useCustomForm } from "@/views/__shared__/schema-helper"
+import { useCustomForm } from "@/shared/composable/useCustomForm"
 
 const props = defineProps<{
   /** ログインAPIのインターフェース */
@@ -17,7 +17,7 @@ const props = defineProps<{
 const router = useRouter()
 const authContext = useAuth()
 
-const { defineField, handleSubmit, isSubmitting } = useCustomForm(loginSchema)
+const { defineField, handleSubmit, isSubmitting } = useCustomForm<LoginSchema>(loginSchema)
 const [id] = defineField("id")
 const [password] = defineField("password")
 
