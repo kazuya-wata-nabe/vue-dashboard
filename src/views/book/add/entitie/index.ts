@@ -9,12 +9,6 @@ export const schema = createSchema({
 
 export type BookWriteModel = ToSchema<typeof schema>
 
-export const postBook = async (form: BookWriteModel) => {
-  client.POST("/books", {
-    body: {
-      title: form.title,
-      borrowDate: form.borrowDate,
-      returnDate: form.returnDate,
-    },
-  })
+export const postBook = async (body: BookWriteModel) => {
+  client.POST("/books", { body })
 }
