@@ -27,3 +27,4 @@ router.beforeEach(async (to) => {
 <template>
   <slot :role="role"></slot>
 </template>
+@/domain/auth

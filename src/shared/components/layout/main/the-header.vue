@@ -43,3 +43,4 @@ const onClickLogout = async () => {
   cursor: pointer;
 }
 </style>
+@/domain/auth

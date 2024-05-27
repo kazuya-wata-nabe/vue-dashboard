@@ -1,10 +1,17 @@
-# FSD
-- app — app-wide settings, styles and providers.
-- pages — compositional layer to construct full pages from entities, features and widgets.
-- widgets — compositional layer to combine entities and features into meaningful blocks. (e.g. IssuesList, UserProfile).
-- features — user interactions, actions that bring business value to the user. (e.g. SendComment, AddToCart, UsersSearch).
-- entities — business entities. (e.g., User, Product, Order).
-- shared 
+# アーキテクチャ
+- レイヤードアーキテクチャ
+- 依存は一方方向にすること
+- 下位のレイヤーが上位のレイヤーをimportするのは禁止
+
+```ts
+// NG
+import hoge from "@/pages"
+// OK
+import hoge from "@/shared"
+```
+
+
+- 同レイヤーでimportするのは禁止
 
 # ディレクトリ、ファイル名
 - kebab-caseで作成すること

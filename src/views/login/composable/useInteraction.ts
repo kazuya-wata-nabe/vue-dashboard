@@ -1,5 +1,5 @@
 import { type Router } from "vue-router"
-import type { AuthContext } from "@/features/auth"
+import type { AuthContext } from "@/domain/auth"
 import { client } from "@/shared/api/client"
 import { useCustomForm } from "@/shared/composable/useCustomForm"
 import { loginSchema, type LoginSchema } from "@/views/login/model/form"

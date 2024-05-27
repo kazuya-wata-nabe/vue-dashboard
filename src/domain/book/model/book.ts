@@ -1,4 +1,4 @@
-import type { ApiSchema } from "@/shared/api/response"
+import type { ApiResponse } from "@/shared/api/response"
 import { isAfter } from "@/shared/lib/date"
 
 export type Book = {
@@ -11,7 +11,7 @@ export type Book = {
 
 export const createBook =
   (date: string) =>
-  (res: ApiSchema<"Book">): Book => {
+  (res: ApiResponse<"BookSuccess">[number]): Book => {
     return {
       id: res.id,
       title: res.title,
