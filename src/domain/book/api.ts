@@ -1,9 +1,10 @@
-import { client } from "@/shared/api/client/client"
-import { type Failure, type Success } from "@/shared/api/response"
+import { client } from "@/shared/api/client"
 
-type BookSuccess = Success<"Book">
-type BookFailure = Failure<"Book">
 export const fetchBookList = async () => {
-  const result = await client.GET<BookSuccess[], BookFailure>("/books")
+  const result = await client.GET("/books", {
+    params: {
+      query: undefined,
+    },
+  })
   return result
 }

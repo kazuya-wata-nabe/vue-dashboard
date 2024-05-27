@@ -9,7 +9,7 @@ export type paths = {
       responses: {
         200: {
           content: {
-            "application/json": components["schemas"]["Book"]
+            "application/json": components["schemas"]["User"]
           }
         }
       }
@@ -37,6 +37,19 @@ export type paths = {
       }
     }
   }
+  "/books/{id}": {
+    get: {
+      parameters: {
+        path: {
+          id: number
+        }
+      }
+      responses: {
+        200: components["responses"]["BookSuccess"]
+        400: components["responses"]["BadRequest"]
+      }
+    }
+  }
 }
 
 export type webhooks = Record<string, never>
@@ -44,7 +57,6 @@ export type webhooks = Record<string, never>
 export type components = {
   schemas: {
     Book: {
-      /** Format: int64 */
       id: number
       title: string
       /** Format: date */
@@ -52,22 +64,29 @@ export type components = {
       /** Format: date */
       returnDate: string
     }
+    /** @enum {string} */
+    UserRole: "ADMIN" | "COMMON"
+    User: {
+      id?: number
+      role?: components["schemas"]["UserRole"]
+    }
     BadRequestError: {
-      /** Format: int32 */
-      code?: number
-      type?: string
-      message?: string
+      field?: {
+        /** Format: int32 */
+        code?: number
+        reason?: string
+      }
     }
   }
   responses: {
     BookSuccess: {
       content: {
-        "application/json": components["schemas"]["Book"]
+        "application/json": components["schemas"]["Book"][]
       }
     }
     BadRequest: {
       content: {
-        "application/json": components["schemas"]["BadRequestError"]
+        "application/json": components["schemas"]["BadRequestError"][]
       }
     }
   }

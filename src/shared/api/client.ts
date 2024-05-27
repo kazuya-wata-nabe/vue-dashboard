@@ -23,4 +23,5 @@ export const client = {
   GET: instance.GET,
   POST: instance.POST,
   PUT: instance.PUT,
-}
+  DELETE: instance.DELETE,
+} as const

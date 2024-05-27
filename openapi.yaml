@@ -22,10 +22,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Book"
+                $ref: "#/components/schemas/User"
 
   /books:
     get:
+      description: ""
+      tags:
+        - book
       parameters:
         - in: query
           name: title
@@ -40,9 +43,6 @@ paths:
           schema:
             type: string
 
-      tags:
-        - book
-      description: ""
       responses:
         "200":
           $ref: "#/components/responses/BookSuccess"
@@ -61,6 +61,24 @@ paths:
         "400":
           $ref: "#/components/responses/BadRequest"
 
+  /books/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      tags:
+        - book
+      description: ""
+      responses:
+        "200":
+          $ref: "#/components/responses/BookSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
 components:
   schemas:
     Book:
@@ -73,7 +91,7 @@ components:
       properties:
         id:
           type: integer
-          format: int64
+          readOnly: true
         title:
           type: string
           maximum: 50
@@ -83,15 +101,31 @@ components:
         returnDate:
           type: string
           format: date
+    UserRole:
+      type: string
+      enum: [ADMIN, COMMON]
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        role:
+          oneOf:
+            - $ref: "#/components/schemas/UserRole"
 
     BadRequestError:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
-        reason:
-          type: string
+        "field":
+          type: object
+          properties:
+            code:
+              type: integer
+              format: int32
+            reason:
+              type: string
 
   parameters:
     BookListParams:
@@ -107,14 +141,18 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Book"
+            type: array
+            items:
+              $ref: "#/components/schemas/Book"
 
     BadRequest:
       description: ""
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BadRequestError"
+            type: array
+            items:
+              $ref: "#/components/schemas/BadRequestError"
 
   requestBodies:
     Book:

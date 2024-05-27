@@ -7,11 +7,11 @@ export const useInteract = () => {
   const books = ref<Book[]>([])
 
   onMounted(async () => {
-    const { failure, res } = await fetchBookList()
-    if (failure) {
-      console.debug(res)
+    const { data, error } = await fetchBookList()
+    if (error) {
+      console.debug(error)
     } else {
-      books.value = res.map(createBook(today()))
+      books.value = data.map(createBook(today()))
     }
   })
 
