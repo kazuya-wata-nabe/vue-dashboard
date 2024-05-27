@@ -37,10 +37,7 @@ export const isAfter = (a: string | Date, b: string | Date) => {
   return dateFns.isAfter(a, b)
 }
 
-export const today = () => {
-  return startOfToday().toString()
-}
-
+export const today = () => startOfToday().toString()
 export const parse = (value: string) => parseValue(value)
 export const format = (date: Date, template = DateFormatTemplate["yyyy/MM/dd"]) =>
   dateFns.format(date, template)

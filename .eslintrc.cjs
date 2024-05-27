@@ -1,9 +1,11 @@
 /* eslint-env node */
 require("@rushstack/eslint-patch/modern-module-resolution")
 
+const WARNING = Boolean(process.env) === true ? "error" : "warn"
+
 module.exports = {
   root: true,
-  plugins: ["prefer-arrow-functions"],
+  plugins: ["prefer-arrow-functions", "no-relative-import-paths"],
   extends: [
     "plugin:vue/vue3-essential",
     "eslint:recommended",
@@ -17,17 +19,25 @@ module.exports = {
   ignorePatterns: ["src/assets", "*.config.ts", "*.json"],
   rules: {
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": WARNING,
     "@typescript-eslint/no-non-null-assertion": "error",
     "@typescript-eslint/no-explicit-any": "error",
-    "prettier/prettier": "warn",
+    "prettier/prettier": WARNING,
     "prefer-arrow-functions/prefer-arrow-functions": ["error"],
+    "no-relative-import-paths/no-relative-import-paths": [
+      "error",
+      {
+        allowSameFolder: false,
+        rootDir: "./",
+      },
+    ],
   },
   overrides: [
     {
       files: ["**/*.test.ts", " **/*.stories.ts"],
       rules: {
         "@typescript-eslint/no-non-null-assertion": "off",
+        "no-relative-import-paths/no-relative-import-paths": "off",
       },
     },
     {

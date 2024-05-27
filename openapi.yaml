@@ -118,7 +118,7 @@ components:
     BadRequestError:
       type: object
       properties:
-        "field":
+        additionalProperties:
           type: object
           properties:
             code:

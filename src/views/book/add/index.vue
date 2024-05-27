@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { schema, type BookWriteModel } from "../model"
+import { schema, type BookWriteModel } from "src/views/book/model"
 import { FlexCol, TextField, SubmitButton, DatePicker } from "@/shared/components/parts"
 import { useCustomForm } from "@/shared/composable/useCustomForm"
 

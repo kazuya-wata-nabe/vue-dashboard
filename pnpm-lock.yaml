@@ -105,6 +105,9 @@ importers:
       eslint-plugin-neverthrow:
         specifier: ^1.1.4
         version: 1.1.4(@typescript-eslint/parser@7.10.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
+      eslint-plugin-no-relative-import-paths:
+        specifier: ^1.5.4
+        version: 1.5.4
       eslint-plugin-prefer-arrow-functions:
         specifier: ^3.3.2
         version: 3.3.2(eslint@8.57.0)
@@ -2774,6 +2777,9 @@ packages:
     peerDependencies:
       '@typescript-eslint/parser': '>=4.20.0'
       eslint: '>=5.16.0'
+
+  eslint-plugin-no-relative-import-paths@1.5.4:
+    resolution: {integrity: sha512-2smViH7R3682NR6dwgYr8Vm7emqNP1gEjBku6DbvUy3Ef/2Fz+mhwsFjZGSixzWzazMCj4MAgIWTsHELCCDJKA==}
 
   eslint-plugin-prefer-arrow-functions@3.3.2:
     resolution: {integrity: sha512-XRGsga9cK6pZ48IA2PM2PABBlWshRYhkofkQxcWzCM0YlDnal2hrQKsuz0FqtBHimJpgEXGgHUko3KrOayxlOQ==}
@@ -8697,6 +8703,8 @@ snapshots:
       tsutils: 3.21.0(typescript@5.4.5)
     transitivePeerDependencies:
       - typescript
+
+  eslint-plugin-no-relative-import-paths@1.5.4: {}
 
   eslint-plugin-prefer-arrow-functions@3.3.2(eslint@8.57.0):
     dependencies:

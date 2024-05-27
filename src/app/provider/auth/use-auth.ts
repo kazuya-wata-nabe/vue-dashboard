@@ -1,4 +1,4 @@
-import type { AuthStorage } from "./model/storage"
+import type { AuthStorage } from "src/app/provider/auth/model/storage"
 import { inject, provide, type InjectionKey } from "vue"
 
 type AuthContext = {

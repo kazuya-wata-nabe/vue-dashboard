@@ -1,4 +1,4 @@
-import InputForm from "./form/input-form.vue"
+import InputForm from "src/shared/components/parts/form/input-form.vue"
 
 export * from "@/shared/components/parts/button"
 export { default as DatePicker } from "./date-picker/date-picker.vue"

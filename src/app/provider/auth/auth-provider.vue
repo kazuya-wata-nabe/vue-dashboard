@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { LocalStorage } from "./infra/local-storage"
-import { ROLE, type Role } from "./model/role"
-import { provideAuth } from "./use-auth"
+import { LocalStorage } from "src/app/provider/auth/infra/local-storage"
+import { ROLE, type Role } from "src/app/provider/auth/model/role"
+import { provideAuth } from "src/app/provider/auth/use-auth"
 import { ref } from "vue"
 import router from "@/app/provider/router"
 

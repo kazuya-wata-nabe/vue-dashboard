@@ -59,6 +59,7 @@
     "@vue/tsconfig": "^0.5.1",
     "eslint": "^8.57.0",
     "eslint-plugin-neverthrow": "^1.1.4",
+    "eslint-plugin-no-relative-import-paths": "^1.5.4",
     "eslint-plugin-prefer-arrow-functions": "^3.3.2",
     "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-vue": "^9.23.0",

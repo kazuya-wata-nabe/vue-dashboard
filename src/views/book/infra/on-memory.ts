@@ -1,4 +1,4 @@
-import type { BookRepository, BookWriteModel } from "../model"
+import type { BookRepository, BookWriteModel } from "src/views/book/model"
 
 /** @protected */
 export class BookRepositoryOnMemory implements BookRepository {

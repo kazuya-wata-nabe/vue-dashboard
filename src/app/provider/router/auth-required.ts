@@ -29,6 +29,6 @@ const routes: RouteRecordRaw[] = [
 ]
 
 export const authRequired = routes.map((route) => {
-  route.meta = { layout: MainLayout }
+  route.meta = { ...route.meta, layout: MainLayout }
   return route
 })

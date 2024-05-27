@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import SideMenu from "./side-menu.vue"
-import TheHeader from "./the-header.vue"
+import SideMenu from "src/shared/components/layout/main/side-menu.vue"
+import TheHeader from "src/shared/components/layout/main/the-header.vue"
 import { ref } from "vue"
 import type { Role } from "@/app/provider/auth/model/role"
 

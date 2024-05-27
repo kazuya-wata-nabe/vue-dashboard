@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { loginSchema, type LoginSchema } from "./form"
-import { type LoginRepository } from "./model"
+import { loginSchema, type LoginSchema } from "src/views/login/form"
+import { type LoginRepository } from "src/views/login/model"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useAuth } from "@/app/provider/auth/use-auth"
