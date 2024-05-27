@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import SideMenu from "src/shared/components/layout/main/side-menu.vue"
-import TheHeader from "src/shared/components/layout/main/the-header.vue"
 import { ref } from "vue"
 import type { Role } from "@/app/provider/auth/model/role"
+import SideMenu from "@/shared/components/layout/main/side-menu.vue"
+import TheHeader from "@/shared/components/layout/main/the-header.vue"
 
 withDefaults(defineProps<{ role: Role }>(), { role: "ADMIN" })
 

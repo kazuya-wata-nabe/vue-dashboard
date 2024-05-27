@@ -1,6 +1,6 @@
 import { onMounted, ref } from "vue"
-import { createBook, type Book } from "@/domain/book"
-import { fetchBookList } from "@/domain/book/api"
+import { createBook, type Book } from "@/entities/book"
+import { fetchBookList } from "@/entities/book/api"
 import { today } from "@/shared/lib/date"
 
 export const useInteract = () => {

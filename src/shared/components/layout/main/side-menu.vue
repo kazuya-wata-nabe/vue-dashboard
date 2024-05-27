@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router"
 import { FlexCol, FlexRow } from "@/shared/components/parts"
-import GoogleIcon from "@/shared/components/parts/google-icon.vue"
+import { GoogleIcon } from "@/shared/components/parts"
 
 defineProps<{
   slim: boolean

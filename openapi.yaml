@@ -81,17 +81,21 @@ paths:
 
 components:
   schemas:
-    Book:
+    Id:
       type: object
       required:
         - id
+      properties:
+        id:
+          type: integer
+
+    Book:
+      type: object
+      required:
         - title
         - borrowDate
         - returnDate
       properties:
-        id:
-          type: integer
-          readOnly: true
         title:
           type: string
           maximum: 50
@@ -101,6 +105,7 @@ components:
         returnDate:
           type: string
           format: date
+
     UserRole:
       type: string
       enum: [ADMIN, COMMON]
@@ -143,7 +148,9 @@ components:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/Book"
+              allOf:
+                - $ref: "#/components/schemas/Id"
+                - $ref: "#/components/schemas/Book"
 
     BadRequest:
       description: ""

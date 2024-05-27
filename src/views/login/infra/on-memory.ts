@@ -1,4 +1,4 @@
-import type { FetchParams, LoginRepository } from "src/views/login/model"
+import type { FetchParams, LoginRepository } from "@/views/login/model"
 
 const users = [{ id: "test1", password: "test1" }]
 

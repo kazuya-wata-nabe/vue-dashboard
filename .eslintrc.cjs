@@ -28,7 +28,8 @@ module.exports = {
       "error",
       {
         allowSameFolder: false,
-        rootDir: "./",
+        rootDir: "src",
+        prefix: "@",
       },
     ],
   },

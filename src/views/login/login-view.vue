@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { loginSchema, type LoginSchema } from "src/views/login/form"
-import { type LoginRepository } from "src/views/login/model"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useAuth } from "@/app/provider/auth/use-auth"
-import AlertDialog from "@/shared//components/parts/alert-dialog.vue"
+import { AlertDialog } from "@/shared//components/parts"
 import { FlexCol, InputForm, TextField } from "@/shared/components/parts"
 import { SubmitButton } from "@/shared/components/parts/button"
 import { useCustomForm } from "@/shared/composable/useCustomForm"
+import { loginSchema, type LoginSchema } from "@/views/login/form"
+import { type LoginRepository } from "@/views/login/model"
 
 const props = defineProps<{
   /** ログインAPIのインターフェース */

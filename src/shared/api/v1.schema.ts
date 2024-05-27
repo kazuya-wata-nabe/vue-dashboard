@@ -56,8 +56,10 @@ export type webhooks = Record<string, never>
 
 export type components = {
   schemas: {
-    Book: {
+    Id: {
       id: number
+    }
+    Book: {
       title: string
       /** Format: date */
       borrowDate: string
@@ -71,17 +73,13 @@ export type components = {
       role?: components["schemas"]["UserRole"]
     }
     BadRequestError: {
-      field?: {
-        /** Format: int32 */
-        code?: number
-        reason?: string
-      }
+      additionalProperties?: string
     }
   }
   responses: {
     BookSuccess: {
       content: {
-        "application/json": components["schemas"]["Book"][]
+        "application/json": (components["schemas"]["Id"] & components["schemas"]["Book"])[]
       }
     }
     BadRequest: {

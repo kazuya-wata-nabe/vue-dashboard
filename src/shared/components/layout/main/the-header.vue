@@ -2,8 +2,7 @@
 import { useRouter } from "vue-router"
 import type { Role } from "@/app/provider/auth/model/role"
 import { useAuth } from "@/app/provider/auth/use-auth"
-import { FlexRow } from "@/shared/components/parts"
-import GoogleIcon from "@/shared/components/parts/google-icon.vue"
+import { FlexRow, GoogleIcon } from "@/shared/components/parts"
 
 defineProps<{
   role: Role

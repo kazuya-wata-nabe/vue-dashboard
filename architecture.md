@@ -14,6 +14,15 @@
 
 # import
 - 絶対パスにすること
-- import hoge from "@/xxxx"
+
+```
+o: import hoge from "@/xxxx"
+x: import hoge from "../xxxx"
+```
 
 # 関数はアロー関数で定義すること
+
+```
+o: const hoge = () => {}
+x: function hoge() {}
+```
