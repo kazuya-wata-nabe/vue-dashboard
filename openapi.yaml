@@ -11,11 +11,24 @@ tags:
     description: ""
 
 paths:
+  /login:
+    post:
+      description: ""
+      tags:
+        - auth
+      requestBody:
+        $ref: "#/components/requestBodies/Login"
+      responses:
+        "201":
+          $ref: "#/components/responses/LoginSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
   /me:
     get:
+      description: ""
       tags:
         - user
-      description: ""
       responses:
         "200":
           description: ""
@@ -89,6 +102,26 @@ components:
         id:
           type: integer
 
+    Email:
+      type: object
+      properties:
+        email:
+          type: string
+
+    Password:
+      type: object
+      properties:
+        password:
+          type: string
+
+    Authenticated:
+      type: object
+      required:
+        - access-token
+      properties:
+        access-token:
+          type: string
+
     Book:
       type: object
       required:
@@ -141,6 +174,13 @@ components:
         type: string
 
   responses:
+    LoginSuccess:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Authenticated"
+
     BookSuccess:
       description: ""
       content:
@@ -162,6 +202,17 @@ components:
               $ref: "#/components/schemas/BadRequestError"
 
   requestBodies:
+    Login:
+      description: ""
+      content:
+        application/json:
+          schema:
+            required:
+              - email
+              - password
+            allOf:
+              - $ref: "#/components/schemas/Email"
+              - $ref: "#/components/schemas/Password"
     Book:
       description: ""
       content:

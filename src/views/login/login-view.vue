@@ -1,49 +1,39 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useRouter } from "vue-router"
-import { useAuth } from "@/app/provider/auth/use-auth"
+import { useAuth } from "@/features/auth"
 import { AlertDialog } from "@/shared//components/parts"
 import { FlexCol, InputForm, TextField } from "@/shared/components/parts"
 import { SubmitButton } from "@/shared/components/parts/button"
-import { useCustomForm } from "@/shared/composable/useCustomForm"
-import { loginSchema, type LoginSchema } from "@/views/login/form"
-import { type LoginRepository } from "@/views/login/model"
-
-const props = defineProps<{
-  /** ログインAPIのインターフェース */
-  repository: LoginRepository
-}>()
+import { useInteract } from "@/views/login/composable/useInteraction"
 
 const router = useRouter()
-const authContext = useAuth()
-
-const { defineField, handleSubmit, isSubmitting } = useCustomForm<LoginSchema>(loginSchema)
-const [id] = defineField("id")
-const [password] = defineField("password")
-
+const auth = useAuth()
 const dialog = ref<InstanceType<typeof AlertDialog>>()
 
-const onSubmit = handleSubmit(async (form) => {
-  try {
-    await props.repository.login({ ...form })
-    await authContext.save()
-    await router.replace({ name: "home" })
-  } catch {
-    dialog.value?.showDialog({ autoClose: true })
-  }
-})
+const { defineField, isSubmitting, onClickSubmit: handleSubmit } = useInteract(auth, router)
+
+const [email, emailAttrs] = defineField("email")
+const [password, passwordAttrs] = defineField("password")
+const onClickSubmit = handleSubmit(() => dialog.value?.showDialog())
 </script>
 
 <template>
   <main>
-    <FlexCol>
+    <FlexCol gap="32">
       <FlexCol class="header">
         <h1>This is Header Area</h1>
       </FlexCol>
-      <InputForm>
-        <TextField size="m" label="id" placeholder="" v-model="id" error-message="" />
-        <TextField size="m" label="password" placeholder="" v-model="password" error-message="" />
-        <SubmitButton :isSubmitting="isSubmitting" @click="onSubmit">submit</SubmitButton>
+      <InputForm id="login-form">
+        <TextField size="l" label="id" placeholder="email" v-model="email" v-bind="emailAttrs" />
+        <TextField
+          size="l"
+          label="password"
+          placeholder="password"
+          v-model="password"
+          v-bind="passwordAttrs"
+        />
+        <SubmitButton :isSubmitting="isSubmitting" @click="onClickSubmit">submit</SubmitButton>
       </InputForm>
     </FlexCol>
   </main>
@@ -58,4 +48,3 @@ const onSubmit = handleSubmit(async (form) => {
   place-content: center;
 }
 </style>
-@/shared/lib/schema-helper

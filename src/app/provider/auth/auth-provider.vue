@@ -2,8 +2,8 @@
 import { ref } from "vue"
 import { LocalStorage } from "@/app/provider/auth/infra/local-storage"
 import { ROLE, type Role } from "@/app/provider/auth/model/role"
-import { provideAuth } from "@/app/provider/auth/use-auth"
 import router from "@/app/provider/router"
+import { provideAuth } from "@/features/auth"
 
 defineOptions({ inheritAttrs: false })
 

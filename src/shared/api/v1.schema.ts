@@ -3,7 +3,19 @@
  * Do not make direct changes to the file.
  */
 
+/** WithRequired type helpers */
+type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] }
+
 export type paths = {
+  "/login": {
+    post: {
+      requestBody: components["requestBodies"]["Login"]
+      responses: {
+        201: components["responses"]["LoginSuccess"]
+        400: components["responses"]["BadRequest"]
+      }
+    }
+  }
   "/me": {
     get: {
       responses: {
@@ -59,6 +71,15 @@ export type components = {
     Id: {
       id: number
     }
+    Email: {
+      email?: string
+    }
+    Password: {
+      password?: string
+    }
+    Authenticated: {
+      "access-token": string
+    }
     Book: {
       title: string
       /** Format: date */
@@ -73,10 +94,19 @@ export type components = {
       role?: components["schemas"]["UserRole"]
     }
     BadRequestError: {
-      additionalProperties?: string
+      additionalProperties?: {
+        /** Format: int32 */
+        code?: number
+        reason?: string
+      }
     }
   }
   responses: {
+    LoginSuccess: {
+      content: {
+        "application/json": components["schemas"]["Authenticated"]
+      }
+    }
     BookSuccess: {
       content: {
         "application/json": (components["schemas"]["Id"] & components["schemas"]["Book"])[]
@@ -92,6 +122,14 @@ export type components = {
     BookListParams: string
   }
   requestBodies: {
+    Login?: {
+      content: {
+        "application/json": WithRequired<
+          components["schemas"]["Email"] & components["schemas"]["Password"],
+          "email" | "password"
+        >
+      }
+    }
     Book?: {
       content: {
         "application/json": components["schemas"]["Book"]

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { useRouter } from "vue-router"
-import type { Role } from "@/app/provider/auth/model/role"
-import { useAuth } from "@/app/provider/auth/use-auth"
+import type { UserRole } from "@/entities/user-role"
+import { useAuth } from "@/features/auth"
 import { FlexRow, GoogleIcon } from "@/shared/components/parts"
 
 defineProps<{
-  role: Role
+  role: UserRole
 }>()
 
 const router = useRouter()

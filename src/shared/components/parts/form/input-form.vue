@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+defineProps<{
+  id: string
+}>()
 const emits = defineEmits<{
   click: []
 }>()
-const id = Symbol().toString()
 </script>
 
 <template>
@@ -12,7 +14,7 @@ const id = Symbol().toString()
 </template>
 
 <style scoped>
-#form {
+form {
   display: flex;
   flex-direction: column;
   gap: 8px;

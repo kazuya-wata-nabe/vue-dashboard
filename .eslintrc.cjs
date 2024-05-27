@@ -1,7 +1,7 @@
 /* eslint-env node */
 require("@rushstack/eslint-patch/modern-module-resolution")
 
-const WARNING = Boolean(process.env) === true ? "error" : "warn"
+const WARNING = Boolean(process.env.STRICT_LINT) === true ? "error" : "warn"
 
 module.exports = {
   root: true,

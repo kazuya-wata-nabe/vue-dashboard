@@ -1,7 +1,7 @@
 import { createSchema, required, type ToSchema } from "@/shared/lib/schema-helper"
 
 export const loginSchema = createSchema({
-  id: required.string(),
+  email: required.string(),
   password: required.string(),
 })
 
