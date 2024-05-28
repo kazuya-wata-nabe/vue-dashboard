@@ -5,7 +5,9 @@ import { useAuth } from "@/features/auth"
 import { AlertDialog } from "@/shared//components/parts"
 import { FlexCol, InputForm, TextField } from "@/shared/components/parts"
 import { SubmitButton } from "@/shared/components/parts/button"
-import { useInteract } from "@/views/login/composable/useInteraction"
+import { useInteract } from "@/views/login/use-interaction"
+
+defineOptions({ name: "LoginView" })
 
 const router = useRouter()
 const auth = useAuth()

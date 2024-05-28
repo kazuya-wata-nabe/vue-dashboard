@@ -38,7 +38,6 @@ module.exports = {
       files: ["**/*.test.ts", " **/*.stories.ts"],
       rules: {
         "@typescript-eslint/no-non-null-assertion": "off",
-        "no-relative-import-paths/no-relative-import-paths": "off",
       },
     },
     {

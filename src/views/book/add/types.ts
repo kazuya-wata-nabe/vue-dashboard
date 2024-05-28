@@ -1,4 +1,3 @@
-import { client } from "@/shared/api/client"
 import { createSchema, required, type ToSchema } from "@/shared/lib/schema-helper"
 
 export const schema = createSchema({
@@ -8,7 +7,3 @@ export const schema = createSchema({
 })
 
 export type BookWriteModel = ToSchema<typeof schema>
-
-export const postBook = async (body: BookWriteModel) => {
-  client.POST("/books", { body })
-}

@@ -1,6 +1,6 @@
-import LoginView from "./login-view.vue"
 import { userEvent, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
+import LoginView from "@/views/login/login-view.vue"
 
 /** ログイン画面 */
 const meta = {

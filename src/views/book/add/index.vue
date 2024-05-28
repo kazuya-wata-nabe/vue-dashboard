@@ -1,20 +1,14 @@
 <script setup lang="ts">
 import { FlexCol, TextField, SubmitButton, DatePicker } from "@/shared/components/parts"
-import { useCustomForm } from "@/shared/composable/useCustomForm"
-import { schema, type BookWriteModel } from "@/views/book/add/entities"
+import { useInteract } from "@/views/book/add/use-interact"
 
 defineOptions({ name: "BookAdd" })
 
-const { handleSubmit, isSubmitting, defineField } = useCustomForm<BookWriteModel>(schema)
+const { isSubmitting, defineField, onClickSubmit } = useInteract()
 
 const [title, titleAttrs] = defineField("title")
 const [borrowDate, borrowDateAttrs] = defineField("borrowDate")
-
 const [returnDate, returnDateAttrs] = defineField("returnDate")
-
-const command = handleSubmit(async (form) => {
-  console.debug(form)
-})
 </script>
 
 <template>
@@ -41,7 +35,7 @@ const command = handleSubmit(async (form) => {
       v-model="returnDate"
       v-bind="returnDateAttrs"
     />
-    <SubmitButton :isSubmitting="isSubmitting" :command="command">登録</SubmitButton>
+    <SubmitButton :isSubmitting="isSubmitting" @click="onClickSubmit">登録</SubmitButton>
   </FlexCol>
 </template>
 

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { ref } from "vue"
 import { LocalStorage } from "@/app/provider/auth/infra/local-storage"
-import { ROLE, type Role } from "@/app/provider/auth/model/role"
 import router from "@/app/provider/router"
+import type { UserRole } from "@/entities/user-role"
 import { provideAuth } from "@/features/auth"
 
 defineOptions({ inheritAttrs: false })
@@ -11,14 +11,13 @@ const storage = new LocalStorage()
 // TODO: pluginにしてもいいかも
 provideAuth(storage)
 
-const role = ref<Role>()
+const role = ref<UserRole>()
 
 router.beforeEach(async (to) => {
   const isAuthenticated = await storage.load()
   if (to.meta.requiresAuth && !isAuthenticated) {
     return { name: "login" }
   } else {
-    role.value = to.name === "home" ? ROLE.ADMIN : ROLE.COMMON
     return true
   }
 })

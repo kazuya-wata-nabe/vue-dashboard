@@ -1,9 +1,9 @@
-import { fixture2 } from "./__test__/fixture"
-import Meta, { Primary, Secondary } from "./home-view.stories"
 import { expect } from "@storybook/test"
 import { composeStory } from "@storybook/vue3"
 import { cleanup, render } from "@testing-library/vue"
 import { afterEach, test, vi } from "vitest"
+import { fixture2 } from "@/views/home/__tests__/fixture"
+import Meta, { Primary, Secondary } from "@/views/home/__tests__/home-view.stories"
 
 afterEach(cleanup)
 

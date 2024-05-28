@@ -2,6 +2,13 @@ import type { ApiSchema } from "@/shared/api/response"
 
 export type UserRole = ApiSchema<"UserRole">
 
+/**
+ * @enum
+ * |value|description|
+ * |--|--|
+ * |ADMIN|管理者|
+ * |COMMON|一般|
+ */
 const USER_ROLE = {
   ADMIN: "管理者",
   COMMON: "一般",

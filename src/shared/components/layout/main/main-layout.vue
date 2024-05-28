@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { ref } from "vue"
-import type { Role } from "@/app/provider/auth/model/role"
+import type { UserRole } from "@/entities/user-role"
 import SideMenu from "@/shared/components/layout/main/side-menu.vue"
 import TheHeader from "@/shared/components/layout/main/the-header.vue"
 
-withDefaults(defineProps<{ role: Role }>(), { role: "ADMIN" })
+defineProps<{ role: UserRole }>()
 
 const slim = ref(false)
 const toggle = () => (slim.value = !slim.value)
