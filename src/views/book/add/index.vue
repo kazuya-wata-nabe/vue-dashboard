@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { FlexCol, TextField, SubmitButton, DatePicker } from "@/shared/components/parts"
 import { useCustomForm } from "@/shared/composable/useCustomForm"
-import { schema, type BookWriteModel } from "@/views/book/add/model"
+import { schema, type BookWriteModel } from "@/views/book/add/entities"
 
 defineOptions({ name: "BookAdd" })
 

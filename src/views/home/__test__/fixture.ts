@@ -1,6 +1,6 @@
-import type { ApiSchema } from "@/shared/api/response"
+import type { ApiResponse } from "@/shared/api/response"
 
-export const fixture1: ApiSchema<"Book">[] = [
+export const fixture1: ApiResponse<"BookSuccess"> = [
   {
     id: 2,
     title: "fugafuga",

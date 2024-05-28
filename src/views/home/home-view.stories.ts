@@ -1,8 +1,6 @@
 import HomeView from "./home-view.vue"
 import { expect, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
-import { mainLayout } from "@/__mocks__/helper"
-import { ROLE } from "@/app/provider/auth/model/role"
 
 /**
  * ホーム画面
@@ -13,7 +11,7 @@ import { ROLE } from "@/app/provider/auth/model/role"
 const meta = {
   component: HomeView,
   tags: ["autodocs"],
-  decorators: [mainLayout(ROLE.ADMIN)],
+  decorators: [],
 } satisfies Meta<typeof HomeView>
 
 export default meta

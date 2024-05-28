@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useRouter } from "vue-router"
-import type { UserRole } from "@/domain/user-role"
+import type { UserRole } from "@/entities/user-role"
 import { useAuth } from "@/features/auth"
 import { FlexRow, GoogleIcon } from "@/shared/components/parts"
 
@@ -43,3 +43,4 @@ const onClickLogout = async () => {
   cursor: pointer;
 }
 </style>
+@/entities/user-role

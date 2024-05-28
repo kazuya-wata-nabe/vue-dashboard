@@ -1,17 +1,12 @@
-import { AuthRepositoryOnMemory } from "./infra/on-memory"
 import LoginView from "./login-view.vue"
 import { userEvent, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
-import { publicLayout } from "@/__mocks__/helper"
 
 /** ログイン画面 */
 const meta = {
   component: LoginView,
-  args: {
-    repository: new AuthRepositoryOnMemory(),
-  },
   tags: ["autodocs"],
-  decorators: [publicLayout],
+  decorators: [],
 } satisfies Meta<typeof LoginView>
 
 export default meta
