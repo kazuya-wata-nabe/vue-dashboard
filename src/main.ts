@@ -5,7 +5,7 @@ const enableMocking = async () => {
     return
   }
 
-  const { worker } = await import("@/__mocks__/browser")
+  const { worker } = await import("@/shared/mocks/browser")
 
   return worker.start({ onUnhandledRequest: "bypass" })
 }

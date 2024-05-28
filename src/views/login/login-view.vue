@@ -48,4 +48,3 @@ const onClickSubmit = handleSubmit(() => dialog.value?.showDialog())
   place-content: center;
 }
 </style>
-@/domain/auth
