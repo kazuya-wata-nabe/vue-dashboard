@@ -66,6 +66,9 @@ importers:
       '@storybook/vue3-vite':
         specifier: ^8.1.2
         version: 8.1.2(prettier@3.2.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))(vue@3.4.27(typescript@5.4.5))
+      '@testing-library/jest-dom':
+        specifier: ^6.4.5
+        version: 6.4.5(vitest@1.6.0(@types/node@20.12.12)(happy-dom@14.11.0)(jsdom@24.0.0)(sass@1.77.2))
       '@testing-library/vue':
         specifier: ^8.1.0
         version: 8.1.0(@vue/compiler-sfc@3.4.27)(vue@3.4.27(typescript@5.4.5))
@@ -135,6 +138,9 @@ importers:
       npm-run-all2:
         specifier: ^6.1.2
         version: 6.2.0
+      openapi-msw:
+        specifier: ^0.6.0
+        version: 0.6.0(msw@2.3.0(typescript@5.4.5))
       openapi-typescript:
         specifier: ^6.7.6
         version: 6.7.6
@@ -4035,6 +4041,11 @@ packages:
 
   openapi-fetch@0.9.7:
     resolution: {integrity: sha512-NMp/GEmWSGO0b2d731IdGXcMP2PF85Rk1q+oy2Mx/DYMdP3pgTZTRamKxgZpkHhM4iOVsyD1iP5HKL9Fr6CH2Q==}
+
+  openapi-msw@0.6.0:
+    resolution: {integrity: sha512-bx2LNwDt+pzimis//rjalNRF2uDOkBlA1Z2RDJEFFvGIGfREuX8zf692cH87Laxol06AkYBSqfigkRBm60v0Ng==}
+    peerDependencies:
+      msw: ^2.0.0
 
   openapi-sampler@1.5.1:
     resolution: {integrity: sha512-tIWIrZUKNAsbqf3bd9U1oH6JEXo8LNYuDlXw26By67EygpjT+ArFnsxxyTMjFWRfbqo5ozkvgSQDK69Gd8CddA==}
@@ -10076,6 +10087,11 @@ snapshots:
 
   openapi-fetch@0.9.7:
     dependencies:
+      openapi-typescript-helpers: 0.0.8
+
+  openapi-msw@0.6.0(msw@2.3.0(typescript@5.4.5)):
+    dependencies:
+      msw: 2.3.0(typescript@5.4.5)
       openapi-typescript-helpers: 0.0.8
 
   openapi-sampler@1.5.1:

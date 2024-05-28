@@ -3,12 +3,10 @@ import type { paths } from "@/shared/api/v1.schema"
 
 const baseUrl: string = import.meta.env.API_BASE_URL ?? ""
 
-const accessToken: string | undefined = undefined
-
 const authMiddleware: Middleware = {
   onRequest: async (req) => {
-    const token = localStorage.getItem("token")
-    if (token) {
+    const accessToken = localStorage.getItem("token")
+    if (accessToken) {
       req.headers.set("Authorization", `Bearer ${accessToken}`)
     }
 
