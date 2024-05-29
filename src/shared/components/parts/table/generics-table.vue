@@ -1,14 +1,10 @@
-<script setup lang="ts" generic="T">
-type Item<T> = {
-  id: string | number
-} & T
-
-defineProps<{ items: Item<T>[] }>()
+<script setup lang="ts" generic="T extends { id: string | number }">
+defineProps<{ items: T[] }>()
 </script>
 
 <template>
-  <table class="outline" v-if="items.length">
-    <thead class="outline">
+  <table v-if="items.length">
+    <thead>
       <tr>
         <slot name="head"></slot>
       </tr>

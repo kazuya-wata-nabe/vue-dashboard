@@ -2,9 +2,6 @@ import { fn } from "@storybook/test"
 import type { UserRole } from "@/entities/user-role"
 import { MainLayout, PublicLayout } from "@/shared/components/layout"
 
-export const sleep = async (sec: number) =>
-  new Promise((resolve) => setTimeout(resolve, sec * 1000))
-
 export const mainLayout = (role: UserRole) => () => ({
   components: { MainLayout },
   setup: () => {

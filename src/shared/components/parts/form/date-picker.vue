@@ -1,9 +1,10 @@
 <script setup lang="ts">
+/**
+ * @see {@link https://vue3datepicker.com/installation/}
+ */
 import VueDatePicker, { type VueDatePickerProps } from "@vuepic/vue-datepicker"
 import "@vuepic/vue-datepicker/dist/main.css"
 import { computed } from "vue"
-
-defineOptions({ inheritAttrs: true })
 
 const props = defineProps<{
   id: string
@@ -36,7 +37,7 @@ const config = computed(
   }),
 )
 
-const model = defineModel<string | Date | undefined>({ required: true })
+const model = defineModel<string | undefined>({ required: true })
 
 const classes = computed(() => ({
   "date-picker": true,

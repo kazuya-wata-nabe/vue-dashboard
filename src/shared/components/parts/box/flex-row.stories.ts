@@ -1,5 +1,5 @@
-import FlexRow from "./flex-row.vue"
 import type { Meta, StoryObj } from "@storybook/vue3"
+import FlexRow from "@/shared/components/parts/box/flex-row.vue"
 
 const meta = {
   component: FlexRow,

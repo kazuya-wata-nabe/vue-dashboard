@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BookTable from "@/views/home/components/BookTable.vue"
+import { GenericsTable } from "@/shared/components/parts"
 import { useInteract } from "@/views/home/composable/useInteract"
 
 const { books } = useInteract()
@@ -8,7 +8,7 @@ const { books } = useInteract()
 <template>
   <h1>本の一覧</h1>
   <div class="table-container">
-    <BookTable :items="books">
+    <GenericsTable :items="books">
       <template #head>
         <th>タイトル</th>
         <th>借りた日</th>
@@ -17,9 +17,9 @@ const { books } = useInteract()
       <template #record="{ item }">
         <td class="title">{{ item.title }}</td>
         <td class="date">{{ item.borrowDate }}</td>
-        <td class="date" :class="{ 'is-over': item.isOverReturnDate }">{{ item.returnDate }}</td>
+        <td class="date" :class="{ over: item.isOverReturnDate }">{{ item.returnDate }}</td>
       </template>
-    </BookTable>
+    </GenericsTable>
   </div>
 </template>
 
@@ -29,13 +29,11 @@ const { books } = useInteract()
   max-width: 300px;
   overflow-wrap: break-word;
 }
+
 .date {
   min-width: 100px;
-}
-.over {
-  color: red;
-}
-.is-over {
-  color: red;
+  & .over {
+    color: red;
+  }
 }
 </style>

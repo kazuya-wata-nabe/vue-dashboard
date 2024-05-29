@@ -1,4 +1,4 @@
-import FlexCol from "./flex-col.vue"
+import { FlexCol } from ".."
 import type { Meta, StoryObj } from "@storybook/vue3"
 
 const meta = {

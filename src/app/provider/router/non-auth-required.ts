@@ -1,13 +1,13 @@
 import type { RouteRecordRaw } from "vue-router"
 import PublicLayout from "@/shared/components/layout/public/public-layout.vue"
 
-const Login = () => import("@/views/login/login-view.vue")
+const LoginView = () => import("@/views/login/index.vue")
 
 const routes: RouteRecordRaw[] = [
   {
     path: "/login",
     name: "login",
-    component: Login,
+    component: LoginView,
   },
 ]
 
