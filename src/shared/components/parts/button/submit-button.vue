@@ -3,14 +3,14 @@ defineProps<{
   isSubmitting: boolean
 }>()
 
-defineEmits<{
+const emits = defineEmits<{
   click: []
 }>()
 </script>
 
 <template>
   <div class="button-container" :class="{ loading: isSubmitting }">
-    <button @click="$emit('click')" :disabled="isSubmitting">
+    <button @click="emits('click')" :disabled="isSubmitting">
       <div class="loader" v-show="isSubmitting"></div>
       <slot></slot>
     </button>

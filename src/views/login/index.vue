@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useAuth } from "@/features/auth"
 import { AlertDialog } from "@/shared//components/parts"
@@ -11,13 +10,11 @@ defineOptions({ name: "LoginView" })
 
 const router = useRouter()
 const auth = useAuth()
-const dialog = ref<InstanceType<typeof AlertDialog>>()
 
-const { defineField, isSubmitting, onClickSubmit: handleSubmit } = useInteract(auth, router)
+const { isOpen, isSubmitting, defineField, onClickSubmit } = useInteract(auth, router)
 
 const [email, emailAttrs] = defineField("email")
 const [password, passwordAttrs] = defineField("password")
-const onClickSubmit = handleSubmit(() => dialog.value?.showDialog())
 </script>
 
 <template>
@@ -39,7 +36,7 @@ const onClickSubmit = handleSubmit(() => dialog.value?.showDialog())
       </InputForm>
     </FlexCol>
   </main>
-  <AlertDialog ref="dialog">
+  <AlertDialog :is-open="isOpen.alert">
     <div>ログインに失敗しました</div>
   </AlertDialog>
 </template>

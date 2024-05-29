@@ -2,6 +2,7 @@
 import { computed } from "vue"
 
 const props = defineProps<{
+  id: string
   size: "s" | "m" | "l"
   label: string
   placeholder: string
@@ -16,8 +17,6 @@ const classes = computed(() => ({
   medium: props.size === "m",
   large: props.size === "l",
 }))
-
-const id = `input-${crypto.randomUUID()}`
 </script>
 
 <template>

@@ -1,41 +1,33 @@
 <script setup lang="ts">
-import { ref } from "vue"
+defineProps<{
+  isOpen: boolean
+}>()
 
-const DELAY = 1 * 1000
+const emits = defineEmits<{
+  close: []
+}>()
 
-const dialog = ref<HTMLDialogElement>()
-const isShown = ref(false)
-
-const showDialog = ({ autoClose }: { autoClose?: true } = {}) => {
-  isShown.value = true
-  dialog.value?.showModal()
-  if (autoClose) setTimeout(() => dialog.value?.close(), DELAY)
-}
-const closeModal = () => {
-  dialog.value?.close()
-  isShown.value = false
-}
-
-defineExpose({ showDialog })
+const closeModal = () => emits("close")
 </script>
 
 <template>
-  <dialog ref="dialog" class="alert-dialog" @click.self="closeModal">
-    <Transition>
-      <div class="alert-content" v-if="isShown">
+  <Transition>
+    <div class="alert-dialog" v-if="isOpen">
+      <div class="alert-content">
         <slot v-bind="{ closeModal }"></slot>
       </div>
-    </Transition>
-  </dialog>
+    </div>
+  </Transition>
 </template>
 
 <style scoped>
 .alert-dialog {
-  border-color: royalblue;
+  position: fixed;
   top: 0;
-  left: 50%;
-  padding: 0px;
-  transform: translateX(-50%);
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .alert-content {
@@ -48,7 +40,7 @@ defineExpose({ showDialog })
 
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s ease;
 }
 
 .v-enter-from,

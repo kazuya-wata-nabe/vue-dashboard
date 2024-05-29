@@ -24,5 +24,5 @@ router.beforeEach(async (to) => {
 </script>
 
 <template>
-  <slot :role="role"></slot>
+  <slot :role="role" :storage></slot>
 </template>

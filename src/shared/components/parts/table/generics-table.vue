@@ -5,11 +5,11 @@ defineProps<{ items: T[] }>()
 <template>
   <table v-if="items.length">
     <thead>
-      <tr>
+      <tr class="table-header">
         <slot name="head"></slot>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="table-body">
       <tr v-for="item in items" :key="item.id">
         <slot name="record" v-bind="{ item }"></slot>
       </tr>
