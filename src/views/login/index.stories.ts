@@ -27,12 +27,11 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {}
 
 /**
- * mock環境では以下の場合にログイン成功となる
+ * mock環境では以下の場合にログイン成功
  *
  * |id|password|
  * |---|---|
- * |test1|test1|
- * |test2|test2|
+ * |test@example.com|passw0rd|
  */
 export const LoginSuccess: Story = {
   name: "ログイン成功",
@@ -40,11 +39,11 @@ export const LoginSuccess: Story = {
     const canvas = within(canvasElement)
 
     await step("id input", async () => {
-      await userEvent.type(canvas.getByLabelText("id"), "test1")
+      await userEvent.type(canvas.getByLabelText("id"), "test@example.com")
     })
 
     await step("password input", async () => {
-      await userEvent.type(canvas.getByLabelText("password"), "test1")
+      await userEvent.type(canvas.getByLabelText("password"), "passw0rd")
     })
 
     await step("submit", async () => {

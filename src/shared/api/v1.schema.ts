@@ -94,10 +94,10 @@ export type components = {
       role?: components["schemas"]["UserRole"]
     }
     BadRequestError: {
-      additionalProperties?: {
+      [key: string]: {
         /** Format: int32 */
-        code?: number
-        reason?: string
+        code: number
+        reason: string
       }
     }
   }

@@ -2,8 +2,9 @@
 import { useRouter } from "vue-router"
 import { useAuth } from "@/features/auth"
 import { AlertDialog } from "@/shared//components/parts"
-import { FlexCol, InputForm, TextField } from "@/shared/components/parts"
+import { FlexCol, InputForm } from "@/shared/components/parts"
 import { SubmitButton } from "@/shared/components/parts/button"
+import TextField from "@/shared/components/parts/form/text-field.vue"
 import { useInteract } from "@/views/login/use-interaction"
 
 defineOptions({ name: "LoginView" })
@@ -11,7 +12,10 @@ defineOptions({ name: "LoginView" })
 const router = useRouter()
 const auth = useAuth()
 
-const { isOpen, isSubmitting, defineField, onClickSubmit } = useInteract(auth, router)
+const { isOpen, isSubmitting, modalController, defineField, onClickSubmit } = useInteract(
+  auth,
+  router,
+)
 
 const [email, emailAttrs] = defineField("email")
 const [password, passwordAttrs] = defineField("password")
@@ -36,12 +40,15 @@ const [password, passwordAttrs] = defineField("password")
       </InputForm>
     </FlexCol>
   </main>
-  <AlertDialog :is-open="isOpen.alert">
+  <AlertDialog :is-open="isOpen.alert" @close="modalController.close">
     <div>ログインに失敗しました</div>
   </AlertDialog>
 </template>
 
 <style scoped>
+main {
+  margin: 0 auto;
+}
 .header {
   height: 100px;
   place-content: center;

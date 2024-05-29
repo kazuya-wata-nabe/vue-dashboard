@@ -1,4 +1,4 @@
-openapi: 3.0.2
+openapi: 3.1.0
 
 info:
   title: Sample
@@ -155,15 +155,17 @@ components:
 
     BadRequestError:
       type: object
-      properties:
-        additionalProperties:
-          type: object
-          properties:
-            code:
-              type: integer
-              format: int32
-            reason:
-              type: string
+      additionalProperties:
+        type: object
+        required:
+          - code
+          - reason
+        properties:
+          code:
+            type: integer
+            format: int32
+          reason:
+            type: string
 
   parameters:
     BookListParams:

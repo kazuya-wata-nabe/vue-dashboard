@@ -9,18 +9,15 @@ export const useInteract = (auth: AuthContext, router: Router) => {
   const { defineField, handleSubmit, isSubmitting } = useCustomForm<LoginSchema>(loginSchema)
   const { isOpen, modalController } = useModal(["alert"])
 
-  const onClickSubmit = handleSubmit(
-    async (body) => {
-      const { data, error } = await client.POST("/login", { body })
-      if (error) {
-        modalController.open("alert")
-      } else {
-        await auth.save(data)
-        await router.replace({ name: "home" })
-      }
-    },
-    () => console.debug(2),
-  )
+  const onClickSubmit = handleSubmit(async (body) => {
+    const { data, error } = await client.POST("/login", { body })
+    if (error) {
+      modalController.open("alert")
+    } else {
+      await auth.save(data)
+      await router.replace({ name: "home" })
+    }
+  })
 
   return {
     isOpen,

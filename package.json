@@ -19,7 +19,7 @@
     "storybook:build": "storybook build",
     "prepare": "husky",
     "build-storybook": "storybook build",
-    "gen:schema": "openapi-typescript ./openapi.yaml -o ./src/shared/api/v1.schema.ts --export-type --enum",
+    "gen:schema": "openapi-typescript -t ./openapi.yaml -o ./src/shared/api/v1.schema.ts",
     "postgen:schema": "prettier --write ./src/shared/api/v1.schema.ts"
   },
   "lint-staged": {

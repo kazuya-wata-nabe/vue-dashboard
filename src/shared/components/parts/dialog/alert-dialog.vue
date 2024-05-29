@@ -12,16 +12,19 @@ const closeModal = () => emits("close")
 
 <template>
   <Transition>
-    <div class="alert-dialog" v-if="isOpen">
-      <div class="alert-content">
-        <slot v-bind="{ closeModal }"></slot>
+    <div class="overlay" v-if="isOpen" @click="closeModal">
+      <div class="dialog">
+        <div class="content" @click.stop>
+          <slot> </slot>
+        </div>
+        <slot name="button" v-bind="{ closeModal }"> </slot>
       </div>
     </div>
   </Transition>
 </template>
 
 <style scoped>
-.alert-dialog {
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -30,12 +33,21 @@ const closeModal = () => emits("close")
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.alert-content {
+.dialog {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  height: 80px;
+  flex-direction: column;
+  place-content: center;
+  margin: 0 auto;
+  padding: 20px 0;
+  max-width: 300px;
+  height: 100%;
+}
+
+.content {
+  background: whitesmoke;
+  margin: 0 auto;
+  padding: 20px;
+  width: fit-content;
 }
 
 .v-enter-active,
