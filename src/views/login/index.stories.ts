@@ -1,5 +1,6 @@
-import { fn, userEvent, within } from "@storybook/test"
+import { expect, fn, spyOn, userEvent, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
+import { mockApi } from "@/__tests__/helper"
 import { provideAuth } from "@/features/auth"
 import LoginView from "@/views/login/index.vue"
 
@@ -12,6 +13,11 @@ const mockAuth = {
 const meta = {
   component: LoginView,
   tags: ["autodocs"],
+  parameters: {
+    msw: {
+      handlers: [mockApi.get("/books", ({ response }) => response(200).json([]))],
+    },
+  },
   decorators: [
     () => ({
       setup: () => provideAuth(mockAuth),

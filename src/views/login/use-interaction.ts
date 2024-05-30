@@ -1,11 +1,13 @@
-import { type Router } from "vue-router"
-import type { AuthContext } from "@/features/auth"
+import { useRouter } from "vue-router"
+import { useAuth } from "@/features/auth"
 import { client } from "@/shared/api/client"
 import { useCustomForm } from "@/shared/composable/useCustomForm"
 import { useModal } from "@/shared/composable/useModal"
 import { loginSchema, type LoginSchema } from "@/views/login/model/form"
 
-export const useInteract = (auth: AuthContext, router: Router) => {
+export const useInteract = () => {
+  const router = useRouter()
+  const auth = useAuth()
   const { defineField, handleSubmit, isSubmitting } = useCustomForm<LoginSchema>(loginSchema)
   const { isOpen, modalController } = useModal(["alert"])
 
@@ -15,7 +17,7 @@ export const useInteract = (auth: AuthContext, router: Router) => {
       modalController.open("alert")
     } else {
       await auth.save(data)
-      await router.replace({ name: "home" })
+      await router.push({ name: "home" })
     }
   })
 

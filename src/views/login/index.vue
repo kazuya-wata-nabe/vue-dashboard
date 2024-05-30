@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router"
-import { useAuth } from "@/features/auth"
 import { AlertDialog } from "@/shared//components/parts"
 import { FlexCol, InputForm } from "@/shared/components/parts"
 import { SubmitButton } from "@/shared/components/parts/button"
@@ -9,13 +7,7 @@ import { useInteract } from "@/views/login/use-interaction"
 
 defineOptions({ name: "LoginView" })
 
-const router = useRouter()
-const auth = useAuth()
-
-const { isOpen, isSubmitting, modalController, defineField, onClickSubmit } = useInteract(
-  auth,
-  router,
-)
+const { isOpen, isSubmitting, modalController, defineField, onClickSubmit } = useInteract()
 
 const [email, emailAttrs] = defineField("email")
 const [password, passwordAttrs] = defineField("password")
