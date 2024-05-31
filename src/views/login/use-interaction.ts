@@ -8,7 +8,7 @@ import { loginSchema, type LoginSchema } from "@/views/login/model/form"
 export const useInteract = () => {
   const router = useRouter()
   const auth = useAuth()
-  const { defineField, handleSubmit, isSubmitting } = useCustomForm<LoginSchema>(loginSchema)
+  const { handleSubmit, isSubmitting, defineField } = useCustomForm<LoginSchema>(loginSchema)
   const { isOpen, modalController } = useModal(["alert"])
 
   const onClickSubmit = handleSubmit(async (body) => {

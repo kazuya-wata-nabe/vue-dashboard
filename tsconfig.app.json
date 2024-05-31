@@ -9,6 +9,9 @@
   ],
   "exclude": [
     "src/**/__tests__/*",
+    "src/**/*.test.ts",
+    "src/**/*.stories.ts",
+    "setupFile.ts"
   ],
   "compilerOptions": {
     "composite": true,

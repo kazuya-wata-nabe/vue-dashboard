@@ -1,6 +1,6 @@
-import { expect, fn, spyOn, userEvent, within } from "@storybook/test"
+import { fn, userEvent, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
-import { mockApi } from "@/__tests__/helper"
+import { mockApi, mockRouteTransition } from "@/__tests__/helper"
 import { provideAuth } from "@/features/auth"
 import LoginView from "@/views/login/index.vue"
 
@@ -15,7 +15,7 @@ const meta = {
   tags: ["autodocs"],
   parameters: {
     msw: {
-      handlers: [mockApi.get("/books", ({ response }) => response(200).json([]))],
+      handlers: [mockApi.GET("/books", [])],
     },
   },
   decorators: [
@@ -41,6 +41,7 @@ export const Primary: Story = {}
  */
 export const LoginSuccess: Story = {
   name: "ログイン成功",
+  decorators: [mockRouteTransition({ current: "login" })],
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 

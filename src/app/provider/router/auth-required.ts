@@ -5,7 +5,7 @@ const Home = () => import("@/views/home/home-view.vue")
 const BookList = () => import("@/views/book/list/index.vue")
 const BookAdd = () => import("@/views/book/add/index.vue")
 
-const routes: RouteRecordRaw[] = [
+const routes = [
   {
     path: "/",
     name: "home",
@@ -26,9 +26,17 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
-]
+] as const satisfies RouteRecordRaw[]
 
-export const authRequired = routes.map((route) => {
+export const authRequired = routes.map((route: RouteRecordRaw) => {
   route.meta = { ...route.meta, layout: MainLayout, requiresAuth: true }
   return route
 })
+
+type GetRouteName<T extends RouteRecordRaw> = T extends { name: string }
+  ? T["name"]
+  : T extends { children: RouteRecordRaw[] }
+    ? T["children"][number]["name"]
+    : never
+
+export type AuthRouteNames = GetRouteName<(typeof routes)[number]>
