@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { RouterLink } from "vue-router"
 import { FlexCol, FlexRow } from "@/shared/components/parts"
 import { GoogleIcon } from "@/shared/components/parts"
+import TypedLink from "@/shared/components/parts/link/typed-link.vue"
 
 defineProps<{
   slim: boolean
@@ -12,7 +12,7 @@ const emits = defineEmits<{ toggle: [] }>()
 const routes = [
   { name: "Home", link: "home", icon: "home" },
   { name: "Book", link: "book-list", icon: "book" },
-]
+] as const
 </script>
 
 <template>
@@ -23,10 +23,10 @@ const routes = [
     <FlexRow>
       <ul class="menu-list">
         <li class="menu-item" v-for="route in routes" :key="route.name">
-          <RouterLink :to="{ name: route.link }" class="link" active-class="active">
+          <TypedLink :to="{ name: route.link }" class="link" active-class="active">
             <GoogleIcon clickable colorInherit> {{ route.icon }}</GoogleIcon>
             <span v-if="!slim">{{ route.name }}</span>
-          </RouterLink>
+          </TypedLink>
         </li>
       </ul>
     </FlexRow>
