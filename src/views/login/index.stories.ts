@@ -12,7 +12,7 @@ const mockAuth = {
 /** ログイン画面 */
 const meta = {
   component: LoginView,
-  tags: ["autodocs"],
+  tags: [""],
   parameters: {
     msw: {
       handlers: [mockApi.GET("/books", [])],

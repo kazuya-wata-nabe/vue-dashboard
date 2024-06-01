@@ -12,13 +12,13 @@ import Component from "@/views/home/index.vue"
  */
 const meta = {
   component: Component,
-  tags: ["autodocs"],
+  tags: [""],
   parameters: {
     ...registerMockApi([
       mockApi.GET("/books", dummyBooks1), //
     ]),
   },
-  decorators: [],
+  decorators: [mockDate("2021-03-10")],
 } satisfies Meta<typeof Component>
 
 export default meta
@@ -29,7 +29,9 @@ export const Primary: Story = {}
 export const Secondary: Story = {
   name: "返却期限切れ",
   parameters: {
-    ...extendMockApi(meta, [mockApi.GET("/books", dummyBooks2)]),
+    ...extendMockApi(meta, [
+      mockApi.GET("/books", dummyBooks2, { delay: 500 }), //
+    ]),
   },
   decorators: [mockDate("2021-03-11")],
   play: async ({ canvasElement }) => {
@@ -37,6 +39,6 @@ export const Secondary: Story = {
 
     const actual = await canvas.findByText("2021/03/10")
     expect(actual).toBeInTheDocument()
-    expect(actual.classList).toContain("is-over")
+    expect(actual.classList).toContain("over")
   },
 }

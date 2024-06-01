@@ -1,6 +1,6 @@
 import { spyOn } from "@storybook/test"
 import type { Parameters } from "@storybook/vue3"
-import { HttpHandler, HttpResponse, http } from "msw"
+import { HttpHandler, HttpResponse, delay, http } from "msw"
 import { createOpenApiHttp } from "openapi-msw"
 import { createApp, type App } from "vue"
 import { useRouter } from "vue-router"
@@ -35,15 +35,23 @@ type ResponseType<
 
 const InitStatus = { get: "200", post: "201" } as const
 
+export const DELAY = {
+  500: import.meta.env.NODE_ENV === "test" ? 500 : 0,
+  1000: import.meta.env.NODE_ENV === "test" ? 1000 : 0,
+} as const
+
+type Delay = (typeof DELAY)[keyof typeof DELAY]
+
 const mockApiFactory =
   <Method extends HttpMethod>(method: Method) =>
   <Path extends PathsWithMethod<Method>, Status extends HttpStatus = (typeof InitStatus)[Method]>(
     path: Path,
     response: ResponseType<Path, Method, Status>,
-    option?: { status: Status },
+    option: { status?: Status; delay?: Delay } = {},
   ) => {
-    return http[method](path, () => {
+    return http[method](path, async () => {
       const status = option?.status ?? InitStatus[method]
+      await delay(option?.delay ?? 0)
       return HttpResponse.json(response ?? [], { status: parseInt(status) })
     })
   }

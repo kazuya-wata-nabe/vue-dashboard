@@ -1,11 +1,8 @@
 import type { ApiResponse } from "@/shared/api/response"
 import { isAfter } from "@/shared/lib/date"
+import { dateFormatter } from "@/shared/lib/formatter"
 
-export type Book = {
-  id: number
-  title: string
-  borrowDate: string
-  returnDate: string
+export type Book = ApiResponse<"BookSuccess">[number] & {
   isOverReturnDate: boolean
 }
 
@@ -15,8 +12,8 @@ export const createBook =
     return {
       id: res.id,
       title: res.title,
-      borrowDate: res.borrowDate,
-      returnDate: res.returnDate,
+      borrowDate: dateFormatter(res.borrowDate, "/"),
+      returnDate: dateFormatter(res.returnDate, "/"),
       isOverReturnDate: isAfter(date, res.returnDate),
     }
   }

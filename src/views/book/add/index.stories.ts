@@ -5,7 +5,7 @@ import BookForm from "@/views/book/add/index.vue"
 /** 登録フォーム */
 const meta = {
   component: BookForm,
-  tags: ["autodocs"],
+  tags: [""],
 } satisfies Meta<typeof BookForm>
 
 export default meta
