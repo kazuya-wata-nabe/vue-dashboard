@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from "vue-router"
 import MainLayout from "@/shared/components/layout/main/main-layout.vue"
+import { propsWithId, type AuthRoute, type RouteRecord } from "@/shared/routes"
 
 const Home = () => import("@/views/home/home-view.vue")
 const BookList = () => import("@/views/book/list/index.vue")
@@ -24,19 +25,17 @@ const routes = [
         name: "book-add",
         component: BookAdd,
       },
+      {
+        path: ":id",
+        name: "book-edit",
+        props: propsWithId,
+        component: BookAdd,
+      },
     ],
   },
-] as const satisfies RouteRecordRaw[]
+] as const satisfies RouteRecord<AuthRoute>[]
 
 export const authRequired = routes.map((route: RouteRecordRaw) => {
   route.meta = { ...route.meta, layout: MainLayout, requiresAuth: true }
   return route
 })
-
-type GetRouteName<T extends RouteRecordRaw> = T extends { name: string }
-  ? T["name"]
-  : T extends { children: RouteRecordRaw[] }
-    ? T["children"][number]["name"]
-    : never
-
-export type AuthRouteNames = GetRouteName<(typeof routes)[number]>

@@ -1,8 +1,8 @@
 import { setup, type Preview } from "@storybook/vue3"
 import { initialize, mswLoader } from "msw-storybook-addon"
 import "@/app/assets/main.css"
+import { handlers } from "@/app/mocks/handlers"
 import { router } from "@/app/provider/router"
-import { handlers } from "@/shared/mocks/handlers"
 
 initialize({ onUnhandledRequest: "bypass" }, handlers)
 

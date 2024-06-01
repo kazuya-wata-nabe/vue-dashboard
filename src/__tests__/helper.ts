@@ -1,13 +1,11 @@
 import type { Parameters } from "@storybook/vue3"
 import { HttpResponse, http } from "msw"
 import { createOpenApiHttp } from "openapi-msw"
-import { unknown } from "zod"
 import { createApp, type App } from "vue"
 import { useRouter } from "vue-router"
 import { router } from "@/app/provider/router"
-import type { AuthRouteNames } from "@/app/provider/router/auth-required"
-import type { NonAuthRouteNames } from "@/app/provider/router/non-auth-required"
 import { type paths } from "@/shared/api/v1.schema"
+import type { AuthRoute, NonAuthRoute } from "@/shared/routes"
 
 type HttpMethod = "get" | "post"
 type HttpStatus = "200" | "201" | "204" | "400" | "401" | "404" | "500"
@@ -76,7 +74,7 @@ export const mockApi = {
  * 参考: https://qiita.com/katsumata_yusuke/items/792fa743b322de70a7a7
  */
 export const mockRouteTransition =
-  ({ current }: { current: NonAuthRouteNames | AuthRouteNames }) =>
+  ({ current }: { current: NonAuthRoute | AuthRoute }) =>
   () => ({
     setup: () => {
       const { currentRoute, push } = useRouter()

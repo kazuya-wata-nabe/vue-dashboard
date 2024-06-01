@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { FlexCol, FlexRow } from "@/shared/components/parts"
 import { GoogleIcon } from "@/shared/components/parts"
-import TypedLink from "@/shared/components/parts/link/typed-link.vue"
+import { TypedLink } from "@/shared/components/parts/link"
 
 defineProps<{
   slim: boolean
