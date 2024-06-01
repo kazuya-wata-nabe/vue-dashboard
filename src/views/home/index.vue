@@ -8,21 +8,23 @@ const { books } = useInteract()
 </script>
 
 <template>
-  <h1>本の一覧</h1>
-  <div class="table-container">
-    <GenericsTable :items="books">
-      <template #head>
-        <th>タイトル</th>
-        <th>借りた日</th>
-        <th>返却期限</th>
-      </template>
-      <template #record="{ item }">
-        <td class="title">{{ item.title }}</td>
-        <td class="date">{{ item.borrowDate }}</td>
-        <td class="date" :class="{ over: item.isOverReturnDate }">{{ item.returnDate }}</td>
-      </template>
-    </GenericsTable>
-  </div>
+  <main>
+    <h1>本の一覧</h1>
+    <div class="table-container">
+      <GenericsTable :items="books">
+        <template #head>
+          <th>タイトル</th>
+          <th>借りた日</th>
+          <th>返却期限</th>
+        </template>
+        <template #record="{ item }">
+          <td class="title">{{ item.title }}</td>
+          <td class="date">{{ item.borrowDate }}</td>
+          <td class="date" :class="{ over: item.isOverReturnDate }">{{ item.returnDate }}</td>
+        </template>
+      </GenericsTable>
+    </div>
+  </main>
 </template>
 
 <style scoped>
@@ -34,7 +36,7 @@ const { books } = useInteract()
 
 .date {
   min-width: 100px;
-  & .over {
+  &.over {
     color: red;
   }
 }

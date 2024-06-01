@@ -1,15 +1,15 @@
 import type { ApiResponse } from "@/shared/api/response"
 
-export const fixture1: ApiResponse<"BookSuccess"> = [
+export const dummyBooks1: ApiResponse<"BookSuccess"> = [
   {
     id: 2,
-    title: "fugafuga",
+    title: "hogehoge",
     borrowDate: "2021-01-01",
     returnDate: "2021-03-10",
   },
 ]
 
-export const fixture2 = [
+export const dummyBooks2 = [
   {
     id: 2,
     title: "piyopiyo",

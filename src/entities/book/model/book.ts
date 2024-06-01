@@ -17,6 +17,6 @@ export const createBook =
       title: res.title,
       borrowDate: res.borrowDate,
       returnDate: res.returnDate,
-      isOverReturnDate: isAfter(res.returnDate, date),
+      isOverReturnDate: isAfter(date, res.returnDate),
     }
   }

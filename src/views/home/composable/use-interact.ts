@@ -7,7 +7,7 @@ export const useInteract = () => {
   const books = ref<Book[]>([])
 
   onMounted(async () => {
-    const { data, error } = await client.GET("/books", {})
+    const { data, error } = await client.GET("/books")
     if (error) {
       console.debug(error)
     } else {

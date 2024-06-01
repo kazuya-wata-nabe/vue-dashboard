@@ -1,8 +1,8 @@
 import { useRouter } from "vue-router"
 import { useAuth } from "@/features/auth"
 import { client } from "@/shared/api/client"
-import { useCustomForm } from "@/shared/composable/useCustomForm"
-import { useModal } from "@/shared/composable/useModal"
+import { useCustomForm } from "@/shared/composable/use-custom-form"
+import { useModal } from "@/shared/composable/use-modal"
 import { loginSchema, type LoginSchema } from "@/views/login/model/form"
 
 export const useInteract = () => {

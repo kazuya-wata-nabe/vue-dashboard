@@ -16,7 +16,7 @@ const parseValue = (value: DateArg) => {
   const template = value.slice(4, 5) === "-" ? "yyyy-MM-dd" : "yyyy/MM/dd"
   const d = dateFns.parse(value, template, new Date())
   if (d.toString() === "Invalid Date") {
-    throw new Error(`日付の書式をISOにしてください: ${value}`)
+    throw new Error(`日付の形式をISOにしてください: ${value}`)
   }
   return d
 }

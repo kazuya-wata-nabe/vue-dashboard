@@ -1,5 +1,6 @@
+import { spyOn } from "@storybook/test"
 import type { Parameters } from "@storybook/vue3"
-import { HttpResponse, http } from "msw"
+import { HttpHandler, HttpResponse, http } from "msw"
 import { createOpenApiHttp } from "openapi-msw"
 import { createApp, type App } from "vue"
 import { useRouter } from "vue-router"
@@ -95,10 +96,22 @@ type Meta = {
   parameters?: Parameters
 }
 
-export const extendMockApi = (meta: Meta, ...handlers: unknown[]) => [
-  ...handlers,
-  ...(meta.parameters?.msw.handlers ?? []),
-]
+export const registerMockApi = (handlers: HttpHandler[]) => ({
+  msw: { handlers },
+})
+
+export const extendMockApi = (meta: Meta, ...handlers: unknown[]) => ({
+  msw: { handlers: [...handlers, ...(meta.parameters?.msw.handlers ?? [])] },
+})
+
+export const mockDate = (date: `${string}-${string}-${string}`) => () => ({
+  setup: (args: unknown) => {
+    const now = new Date(date).getTime()
+    spyOn(global.Date, "now").mockReturnValue(now)
+    return { args }
+  },
+  template: `<story v-bind="args" />`,
+})
 
 export const withSetup = <T extends Record<string, unknown>>(
   composable: () => T,

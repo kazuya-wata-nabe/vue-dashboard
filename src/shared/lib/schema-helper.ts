@@ -64,7 +64,7 @@ export const refines = () => ({
     },
     message: {
       path: [`new${key}`, `old${key}`],
-      message: `新旧${label}が一致しません`,
+      message: `${label}が一致しません`,
     },
   }),
   fromTo: <T extends string>(key: T) => ({

@@ -3,7 +3,7 @@ import { composeStory } from "@storybook/vue3"
 import { cleanup, render } from "@testing-library/vue"
 import { afterEach, test, vi } from "vitest"
 import { fixture2 } from "@/views/home/__tests__/fixture"
-import Meta, { Primary, Secondary } from "@/views/home/__tests__/home-view.stories"
+import Meta, { Primary, Secondary } from "@/views/home/index.stories"
 
 afterEach(cleanup)
 

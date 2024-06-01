@@ -1,5 +1,5 @@
 import { client } from "@/shared/api/client"
-import { useCustomForm } from "@/shared/composable/useCustomForm"
+import { useCustomForm } from "@/shared/composable/use-custom-form"
 import { schema, type BookWriteModel } from "@/views/book/add/types"
 
 export const useInteract = () => {

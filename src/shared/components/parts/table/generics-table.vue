@@ -1,9 +1,10 @@
 <script setup lang="ts" generic="T extends { id: string | number }">
-defineProps<{ items: T[] }>()
+defineProps<{ items: T[] | undefined }>()
 </script>
 
 <template>
-  <table v-if="items.length">
+  <div v-if="items === undefined"></div>
+  <table v-else-if="items.length">
     <thead>
       <tr class="table-header">
         <slot name="head"></slot>
@@ -15,6 +16,7 @@ defineProps<{ items: T[] }>()
       </tr>
     </tbody>
   </table>
+  <div v-else>no data</div>
 </template>
 
 <style scoped>
