@@ -43,4 +43,3 @@ const onClickLogout = async () => {
   cursor: pointer;
 }
 </style>
-@/entities/user-role

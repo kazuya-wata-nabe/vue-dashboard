@@ -13,13 +13,22 @@ export type WithId = {
   id: string
 }
 
-export const propsWithId = (route: RouteLocationNormalized): WithId => {
-  const id = typeof route.params.id
-  if (typeof id === "string") {
-    return { id }
+const withProps =
+  <RouteKey extends "params" | "query">(routeKey: RouteKey) =>
+  <T extends object>(...keys: (keyof T)[]) =>
+  (route: RouteLocationNormalized): Record<keyof T, string> => {
+    return keys.reduce(
+      (acc, key) => {
+        const _value = route[routeKey][key.toString()]
+        const value = typeof _value === "string" ? _value : ""
+        return { ...acc, [key]: value }
+      },
+      {} as Record<keyof T, string>,
+    )
   }
-  return { id: "" }
-}
+
+export const propsWithId = withProps("params")("id")
+export const withQuery = withProps("query")
 
 export type NonAuthRoute = "login"
 

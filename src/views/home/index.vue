@@ -1,17 +1,21 @@
 <script setup lang="ts">
-import { GenericsTable } from "@/shared/components/parts"
+import { GenericTable } from "@/shared/components/parts"
 import { useInteract } from "@/views/home/composable/use-interact"
 
 defineOptions({ name: "HomeView" })
 
-const { books } = useInteract()
+const props = defineProps<{
+  date: string | ""
+}>()
+
+const { books } = useInteract(() => props.date)
 </script>
 
 <template>
   <main>
     <h1>本の一覧</h1>
     <div class="table-container">
-      <GenericsTable :items="books">
+      <GenericTable :items="books">
         <template #head>
           <th>タイトル</th>
           <th>借りた日</th>
@@ -22,7 +26,7 @@ const { books } = useInteract()
           <td class="date">{{ item.borrowDate }}</td>
           <td class="date" :class="{ over: item.isOverReturnDate }">{{ item.returnDate }}</td>
         </template>
-      </GenericsTable>
+      </GenericTable>
     </div>
   </main>
 </template>

@@ -1,1 +1,1 @@
-export { default as GenericsTable } from "@/shared/components/parts/table/generics-table.vue"
+export { default as GenericTable } from "@/shared/components/parts/table/generics-table.vue"

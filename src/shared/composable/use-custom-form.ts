@@ -25,10 +25,13 @@ type UserForm<T extends GenericObject> = Pick<
   FormContext<T>,
   "resetForm" | "setErrors" | "validate" | "handleSubmit" | "setValues" | "isSubmitting"
 > & {
-  defineField: (path: Path<T>) => DefineFieldReturn<T>
+  defineField: (path: Path<T>, handlers?: Handlers) => DefineFieldReturn<T>
 }
 
-export const useCustomForm = <T extends GenericObject>(schema: ZodSchema): UserForm<T> => {
+type Handlers = {
+  onChange: ({ target }: { target: { value: string } }) => void
+}
+export const useCustomForm = <T extends GenericObject>(schema: ZodSchema<T>): UserForm<T> => {
   const {
     defineField: _defineField,
     validate,
@@ -42,11 +45,12 @@ export const useCustomForm = <T extends GenericObject>(schema: ZodSchema): UserF
     validationSchema: toTypedSchema(schema),
   })
 
-  const defineField = (path: Path<T>): DefineFieldReturn<T> => {
+  const defineField = (path: Path<T>, handler?: Handlers): DefineFieldReturn<T> => {
     const [model, attrs] = _defineField(path, {
       props: () => ({
         id: toKebabCase(path),
         errorMessage: errors.value[path],
+        ...handler,
       }),
     })
 

@@ -37,6 +37,10 @@ const config = computed(
   }),
 )
 
+const emits = defineEmits<{
+  change: [value: { target: { value: string } }]
+}>()
+
 const model = defineModel<string | undefined>({ required: true })
 
 const classes = computed(() => ({
@@ -61,7 +65,12 @@ const getDayClass = (date: Date) => {
 </script>
 
 <template>
-  <VueDatePicker v-bind="config" v-model="model" :day-class="getDayClass">
+  <VueDatePicker
+    v-bind="config"
+    v-model="model"
+    :day-class="getDayClass"
+    @date-update="(e) => emits('change', { target: { value: e.toISOString() } })"
+  >
     <template #year="year">{{ year.text }}年</template>
     <template #month="month">
       {{ month.text }}
@@ -80,6 +89,7 @@ const getDayClass = (date: Date) => {
           :placeholder="placeholder"
           :value="value"
           v-bind="$attrs"
+          @input="() => console.debug(1)"
         />
         <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
       </div>

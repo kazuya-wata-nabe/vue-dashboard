@@ -90,8 +90,7 @@ export type components = {
     /** @enum {string} */
     UserRole: "ADMIN" | "COMMON"
     User: {
-      id?: number
-      role?: components["schemas"]["UserRole"]
+      role: components["schemas"]["UserRole"]
     }
     BadRequestError: {
       [key: string]: {

@@ -1,9 +1,8 @@
 import { onMounted, ref } from "vue"
+import { createBook, type Book } from "@/features/book"
 import { client } from "@/shared/api/client"
-import { today } from "@/shared/lib/date"
-import { createBook, type Book } from "@/views/home/model"
 
-export const useInteract = () => {
+export const useInteract = (date: () => string) => {
   const books = ref<Book[]>()
 
   onMounted(async () => {
@@ -11,7 +10,7 @@ export const useInteract = () => {
     if (error) {
       console.debug(error)
     } else {
-      books.value = data.map(createBook(today()))
+      books.value = data.map(createBook(date()))
     }
   })
 

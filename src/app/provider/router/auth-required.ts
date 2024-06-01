@@ -1,6 +1,7 @@
 import type { RouteRecordRaw } from "vue-router"
 import MainLayout from "@/shared/components/layout/main/main-layout.vue"
-import { propsWithId, type AuthRoute, type RouteRecord } from "@/shared/routes"
+import { propsWithId, withQuery, type AuthRoute, type RouteRecord } from "@/shared/routes"
+import type { Props as BookListProps } from "@/views/book/list/types"
 
 const Home = () => import("@/views/home/index.vue")
 const BookList = () => import("@/views/book/list/index.vue")
@@ -18,6 +19,7 @@ const routes = [
       {
         path: "",
         name: "book-list",
+        props: withQuery<BookListProps>("date"),
         component: BookList,
       },
       {
