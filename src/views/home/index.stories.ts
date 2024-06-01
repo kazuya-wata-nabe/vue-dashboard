@@ -1,6 +1,6 @@
 import { expect, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
-import HomeView from "@/views/home/home-view.vue"
+import HomeView from "@/views/home/index.vue"
 
 /**
  * ホーム画面

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { GenericsTable } from "@/shared/components/parts"
-import { useInteract } from "@/views/home/composable/useInteract"
+import { useInteract } from "@/views/home/composable/use-interact"
+
+defineOptions({ name: "HomeView" })
 
 const { books } = useInteract()
 </script>

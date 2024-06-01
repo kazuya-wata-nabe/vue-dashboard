@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from "vue-router"
 import MainLayout from "@/shared/components/layout/main/main-layout.vue"
 import { propsWithId, type AuthRoute, type RouteRecord } from "@/shared/routes"
 
-const Home = () => import("@/views/home/home-view.vue")
+const Home = () => import("@/views/home/index.vue")
 const BookList = () => import("@/views/book/list/index.vue")
 const BookAdd = () => import("@/views/book/add/index.vue")
 
