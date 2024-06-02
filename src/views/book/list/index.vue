@@ -8,7 +8,7 @@ defineOptions({ name: "BookList", inheritAttrs: false })
 
 const props = defineProps<Props>()
 
-const { books, defineField, onChangeDate } = useInteract(() => props.date ?? "")
+const { books, defineField, onChangeDate } = useInteract(() => props.date)
 
 const [date, dateAttrs] = defineField("date", {
   onChange: ({ target }) => onChangeDate(target.value),

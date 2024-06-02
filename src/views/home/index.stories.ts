@@ -13,6 +13,7 @@ import Component from "@/views/home/index.vue"
 const meta = {
   component: Component,
   tags: [""],
+  args: {},
   parameters: {
     ...registerMockApi([
       mockApi.GET("/books", dummyBooks1), //
@@ -25,6 +26,46 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {}
+
+export const WithValidQuery: Story = {
+  name: "クエリパラメータあり",
+  args: {
+    date: "2022-11-11",
+  },
+  parameters: {
+    ...extendMockApi(meta, [
+      mockApi.GET("/books", dummyBooks2, { delay: 500 }), //
+    ]),
+  },
+  decorators: [mockDate("2021-03-11")],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+
+    const actual = await canvas.findByText("2021/03/10")
+    expect(actual).toBeInTheDocument()
+    expect(actual.classList).toContain("over")
+  },
+}
+
+export const WithInvalidQuery: Story = {
+  name: "不正な日付はクエリパラメータなしで扱う",
+  args: {
+    date: "hoge",
+  },
+  parameters: {
+    ...extendMockApi(meta, [
+      mockApi.GET("/books", dummyBooks2, { delay: 500 }), //
+    ]),
+  },
+  decorators: [mockDate("2021-03-11")],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+
+    const actual = await canvas.findByText("2021/03/10")
+    expect(actual).toBeInTheDocument()
+    expect(actual.classList).toContain("over")
+  },
+}
 
 export const Secondary: Story = {
   name: "返却期限切れ",

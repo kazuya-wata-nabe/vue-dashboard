@@ -5,7 +5,7 @@ import { useInteract } from "@/views/home/composable/use-interact"
 defineOptions({ name: "HomeView" })
 
 const props = defineProps<{
-  date: string | ""
+  date?: string
 }>()
 
 const { books } = useInteract(() => props.date)

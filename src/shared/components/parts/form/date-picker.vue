@@ -33,7 +33,7 @@ const config = computed(
     format: "yyyy/MM/dd",
     weekStart: WeekOfDay.sunday,
     clearable: false,
-    modelType: "format",
+    modelType: "yyyy-MM-dd",
   }),
 )
 
@@ -62,6 +62,10 @@ const getDayClass = (date: Date) => {
   if (weekOfDay === WeekOfDay.saturday) return "saturday"
   return ""
 }
+
+const handleUpdate = (value: string) => {
+  emits("change", { target: { value } })
+}
 </script>
 
 <template>
@@ -69,7 +73,7 @@ const getDayClass = (date: Date) => {
     v-bind="config"
     v-model="model"
     :day-class="getDayClass"
-    @date-update="(e) => emits('change', { target: { value: e.toISOString() } })"
+    @update:model-value="handleUpdate"
   >
     <template #year="year">{{ year.text }}年</template>
     <template #month="month">

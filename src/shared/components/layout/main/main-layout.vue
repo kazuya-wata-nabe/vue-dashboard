@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue"
-import type { UserRole } from "@/entities/user-role"
+import type { UserRole } from "@/features/auth"
 import SideMenu from "@/shared/components/layout/main/side-menu.vue"
 import TheHeader from "@/shared/components/layout/main/the-header.vue"
 

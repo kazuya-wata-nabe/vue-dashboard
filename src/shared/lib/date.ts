@@ -2,19 +2,6 @@ import * as dateFns from "date-fns"
 import { startOfToday } from "date-fns"
 
 type Duration = "day" | "hour"
-type DateArg = string | Date
-
-const parseValue = (value: DateArg) => {
-  if (typeof value === "object") {
-    return value
-  }
-  const template = value.slice(4, 5) === "-" ? "yyyy-MM-dd" : "yyyy/MM/dd"
-  const d = dateFns.parse(value, template, new Date())
-  if (d.toString() === "Invalid Date") {
-    throw new Error(`日付の形式をISOにしてください: ${value}`)
-  }
-  return d
-}
 
 export const isSame = (a: string, b: string, duration: Duration) => {
   switch (duration) {
@@ -33,4 +20,12 @@ export const isAfter = (a: string | Date, b: string | Date) => {
 }
 
 export const today = () => startOfToday().toString()
-export const parse = (value: string) => parseValue(value)
+
+export const isValid = (value: string) => {
+  const ymd = value.split("-")
+  if (ymd.length === 3) {
+    const date = dateFns.parse(value, "yyyy-MM-dd", new Date())
+    return dateFns.isValid(date)
+  }
+  return false
+}

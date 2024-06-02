@@ -2,7 +2,7 @@ import { expect } from "@storybook/test"
 import { composeStory } from "@storybook/vue3"
 import { cleanup, render } from "@testing-library/vue"
 import { afterEach, test, vi } from "vitest"
-import { fixture2 } from "@/views/home/__tests__/fixture"
+import { dummyBooks2 } from "@/views/home/__tests__/fixture"
 import Meta, { Primary, Secondary } from "@/views/home/index.stories"
 
 afterEach(cleanup)
@@ -17,7 +17,7 @@ test("storyの再利用サンプル", async () => {
 
 test("apiのモックサンプル", async () => {
   const ViewOk = composeStory(Primary, Meta)
-  const mock = vi.fn(() => ({ fetch: vi.fn().mockResolvedValue(fixture2) }))()
+  const mock = vi.fn(() => ({ fetch: vi.fn().mockResolvedValue(dummyBooks2) }))()
 
   const { findByText } = render(ViewOk, { props: { queryService: mock } })
 

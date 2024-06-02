@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useRouter } from "vue-router"
-import type { UserRole } from "@/entities/user-role"
+import type { UserRole } from "@/features/auth"
 import { useAuth } from "@/features/auth"
 import { FlexRow, GoogleIcon } from "@/shared/components/parts"
 

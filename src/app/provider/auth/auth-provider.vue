@@ -2,8 +2,7 @@
 import { ref } from "vue"
 import { LocalStorage } from "@/app/provider/auth/infra/local-storage"
 import { router } from "@/app/provider/router"
-import type { UserRole } from "@/entities/user-role"
-import { provideAuth } from "@/features/auth"
+import { provideAuth, type UserRole } from "@/features/auth"
 import { client } from "@/shared/api/client"
 
 defineOptions({ inheritAttrs: false })
@@ -18,14 +17,13 @@ router.beforeResolve(async (to) => {
   const isAuthenticated = await storage.load()
   if (to.meta.requiresAuth && !isAuthenticated) {
     return { name: "login" }
-  } else {
-    const { data, error } = await client.GET("/me")
-    if (error) {
-      return { name: "login" }
-    }
-    role.value = data.role
-    return true
   }
+  const { data, error } = await client.GET("/me")
+  if (error) {
+    return { name: "login" }
+  }
+  role.value = data.role
+  return true
 })
 </script>
 

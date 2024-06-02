@@ -2,8 +2,8 @@ import type { RouteRecordRaw } from "vue-router"
 import MainLayout from "@/shared/components/layout/main/main-layout.vue"
 import { propsWithId, withQuery, type AuthRoute, type RouteRecord } from "@/shared/routes"
 import type { Props as BookListProps } from "@/views/book/list/types"
+import { type HomeProps, HomeView } from "@/views/home"
 
-const Home = () => import("@/views/home/index.vue")
 const BookList = () => import("@/views/book/list/index.vue")
 const BookAdd = () => import("@/views/book/add/index.vue")
 
@@ -11,7 +11,8 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: Home,
+    props: withQuery<HomeProps>("date"),
+    component: HomeView,
   },
   {
     path: "/book",
