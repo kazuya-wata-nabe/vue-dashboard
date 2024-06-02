@@ -2,13 +2,13 @@
 import { ref } from "vue"
 import { LocalStorage } from "@/app/provider/auth/infra/local-storage"
 import { router } from "@/app/provider/router"
-import { provideAuth, type UserRole } from "@/features/auth"
+import { provideAuth } from "@/features/auth"
+import type { UserRole } from "@/features/user-role"
 import { client } from "@/shared/api/client"
 
 defineOptions({ inheritAttrs: false })
 
 const storage = new LocalStorage()
-// TODO: pluginにしてもいいかも
 provideAuth(storage)
 
 const role = ref<UserRole>()
@@ -28,5 +28,5 @@ router.beforeResolve(async (to) => {
 </script>
 
 <template>
-  <slot :role="role" :storage="storage"></slot>
+  <slot :storage="storage"></slot>
 </template>
