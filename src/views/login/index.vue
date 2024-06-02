@@ -5,7 +5,7 @@ import { SubmitButton } from "@/shared/components/parts/button"
 import TextField from "@/shared/components/parts/form/text-field.vue"
 import { useInteract } from "@/views/login/use-interaction"
 
-defineOptions({ name: "LoginView" })
+defineOptions({ name: "LoginView", inheritAttrs: false })
 
 const { isOpen, isSubmitting, modalController, defineField, onClickSubmit } = useInteract()
 

@@ -1,21 +1,18 @@
 <script lang="ts" setup>
 import { ref } from "vue"
-import { LocalStorage } from "@/app/provider/auth/infra/local-storage"
 import { router } from "@/app/provider/router"
-import { provideAuth } from "@/features/auth"
+import { useAuthenticated } from "@/features/auth"
 import type { UserRole } from "@/features/user-role"
 import { client } from "@/shared/api/client"
 
 defineOptions({ inheritAttrs: false })
 
-const storage = new LocalStorage()
-provideAuth(storage)
-
 const role = ref<UserRole>()
+const { isAuthenticated } = useAuthenticated()
 
 router.beforeResolve(async (to) => {
-  const isAuthenticated = await storage.load()
-  if (to.meta.requiresAuth && !isAuthenticated) {
+  const authenticated = await isAuthenticated()
+  if (to.meta.requiresAuth && !authenticated) {
     return { name: "login" }
   }
   const { data, error } = await client.GET("/me")
@@ -28,5 +25,5 @@ router.beforeResolve(async (to) => {
 </script>
 
 <template>
-  <slot :storage="storage"></slot>
+  <slot :role="role"></slot>
 </template>
