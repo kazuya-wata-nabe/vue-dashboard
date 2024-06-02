@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/vue3"
 
 const meta = {
   component: FlexCol,
+  tags: ["autodocs", "!dev"],
   argTypes: {
     gap: { control: "radio", options: ["8", "16", "24", "32"] },
   },

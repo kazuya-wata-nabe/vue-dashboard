@@ -18,9 +18,8 @@ const key = Symbol() as InjectionKey<AuthContext>
 
 export const provideAuth = (storage: AuthStorage) => ({
   install: (app: App) => {
-    const save = (data: Data) => storage.save(data)
     app.provide(key, {
-      save,
+      save: (data: Data) => storage.save(data),
       load: () => storage.load(),
       logout: () => storage.remove(),
     })

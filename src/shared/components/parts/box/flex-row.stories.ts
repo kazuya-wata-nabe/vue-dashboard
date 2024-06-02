@@ -3,6 +3,7 @@ import FlexRow from "@/shared/components/parts/box/flex-row.vue"
 
 const meta = {
   component: FlexRow,
+  tags: ["autodocs", "!dev"],
   argTypes: {
     gap: { control: "radio", options: ["8", "16", "24", "32"] },
   },
