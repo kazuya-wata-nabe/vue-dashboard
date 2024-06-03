@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { AlertDialog } from "@/shared//components/parts"
-import { FlexCol, InputForm } from "@/shared/components/parts"
-import { SubmitButton } from "@/shared/components/parts/button"
-import TextField from "@/shared/components/parts/form/text-field.vue"
+import { AlertDialog } from "@/shared//parts"
+import { FlexCol, InputForm } from "@/shared/parts"
+import { SubmitButton } from "@/shared/parts/button"
+import TextField from "@/shared/parts/form/text-field.vue"
 import { useInteract } from "@/views/login/interaction"
 
 defineOptions({ name: "LoginView", inheritAttrs: false })

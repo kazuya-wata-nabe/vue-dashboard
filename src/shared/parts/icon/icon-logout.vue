@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import BaseIcon from "@/shared/components/parts/icon/base-icon.vue"
+import BaseIcon from "./base-icon.vue"
 
 const emits = defineEmits<{
   click: []

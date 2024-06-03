@@ -1,6 +1,5 @@
+import { FlexCol, FlexRow } from "./index"
 import { type StoryObj } from "@storybook/vue3"
-import { FlexCol, FlexRow } from "@/shared/components/parts"
-import "@/shared/components/parts/index.css"
 
 const meta = {
   tags: ["autodocs", "!dev"],
@@ -38,9 +37,9 @@ export const _FlexCol: Story = {
 
 export const _FlexRow: Story = {
   render: () => ({
-    components: { FlexRow },
+    components: { FlexRow, FlexCol },
     template: `
-      <div class="canvas col">
+      <FlexCol gap="8">
         <FlexRow gap="8">
           gap: &nbsp;&nbsp;8
           <div>hoge</div>
@@ -57,7 +56,7 @@ export const _FlexRow: Story = {
           gap: 32
           <div>hoge</div>
         </FlexRow>
-      </div>
+      </FlexCol>
     `,
   }),
 }

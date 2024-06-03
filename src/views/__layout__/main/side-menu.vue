@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { FlexCol, FlexRow } from "@/shared/components/parts"
-import { IconMenu, IconSideItem } from "@/shared/components/parts"
-import { TypedLink } from "@/shared/components/parts/link"
+import { FlexCol, FlexRow } from "@/shared/parts"
+import { IconMenu, IconSideItem } from "@/shared/parts"
+import { TypedLink } from "@/shared/parts/link"
 
 defineProps<{
   slim: boolean

@@ -2,8 +2,8 @@
 import { useRouter } from "vue-router"
 import { useAuth } from "@/features/auth"
 import type { UserRole } from "@/features/user-role"
-import { FlexRow, IconLogout } from "@/shared/components/parts"
-import IconThreeDot from "@/shared/components/parts/icon/icon-three-dot.vue"
+import { FlexRow, IconLogout } from "@/shared/parts"
+import IconThreeDot from "@/shared/parts/icon/icon-three-dot.vue"
 
 defineProps<{
   role: UserRole
