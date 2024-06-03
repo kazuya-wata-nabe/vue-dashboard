@@ -3,11 +3,11 @@ name: Install Module And Cache
 description: Setup Environment Variables for Django Project
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - uses: actions/setup-node@v4
       with:
-        node-version-file: '.node-version'
+        node-version-file: "package-json"
 
     - name: cache node-modules
       id: cache-node-modules
@@ -15,9 +15,6 @@ runs:
       with:
         path: node_modules
         key: ${{ runner.os }}-node-${{ hashFiles('**/.node-version') }}-${{ hashFiles('**/package-lock.json') }}
-    
-    - run: ls -a
-      shell: bash
 
     - name: clean-install if cache-hit
       shell: bash
