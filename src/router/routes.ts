@@ -1,11 +1,11 @@
-import type { Component } from "vue"
-import "vue-router"
 import { parsePathId, strOrEmpty, type GetRouteNames, type Route } from "@/router/helper"
-import { MainLayout, PublicLayout } from "@/views/__layout__"
+import { MainLayout, PublicLayout } from "@/views/_layout"
 import { BookAdd } from "@/views/book/add"
 import * as BookList from "@/views/book/list"
 import * as Home from "@/views/home"
 import * as Login from "@/views/login"
+import type { Component } from "vue"
+import "vue-router"
 
 declare module "vue-router" {
   interface RouteMeta {

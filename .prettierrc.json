@@ -9,7 +9,8 @@
   "printWidth": 100,
   "trailingComma": "all",
   "importOrder": [
-    "^vue",
-    "^@/(.*)$"
+    "^react",
+    "^@?\\w",
+    "^[./]"
   ]
 }

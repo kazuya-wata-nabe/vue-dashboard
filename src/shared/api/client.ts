@@ -1,5 +1,5 @@
-import createClient, { type Middleware } from "openapi-fetch"
 import type { paths } from "@/shared/api/v1.schema"
+import createClient, { type Middleware } from "openapi-fetch"
 
 const baseUrl: string = import.meta.env.API_BASE_URL ?? ""
 

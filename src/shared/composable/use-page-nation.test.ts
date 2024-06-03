@@ -1,5 +1,5 @@
-import { describe, expect, test } from "vitest"
 import { usePageNation } from "@/shared/composable/use-page-nation"
+import { describe, expect, test } from "vitest"
 
 const repeatInformationDummy = (n: number) => Array.from({ length: n }, (_, i) => ({ id: i + 1 }))
 

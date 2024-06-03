@@ -7,8 +7,8 @@ import {
   type Path,
   type PathValue,
 } from "vee-validate"
-import type { ZodSchema } from "zod"
 import type { Ref } from "vue"
+import type { ZodSchema } from "zod"
 
 type DefineFieldReturn<T extends GenericObject> = [
   Ref<PathValue<T, Path<T>>>,

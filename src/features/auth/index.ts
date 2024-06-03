@@ -1,5 +1,5 @@
-import { inject, type App, type InjectionKey } from "vue"
 import type { ApiSchema } from "@/shared/api/response"
+import { inject, type App, type InjectionKey } from "vue"
 
 type Data = ApiSchema<"Authenticated">
 export type AuthContext = {

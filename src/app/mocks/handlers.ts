@@ -1,5 +1,5 @@
-import { createOpenApiHttp } from "openapi-msw"
 import type { paths } from "@/shared/api/v1.schema"
+import { createOpenApiHttp } from "openapi-msw"
 
 const http = createOpenApiHttp<paths>()
 

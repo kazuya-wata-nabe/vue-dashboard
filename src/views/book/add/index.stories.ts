@@ -1,6 +1,6 @@
+import Component from "@/views/book/add/index.vue"
 import { expect, userEvent, within } from "@storybook/test"
 import type { Meta, StoryObj } from "@storybook/vue3"
-import Component from "@/views/book/add/index.vue"
 
 /** 登録フォーム */
 const meta = {
