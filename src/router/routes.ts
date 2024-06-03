@@ -1,6 +1,6 @@
 import type { Component } from "vue"
 import "vue-router"
-import { strOrEmpty, type GetRouteNames, type Route } from "@/router/helper"
+import { parsePathId, strOrEmpty, type GetRouteNames, type Route } from "@/router/helper"
 import MainLayout from "@/shared/components/layout/main/main-layout.vue"
 import PublicLayout from "@/shared/components/layout/public/public-layout.vue"
 import { BookAdd } from "@/views/book/add"
@@ -60,7 +60,7 @@ const routesAuthRequired = [
         name: "book-edit",
         component: BookAdd,
         props: (route) => ({
-          id: route.params.id,
+          id: parsePathId(route),
         }),
       },
     ],

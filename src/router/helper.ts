@@ -11,25 +11,10 @@ type RouteName<T extends Route> = T extends {
 }
   ? T["name"]
   : T extends { children: Route[] }
-    ? T["children"][number]["name"]
+    ? RouteName<T["children"][number]>
     : never
 
 export type GetRouteNames<T extends Route[]> = RouteName<T[number]>
-
-type _GetProps<T extends Route> = T extends {
-  name: string
-  props: unknown
-}
-  ? { [Name in T["name"]]: { props: T["props"] } }
-  : T extends { children: Route[] }
-    ? _GetProps<T["children"][number]>
-    : never
-
-export type GetProps<T extends Route[]> = _GetProps<T[number]>
-
-export type WithId = {
-  id: string
-}
 
 export const strOrEmpty = (route: RouteLocationNormalized, key: string) => {
   const value = route.query[key]
@@ -37,4 +22,12 @@ export const strOrEmpty = (route: RouteLocationNormalized, key: string) => {
     return value
   }
   return ""
+}
+
+export const parsePathId = (route: RouteLocationNormalized): string | "" => {
+  const value = (route.query["id"] ?? "").toString()
+  if (Number.isNaN(value)) {
+    return ""
+  }
+  return value
 }
