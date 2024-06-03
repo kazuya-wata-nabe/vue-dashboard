@@ -1,5 +1,5 @@
-import { routes } from "@/router/routes"
 import { createMemoryHistory, createRouter, createWebHistory } from "vue-router"
+import { routes } from "@/router/routes"
 
 const baseUrl = import.meta.env.BASE_URL
 

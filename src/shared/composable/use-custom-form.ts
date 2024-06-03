@@ -1,4 +1,4 @@
-import { toTypedSchema } from "@vee-validate/zod"
+import type { Ref } from "vue"
 import {
   useForm,
   type BaseFieldProps,
@@ -7,8 +7,8 @@ import {
   type Path,
   type PathValue,
 } from "vee-validate"
-import type { Ref } from "vue"
 import type { ZodSchema } from "zod"
+import { toTypedSchema } from "@vee-validate/zod"
 
 type DefineFieldReturn<T extends GenericObject> = [
   Ref<PathValue<T, Path<T>>>,

@@ -2,9 +2,9 @@
 /**
  * @see {@link https://vue3datepicker.com/installation/}
  */
+import { computed } from "vue"
 import VueDatePicker, { type VueDatePickerProps } from "@vuepic/vue-datepicker"
 import "@vuepic/vue-datepicker/dist/main.css"
-import { computed } from "vue"
 
 const props = defineProps<{
   size: "small" | "medium" | "large"
