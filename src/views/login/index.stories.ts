@@ -1,7 +1,7 @@
 import { fn, userEvent, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
-import { mockApi, mockRouteTransition } from "@/__tests__/helper"
 import { provideAuth } from "@/features/auth"
+import { mockApi, mockRouteTransition } from "@/shared/__tests__/helper"
 import LoginView from "@/views/login/index.vue"
 
 const mockAuth = {

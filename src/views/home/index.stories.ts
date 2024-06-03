@@ -1,6 +1,6 @@
 import { expect, within } from "@storybook/test"
 import { type Meta, type StoryObj } from "@storybook/vue3"
-import { extendMockApi, mockApi, mockDate, registerMockApi } from "@/__tests__/helper"
+import { extendMockApi, mockApi, mockDate, registerMockApi } from "@/shared/__tests__/helper"
 import { dummyBooks1, dummyBooks2 } from "@/views/home/__tests__/fixture"
 import Component from "@/views/home/index.vue"
 

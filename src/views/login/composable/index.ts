@@ -3,7 +3,7 @@ import { useAuth } from "@/features/auth"
 import { client } from "@/shared/api/client"
 import { useCustomForm } from "@/shared/composable/use-custom-form"
 import { useModal } from "@/shared/composable/use-modal"
-import { loginSchema, type LoginSchema } from "@/views/login/model/form"
+import { loginSchema, type LoginSchema } from "./form-schema"
 
 export const useInteract = () => {
   const router = useRouter()
