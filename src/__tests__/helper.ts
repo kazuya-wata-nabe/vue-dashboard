@@ -91,13 +91,13 @@ export const mockRouteTransition =
       return { currentRoute }
     },
     template: `
-    <div style="position: fixed; background: white;">
-      <div data-testid="currentRoute">currentRoute: {{ currentRoute.name }}</div>
-      <div data-testid="currentParams">currentParams: {{ currentRoute.params }}</div>
-      <div data-testid="currentQuery">currentQuery: {{ currentRoute.query }}</div>
-    </div>
-    <story />
-  `,
+      <div style="position: fixed; background: white;">
+        <div data-testid="currentRoute">currentRoute: {{ currentRoute.name }}</div>
+        <div data-testid="currentParams">currentParams: {{ currentRoute.params }}</div>
+        <div data-testid="currentQuery">currentQuery: {{ currentRoute.query }}</div>
+      </div>
+      <story />
+    `,
   })
 
 type Meta = {

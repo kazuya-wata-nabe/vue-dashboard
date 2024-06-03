@@ -1,6 +1,6 @@
 import { expect, userEvent, within } from "@storybook/test"
 import type { Meta, StoryObj } from "@storybook/vue3"
-import Component from "@/views/book/add/index.vue"
+import Component from "@/views/book/edit/index.vue"
 
 /** 登録フォーム */
 const meta = {
@@ -13,7 +13,9 @@ type Story = StoryObj<typeof meta>
 
 /** 基本の表示 */
 export const Primary: Story = {
-  args: {},
+  args: {
+    id: "1",
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const input = canvas.getByLabelText("タイトル")

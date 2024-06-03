@@ -20,10 +20,8 @@ const _register = (value: ZodString | ZodString, rule: StringValidate) => {
     const [, n] = rule
     return value.min(n, messages.min(n))
   }
-  if (rule === "email") {
-    return value.email(messages.email)
-  }
-  return value
+
+  return value[rule](messages[rule])
 }
 
 const register = (value: ZodString) => (args: StringValidate[]) => {
@@ -77,7 +75,7 @@ export const refines = () => ({
       return true
     },
     message: {
-      path: [`${key}To`, `${key}From`],
+      path: [`${key}From`, `${key}To`],
       message: "invalid from to",
     },
   }),

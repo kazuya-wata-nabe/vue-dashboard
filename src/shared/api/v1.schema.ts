@@ -61,6 +61,18 @@ export type paths = {
         400: components["responses"]["BadRequest"]
       }
     }
+    put: {
+      parameters: {
+        path: {
+          id: number
+        }
+      }
+      requestBody: components["requestBodies"]["Book"]
+      responses: {
+        200: components["schemas"]["Book"]
+        400: components["responses"]["BadRequest"]
+      }
+    }
   }
 }
 

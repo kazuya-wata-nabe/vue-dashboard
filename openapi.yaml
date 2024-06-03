@@ -76,19 +76,40 @@ paths:
 
   /books/{id}:
     get:
+      tags:
+        - book
+      description: ""
       parameters:
         - in: path
           name: id
           schema:
-            type: integer
+            type: string
           required: true
 
-      tags:
-        - book
-      description: ""
       responses:
         "200":
           $ref: "#/components/responses/BookSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
+    put:
+      tags:
+        - book
+      description: ""
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+
+      requestBody:
+        required: true
+        $ref: "#/components/requestBodies/Book"
+
+      responses:
+        "200":
+          $ref: "#/components/schemas/Book"
         "400":
           $ref: "#/components/responses/BadRequest"
 
@@ -100,7 +121,7 @@ components:
         - id
       properties:
         id:
-          type: integer
+          type: string
 
     Email:
       type: object
