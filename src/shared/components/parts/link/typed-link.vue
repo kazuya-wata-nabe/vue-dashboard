@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router"
-import type { AuthRoute } from "@/shared/routes"
+import type { RouteNames } from "@/router/routes"
 
 defineProps<{
-  to: { name: AuthRoute }
+  to: { name: RouteNames }
 }>()
 </script>
 

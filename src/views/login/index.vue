@@ -3,7 +3,7 @@ import { AlertDialog } from "@/shared//components/parts"
 import { FlexCol, InputForm } from "@/shared/components/parts"
 import { SubmitButton } from "@/shared/components/parts/button"
 import TextField from "@/shared/components/parts/form/text-field.vue"
-import { useInteract } from "@/views/login/use-interaction"
+import { useInteract } from "@/views/login/interaction"
 
 defineOptions({ name: "LoginView", inheritAttrs: false })
 
@@ -46,3 +46,4 @@ main {
   place-content: center;
 }
 </style>
+@/views/login/interaction/use-interact

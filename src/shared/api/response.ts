@@ -9,3 +9,10 @@ export type ApiResponse<T extends KeyofResponses> = components["responses"][T] e
 }
   ? components["responses"][T]["content"]["application/json"]
   : never
+
+export type ApiQuery<T extends keyof components["parameters"]> =
+  components["parameters"][T] extends {
+    content: { "application/json": unknown }
+  }
+    ? components["parameters"][T]
+    : never

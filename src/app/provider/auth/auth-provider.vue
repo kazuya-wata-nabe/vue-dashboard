@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { ref } from "vue"
-import { router } from "@/app/provider/router"
 import { useAuthenticated } from "@/features/auth"
 import type { UserRole } from "@/features/user-role"
+import { router } from "@/router"
 import { client } from "@/shared/api/client"
 
 defineOptions({ inheritAttrs: false })

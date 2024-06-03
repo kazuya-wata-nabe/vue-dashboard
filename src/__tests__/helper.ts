@@ -4,9 +4,9 @@ import { HttpHandler, HttpResponse, delay, http } from "msw"
 import { createOpenApiHttp } from "openapi-msw"
 import { createApp, type App } from "vue"
 import { useRouter } from "vue-router"
-import { router } from "@/app/provider/router"
+import { router } from "@/router"
+import type { RouteNames } from "@/router/routes"
 import { type paths } from "@/shared/api/v1.schema"
-import type { AuthRoute, NonAuthRoute } from "@/shared/routes"
 
 type HttpMethod = "get" | "post"
 type HttpStatus = "200" | "201" | "204" | "400" | "401" | "404" | "500"
@@ -83,7 +83,7 @@ export const mockApi = {
  * 参考: https://qiita.com/katsumata_yusuke/items/792fa743b322de70a7a7
  */
 export const mockRouteTransition =
-  ({ current }: { current: NonAuthRoute | AuthRoute }) =>
+  ({ current }: { current: RouteNames }) =>
   () => ({
     setup: () => {
       const { currentRoute, push } = useRouter()
