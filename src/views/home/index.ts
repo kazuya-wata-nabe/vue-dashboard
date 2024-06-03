@@ -1,2 +1,2 @@
-export const Component = () => import("@/views/home/index.vue")
-export * from "@/views/home/composable/types"
+export const Component = () => import("./index.vue")
+export * from "./types"

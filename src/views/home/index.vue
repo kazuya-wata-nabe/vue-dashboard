@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { GenericTable } from "@/shared/parts"
-import { useInteract } from "@/views/home/composable/use-interact"
+import { useInteract } from "./composable"
 
 defineOptions({ name: "HomeView" })
 

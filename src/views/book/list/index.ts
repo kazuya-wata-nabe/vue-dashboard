@@ -1,3 +1,2 @@
-export const Component = () => import("@/views/book/list/index.vue")
-
-export * from "@/views/book/list/types"
+export const Component = () => import("./index.vue")
+export * from "./types"

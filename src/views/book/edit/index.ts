@@ -1,2 +1,2 @@
-export const BookEdit = () => import("@/views/book/edit/index.vue")
-export * from "@/views/book/edit/types"
+export const BookEdit = () => import("./index.vue")
+export * from "./types"

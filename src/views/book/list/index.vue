@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import DatePicker from "@/shared/parts/form/date-picker.vue"
 import { GenericTable } from "@/shared/parts/table"
-import { type Props } from "@/views/book/list/types"
-import { useInteract } from "./interact/use-interact"
+import { useInteract } from "./composable"
+import { type Props } from "./types"
 
 defineOptions({ name: "BookList", inheritAttrs: false })
 

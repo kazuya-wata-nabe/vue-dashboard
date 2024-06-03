@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { FlexCol, TextField, SubmitButton, DatePicker } from "@/shared/parts"
-import { useInteract } from "@/views/book/add/composable/use-interact"
+import { useInteract } from "./composable"
 
 defineOptions({ name: "BookAdd" })
 
