@@ -1,12 +1,11 @@
 import type { Component } from "vue"
 import "vue-router"
 import { parsePathId, strOrEmpty, type GetRouteNames, type Route } from "@/router/helper"
-import MainLayout from "@/shared/components/layout/main/main-layout.vue"
-import PublicLayout from "@/shared/components/layout/public/public-layout.vue"
+import { MainLayout, PublicLayout } from "@/views/__layout__"
 import { BookAdd } from "@/views/book/add"
 import * as BookList from "@/views/book/list"
 import * as Home from "@/views/home"
-import { LoginView } from "@/views/login"
+import * as Login from "@/views/login"
 
 declare module "vue-router" {
   interface RouteMeta {
@@ -21,7 +20,7 @@ const routesNonAuthRequired = [
   {
     path: "/login",
     name: "login",
-    component: LoginView,
+    component: Login.Component,
   },
 ] as const satisfies Route[]
 

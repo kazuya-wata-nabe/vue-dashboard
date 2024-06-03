@@ -1,1 +1,1 @@
-export const LoginView = () => import("@/views/login/index.vue")
+export const Component = () => import("@/views/login/index.vue")

@@ -2,7 +2,8 @@
 import { useRouter } from "vue-router"
 import { useAuth } from "@/features/auth"
 import type { UserRole } from "@/features/user-role"
-import { FlexRow, GoogleIcon } from "@/shared/components/parts"
+import { FlexRow, IconLogout } from "@/shared/components/parts"
+import IconThreeDot from "@/shared/components/parts/icon/icon-three-dot.vue"
 
 defineProps<{
   role: UserRole
@@ -20,8 +21,8 @@ const onClickLogout = async () => {
   <FlexRow class="header">
     this is header, role is {{ role }}
     <FlexRow class="icons" gap="24">
-      <GoogleIcon dark @click="onClickLogout"> logout </GoogleIcon>
-      <GoogleIcon dark> more_horiz </GoogleIcon>
+      <IconLogout @click="onClickLogout" />
+      <IconThreeDot />
     </FlexRow>
   </FlexRow>
 </template>
@@ -37,9 +38,5 @@ const onClickLogout = async () => {
   place-content: center;
   place-items: center;
   padding: 0 16px;
-}
-
-.material-symbols-outlined {
-  cursor: pointer;
 }
 </style>

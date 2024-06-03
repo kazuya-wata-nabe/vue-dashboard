@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { ref } from "vue"
-import type { UserRole } from "@/features/user-role"
-import SideMenu from "@/shared/components/layout/main/side-menu.vue"
-import TheHeader from "@/shared/components/layout/main/the-header.vue"
+import { type UserRole } from "@/features/user-role"
+import SideMenu from "@/views/__layout__/main/side-menu.vue"
+import TheHeader from "@/views/__layout__/main/the-header.vue"
 
+defineOptions({ name: "MainLayout" })
 defineProps<{ role: UserRole }>()
 
 const slim = ref(false)

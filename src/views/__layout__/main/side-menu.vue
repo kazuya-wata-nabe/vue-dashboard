@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { FlexCol, FlexRow } from "@/shared/components/parts"
-import { GoogleIcon } from "@/shared/components/parts"
+import { IconMenu, IconSideItem } from "@/shared/components/parts"
 import { TypedLink } from "@/shared/components/parts/link"
 
 defineProps<{
@@ -18,13 +18,13 @@ const routes = [
 <template>
   <FlexCol :class="['aside', slim && 'aside-slim']">
     <FlexRow class="menu-icon">
-      <GoogleIcon class="menu-toggle" clickable @click="emits('toggle')" />
+      <IconMenu @click="emits('toggle')" />
     </FlexRow>
     <FlexRow>
       <ul class="menu-list">
         <li class="menu-item" v-for="route in routes" :key="route.name">
           <TypedLink :to="{ name: route.link }" class="link" active-class="active">
-            <GoogleIcon clickable colorInherit> {{ route.icon }}</GoogleIcon>
+            <IconSideItem :icon="route.icon" />
             <span v-if="!slim">{{ route.name }}</span>
           </TypedLink>
         </li>
@@ -45,33 +45,21 @@ const routes = [
   justify-content: end;
 }
 
-.menu-toggle {
-  &::after {
-    content: "menu";
-  }
-
-  &:hover {
-    &::after {
-      content: "arrow_back";
-    }
-  }
-}
-
 .menu-list {
   display: inline-flex;
   flex-direction: column;
   width: 100%;
   padding: 0 0;
-}
 
-.menu-item {
-  color: whitesmoke;
-  list-style: none;
-  position: relative;
-  height: 60px;
+  .menu-item {
+    color: whitesmoke;
+    list-style: none;
+    position: relative;
+    height: 60px;
 
-  &:has(> .active) {
-    background: lightgray;
+    &:has(> .active) {
+      background: lightgray;
+    }
   }
 }
 
