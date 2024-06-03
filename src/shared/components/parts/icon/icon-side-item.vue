@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import GoogleIcon from "@/shared/components/parts/icon/google-icon.vue"
+import BaseIcon from "@/shared/components/parts/icon/base-icon.vue"
 
 defineProps<{
   icon: "home" | "book"
@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <GoogleIcon class="color-inherit" clickable>{{ icon }}</GoogleIcon>
+  <BaseIcon class="color-inherit" clickable>{{ icon }}</BaseIcon>
 </template>
 
 <style scoped>

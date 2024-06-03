@@ -20,9 +20,16 @@ const [password, passwordAttrs] = defineField("password")
         <h1>This is Header Area</h1>
       </FlexCol>
       <InputForm id="login-form">
-        <TextField size="l" label="id" placeholder="email" v-model="email" v-bind="emailAttrs" />
         <TextField
-          size="l"
+          size="large"
+          label="id"
+          placeholder="hoge@example.com"
+          v-model="email"
+          v-bind="emailAttrs"
+        />
+        <TextField
+          type="password"
+          size="large"
           label="password"
           placeholder="password"
           v-model="password"
@@ -32,6 +39,7 @@ const [password, passwordAttrs] = defineField("password")
       </InputForm>
     </FlexCol>
   </main>
+
   <AlertDialog :is-open="isOpen.alert" @close="modalController.close">
     <div>ログインに失敗しました</div>
   </AlertDialog>
@@ -46,4 +54,3 @@ main {
   place-content: center;
 }
 </style>
-@/views/login/interaction/use-interact

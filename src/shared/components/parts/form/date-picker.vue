@@ -7,10 +7,9 @@ import "@vuepic/vue-datepicker/dist/main.css"
 import { computed } from "vue"
 
 const props = defineProps<{
-  id: string
+  size: "small" | "medium" | "large"
   label: string
   placeholder: string
-  size: "s" | "m" | "l"
   errorMessage?: string | undefined
 }>()
 
@@ -41,13 +40,12 @@ const emits = defineEmits<{
   change: [value: { target: { value: string } }]
 }>()
 
+const id = `date-${crypto.randomUUID()}`
 const model = defineModel<string | undefined>({ required: true })
 
 const classes = computed(() => ({
   "date-picker": true,
-  small: props.size === "s",
-  medium: props.size === "m",
-  large: props.size === "l",
+  [props.size]: true,
 }))
 
 const headerColor = (index: number) => {

@@ -15,21 +15,21 @@ const [returnDate, returnDateAttrs] = defineField("returnDate")
   <FlexCol class="input-container" gap="8">
     <p>本の登録</p>
     <TextField
-      size="m"
+      size="medium"
       label="タイトル"
       placeholder="タイトル"
       v-model="title"
       v-bind="titleAttrs"
     />
     <DatePicker
-      size="m"
+      size="medium"
       label="貸出日"
       placeholder="日付を選択"
       v-model="borrowDate"
       v-bind="borrowDateAttrs"
     />
     <DatePicker
-      size="m"
+      size="medium"
       label="返却日"
       placeholder="日付を選択"
       v-model="returnDate"

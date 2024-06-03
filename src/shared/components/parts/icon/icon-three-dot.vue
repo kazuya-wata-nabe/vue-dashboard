@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import GoogleIcon from "@/shared/components/parts/icon/google-icon.vue"
+import BaseIcon from "@/shared/components/parts/icon/base-icon.vue"
 
 const emits = defineEmits<{
   click: []
@@ -7,5 +7,5 @@ const emits = defineEmits<{
 </script>
 
 <template>
-  <GoogleIcon clickable dark @click="emits('click')">more_horiz</GoogleIcon>
+  <BaseIcon clickable dark @click="emits('click')">more_horiz</BaseIcon>
 </template>

@@ -10,16 +10,9 @@ import {
 import type { ZodSchema } from "zod"
 import type { Ref } from "vue"
 
-const toKebabCase = (str: string) => {
-  return str
-    .replace(/^ *?[A-Z]/, (allStr) => allStr.toLowerCase())
-    .replace(/_/g, "-")
-    .replace(/ *?[A-Z]/g, (allStr) => "-" + allStr.replace(/ /g, "").toLowerCase())
-}
-
 type DefineFieldReturn<T extends GenericObject> = [
   Ref<PathValue<T, Path<T>>>,
-  Ref<BaseFieldProps & { id: string; errorMessage: string | undefined }>,
+  Ref<BaseFieldProps & { errorMessage: string | undefined }>,
 ]
 type UserForm<T extends GenericObject> = Pick<
   FormContext<T>,
@@ -31,6 +24,7 @@ type UserForm<T extends GenericObject> = Pick<
 type Handlers = {
   onChange: ({ target }: { target: { value: string } }) => void
 }
+
 export const useCustomForm = <T extends GenericObject>(schema: ZodSchema<T>): UserForm<T> => {
   const {
     defineField: _defineField,
@@ -48,7 +42,6 @@ export const useCustomForm = <T extends GenericObject>(schema: ZodSchema<T>): Us
   const defineField = (path: Path<T>, handler?: Handlers): DefineFieldReturn<T> => {
     const [model, attrs] = _defineField(path, {
       props: () => ({
-        id: toKebabCase(path),
         errorMessage: errors.value[path],
         ...handler,
       }),

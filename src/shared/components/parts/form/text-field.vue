@@ -2,8 +2,7 @@
 import { computed } from "vue"
 
 const props = defineProps<{
-  id: string
-  size: "s" | "m" | "l"
+  size: "small" | "medium" | "large"
   label: string
   placeholder: string
   errorMessage: string | undefined
@@ -13,22 +12,22 @@ const model = defineModel<T | undefined>({ required: true })
 
 const classes = computed(() => ({
   "text-input": true,
-  small: props.size === "s",
-  medium: props.size === "m",
-  large: props.size === "l",
+  [props.size]: true,
 }))
+
+const id = `input-${crypto.randomUUID()}`
 </script>
 
 <template>
   <div class="input-container">
     <label :for="id">{{ label }}</label>
     <input
+      type="text"
+      v-bind="$attrs"
       :id="id"
       :class="classes"
       :placeholder="placeholder"
-      type="text"
       v-model="model"
-      v-bind="$attrs"
     />
     <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
@@ -41,7 +40,7 @@ const classes = computed(() => ({
 }
 .text-input {
   line-height: 1.5rem;
-  .small {
+  &.small {
     width: 100px;
   }
   &.medium {

@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-defineProps<{
-  id: string
-}>()
 const emits = defineEmits<{
   click: []
 }>()
+
+const id = `form-${crypto.randomUUID()}`
 </script>
 
 <template>
