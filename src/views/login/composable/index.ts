@@ -9,12 +9,12 @@ export const useInteract = () => {
   const router = useRouter()
   const auth = useAuth()
   const { handleSubmit, isSubmitting, defineField } = useCustomForm<LoginSchema>(loginSchema)
-  const { isOpen, modalController } = useModal(["alert"])
+  const { isOpen, modal } = useModal(["alert"])
 
   const onClickSubmit = handleSubmit(async (body) => {
     const { data, error } = await client.POST("/login", { body })
     if (error) {
-      modalController.open("alert")
+      modal.open("alert")
     } else {
       await auth.save(data)
       await router.push({ name: "home" })
@@ -23,7 +23,7 @@ export const useInteract = () => {
 
   return {
     isOpen,
-    modalController,
+    modal,
     isSubmitting,
     defineField,
     onClickSubmit,

@@ -3,7 +3,7 @@ import { computed, ref } from "vue"
 export const useModal = <T extends string>(keys: T[]) => {
   const current = ref<T>()
 
-  const modalController = {
+  const modal = {
     open: (value: T) => (current.value = value),
     close: () => (current.value = undefined),
   }
@@ -20,6 +20,6 @@ export const useModal = <T extends string>(keys: T[]) => {
 
   return {
     isOpen,
-    modalController,
+    modal,
   }
 }
