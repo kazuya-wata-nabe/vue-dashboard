@@ -7,23 +7,20 @@
 type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] }
 
 export type paths = {
+  "/me": {
+    get: {
+      responses: {
+        200: components["responses"]["ValidUser"]
+        400: components["responses"]["BadRequest"]
+      }
+    }
+  }
   "/login": {
     post: {
       requestBody: components["requestBodies"]["Login"]
       responses: {
         201: components["responses"]["LoginSuccess"]
         400: components["responses"]["BadRequest"]
-      }
-    }
-  }
-  "/me": {
-    get: {
-      responses: {
-        200: {
-          content: {
-            "application/json": components["schemas"]["User"]
-          }
-        }
       }
     }
   }
@@ -53,7 +50,7 @@ export type paths = {
     get: {
       parameters: {
         path: {
-          id: number
+          id: string
         }
       }
       responses: {
@@ -64,7 +61,7 @@ export type paths = {
     put: {
       parameters: {
         path: {
-          id: number
+          id: string
         }
       }
       requestBody: components["requestBodies"]["Book"]
@@ -81,7 +78,7 @@ export type webhooks = Record<string, never>
 export type components = {
   schemas: {
     Id: {
-      id: number
+      id: string
     }
     Email: {
       email?: string
@@ -90,7 +87,7 @@ export type components = {
       password?: string
     }
     Authenticated: {
-      "access-token": string
+      accessToken: string
     }
     Book: {
       title: string
@@ -113,6 +110,11 @@ export type components = {
     }
   }
   responses: {
+    ValidUser: {
+      content: {
+        "application/json": components["schemas"]["User"]
+      }
+    }
     LoginSuccess: {
       content: {
         "application/json": components["schemas"]["Authenticated"]

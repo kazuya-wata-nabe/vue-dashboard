@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.0.2
 
 info:
   title: Sample
@@ -11,6 +11,17 @@ tags:
     description: ""
 
 paths:
+  /me:
+    get:
+      description: ""
+      tags:
+        - user
+      responses:
+        "200":
+          $ref: "#/components/responses/ValidUser"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
   /login:
     post:
       description: ""
@@ -23,19 +34,6 @@ paths:
           $ref: "#/components/responses/LoginSuccess"
         "400":
           $ref: "#/components/responses/BadRequest"
-
-  /me:
-    get:
-      description: ""
-      tags:
-        - user
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
 
   /books:
     get:
@@ -138,9 +136,9 @@ components:
     Authenticated:
       type: object
       required:
-        - access-token
+        - accessToken
       properties:
-        access-token:
+        accessToken:
           type: string
 
     Book:
@@ -196,6 +194,16 @@ components:
         type: string
 
   responses:
+    ValidUser:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/User"
+          examples:
+            default:
+              $ref: "#/components/examples/me200"
+
     LoginSuccess:
       description: ""
       content:
@@ -242,7 +250,7 @@ components:
           schema:
             $ref: "#/components/schemas/Book"
 
-examples:
-  /me200:
-    value:
-      - role: "ADMIN"
+  examples:
+    me200:
+      value:
+        - role: "ADMIN"

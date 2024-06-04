@@ -7,20 +7,16 @@
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "postbuild": "rm dist/mockServiceWorker.js",
-    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
     "test:unit": "vitest",
+    "test:story": "test-storybook",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.ts --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "storybook": "storybook dev -p 6006",
-    "storybook:test": "test-storybook",
-    "storybook:docs": "storybook build --docs",
-    "storybook:build": "storybook build",
-    "prepare": "husky",
-    "build-storybook": "storybook build",
     "gen:schema": "openapi-typescript -t ./openapi.yaml -o ./src/shared/api/v1.schema.ts",
-    "postgen:schema": "prettier --write ./src/shared/api/v1.schema.ts"
+    "postgen:schema": "prettier --write ./src/shared/api/v1.schema.ts",
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.{vue,ts}": "prettier --write"
