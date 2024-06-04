@@ -8,7 +8,7 @@ export const useInteract = () => {
 
   const onClickSubmit = handleSubmit(async (body) => {
     const { error } = await client.PUT("/books/{id}", {
-      params: { path: { id: 1 } },
+      params: { path: { id: "1" } },
       body,
     })
     if (error) {

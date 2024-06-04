@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@vee-validate/zod": "^4.12.8",
+    "@vueform/multiselect": "^2.6.7",
     "@vuepic/vue-datepicker": "^8.7.0",
     "date-fns": "^3.6.0",
     "neverthrow": "^6.2.1",
