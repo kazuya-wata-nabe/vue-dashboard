@@ -19,7 +19,9 @@ export const isAfter = (a: string | Date, b: string | Date) => {
   return dateFns.isAfter(a, b)
 }
 
-export const today = () => startOfToday().toString()
+export const today = () => {
+  return startOfToday().toString()
+}
 
 export const isValid = (value: string) => {
   const ymd = value.split("-")
@@ -28,4 +30,13 @@ export const isValid = (value: string) => {
     return dateFns.isValid(date)
   }
   return false
+}
+
+const DATE_TEMPLATE = {
+  "-": "yyyy-MM-dd",
+  "/": "yyyy/MM/dd",
+} as const
+
+export const format = (date: string, template: keyof typeof DATE_TEMPLATE) => {
+  return dateFns.format(date, DATE_TEMPLATE[template])
 }

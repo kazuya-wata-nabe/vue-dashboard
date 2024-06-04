@@ -1,6 +1,5 @@
 import type { ApiResponse } from "@/shared/api/response"
-import { isAfter, today } from "@/shared/lib/date"
-import { dateFormatter } from "@/shared/lib/formatter"
+import { format, isAfter, today } from "@/shared/lib/date"
 import { createSchema, required, type ToSchema } from "@/shared/lib/schema-helper"
 
 export type Book = ApiResponse<"BookSuccess">[number] & {
@@ -13,8 +12,8 @@ export const createBook =
     return {
       id: res.id,
       title: res.title,
-      borrowDate: dateFormatter(res.borrowDate, "/"),
-      returnDate: dateFormatter(res.returnDate, "/"),
+      borrowDate: format(res.borrowDate, "/"),
+      returnDate: format(res.returnDate, "/"),
       isOverReturnDate: isAfter(date ?? today(), res.returnDate),
     }
   }
