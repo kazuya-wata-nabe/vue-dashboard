@@ -101,8 +101,10 @@ function hoge() {}
 ## その他
 - ここまでに記載された内容はPJにあわせてカスタムしてください
 
-## 時間があれば以下をやりたいこと
+## 時間があればやりたいこと
 - openapiからzod schemaを生成する
   - https://qiita.com/ay-kapi/items/b959ee60fed8a84a9973
 - ESLintを使ってモジュール間のimportを制限する
   - https://zenn.dev/sho_ts/articles/752cac66d90443
+- file-based routing
+  - https://router.vuejs.org/guide/advanced/typed-routes.html
