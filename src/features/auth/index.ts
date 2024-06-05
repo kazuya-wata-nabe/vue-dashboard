@@ -16,7 +16,7 @@ export type AuthStorage = {
 
 const key = Symbol() as InjectionKey<AuthContext>
 
-export const provideAuth = (storage: AuthStorage) => ({
+export const createAuthContext = (storage: AuthStorage) => ({
   install: (app: App) => {
     app.provide(key, {
       save: (data: Data) => storage.save(data),

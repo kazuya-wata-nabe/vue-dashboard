@@ -3,7 +3,6 @@ import { setup, type Preview } from "@storybook/vue3"
 import "@/app/assets/main.css"
 import { handlers } from "@/app/mocks/handlers"
 import { router } from "@/app/provider/router"
-import { provideAuth } from "@/features/auth"
 
 initialize({ onUnhandledRequest: "bypass" }, handlers)
 

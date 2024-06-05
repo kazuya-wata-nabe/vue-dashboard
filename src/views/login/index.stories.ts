@@ -1,29 +1,20 @@
 import { fn, userEvent, within } from "@storybook/test"
-import { type Meta, type StoryObj } from "@storybook/vue3"
-import { provideAuth } from "@/features/auth"
-import { mockApi, mockRouteTransition } from "@/shared/__tests__/helper"
+import { setup, type Meta, type StoryObj } from "@storybook/vue3"
+import { createAuthContext } from "@/features/auth"
+import { mockApi, mockRouteTransition, registerMockApi } from "@/shared/__tests__/helper"
 import LoginView from "@/views/login/index.vue"
 
-const mockAuth = {
-  load: fn(),
-  save: fn(),
-  remove: fn(),
-}
+const auth = createAuthContext({ load: fn(), save: fn(), remove: fn() })
+setup((app) => {
+  app.use(auth)
+})
 /** ログイン画面 */
 const meta = {
   component: LoginView,
   tags: [""],
   parameters: {
-    msw: {
-      handlers: [mockApi.GET("/books", [])],
-    },
+    ...registerMockApi([mockApi.POST("/login", { accessToken: "ok" })]),
   },
-  decorators: [
-    () => ({
-      setup: () => provideAuth(mockAuth),
-      template: "<story />",
-    }),
-  ],
 } satisfies Meta<typeof LoginView>
 
 export default meta
