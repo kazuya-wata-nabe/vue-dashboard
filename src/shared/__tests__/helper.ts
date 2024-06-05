@@ -4,9 +4,9 @@ import { HttpHandler, HttpResponse, delay, http } from "msw"
 import { createOpenApiHttp } from "openapi-msw"
 import { spyOn } from "@storybook/test"
 import type { Parameters } from "@storybook/vue3"
-import { router } from "@/router"
-import type { RouteNames } from "@/router/routes"
+import { router } from "@/app/provider/router"
 import { type paths } from "@/shared/api/v1.schema"
+import type { RouteNames } from "@/shared/routes"
 
 type HttpMethod = "get" | "post"
 type HttpStatus = "200" | "201" | "204" | "400" | "401" | "404" | "500"
@@ -59,12 +59,12 @@ const mockApiFactory =
  * @example
  * ```ts
  * // 正常系
- * mockApi.get("/books", [])
+ * mockApi.GET("/books", [])
  * // 異常系
- * mockApi.get("/books", [], 400)
- * // パスクエリ判定
- * mockApi.CUSTOM.get("/books", ({ query, response }) =>
- *   query.get("title") === "hoge" ? response(200).json([]) : response(400).json([])
+ * mockApi.GET("/books", [], 400)
+ * // クエリパラメータ判定
+ * mockApi.CUSTOM.GET("/books", ({ query, response }) =>
+ *   query.GET("title") === "hoge" ? response(200).json([]) : response(400).json([])
  * )
  * // パスパラメータ判定
  * mockApi.CUSTOM.get("/books/{id}", ({ params, response }) => {

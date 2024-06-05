@@ -1,11 +1,12 @@
 import type { Component } from "vue"
-import "vue-router"
-import { parsePathId, strOrEmpty, type GetRouteNames, type Route } from "@/router/helper"
+import type { RouteRecordRaw } from "vue-router"
+import type { AuthRequiredRoutes, NonAuthRequiredRoutes, Route } from "@/shared/routes"
 import { MainLayout, PublicLayout } from "@/views/_layout"
-import { BookAdd } from "@/views/book/add"
+import * as BookAdd from "@/views/book/add"
 import * as BookList from "@/views/book/list"
 import * as Home from "@/views/home"
 import * as Login from "@/views/login"
+import { parsePathId, strOrEmpty } from "./helper"
 
 declare module "vue-router" {
   interface RouteMeta {
@@ -14,17 +15,24 @@ declare module "vue-router" {
   }
 }
 
-export type RouteNames = GetRouteNames<typeof routesNonAuthRequired | typeof routesAuthRequired>
-
+/**
+ * \<RouterLink :to={name}>のnameのtypoを予防する仕掛けです
+ * - nameは src/shared/routes/index.ts に定義済みのものしか設定できません
+ * - 面倒になったらsatisfiesを変更してください
+ * ```diff
+ * - satisfies Route<NonAuthRequiredRoutes>[]
+ * + satisfies RouteRecordRaw[]
+ * ```
+ */
 const routesNonAuthRequired = [
   {
     path: "/login",
     name: "login",
     component: Login.Component,
   },
-] as const satisfies Route[]
+] as const satisfies Route<NonAuthRequiredRoutes>[]
 
-const nonAuthRequired = routesNonAuthRequired.map((route: Route) => {
+const nonAuthRequired = routesNonAuthRequired.map((route: RouteRecordRaw) => {
   route.meta = { ...route.meta, layout: PublicLayout }
   return route
 })
@@ -52,21 +60,21 @@ const routesAuthRequired = [
       {
         path: "add",
         name: "book-add",
-        component: BookAdd,
+        component: BookAdd.Component,
       },
       {
         path: ":id",
         name: "book-edit",
-        component: BookAdd,
+        component: BookAdd.Component,
         props: (route) => ({
           id: parsePathId(route),
         }),
       },
     ],
   },
-] as const satisfies Route[]
+] as const satisfies Route<AuthRequiredRoutes>[]
 
-const authRequired = routesAuthRequired.map((route: Route) => {
+const authRequired = routesAuthRequired.map((route: RouteRecordRaw) => {
   route.meta = { ...route.meta, layout: MainLayout, auth: true }
   return route
 })

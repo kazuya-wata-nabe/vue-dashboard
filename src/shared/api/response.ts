@@ -1,5 +1,10 @@
 import type { components } from "@/shared/api/v1.schema"
 
+/**
+ * openapiから定義されているpath, responseなどの型を抽出する仕掛け
+ * v1.schemaはpnpm gen:schemaで生成する
+ * @see {@link https://openapi-ts.pages.dev/introduction}
+ */
 export type ApiSchema<T extends keyof components["schemas"]> = components["schemas"][T]
 
 type KeyofResponses = Exclude<keyof components["responses"], "BadRequest">

@@ -1,9 +1,9 @@
 import { createApp } from "vue"
 import App from "@/app/App.vue"
 import "@/app/assets/main.css"
-import { LocalStorage } from "@/app/provider/auth/infra/local-storage"
+import { router } from "@/app/provider/router"
 import { provideAuth } from "@/features/auth"
-import { router } from "@/router"
+import { LocalStorage } from "./provider/auth/infra/local-storage"
 
 const storage = new LocalStorage()
 const auth = provideAuth(storage)

@@ -1,1 +1,1 @@
-export const BookAdd = () => import("./index.vue")
+export const Component = () => import("./index.vue")

@@ -19,7 +19,7 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{vue,ts}": "prettier --write"
+    "*.{vue,ts}": "pnpm format"
   },
   "dependencies": {
     "@vee-validate/zod": "^4.12.8",

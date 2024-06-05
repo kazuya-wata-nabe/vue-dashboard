@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router"
-import type { RouteNames } from "@/router/routes"
+import type { RouteNames } from "@/shared/routes"
 
+/**
+ * RouterLinkでnameのtypoを防ぐための仕掛け
+ * paramsのtypoは防げないので必要に応じてカスタムしてください
+ */
 defineProps<{
   to: { name: RouteNames }
   params?: Record<string, string>

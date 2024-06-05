@@ -14,6 +14,7 @@ type DefineFieldReturn<T extends GenericObject> = [
   Ref<PathValue<T, Path<T>>>,
   Ref<BaseFieldProps & { errorMessage: string | undefined }>,
 ]
+
 type UserForm<T extends GenericObject> = Pick<
   FormContext<T>,
   "resetForm" | "setErrors" | "validate" | "handleSubmit" | "setValues" | "isSubmitting"
@@ -25,6 +26,12 @@ type Handlers = {
   onChange: ({ target }: { target: { value: string } }) => void
 }
 
+/**
+ * vee-validateをラップした関数
+ * defineFieldの第２引数にerrorMessageを追加してv-bindで
+ * propsに設定できるようにした
+ * exportするAPIはPJにあわせてカスタムしてください
+ */
 export const useCustomForm = <T extends GenericObject>(schema: ZodSchema<T>): UserForm<T> => {
   const {
     defineField: _defineField,
