@@ -2,7 +2,7 @@ import { type StoryObj } from "@storybook/vue3"
 import { FlexCol, FlexRow } from "./index"
 
 const meta = {
-  tags: ["autodocs", "!dev"],
+  tags: ["!autodocs", "!dev"],
 }
 
 export default meta

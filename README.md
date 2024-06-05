@@ -75,9 +75,9 @@ const hoge = () => {}
 function hoge() {}
 ```
 
-- 使っていないimport, 変数は削除してください
-  - 上記が残っているとpush時にエラーになります
-  - push前は試行錯誤しやすいよう警告だけ
+- 使っていないimport, 変数は削除してからpushしてください
+  - 上記が残っているとエラーになります
+  - push前は試行錯誤しやすいよう警告だけにしてます
 
 ## apiについて
 - api clientはfetchです
@@ -87,7 +87,7 @@ function hoge() {}
 - 自動生成するのでapiディレクトリは作っていません
   - 必要があれば各レイヤーで作ってください
 - 自動生成の元ネタなので積極的にopenapiをメンテナンスしてください
-  - 自動生成し易い書き方は[こちら](https://openapi-ts.pages.dev/advanced#styleguide)
+  - 自動生成しやすい書き方は[こちら](https://openapi-ts.pages.dev/advanced#styleguide)
 
 ## mockについて
 - mock serverはmswです
