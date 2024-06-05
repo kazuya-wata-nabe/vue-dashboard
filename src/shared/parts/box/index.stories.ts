@@ -1,17 +1,17 @@
-import { type StoryObj } from "@storybook/vue3"
-import { FlexCol, FlexRow } from "./index"
+import { type Meta, type StoryObj } from "@storybook/vue3"
+import * as Components from "./index"
 
 const meta = {
-  tags: ["!autodocs", "!dev"],
-}
+  tags: ["autodocs", "!dev"],
+} satisfies Meta<{}>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const _FlexCol: Story = {
+export const FlexCol: Story = {
   render: () => ({
-    components: { FlexCol, FlexRow },
+    components: { ...Components },
     template: `
       <FlexRow gap="8">
         <FlexCol gap="8">
@@ -35,9 +35,9 @@ export const _FlexCol: Story = {
   }),
 }
 
-export const _FlexRow: Story = {
+export const FlexRow: Story = {
   render: () => ({
-    components: { FlexRow, FlexCol },
+    components: { ...Components },
     template: `
       <FlexCol gap="8">
         <FlexRow gap="8">

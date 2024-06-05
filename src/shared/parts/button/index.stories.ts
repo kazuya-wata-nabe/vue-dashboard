@@ -2,23 +2,32 @@ import { type Meta, type StoryObj } from "@storybook/vue3"
 import { SubmitButton } from "./index"
 
 const meta = {
-  render: () => ({
-    components: { SubmitButton },
-  }),
   tags: ["autodocs", "!dev"],
-} satisfies Meta<{}>
+  render: (args) => ({
+    components: { SubmitButton },
+    setup: () => {
+      return { args }
+    },
+    template: `
+    <div style="width: 200px">
+      <SubmitButton v-bind="args">Hoge</SubmitButton>
+    </div>
+    `,
+  }),
+} satisfies Meta<typeof SubmitButton>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {
-  render: () => ({
-    components: { SubmitButton },
-    template: `
-      <div>
-        <SubmitButton />
-      </div>
-    `,
-  }),
+export const IsSubmittingFalse: Story = {
+  args: {
+    isSubmitting: false,
+  },
+}
+
+export const IsSubmittingTrue: Story = {
+  args: {
+    isSubmitting: true,
+  },
 }
