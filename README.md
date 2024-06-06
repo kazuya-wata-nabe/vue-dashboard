@@ -79,6 +79,9 @@ function hoge() {}
   - 上記が残っているとエラーになります
   - push前は試行錯誤しやすいよう警告だけにしてます
 
+- `eslint`のルールは`.eslintrc`で定義しています
+  - 追加したい or 削除したいルールがあれば適宜カスタムしてください
+
 ## apiについて
 - api clientはfetchです
 - パス、リクエスト、レスポンスの型はopenapiから自動生成しています
@@ -90,7 +93,7 @@ function hoge() {}
   - 自動生成しやすい書き方は[こちら](https://openapi-ts.pages.dev/advanced#styleguide)
 
 ## mockについて
-- mock serverはmswです
+- mock serverにmsw使っています
   - openapi-msw使っているため、openapiに定義されているパス、レスポンス以外は登録できません
 - レスポンスは`src/app/mocks/handlers.ts`で設定しているので適宜更新してください
   - レスポンスにopenapiのexamplesを使う場合はredoclyでjsonを出力してください

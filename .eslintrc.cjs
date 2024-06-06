@@ -26,6 +26,8 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "error",
     "prettier/prettier": WARNING,
     "prefer-arrow-functions/prefer-arrow-functions": ["error"],
+    /** @see {@link https://github.com/sindresorhus/eslint-plugin-unicorn} */
+    "unicorn/prefer-top-level-await": "off",
     "unicorn/prevent-abbreviations": "off",
     "unicorn/switch-case-braces": "off",
     "unicorn/no-array-reduce": "off",

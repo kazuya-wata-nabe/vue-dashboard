@@ -1,6 +1,7 @@
 import { schema, type BookWriteModel } from "@/features/book"
 import { client } from "@/shared/api/client"
 import { useCustomForm } from "@/shared/composable/use-custom-form"
+import { handleSubmitError } from "./functions"
 
 export const useInteract = () => {
   const { handleSubmit, isSubmitting, defineField, resetForm } =
@@ -8,7 +9,9 @@ export const useInteract = () => {
 
   const onClickSubmit = handleSubmit(async (body) => {
     const { error } = await client.POST("/books", { body })
-    alert(JSON.stringify(error, undefined, 2))
+    if (error) {
+      handleSubmitError(error)
+    }
   })
 
   const onClickReset = () => resetForm()

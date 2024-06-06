@@ -173,17 +173,12 @@ components:
 
     BadRequestError:
       type: object
-      additionalProperties:
-        type: object
-        required:
-          - code
-          - reason
-        properties:
-          code:
-            type: integer
-            format: int32
-          reason:
-            type: string
+      properties:
+        code:
+          type: integer
+          format: int32
+        reason:
+          type: string
 
   parameters:
     BookListParams:

@@ -102,11 +102,9 @@ export type components = {
       role: components["schemas"]["UserRole"]
     }
     BadRequestError: {
-      [key: string]: {
-        /** Format: int32 */
-        code: number
-        reason: string
-      }
+      /** Format: int32 */
+      code?: number
+      reason?: string
     }
   }
   responses: {
