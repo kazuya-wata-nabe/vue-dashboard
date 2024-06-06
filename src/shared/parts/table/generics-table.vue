@@ -4,7 +4,7 @@ defineProps<{ items: T[] | undefined }>()
 
 <template>
   <div v-if="items === undefined"></div>
-  <table v-else-if="items.length">
+  <table v-else-if="items.length > 0">
     <thead>
       <tr class="table-header">
         <slot name="head"></slot>

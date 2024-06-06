@@ -22,10 +22,10 @@ export const Primary: Story = {}
 
 export const LoginSuccess: Story = {
   name: "ログイン成功したらHomeに遷移する",
+  decorators: [mockRouteTransition({ current: "login" })],
   parameters: {
     ...registerMockApi([mockApi.POST("/login", { accessToken: "ok" })]),
   },
-  decorators: [mockRouteTransition({ current: "login" })],
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const currentRoute = canvas.getByTestId("currentRoute")

@@ -10,6 +10,5 @@ const enableMocking = async () => {
   return worker.start({ onUnhandledRequest: "bypass" })
 }
 
-enableMocking().then(() => {
-  app.mount("#app")
-})
+await enableMocking()
+app.mount("#app")

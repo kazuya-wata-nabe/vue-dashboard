@@ -2,7 +2,7 @@
 import { AlertDialog } from "@/shared//parts"
 import { FlexCol, InputForm } from "@/shared/parts"
 import { SubmitButton } from "@/shared/parts/button"
-import TextField from "@/shared/parts/form/text-field.vue"
+import { TextField } from "@/shared/parts/form"
 import { useInteract } from "./composable"
 
 defineOptions({ name: "LoginView", inheritAttrs: false })

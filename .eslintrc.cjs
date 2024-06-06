@@ -11,6 +11,7 @@ module.exports = {
     "eslint:recommended",
     "@vue/eslint-config-typescript",
     "@vue/eslint-config-prettier/skip-formatting",
+    "plugin:unicorn/recommended",
     "plugin:storybook/recommended",
   ],
   parserOptions: {
@@ -18,12 +19,23 @@ module.exports = {
   },
   ignorePatterns: ["src/assets", "*.config.ts", "*.json"],
   rules: {
+    eqeqeq: "error",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": WARNING,
     "@typescript-eslint/no-non-null-assertion": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "prettier/prettier": WARNING,
     "prefer-arrow-functions/prefer-arrow-functions": ["error"],
+    "unicorn/prevent-abbreviations": "off",
+    "unicorn/switch-case-braces": "off",
+    "unicorn/no-array-reduce": "off",
+    "unicorn/filename-case": [
+      "error",
+      {
+        case: "kebabCase",
+        ignore: ["App.vue"],
+      },
+    ],
     "no-relative-import-paths/no-relative-import-paths": [
       "error",
       {

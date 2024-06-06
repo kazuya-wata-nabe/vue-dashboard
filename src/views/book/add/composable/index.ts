@@ -8,7 +8,7 @@ export const useInteract = () => {
 
   const onClickSubmit = handleSubmit(async (body) => {
     const { error } = await client.POST("/books", { body })
-    alert(JSON.stringify(error, null, 2))
+    alert(JSON.stringify(error, undefined, 2))
   })
 
   const onClickReset = () => resetForm()

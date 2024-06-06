@@ -51,7 +51,7 @@ const mockApiFactory =
     return http[method](path, async () => {
       const status = option?.status ?? InitStatus[method]
       await delay(option?.delay ? DELAY[option.delay] : 0)
-      return HttpResponse.json(response ?? [], { status: parseInt(status) })
+      return HttpResponse.json(response ?? [], { status: Number.parseInt(status) })
     })
   }
 /**

@@ -12,7 +12,7 @@ export const useInteract = () => {
       body,
     })
     if (error) {
-      alert(JSON.stringify(error, null, 2))
+      alert(JSON.stringify(error, undefined, 2))
     }
   })
 

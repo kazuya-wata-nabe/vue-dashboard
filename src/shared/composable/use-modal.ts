@@ -25,13 +25,8 @@ export const useModal = <T extends string>(keys: T[]) => {
   }
 
   const isOpen = computed(() => {
-    return keys.reduce(
-      (acc, cur) => ({
-        ...acc,
-        [cur]: current.value === cur,
-      }),
-      {} as Record<T, boolean>,
-    )
+    const entries = keys.map((cur) => [cur, current.value === cur])
+    return Object.fromEntries(entries)
   })
 
   return {
