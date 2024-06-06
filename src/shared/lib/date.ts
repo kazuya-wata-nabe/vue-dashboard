@@ -1,5 +1,6 @@
 import * as dateFns from "date-fns"
 import { startOfToday } from "date-fns"
+import { ja } from "date-fns/locale"
 
 type Duration = "day" | "hour"
 
@@ -26,7 +27,7 @@ export const today = () => {
 export const isValid = (value: string) => {
   const ymd = value.split("-")
   if (ymd.length === 3) {
-    const date = dateFns.parse(value, "yyyy-MM-dd", new Date())
+    const date = dateFns.parse(value, "yyyy-MM-dd", new Date(), { locale: ja })
     return dateFns.isValid(date)
   }
   return false
