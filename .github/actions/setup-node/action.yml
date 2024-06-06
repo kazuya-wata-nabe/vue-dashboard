@@ -3,7 +3,7 @@ name: Install Module And Cache
 description: Setup Environment Variables for Django Project
 
 runs:
-  using: "composite"
+  using: composite
   steps:
     - name: Install Node.js
       uses: actions/setup-node@v4
