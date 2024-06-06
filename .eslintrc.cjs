@@ -5,7 +5,7 @@ const WARNING = Boolean(process.env.STRICT_LINT) === true ? "error" : "warn"
 
 module.exports = {
   root: true,
-  plugins: ["prefer-arrow-functions", "no-relative-import-paths"],
+  plugins: ["prefer-arrow-functions", "no-relative-import-paths", "strict-dependencies"],
   extends: [
     "plugin:vue/vue3-essential",
     "eslint:recommended",

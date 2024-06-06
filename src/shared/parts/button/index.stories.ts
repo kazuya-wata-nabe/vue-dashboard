@@ -2,7 +2,7 @@ import { type Meta, type StoryObj } from "@storybook/vue3"
 import { SubmitButton } from "./index"
 
 const meta = {
-  tags: ["autodocs", "!dev"],
+  tags: ["!autodocs", "!dev", "!test"],
   render: (args) => ({
     components: { SubmitButton },
     setup: () => {

@@ -11,16 +11,17 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** 基本の表示 */
-export const Primary: Story = {
-  args: {},
+export const Primary: Story = {}
+
+export const InValidInput: Story = {
+  name: "未入力で登録すると必須エラーを表示する",
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const input = canvas.getByLabelText("タイトル")
-    await userEvent.type(input, "hogehoge")
+    const button = canvas.getByRole("button", { name: "登録" })
+    await userEvent.click(button)
 
-    expect(input).toHaveValue("hogehoge")
+    const errors = await canvas.findAllByText("必須項目です")
 
-    expect(await canvas.findByText("必須項目です")).toBeInTheDocument()
+    expect(errors).toHaveLength(3)
   },
 }

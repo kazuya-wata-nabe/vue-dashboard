@@ -2,7 +2,7 @@ import { type Meta, type StoryObj } from "@storybook/vue3"
 import * as Components from "./index"
 
 const meta = {
-  tags: ["autodocs", "!dev"],
+  tags: ["!autodocs", "!dev", "!test"],
 } satisfies Meta<{}>
 
 export default meta

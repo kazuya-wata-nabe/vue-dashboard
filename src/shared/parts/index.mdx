@@ -1,11 +1,17 @@
 import { Canvas, Story, Meta, Controls } from "@storybook/blocks"
 import * as Box from "./box/index.stories"
+import * as Button from "./button/index.stories"
 
 <Meta title="configure" />
 
-# aaa
+# パーツまとめ
 
-## index
+## Flex
 
 <Canvas of={Box.FlexCol} />
 <Canvas of={Box.FlexRow} />
+
+## Button
+
+<Canvas of={Button.IsSubmittingFalse} />
+<Canvas of={Button.IsSubmittingTrue} />
