@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.0.2
 
 info:
   title: Sample
@@ -11,6 +11,17 @@ tags:
     description: ""
 
 paths:
+  /me:
+    get:
+      description: ""
+      tags:
+        - user
+      responses:
+        "200":
+          $ref: "#/components/responses/ValidUser"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
   /login:
     post:
       description: ""
@@ -23,19 +34,6 @@ paths:
           $ref: "#/components/responses/LoginSuccess"
         "400":
           $ref: "#/components/responses/BadRequest"
-
-  /me:
-    get:
-      description: ""
-      tags:
-        - user
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
 
   /books:
     get:
@@ -76,19 +74,40 @@ paths:
 
   /books/{id}:
     get:
+      tags:
+        - book
+      description: ""
       parameters:
         - in: path
           name: id
           schema:
-            type: integer
+            type: string
           required: true
 
-      tags:
-        - book
-      description: ""
       responses:
         "200":
           $ref: "#/components/responses/BookSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
+    put:
+      tags:
+        - book
+      description: ""
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+
+      requestBody:
+        required: true
+        $ref: "#/components/requestBodies/Book"
+
+      responses:
+        "200":
+          $ref: "#/components/schemas/Book"
         "400":
           $ref: "#/components/responses/BadRequest"
 
@@ -100,7 +119,7 @@ components:
         - id
       properties:
         id:
-          type: integer
+          type: string
 
     Email:
       type: object
@@ -117,9 +136,9 @@ components:
     Authenticated:
       type: object
       required:
-        - access-token
+        - accessToken
       properties:
-        access-token:
+        accessToken:
           type: string
 
     Book:
@@ -154,17 +173,12 @@ components:
 
     BadRequestError:
       type: object
-      additionalProperties:
-        type: object
-        required:
-          - code
-          - reason
-        properties:
-          code:
-            type: integer
-            format: int32
-          reason:
-            type: string
+      properties:
+        code:
+          type: integer
+          format: int32
+        reason:
+          type: string
 
   parameters:
     BookListParams:
@@ -175,6 +189,16 @@ components:
         type: string
 
   responses:
+    ValidUser:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/User"
+          examples:
+            default:
+              $ref: "#/components/examples/me200"
+
     LoginSuccess:
       description: ""
       content:
@@ -221,7 +245,7 @@ components:
           schema:
             $ref: "#/components/schemas/Book"
 
-examples:
-  /me200:
-    value:
-      - role: "ADMIN"
+  examples:
+    me200:
+      value:
+        - role: "ADMIN"

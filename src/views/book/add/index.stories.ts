@@ -1,26 +1,27 @@
 import { expect, userEvent, within } from "@storybook/test"
 import type { Meta, StoryObj } from "@storybook/vue3"
-import BookForm from "@/views/book/add/index.vue"
+import Component from "@/views/book/add/index.vue"
 
 /** 登録フォーム */
 const meta = {
-  component: BookForm,
+  component: Component,
   tags: [""],
-} satisfies Meta<typeof BookForm>
+} satisfies Meta<typeof Component>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** 基本の表示 */
-export const Primary: Story = {
-  args: {},
+export const Primary: Story = {}
+
+export const InValidInput: Story = {
+  name: "未入力で登録すると必須エラーを表示する",
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const input = canvas.getByLabelText("タイトル")
-    await userEvent.type(input, "hogehoge")
+    const button = canvas.getByRole("button", { name: "登録" })
+    await userEvent.click(button)
 
-    expect(input).toHaveValue("hogehoge")
+    const errors = await canvas.findAllByText("必須項目です")
 
-    expect(await canvas.findByText("必須項目です")).toBeInTheDocument()
+    expect(errors).toHaveLength(3)
   },
 }

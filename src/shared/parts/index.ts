@@ -1,0 +1,6 @@
+export * from "@/shared/parts/box"
+export * from "@/shared/parts/button"
+export * from "@/shared/parts/dialog"
+export * from "@/shared/parts/form"
+export * from "@/shared/parts/icon"
+export * from "@/shared/parts/table"

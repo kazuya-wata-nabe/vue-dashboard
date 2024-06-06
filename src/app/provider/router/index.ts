@@ -1,9 +1,7 @@
 import { createMemoryHistory, createRouter, createWebHistory } from "vue-router"
-import { authRequired } from "@/app/provider/router/auth-required"
-import { nonAuthRequired } from "@/app/provider/router/non-auth-required"
+import { routes } from "./routes"
 
 const baseUrl = import.meta.env.BASE_URL
-const routes = [...nonAuthRequired, ...authRequired]
 
 const createWebHistoryRouter = () => {
   return createRouter({

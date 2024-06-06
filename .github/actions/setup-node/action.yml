@@ -3,24 +3,32 @@ name: Install Module And Cache
 description: Setup Environment Variables for Django Project
 
 runs:
-  using: "composite"
+  using: composite
   steps:
-    - uses: actions/setup-node@v4
+    - name: Install Node.js
+      uses: actions/setup-node@v4
       with:
-        node-version-file: "package-json"
+        node-version: package.json
 
-    - name: cache node-modules
-      id: cache-node-modules
-      uses: actions/cache@v4
+    - uses: pnpm/action-setup@v4
+      name: Install pnpm
       with:
-        path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        version: 8
+        run_install: false
 
-    - name: clean-install if cache-hit
+    - name: Get pnpm store directory
       shell: bash
       run: |
-        if [ "${{ steps.cache-node-modules.outputs.cache-hit }}" = "true" ]; then
-          echo "skip npm clean-install"
-        else
-          npm ci
-        fi
+        echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+    - uses: actions/cache@v4
+      name: Setup pnpm cache
+      with:
+        path: ${{ env.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install
