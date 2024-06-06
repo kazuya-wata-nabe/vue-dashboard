@@ -86,6 +86,9 @@ function hoge() {}
 - `eslint`のルールは`.eslintrc`で定義しています
   - 追加したい or 削除したいルールがあれば適宜カスタムしてください
 
+- RouterLinkは使わず `@/shared/parts/link/typed-link.vue`を使ってください
+  - 遷移先名のtypoによる実行時エラーを防ぐため
+
 ## その他
 ### apiについて
 - api clientはfetchです
