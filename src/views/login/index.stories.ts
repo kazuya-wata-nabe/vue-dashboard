@@ -1,3 +1,4 @@
+import { expect, waitFor } from "@storybook/test"
 import { fn, userEvent, within } from "@storybook/test"
 import { setup, type Meta, type StoryObj } from "@storybook/vue3"
 import { createAuthContext } from "@/features/auth"
@@ -20,13 +21,17 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {}
 
 export const LoginSuccess: Story = {
-  name: "ログイン成功",
+  name: "ログイン成功したらHomeに遷移する",
   parameters: {
     ...registerMockApi([mockApi.POST("/login", { accessToken: "ok" })]),
   },
   decorators: [mockRouteTransition({ current: "login" })],
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
+    const currentRoute = canvas.getByTestId("currentRoute")
+    waitFor(() => {
+      expect(currentRoute).toHaveTextContent("currentRoute: login")
+    })
 
     await step("id input", async () => {
       await userEvent.type(canvas.getByLabelText("id"), "test@example.com")
@@ -39,11 +44,15 @@ export const LoginSuccess: Story = {
     await step("submit", async () => {
       await userEvent.click(canvas.getByRole("button"))
     })
+
+    waitFor(() => {
+      expect(currentRoute).toHaveTextContent("currentRoute: home")
+    })
   },
 }
 
 export const LoginFailure: Story = {
-  name: "ログイン失敗",
+  name: "ログイン失敗したらモーダルが表示される",
   ...registerMockApi([mockApi.POST("/login", [], { status: "400" })]),
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
@@ -59,5 +68,8 @@ export const LoginFailure: Story = {
     await step("submit", async () => {
       await userEvent.click(canvas.getByRole("button"))
     })
+
+    const modal = await canvas.findByText("ログインに失敗しました")
+    expect(modal).toBeInTheDocument()
   },
 }

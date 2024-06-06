@@ -1,7 +1,6 @@
 import { createApp, type App } from "vue"
 import { useRouter } from "vue-router"
 import { HttpHandler, HttpResponse, delay, http } from "msw"
-import { createOpenApiHttp, type ResponseResolver, type ResponseResolverInfo } from "openapi-msw"
 import { spyOn } from "@storybook/test"
 import type { Parameters } from "@storybook/vue3"
 import { router } from "@/app/provider/router"
