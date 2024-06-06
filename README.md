@@ -8,7 +8,7 @@
   - pnpm install
 
 - 起動
-  - pnpm run dev
+  - pnpm dev
 
 ## アーキテクチャ
 - レイヤードアーキテクチャです
