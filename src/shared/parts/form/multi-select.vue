@@ -4,7 +4,7 @@ import Multiselect from "@vueform/multiselect"
 import "@vueform/multiselect/themes/default.css"
 
 const props = defineProps<{
-  size?: "small" | "medium" | "large"
+  size: "small" | "medium" | "large"
   label: string
   placeholder: string
   errorMessage?: string
