@@ -12,26 +12,18 @@ setup((app) => {
 const meta = {
   component: LoginView,
   tags: [""],
-  parameters: {
-    ...registerMockApi([mockApi.POST("/login", { accessToken: "ok" })]),
-  },
 } satisfies Meta<typeof LoginView>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** 基本の表示 */
 export const Primary: Story = {}
 
-/**
- * mock環境では以下の場合にログイン成功
- *
- * |id|password|
- * |---|---|
- * |test@example.com|passw0rd|
- */
 export const LoginSuccess: Story = {
   name: "ログイン成功",
+  parameters: {
+    ...registerMockApi([mockApi.POST("/login", { accessToken: "ok" })]),
+  },
   decorators: [mockRouteTransition({ current: "login" })],
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
@@ -52,6 +44,7 @@ export const LoginSuccess: Story = {
 
 export const LoginFailure: Story = {
   name: "ログイン失敗",
+  ...registerMockApi([mockApi.POST("/login", [], { status: "400" })]),
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 

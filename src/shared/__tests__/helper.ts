@@ -1,7 +1,7 @@
 import { createApp, type App } from "vue"
 import { useRouter } from "vue-router"
 import { HttpHandler, HttpResponse, delay, http } from "msw"
-import { createOpenApiHttp } from "openapi-msw"
+import { createOpenApiHttp, type ResponseResolver, type ResponseResolverInfo } from "openapi-msw"
 import { spyOn } from "@storybook/test"
 import type { Parameters } from "@storybook/vue3"
 import { router } from "@/app/provider/router"
@@ -51,7 +51,7 @@ const mockApiFactory =
   ) => {
     return http[method](path, async () => {
       const status = option?.status ?? InitStatus[method]
-      await delay(option?.delay ?? 0)
+      await delay(option?.delay ? DELAY[option.delay] : 0)
       return HttpResponse.json(response ?? [], { status: parseInt(status) })
     })
   }
@@ -61,20 +61,12 @@ const mockApiFactory =
  * // 正常系
  * mockApi.GET("/books", [])
  * // 異常系
- * mockApi.GET("/books", [], 400)
- * // クエリパラメータ判定
- * mockApi.CUSTOM.GET("/books", ({ query, response }) =>
- *   query.GET("title") === "hoge" ? response(200).json([]) : response(400).json([])
- * )
- * // パスパラメータ判定
- * mockApi.CUSTOM.get("/books/{id}", ({ params, response }) => {
- *   params.id === "1" ? response(200).json([]) : response(400).json([])
+ * mockApi.GET("/books", [], {status: "400"})
  * ```
  */
 export const mockApi = {
   GET: mockApiFactory("get"),
   POST: mockApiFactory("post"),
-  CUSTOM: createOpenApiHttp<paths>(),
 }
 
 /**
