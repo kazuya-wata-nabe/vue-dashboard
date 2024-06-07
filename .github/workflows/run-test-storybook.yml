@@ -30,11 +30,7 @@ jobs:
           node-version-file: package.json
           cache: pnpm
 
-      - name: Install dependencies
-        shell: bash
-        run: pnpm install
-
-      # - uses: ./.github/actions/setup-node
+      - uses: ./.github/actions/setup-node
       # playwrightのcacheを保存して高速化
       - name: Get installed Playwright version
         id: playwright-version
@@ -47,6 +43,10 @@ jobs:
           path: |
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+
+      - name: Install dependencies
+        shell: bash
+        run: pnpm install
 
       - name: Install Playwright
         run: |
