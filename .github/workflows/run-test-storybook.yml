@@ -40,13 +40,13 @@ jobs:
         id: playwright-version
         run: echo "PLAYWRIGHT_VERSION=$(pnpm list @playwright/test | grep @playwright | sed 's/.*@//')" >> $GITHUB_ENV
 
-      # - name: Cache playwright binaries
-      #   uses: actions/cache@v4
-      #   id: playwright-cache
-      #   with:
-      #     path: |
-      #       ~/.cache/ms-playwright
-      #     key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+      - name: Cache playwright binaries
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
       - name: Install Playwright
         run: |
@@ -54,7 +54,7 @@ jobs:
           pnpm playwright install-deps
 
       - name: Build Storybook
-        run: pnpm dlx storybook build --quiet
+        run: pnpm storybook:build --quiet
 
       - name: Serve Storybook and run tests
         run: |
