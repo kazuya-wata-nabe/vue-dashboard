@@ -4,12 +4,7 @@ import "@/app/assets/main.css"
 import { handlers } from "@/app/mocks/handlers"
 import { router } from "@/app/provider/router"
 
-const url = location.hostname.endsWith("github.io")
-  ? "/vue-dashboard/storybook-static/mockServiceWorker.js"
-  : ""
-
-console.debug("STORYBOOK_STATIC: ", import.meta.env.STORYBOOK_STATIC)
-console.debug("location: ", location.hostname.endsWith("github.io"))
+const url = location.hostname.endsWith("github.io") ? "/mockServiceWorker.js" : ""
 
 initialize(
   {
