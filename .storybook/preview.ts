@@ -4,7 +4,15 @@ import "@/app/assets/main.css"
 import { handlers } from "@/app/mocks/handlers"
 import { router } from "@/app/provider/router"
 
-initialize({ onUnhandledRequest: "bypass" }, handlers)
+const url = import.meta.env.SB_STATIC === "true" ? "/storybook-static/mockServiceWorker.js" : ""
+
+initialize(
+  {
+    onUnhandledRequest: "bypass",
+    serviceWorker: { url },
+  },
+  handlers,
+)
 
 setup((app) => {
   app.use(router)

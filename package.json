@@ -8,7 +8,7 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "postbuild": "rm dist/mockServiceWorker.js",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build",
+    "storybook:build": "SB_STATIC=true storybook build",
     "test:unit": "vitest",
     "test:story": "test-storybook",
     "build-only": "vite build",
