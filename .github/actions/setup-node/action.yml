@@ -5,19 +5,35 @@ description: Setup Environment Variables for Django Project
 runs:
   using: composite
   steps:
-    - name: Run Corepack
-      shell: bash
-      run: corepack enable
-
     - name: Install Node.js
       uses: actions/setup-node@v4
       with:
         node-version-file: package.json
-        cache: pnpm
+
+    - name: Get PNPM version from package.json
+      id: pnpm-version
+      shell: bash
+      run: echo "PNPM_VERSION=$(node -p 'require(`./package.json`).volta.pnpm')" >> $GITHUB_OUTPUT
+
+    - uses: pnpm/action-setup@v4
+      name: Install pnpm
+      with:
+        version: ${{ steps.pnpm-version.outputs.PNPM_VERSION }}
+        run_install: false
+
+    - name: Get pnpm store directory
+      shell: bash
+      run: |
+        echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+    - uses: actions/cache@v4
+      name: Setup pnpm cache
+      with:
+        path: ${{ env.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
 
     - name: Install dependencies
       shell: bash
       run: pnpm install
-      env:
-        # CI上では husky を動かさないようにする
-        HUSKY: 0
