@@ -18,3 +18,6 @@ runs:
     - name: Install dependencies
       shell: bash
       run: pnpm install
+      env:
+        # CI上では husky を動かさないようにする
+        HUSKY: 0
