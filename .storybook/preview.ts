@@ -4,9 +4,7 @@ import "@/app/assets/main.css"
 import { handlers } from "@/app/mocks/handlers"
 import { router } from "@/app/provider/router"
 
-const url = location.hostname.endsWith("github.io") ? "/vue-dashboard/mockServiceWorker.js" : ""
-
-console.debug("url: ", url)
+const url = location.hostname.endsWith("github.io") ? `mockServiceWorker.js` : ""
 
 initialize(
   {
