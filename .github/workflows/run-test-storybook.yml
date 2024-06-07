@@ -35,13 +35,13 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
       - name: Install Playwright
-        # if: steps.playwright-cache.outputs.cache-hit != 'true'
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: |
           pnpm playwright install --with-deps &&
           pnpm playwright install-deps
 
       - name: Build Storybook
-        # if: steps.playwright-cache.outputs.cache-hit != 'true'
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: pnpm storybook:build --quiet
 
       - name: Serve Storybook and run tests
