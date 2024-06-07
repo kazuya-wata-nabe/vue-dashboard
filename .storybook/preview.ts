@@ -4,8 +4,7 @@ import "@/app/assets/main.css"
 import { handlers } from "@/app/mocks/handlers"
 import { router } from "@/app/provider/router"
 
-const url =
-  import.meta.env.STORYBOOK_STATIC === "true" ? "storybook-static/mockServiceWorker.js" : ""
+const url = location.hostname.endsWith("github.io") ? "storybook-static/mockServiceWorker.js" : ""
 
 initialize(
   {
