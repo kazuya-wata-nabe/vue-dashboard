@@ -15,10 +15,12 @@ runs:
       shell: bash
       run: echo "PNPM_VERSION=$(node -p 'require(`./package.json`).volta.pnpm')" >> $GITHUB_OUTPUT
 
+    - run: corepack enable
+      shell: bash
+
     - uses: pnpm/action-setup@v4
       name: Install pnpm
       with:
-        version: ${{ steps.pnpm-version.outputs.PNPM_VERSION }}
         run_install: false
 
     - name: Get pnpm store directory
