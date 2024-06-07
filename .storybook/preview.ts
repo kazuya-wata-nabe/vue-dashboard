@@ -6,6 +6,8 @@ import { router } from "@/app/provider/router"
 
 const url = location.hostname.endsWith("github.io") ? "storybook-static/mockServiceWorker.js" : ""
 
+console.debug("STORYBOOK_STATIC: ", import.meta.env.STORYBOOK_STATIC)
+
 initialize(
   {
     onUnhandledRequest: "bypass",
