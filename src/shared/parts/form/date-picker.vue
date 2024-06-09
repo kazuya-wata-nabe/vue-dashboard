@@ -2,9 +2,7 @@
 /**
  * @see {@link https://vue3datepicker.com/installation/}
  */
-import { computed, onMounted, ref } from "vue"
-import { VField } from "vuetify/components/VField"
-import { VInput } from "vuetify/components/VInput"
+import { computed, ref } from "vue"
 import { VTextField } from "vuetify/components/VTextField"
 import VueDatePicker, { type VueDatePickerProps } from "@vuepic/vue-datepicker"
 import "@vuepic/vue-datepicker/dist/main.css"
