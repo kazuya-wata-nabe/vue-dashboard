@@ -2,7 +2,10 @@
 /**
  * @see {@link https://vue3datepicker.com/installation/}
  */
-import { computed } from "vue"
+import { computed, onMounted, ref } from "vue"
+import { VField } from "vuetify/components/VField"
+import { VInput } from "vuetify/components/VInput"
+import { VTextField } from "vuetify/components/VTextField"
 import VueDatePicker, { type VueDatePickerProps } from "@vuepic/vue-datepicker"
 import "@vuepic/vue-datepicker/dist/main.css"
 
@@ -40,8 +43,13 @@ const emits = defineEmits<{
   change: [value: { target: { value: string } }]
 }>()
 
-const id = `date-${crypto.randomUUID()}`
+const datePicker = ref<InstanceType<typeof VueDatePicker>>()
+
 const model = defineModel<string | undefined>({ required: true })
+
+const open = () => {
+  datePicker.value?.openMenu()
+}
 
 const classes = computed(() => ({
   "date-picker": true,
@@ -67,7 +75,17 @@ const handleUpdate = (value: string) => {
 </script>
 
 <template>
+  <VTextField
+    :class="classes"
+    :label="label"
+    :model-value="model"
+    :error-messages="errorMessage"
+    @click="open"
+  >
+  </VTextField>
+
   <VueDatePicker
+    ref="datePicker"
     v-bind="config"
     v-model="model"
     :day-class="getDayClass"
@@ -82,50 +100,32 @@ const handleUpdate = (value: string) => {
         {{ day }}
       </div>
     </template>
-
-    <template #dp-input="{ value }">
-      <div class="input-container">
-        <input
-          :id="id"
-          :class="classes"
-          :placeholder="placeholder"
-          :value="value"
-          v-bind="$attrs"
-          @input="() => console.debug(1)"
-        />
-        <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
-      </div>
-    </template>
+    <template #dp-input> </template>
   </VueDatePicker>
 </template>
 
-<style scoped>
-.input-container {
-  display: flex;
-  flex-direction: column;
-}
-.date-picker {
-  line-height: 1.5rem;
-  &.small {
-    width: 100px;
-  }
-  &.medium {
-    width: 200px;
-  }
-  &.large {
-    width: 300px;
-  }
-}
-
-.error-message {
-  color: red;
-}
-</style>
+<style scoped></style>
 
 <style>
 :root {
   --calendar--red: red;
   --calendar--blue: blue;
+}
+.dp__input_wrap {
+  .v-text-field input {
+    min-height: unset;
+  }
+  .date-input {
+    &.small {
+      width: 100px;
+    }
+    &.medium {
+      width: 200px;
+    }
+    &.large {
+      width: 300px;
+    }
+  }
 }
 
 .dp__month_year_wrap {

@@ -3,6 +3,7 @@ import { setup, type Preview } from "@storybook/vue3"
 import "@/app/assets/main.css"
 import { handlers } from "@/app/mocks/handlers"
 import { router } from "@/app/provider/router"
+import { vuetify } from "@/app/vuetify"
 
 initialize(
   {
@@ -13,7 +14,7 @@ initialize(
 )
 
 setup((app) => {
-  app.use(router)
+  app.use(router).use(vuetify)
 })
 
 const preview: Preview = {

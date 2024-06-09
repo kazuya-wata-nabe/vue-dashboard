@@ -1,5 +1,6 @@
-<script lang="ts" setup generic="T">
+<script lang="ts" setup generic="T extends string | number">
 import { computed } from "vue"
+import { VTextField } from "vuetify/components/VTextField"
 
 const props = defineProps<{
   size: "small" | "medium" | "large"
@@ -14,22 +15,20 @@ const classes = computed(() => ({
   "text-input": true,
   [props.size]: true,
 }))
-
-const id = `input-${crypto.randomUUID()}`
 </script>
 
 <template>
   <div class="input-container">
-    <label :for="id">{{ label }}</label>
-    <input
-      type="text"
+    <VTextField
       v-bind="$attrs"
-      :id="id"
+      type="input"
+      v-model="model"
+      :label="label"
       :class="classes"
       :placeholder="placeholder"
-      v-model="model"
-    />
-    <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
+      :error-messages="errorMessage"
+    >
+    </VTextField>
   </div>
 </template>
 
@@ -49,8 +48,5 @@ const id = `input-${crypto.randomUUID()}`
   &.large {
     width: 300px;
   }
-}
-.error-message {
-  color: red;
 }
 </style>
