@@ -2,7 +2,7 @@ import { createApp, type App } from "vue"
 import { useRouter } from "vue-router"
 import { HttpHandler, HttpResponse, delay, http } from "msw"
 import { spyOn } from "@storybook/test"
-import type { Parameters } from "@storybook/vue3"
+import { type Meta } from "@storybook/vue3"
 import { router } from "@/app/provider/router"
 import { type paths } from "@/shared/api/v1.schema"
 import type { RouteNames } from "@/shared/routes"
@@ -90,9 +90,12 @@ export const mockRouteTransition =
       <story />
     `,
   })
-
-type Meta = {
-  parameters?: Parameters
+/*
+ * generic componentをstorybookのmeta.componentに割り当てられるようにする仕掛け
+ * @see {@link https://github.com/storybookjs/storybook/issues/24238#issuecomment-1958006268 }
+ */
+export type GenericMeta<T extends { component?: unknown }, U> = Omit<T, "component"> & {
+  component: Record<keyof U, unknown>
 }
 
 export const registerMockApi = (handlers: HttpHandler[]) => ({
