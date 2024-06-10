@@ -70,7 +70,7 @@ const config = computed(() => ({
         <input
           :id="`${id}-all`"
           type="checkbox"
-          class="checkbox"
+          class="checkbox all"
           :checked="isCheckedAll"
           @click="onClickAll"
         />

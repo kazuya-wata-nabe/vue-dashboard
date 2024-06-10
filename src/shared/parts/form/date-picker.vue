@@ -83,14 +83,14 @@ const handleUpdate = (value: string) => {
       </div>
     </template>
 
-    <template #dp-input="{ value }">
+    <template #dp-input>
       <div class="input-container">
         <input
+          v-bind="$attrs"
           :id="id"
           :class="classes"
           :placeholder="placeholder"
-          :value="value"
-          v-bind="$attrs"
+          :value="model"
           @input="() => console.debug(1)"
         />
         <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
