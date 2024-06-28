@@ -1,4 +1,4 @@
-import z, { ZodString, type ZodTypeAny } from "zod"
+import z, { ZodString } from "zod"
 
 export { type TypeOf as ToSchema } from "zod"
 
@@ -8,43 +8,45 @@ const messages = {
   max: (n: number) => `${n}文字以内で入力してください`,
   min: (n: number) => `${n}文字以上で入力してください`,
   email: "メール形式で入力してください",
-}
+} as const
 
-const _registerString = (value: ZodString, rule: StringValidate) => {
-  if (Array.isArray(rule) && rule[0] === "max") {
-    const [, n] = rule
-    return value.max(n, messages.max(n))
-  }
-  if (Array.isArray(rule) && rule[0] === "min") {
-    const [, n] = rule
-    return value.min(n, messages.min(n))
+const registerStringValidate = (value: ZodString, rule: StringValidate) => {
+  if (Array.isArray(rule) && (rule[0] === "max" || rule[0] === "min")) {
+    const [key, n] = rule
+    return value[key](n, messages[key](n))
   }
 
   return value[rule](messages[rule])
 }
 
-const registerString = (value: ZodString) => (rules: StringValidate[]) => {
-  return rules.reduce((acc, rule) => _registerString(acc, rule), value)
+const string =
+  (mode: "required" | "optional") =>
+  (...rules: StringValidate[]) => {
+    const value =
+      mode === "required"
+        ? z.string({ required_error: "必須項目です" }).min(1, "必須項目です")
+        : z.string({ required_error: "" })
+
+    return (rules ?? []).reduce((acc, rule) => registerStringValidate(acc, rule), value)
+  }
+
+const array = (mode: "required" | "optional") => (schema: z.ZodTypeAny) => {
+  const value =
+    mode === "required"
+      ? z.array(schema).min(1, "必須項目です").default([])
+      : z.array(schema).default([]).optional()
+
+  return value
 }
 
 export const required = {
-  string: (...args: StringValidate[]) => {
-    const value = z.string({ required_error: "必須項目です" }).min(1, "必須項目です")
-    return registerString(value)(args)
-  },
-  array: <T extends ZodTypeAny>(schema: T) => {
-    return z.array(schema, { required_error: "必須項目です" }).min(1, "必須項目です").default([])
-  },
+  string: string("required"),
+  array: array("required"),
 }
 
 export const optional = {
-  string: (...args: StringValidate[]) => {
-    const value = z.string({ required_error: "" })
-    return registerString(value)(args).optional()
-  },
-  array: (schema: z.ZodTypeAny) => {
-    return z.array(schema).default([]).optional()
-  },
+  string: string("optional"),
+  array: array("optional"),
 }
 
 export const createSchema = <T extends z.ZodRawShape>(shape: T) => z.object(shape)
