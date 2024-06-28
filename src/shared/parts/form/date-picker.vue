@@ -37,7 +37,7 @@ const config = computed(
 )
 
 const emits = defineEmits<{
-  change: [value: { target: { value: string } }]
+  update: [value: { target: { value: string } }]
 }>()
 
 const id = `date-${crypto.randomUUID()}`
@@ -62,7 +62,7 @@ const getDayClass = (date: Date) => {
 }
 
 const handleUpdate = (value: string) => {
-  emits("change", { target: { value } })
+  emits("update", { target: { value } })
 }
 </script>
 
@@ -91,7 +91,6 @@ const handleUpdate = (value: string) => {
           :class="classes"
           :placeholder="placeholder"
           :value="model"
-          @input="() => console.debug(1)"
         />
         <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
       </div>
