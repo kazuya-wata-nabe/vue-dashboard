@@ -20,9 +20,6 @@ importers:
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
-      neverthrow:
-        specifier: ^6.2.1
-        version: 6.2.1
       openapi-fetch:
         specifier: ^0.9.7
         version: 0.9.7
@@ -111,9 +108,6 @@ importers:
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
-      eslint-plugin-neverthrow:
-        specifier: ^1.1.4
-        version: 1.1.4(@typescript-eslint/parser@7.10.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
       eslint-plugin-no-relative-import-paths:
         specifier: ^1.5.4
         version: 1.5.4
@@ -159,9 +153,6 @@ importers:
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
-      sass:
-        specifier: ^1.77.2
-        version: 1.77.2
       storybook:
         specifier: ^8.1.2
         version: 8.1.2(@babel/preset-env@7.24.5(@babel/core@7.24.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1881,9 +1872,6 @@ packages:
   '@types/emscripten@1.39.12':
     resolution: {integrity: sha512-AQImDBgudQfMqUBfrjZYilRxoHDzTBp+ejh+g1fY67eSMalwIKtBXofjpyI0JBgNpHGzxeGAR2QDya0wxW9zbA==}
 
-  '@types/eslint-utils@3.0.5':
-    resolution: {integrity: sha512-dGOLJqHXpjomkPgZiC7vnVSJtFIOM1Y6L01EyUhzPuD0y0wfIGiqxiGs3buUBfzxLIQHrCvZsIMDaCZ8R5IIoA==}
-
   '@types/eslint@8.56.10':
     resolution: {integrity: sha512-Shavhk87gCtY2fhXDctcfS3e6FdxWkCx1iUZ9eEUbh7rTqlZT0/IzOkCOVt0fCjcFuZ9FPYfuezTBImfHCDBGQ==}
 
@@ -3139,13 +3127,6 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-plugin-neverthrow@1.1.4:
-    resolution: {integrity: sha512-+8zsE5rDqsDfKYAOq0Fr2jbuxHXTmntIWWJqJA3ms1GAKcVCjl0ycetzOu/hTxot9ctr+WYQpCBgB3F2HATR7A==}
-    engines: {node: '>=14.17'}
-    peerDependencies:
-      '@typescript-eslint/parser': '>=4.20.0'
-      eslint: '>=5.16.0'
-
   eslint-plugin-no-relative-import-paths@1.5.4:
     resolution: {integrity: sha512-2smViH7R3682NR6dwgYr8Vm7emqNP1gEjBku6DbvUy3Ef/2Fz+mhwsFjZGSixzWzazMCj4MAgIWTsHELCCDJKA==}
 
@@ -3193,16 +3174,6 @@ packages:
   eslint-scope@7.2.2:
     resolution: {integrity: sha512-dOt21O7lTMhDM+X9mB4GX+DZrZtCUJPL/wlcTqxyrx5IvO0IYtILdtrQGQp+8n5S0gwSVmOf9NQrjMOgfQZlIg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-
-  eslint-utils@3.0.0:
-    resolution: {integrity: sha512-uuQC43IGctw68pJA1RgbQS8/NP7rch6Cwd4j3ZBtgo4/8Flj4eGE7ZYSZRN3iq5pVUv6GPdW5Z1RFleo84uLDA==}
-    engines: {node: ^10.0.0 || ^12.0.0 || >= 14.0.0}
-    peerDependencies:
-      eslint: '>=5'
-
-  eslint-visitor-keys@2.1.0:
-    resolution: {integrity: sha512-0rSmRBzXgDzIsD6mGdJgevzgezI534Cer5L/vyMX0kHzT/jiB43jRhd9YUlMGYLQy2zprNmoT8qasCGtY+QaKw==}
-    engines: {node: '>=10'}
 
   eslint-visitor-keys@3.4.3:
     resolution: {integrity: sha512-wpc+LXeiyiisxPlEkUzU6svyS1frIO3Mgxj1fdy7Pm8Ygzguax2N3Fa/D/ag1WqbOprdI+uY6wMUl8/a2G+iag==}
@@ -4591,9 +4562,6 @@ packages:
 
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
-
-  neverthrow@6.2.1:
-    resolution: {integrity: sha512-amlnNvPXmiUOmNsDfUngNWPdZYOmCUGExQy/kuPCmLbhrXVXIYhY4bnE4D3dWl7OMhSEr9NndUrl4aKGFhFIQg==}
 
   node-dir@0.1.17:
     resolution: {integrity: sha512-tmPX422rYgofd4epzrNoOXiE8XFZYOcCq1vD7MAXCDO+O+zndlA2ztdKKMa+EeuBG5tHETpr4ml4RGgpqDCCAg==}
@@ -6021,8 +5989,8 @@ packages:
   vue-component-type-helpers@2.0.19:
     resolution: {integrity: sha512-cN3f1aTxxKo4lzNeQAkVopswuImUrb5Iurll9Gaw5cqpnbTAxtEMM1mgi6ou4X79OCyqYv1U1mzBHJkzmiK82w==}
 
-  vue-component-type-helpers@2.0.21:
-    resolution: {integrity: sha512-3NaicyZ7N4B6cft4bfb7dOnPbE9CjLcx+6wZWAg5zwszfO4qXRh+U52dN5r5ZZfc6iMaxKCEcoH9CmxxoFZHLg==}
+  vue-component-type-helpers@2.0.22:
+    resolution: {integrity: sha512-gPr2Ba7efUwy/Vfbuf735bHSVdN4ycoZUCHfypkI33M9DUH+ieRblLLVM2eImccFYaWNWwEzURx02EgoXDBmaQ==}
 
   vue-docgen-api@4.78.0:
     resolution: {integrity: sha512-RsZf+qzTttCCAN9v7AKmBykc2QWmO8csVk1c2aXeOktomSOu0NA7sgK4ObuRB5lpmtOvTnwuxssyYmxXxABr+A==}
@@ -8470,7 +8438,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.4.27(typescript@5.4.5)
-      vue-component-type-helpers: 2.0.21
+      vue-component-type-helpers: 2.0.22
     transitivePeerDependencies:
       - encoding
       - prettier
@@ -8640,15 +8608,11 @@ snapshots:
 
   '@types/emscripten@1.39.12': {}
 
-  '@types/eslint-utils@3.0.5':
-    dependencies:
-      '@types/eslint': 8.56.10
-      '@types/estree': 1.0.5
-
   '@types/eslint@8.56.10':
     dependencies:
       '@types/estree': 1.0.5
       '@types/json-schema': 7.0.15
+    optional: true
 
   '@types/estree@1.0.5': {}
 
@@ -10018,16 +9982,6 @@ snapshots:
     dependencies:
       eslint: 8.57.0
 
-  eslint-plugin-neverthrow@1.1.4(@typescript-eslint/parser@7.10.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5):
-    dependencies:
-      '@types/eslint-utils': 3.0.5
-      '@typescript-eslint/parser': 7.10.0(eslint@8.57.0)(typescript@5.4.5)
-      eslint: 8.57.0
-      eslint-utils: 3.0.0(eslint@8.57.0)
-      tsutils: 3.21.0(typescript@5.4.5)
-    transitivePeerDependencies:
-      - typescript
-
   eslint-plugin-no-relative-import-paths@1.5.4: {}
 
   eslint-plugin-prefer-arrow-functions@3.3.2(eslint@8.57.0):
@@ -10100,13 +10054,6 @@ snapshots:
     dependencies:
       esrecurse: 4.3.0
       estraverse: 5.3.0
-
-  eslint-utils@3.0.0(eslint@8.57.0):
-    dependencies:
-      eslint: 8.57.0
-      eslint-visitor-keys: 2.1.0
-
-  eslint-visitor-keys@2.1.0: {}
 
   eslint-visitor-keys@3.4.3: {}
 
@@ -10719,7 +10666,8 @@ snapshots:
 
   ignore@5.3.1: {}
 
-  immutable@4.3.6: {}
+  immutable@4.3.6:
+    optional: true
 
   import-fresh@3.3.0:
     dependencies:
@@ -11814,8 +11762,6 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  neverthrow@6.2.1: {}
-
   node-dir@0.1.17:
     dependencies:
       minimatch: 3.1.2
@@ -12687,6 +12633,7 @@ snapshots:
       chokidar: 3.6.0
       immutable: 4.3.6
       source-map-js: 1.2.0
+    optional: true
 
   saxes@6.0.0:
     dependencies:
@@ -13382,7 +13329,7 @@ snapshots:
 
   vue-component-type-helpers@2.0.19: {}
 
-  vue-component-type-helpers@2.0.21: {}
+  vue-component-type-helpers@2.0.22: {}
 
   vue-docgen-api@4.78.0(vue@3.4.27(typescript@5.4.5)):
     dependencies:
