@@ -30,7 +30,6 @@ module.exports = {
     "unicorn/prefer-top-level-await": "off",
     "unicorn/prevent-abbreviations": "off",
     "unicorn/switch-case-braces": "off",
-    "unicorn/no-array-reduce": "off",
     "unicorn/filename-case": [
       "error",
       {
@@ -49,13 +48,13 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["**/*.test.ts", " **/*.stories.ts"],
+      files: ["**/*.test.ts", "**/*.stories.ts"],
       rules: {
         "@typescript-eslint/no-non-null-assertion": "off",
       },
     },
     {
-      files: [" **/*.stories.ts"],
+      files: ["**/*.stories.ts"],
       rules: {
         "prettier/prettier": "off",
       },

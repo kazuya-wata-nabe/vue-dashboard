@@ -34,12 +34,15 @@ type ResponseType<
 
 const InitStatus = { get: "200", post: "201" } as const
 
-export const DELAY = {
-  500: import.meta.env.NODE_ENV === "test" ? 500 : 0,
-  1000: import.meta.env.NODE_ENV === "test" ? 1000 : 0,
-} as const
+export const DELAY = (() => {
+  const ms = (n: number) => (import.meta.env.NODE_ENV === "test" ? n : 0)
+  return {
+    500: ms(500),
+    1000: ms(1000),
+  }
+})()
 
-type Delay = (typeof DELAY)[keyof typeof DELAY]
+type Delay = keyof typeof DELAY
 
 const mockApiFactory =
   <Method extends HttpMethod>(method: Method) =>
@@ -50,7 +53,7 @@ const mockApiFactory =
   ) => {
     return http[method](path, async () => {
       const status = option?.status ?? InitStatus[method]
-      await delay(option?.delay ? DELAY[option.delay] : 0)
+      await delay(option?.delay ? DELAY[option.delay] : undefined)
       return HttpResponse.json(response ?? [], { status: Number.parseInt(status) })
     })
   }

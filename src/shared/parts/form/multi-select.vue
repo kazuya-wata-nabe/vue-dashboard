@@ -120,8 +120,8 @@ const config = computed(() => ({
     text-overflow: ellipsis;
     max-width: 90%;
     overflow: hidden;
+    line-clamp: 1;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
   }
 }
 

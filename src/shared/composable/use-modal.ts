@@ -10,7 +10,7 @@ import { computed, ref } from "vue"
  * // step1モーダル -> step2モーダル
  * ```
  * const { isOpen, modal } = useModal(["step1", "step2"])
- * const onClickStep1 = modal.open("input")
+ * const onClickStep1 = modal.open("step1")
  * const onClickStep2 = modal.open("step2")
  * <div v-if="isOpen.step1" ＠close="modal.close"></div>
  * <div v-if="isOpen.step2" ＠close="modal.close"></div>
@@ -26,7 +26,7 @@ export const useModal = <T extends string>(keys: T[]) => {
 
   const isOpen = computed(() => {
     const entries = keys.map((cur) => [cur, current.value === cur])
-    return Object.fromEntries(entries)
+    return Object.fromEntries(entries) as Record<T, boolean>
   })
 
   return {

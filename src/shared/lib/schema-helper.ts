@@ -1,4 +1,4 @@
-import z, { ZodString } from "zod"
+import z, { type ZodString, type ZodRawShape, type ZodTypeAny } from "zod"
 
 export { type TypeOf as ToSchema } from "zod"
 
@@ -19,34 +19,40 @@ const registerStringValidate = (value: ZodString, rule: StringValidate) => {
   return value[rule](messages[rule])
 }
 
-const string =
-  (mode: "required" | "optional") =>
-  (...rules: StringValidate[]) => {
-    const value =
-      mode === "required"
-        ? z.string({ required_error: "必須項目です" }).min(1, "必須項目です")
-        : z.string({ required_error: "" })
-
-    return (rules ?? []).reduce((acc, rule) => registerStringValidate(acc, rule), value)
+const register = (initValue: ZodString, rules: StringValidate[]) => {
+  let value = initValue
+  for (const rule of rules ?? []) {
+    value = registerStringValidate(value, rule)
   }
-
-const array = (mode: "required" | "optional") => (schema: z.ZodTypeAny) => {
-  const value =
-    mode === "required"
-      ? z.array(schema).min(1, "必須項目です").default([])
-      : z.array(schema).default([]).optional()
-
   return value
 }
 
+const requiredString = (...rules: StringValidate[]) => {
+  const initValue = z.string({ required_error: "必須項目です" }).min(1, "必須項目です")
+  return register(initValue, rules)
+}
+
+const optionalString = (...rules: StringValidate[]) => {
+  const initValue = z.string({ required_error: "" })
+  return register(initValue, rules).optional()
+}
+
+const requiredArray = <T extends ZodTypeAny>(schema: T) => {
+  return z.array(schema).min(1, "必須項目です")
+}
+
+const optionalArray = <T extends ZodTypeAny>(schema: T) => {
+  return z.array(schema).optional()
+}
+
 export const required = {
-  string: string("required"),
-  array: array("required"),
+  string: requiredString,
+  array: requiredArray,
 }
 
 export const optional = {
-  string: string("optional"),
-  array: array("optional"),
+  string: optionalString,
+  array: optionalArray,
 }
 
-export const createSchema = <T extends z.ZodRawShape>(shape: T) => z.object(shape)
+export const createSchema = <T extends ZodRawShape>(shape: T) => z.object(shape)
