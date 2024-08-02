@@ -3,28 +3,70 @@
  * Do not make direct changes to the file.
  */
 
-/** WithRequired type helpers */
-type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] }
-
 export type paths = {
   "/me": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
     get: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
       responses: {
         200: components["responses"]["ValidUser"]
         400: components["responses"]["BadRequest"]
       }
     }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
   }
   "/login": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
     post: {
-      requestBody: components["requestBodies"]["Login"]
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: components["requestBodies"]["Login"]
       responses: {
         201: components["responses"]["LoginSuccess"]
         400: components["responses"]["BadRequest"]
       }
     }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
   }
   "/books": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
     get: {
       parameters: {
         query?: {
@@ -32,27 +74,53 @@ export type paths = {
           "date-from"?: string
           "date-to"?: string
         }
+        header?: never
+        path?: never
+        cookie?: never
       }
+      requestBody?: never
       responses: {
         200: components["responses"]["BookSuccess"]
         400: components["responses"]["BadRequest"]
       }
     }
+    put?: never
     post: {
-      requestBody: components["requestBodies"]["Book"]
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: components["requestBodies"]["Book"]
       responses: {
         200: components["schemas"]["Book"]
         400: components["responses"]["BadRequest"]
       }
     }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
   }
   "/books/{id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
     get: {
       parameters: {
+        query?: never
+        header?: never
         path: {
           id: string
         }
+        cookie?: never
       }
+      requestBody?: never
       responses: {
         200: components["responses"]["BookSuccess"]
         400: components["responses"]["BadRequest"]
@@ -60,31 +128,38 @@ export type paths = {
     }
     put: {
       parameters: {
+        query?: never
+        header?: never
         path: {
           id: string
         }
+        cookie?: never
       }
-      requestBody: components["requestBodies"]["Book"]
+      requestBody?: components["requestBodies"]["Book"]
       responses: {
         200: components["schemas"]["Book"]
         400: components["responses"]["BadRequest"]
       }
     }
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
   }
 }
-
 export type webhooks = Record<string, never>
-
 export type components = {
   schemas: {
     Id: {
       id: string
     }
     Email: {
-      email?: string
+      email: string
     }
     Password: {
-      password?: string
+      password: string
     }
     Authenticated: {
       accessToken: string
@@ -103,27 +178,39 @@ export type components = {
     }
     BadRequestError: {
       /** Format: int32 */
-      code?: number
-      reason?: string
+      code: number
+      reason: string
     }
   }
   responses: {
     ValidUser: {
+      headers: {
+        [name: string]: unknown
+      }
       content: {
         "application/json": components["schemas"]["User"]
       }
     }
     LoginSuccess: {
+      headers: {
+        [name: string]: unknown
+      }
       content: {
         "application/json": components["schemas"]["Authenticated"]
       }
     }
     BookSuccess: {
+      headers: {
+        [name: string]: unknown
+      }
       content: {
         "application/json": (components["schemas"]["Id"] & components["schemas"]["Book"])[]
       }
     }
     BadRequest: {
+      headers: {
+        [name: string]: unknown
+      }
       content: {
         "application/json": components["schemas"]["BadRequestError"][]
       }
@@ -133,15 +220,13 @@ export type components = {
     BookListParams: string
   }
   requestBodies: {
-    Login?: {
+    Login: {
       content: {
-        "application/json": WithRequired<
-          components["schemas"]["Email"] & components["schemas"]["Password"],
-          "email" | "password"
-        >
+        "application/json": WithRequired<components["schemas"]["Email"], "email"> &
+          WithRequired<components["schemas"]["Password"], "password">
       }
     }
-    Book?: {
+    Book: {
       content: {
         "application/json": components["schemas"]["Book"]
       }
@@ -150,9 +235,8 @@ export type components = {
   headers: never
   pathItems: never
 }
-
 export type $defs = Record<string, never>
-
-export type external = Record<string, never>
-
+type WithRequired<T, K extends keyof T> = T & {
+  [P in K]-?: T[P]
+}
 export type operations = Record<string, never>
