@@ -13,6 +13,7 @@ module.exports = {
     "@vue/eslint-config-prettier/skip-formatting",
     "plugin:unicorn/recommended",
     "plugin:storybook/recommended",
+    "plugin:vuejs-accessibility/recommended",
   ],
   parserOptions: {
     ecmaVersion: "latest",
@@ -26,6 +27,12 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "error",
     "prettier/prettier": WARNING,
     "prefer-arrow-functions/prefer-arrow-functions": ["error"],
+    "vuejs-accessibility/label-has-for": [
+      "error",
+      {
+        required: { every: ["id"] },
+      },
+    ],
     /** @see {@link https://github.com/sindresorhus/eslint-plugin-unicorn} */
     "unicorn/prefer-top-level-await": "off",
     "unicorn/prevent-abbreviations": "off",

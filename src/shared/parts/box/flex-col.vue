@@ -6,7 +6,7 @@ const props = defineProps<{
 }>()
 
 const classes = computed(() => ({
-  "flex-row": true,
+  "flex-col": true,
   [`gap${props.gap}`]: props.gap,
 }))
 </script>

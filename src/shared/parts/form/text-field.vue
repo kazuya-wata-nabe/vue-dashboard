@@ -1,5 +1,6 @@
 <script lang="ts" setup generic="T">
 import { computed } from "vue"
+import { useId } from "@/shared/composable/use-id"
 
 const props = defineProps<{
   size: "small" | "medium" | "large"
@@ -15,7 +16,7 @@ const classes = computed(() => ({
   [props.size]: true,
 }))
 
-const id = `input-${crypto.randomUUID()}`
+const id = useId("text")
 </script>
 
 <template>
@@ -37,6 +38,10 @@ const id = `input-${crypto.randomUUID()}`
 .input-container {
   display: flex;
   flex-direction: column;
+  & label {
+    display: flex;
+    flex-direction: column;
+  }
 }
 .text-input {
   line-height: 1.5rem;

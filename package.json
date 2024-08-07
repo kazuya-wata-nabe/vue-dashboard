@@ -63,6 +63,7 @@
     "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-unicorn": "^53.0.0",
     "eslint-plugin-vue": "^9.27.0",
+    "eslint-plugin-vuejs-accessibility": "^2.4.1",
     "happy-dom": "^14.12.3",
     "husky": "^9.1.4",
     "lint-staged": "^15.2.7",
