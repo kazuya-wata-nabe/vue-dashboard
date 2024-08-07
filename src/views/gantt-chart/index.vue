@@ -1,33 +1,38 @@
 <script lang="ts" setup>
 // TODO: refactor
-import { FlexRow } from "@/shared/parts"
-import SubmitButton from "@/shared/parts/button/submit-button.vue"
+import { FlexRow, FlexCol } from "@/shared/parts"
 import TaskItem from "./components/task-item.vue"
+import { useGanttChart } from "./composable"
 
 defineOptions({ name: "GanttChart" })
 
-const hours = Array.from({ length: 23 }, (_, i) => (i + 1).toString().padStart(2, "0"))
+const { datas, hours, addTask } = useGanttChart()
 </script>
 
 <template>
   <div class="container">
-    <div class="sub-container">
+    <!-- -->
+    <div class="sub-container" id="left">
       <div class="title">task</div>
       <div class="button-container">
-        <button>add task</button>
+        <button @click="addTask">add task</button>
       </div>
-      <TaskItem title="bar" assigner=""></TaskItem>
-      <TaskItem title="bar" assigner=""></TaskItem>
+      <FlexCol>
+        <TaskItem v-for="data in datas" :key="data.uid" v-bind="data" />
+      </FlexCol>
     </div>
-    <div class="sub-container scroll">
+    <!-- -->
+    <div class="sub-container scroll" id="right">
       <div class="title">hours</div>
       <FlexRow class="hour-container">
         <FlexRow class="col" v-for="hour in hours" :key="hour">
           {{ hour }}
         </FlexRow>
       </FlexRow>
-      <div>a</div>
-      <div>a</div>
+      <FlexCol>
+        <div class="task-item">a</div>
+        <div class="task-item">a</div>
+      </FlexCol>
     </div>
   </div>
 </template>
@@ -64,5 +69,9 @@ const hours = Array.from({ length: 23 }, (_, i) => (i + 1).toString().padStart(2
 .col {
   justify-content: center;
   min-width: 40px;
+}
+
+.task-item {
+  height: 30px;
 }
 </style>

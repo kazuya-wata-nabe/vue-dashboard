@@ -6,7 +6,11 @@ defineProps<{
 </script>
 
 <template>
-  <div>{{ title }}</div>
+  <div class="task-item">{{ title }}</div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.task-item {
+  height: 30px;
+}
+</style>
