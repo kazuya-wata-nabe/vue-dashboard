@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { computed } from "vue"
 import { useId } from "@/shared/composable/use-id"
-import IconPolygon from "./icon-polygon.vue"
 import { useInteract } from "./use-interact"
 
 const props = defineProps<{
@@ -39,9 +38,9 @@ const activedescendant = computed(() => {
   return model.value ? `${optionID}-${model.value}` : undefined
 })
 
-const handleEnter = () => onKeyDownEnter((value) => (model.value = value))
+const handleEnter = () => onKeyDownEnter((value) => value && (model.value = value))
 
-const handleClick = (value: string) => {
+const handleSelect = (value: string) => {
   model.value = value
   close()
 }
@@ -65,7 +64,21 @@ const handleClick = (value: string) => {
       @keydown.prevent.esc="reset"
     >
       <div>{{ displayValue }}</div>
-      <IconPolygon />
+      <svg
+        width="18"
+        height="16"
+        aria-hidden="true"
+        focusable="false"
+        style="forced-color-adjust: auto"
+      >
+        <polygon
+          class="arrow"
+          stroke-width="0"
+          fill-opacity="0.75"
+          fill="currentcolor"
+          points="3,6 15,6 9,14"
+        />
+      </svg>
     </div>
     <ul
       role="listbox"
@@ -85,8 +98,8 @@ const handleClick = (value: string) => {
           :id="`${optionID}-${index}`"
           :value="option.value"
           :aria-selected="state.currentIndex === index"
-          @click="handleClick(option.value)"
-          @keydown.prevent.enter="handleClick(option.value)"
+          @click="handleSelect(option.value)"
+          @keydown.prevent.enter="handleSelect(option.value)"
           @mouseover="updateIndex(index)"
           @focus="updateIndex(index)"
         >
@@ -112,6 +125,7 @@ div[role="combobox"] {
 svg {
   position: absolute;
   right: 0;
+  transform: translate(-2px, 2px);
 }
 
 div[role="combobox"],
