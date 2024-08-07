@@ -1,7 +1,5 @@
 <script setup lang="ts" generic="T extends { code: string; name: string }">
 import { computed, ref } from "vue"
-import Multiselect from "@vueform/multiselect"
-import "@vueform/multiselect/themes/default.css"
 
 const props = defineProps<{
   size?: "small" | "medium" | "large"
@@ -31,20 +29,6 @@ const makeLabel = (values: object | T[]) => {
   if (!Array.isArray(values)) return ""
   return values.map((value: T) => value.name).join(",")
 }
-
-/** @see {@link https://github.com/vueform/multiselect} */
-const config = computed(() => ({
-  label: "name",
-  trackBy: "code",
-  valueProp: "code",
-  canClear: false,
-  closeOnSelect: false,
-  hideSelected: false,
-  noOptionsText: "",
-  classes: {
-    container: classes.value,
-  },
-}))
 </script>
 
 <template>
