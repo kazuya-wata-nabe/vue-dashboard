@@ -108,11 +108,5 @@ function hoge() {}
 
 ## テストについて
 - storybookにテストを書いてください
-
-## 検討中
-- openapiからzod schemaを生成する
-  - https://qiita.com/ay-kapi/items/b959ee60fed8a84a9973
-- ESLintを使ってモジュール間のimportを制限する
-  - https://zenn.dev/sho_ts/articles/752cac66d90443
-- file-based routing
-  - https://router.vuejs.org/guide/advanced/typed-routes.html
+- 要素の取得はgetByRoleを使ってください
+  - それ以外の方法は禁止です

@@ -5,3 +5,19 @@
 #app {
   display: flex;
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+.small {
+  width: 100px;
+}
+
+.medium {
+  width: 200px;
+}
+
+.large {
+  width: 300px;
+}

@@ -8,8 +8,7 @@ defineProps<{
 
 <template>
   <BaseModal :is-open="isOpen">
-    <template #content="{ closeModal }">
-      <button @click="closeModal">X</button>
+    <template #content>
       <div>error</div>
       <slot></slot>
     </template>
