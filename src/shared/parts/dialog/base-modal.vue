@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted, ref } from "vue"
+
 defineProps<{
   isOpen: boolean
 }>()
@@ -7,15 +9,58 @@ const emits = defineEmits<{
   close: []
 }>()
 
-const closeModal = () => emits("close")
+const focusableElementsSelector =
+  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+const overlay = ref<HTMLDivElement>()
+const button = ref<HTMLButtonElement>()
+
+const handleCloseModal = () => emits("close")
+const handleOutSideClick = () => emits("close")
+const handleKeyEsc = (event: KeyboardEvent) => {
+  if (event.code === "Escape") {
+    emits("close")
+  }
+}
+const handleFocusTrap = (event: KeyboardEvent) => {
+  if (event.code !== "Tab") {
+    return
+  }
+
+  const focusableElements = overlay.value
+    ? [...overlay.value.querySelectorAll<HTMLElement>(focusableElementsSelector)]
+    : []
+  const firstElement = focusableElements[0]
+  const lastElement = focusableElements[-1]
+
+  if (event.shiftKey && document.activeElement === firstElement) {
+    event.preventDefault()
+    lastElement?.focus()
+  } else if (!event.shiftKey && document.activeElement === lastElement) {
+    event.preventDefault()
+    firstElement?.focus()
+  }
+}
+
+onMounted(() => {
+  document.addEventListener("click", handleOutSideClick)
+  document.addEventListener("keydown", handleKeyEsc)
+  document.addEventListener("keydown", handleFocusTrap)
+})
+
+onUnmounted(() => {
+  document.removeEventListener("click", handleOutSideClick)
+  document.removeEventListener("keydown", handleKeyEsc)
+  document.removeEventListener("keydown", handleFocusTrap)
+})
 </script>
 
 <template>
   <Transition>
-    <div class="overlay" v-if="isOpen" @click="closeModal">
-      <div class="dialog">
-        <div class="content" @click.stop>
-          <slot name="content" v-bind="{ closeModal }"> </slot>
+    <div class="overlay" v-if="isOpen" ref="overlay">
+      <div role="dialog">
+        <div class="content">
+          <button @click="handleCloseModal" ref="button">X</button>
+          <slot name="content" v-bind="{ handleCloseModal }"> </slot>
         </div>
       </div>
     </div>
@@ -32,7 +77,7 @@ const closeModal = () => emits("close")
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.dialog {
+div[role="dialog"] {
   display: flex;
   flex-direction: column;
   place-content: center;
