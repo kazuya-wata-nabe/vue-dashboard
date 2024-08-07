@@ -1,6 +1,6 @@
-let id = 0
+let internalId = 0
 
-export const useId = (prefix?: string) => {
-  id += 1
-  return [prefix, `:${id}:`].filter(Boolean).join("-")
+export const useId = (prefix: string = ""): string => {
+  internalId += 1
+  return [prefix, `:${internalId}:`].filter((v) => v !== "").join("-")
 }
