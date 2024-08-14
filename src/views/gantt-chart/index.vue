@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 // TODO: refactor
 import { FlexRow, FlexCol } from "@/shared/parts"
+import TaskBar from "./components/task-bar.vue"
 import TaskItem from "./components/task-item.vue"
 import { useGanttChart } from "./composable"
 
@@ -30,8 +31,7 @@ const { datas, hours, addTask } = useGanttChart()
         </FlexRow>
       </FlexRow>
       <FlexCol>
-        <div class="task-item">a</div>
-        <div class="task-item">a</div>
+        <TaskBar v-for="data in datas" :key="data.uid" v-bind="data" />
       </FlexCol>
     </div>
   </div>
