@@ -1,11 +1,12 @@
 import { computed, onMounted, ref } from "vue"
 import { Task } from "@/views/gantt-chart/types"
 
-const hours = Array.from({ length: 23 }, (_, i) => (i + 1).toString().padStart(2, "0"))
+const hours = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, "0"))
 
 type WithUid = Task & {
   uid: ReturnType<typeof crypto.randomUUID>
   width: number
+  offset: number
 }
 
 const parseInt = (value: string) => Number.parseInt(value.replace(":", ""), 10)
@@ -17,7 +18,12 @@ const calcWidth = (data: Task) => {
 }
 
 const convert = (data: Task) => {
-  return { ...data, uid: crypto.randomUUID(), width: calcWidth(data) }
+  return {
+    ...data,
+    uid: crypto.randomUUID(),
+    width: calcWidth(data),
+    offset: parseInt(data.from),
+  }
 }
 
 const dummy = [
