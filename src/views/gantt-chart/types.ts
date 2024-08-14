@@ -7,9 +7,9 @@ export type Task = {
 }
 
 export const Task = (): Task => ({
-  title: "bar",
+  title: "new task",
   assigner: "fuga",
-  from: "",
-  to: "",
+  from: "00:00",
+  to: "01:00",
   status: "",
 })
