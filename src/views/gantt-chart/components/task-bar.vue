@@ -3,9 +3,14 @@ import { computed } from "vue"
 
 const props = defineProps<{
   width: number
+  offset: number
 }>()
 
-const width = computed(() => `${props.width / 100}px`)
+const width = computed(() => {
+  return `${props.width / 100}px`
+})
+
+const left = computed(() => `${(props.offset / 100) * 40}px`)
 </script>
 
 <template>
@@ -17,5 +22,7 @@ const width = computed(() => `${props.width / 100}px`)
   height: 30px;
   width: calc(40 * v-bind(width));
   background-color: silver;
+  position: relative;
+  left: v-bind(left);
 }
 </style>
