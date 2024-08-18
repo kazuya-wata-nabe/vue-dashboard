@@ -80,7 +80,7 @@
     "vue-tsc": "^2.0.29"
   },
   "volta": {
-    "node": "20.15.1"
+    "node": "20.16.0"
   },
   "msw": {
     "workerDirectory": [

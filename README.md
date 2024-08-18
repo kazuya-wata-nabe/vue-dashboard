@@ -23,7 +23,7 @@
 
 - モジュールの依存は一方方向にしてください
   - 自分より下位のレイヤーのimportのみOK
-  - 同レイヤー同志のimportはNG
+  - 同レイヤー同士のimportは原則NG
 
 ```ts
 // OK
@@ -89,6 +89,11 @@ function hoge() {}
 - RouterLinkは使わず `@/shared/parts/link/typed-link.vue`を使ってください
   - 遷移先名のtypoによる実行時エラーを防ぐため
 
+## テストについて
+- storybookにテストを書いてください
+- 要素の取得はgetByRoleを使ってください
+  - それ以外の方法は原則NG
+
 ## その他
 ### apiについて
 - api clientはfetchです
@@ -106,7 +111,9 @@ function hoge() {}
 - レスポンスは`src/app/mocks/handlers.ts`で設定しているので適宜更新してください
   - レスポンスにopenapiのexamplesを使う場合はredoclyでjsonを出力してください
 
-## テストについて
-- storybookにテストを書いてください
-- 要素の取得はgetByRoleを使ってください
-  - それ以外の方法は禁止です
+### vscodeの設定
+- 推奨
+
+```sh
+cp vscode.settings.json .vscode/settings.json
+```
