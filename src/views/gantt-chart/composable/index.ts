@@ -22,7 +22,7 @@ const convert = (data: Task) => {
     ...data,
     uid: crypto.randomUUID(),
     width: calcWidth(data),
-    offset: parseInt(data.from),
+    offset: (parseInt(data.from) / 100) * 40,
   }
 }
 
