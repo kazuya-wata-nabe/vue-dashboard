@@ -10,23 +10,23 @@ const props = defineProps<{
 
 // TODO: watch reactivity
 const state = ref({ width: props.width, offset: props.offset })
+const container = ref<HTMLDivElement>()
 
 const size = computed(() => `${state.value.width / 100}px`)
 const left = computed(() => `${state.value.offset}px`)
 
-const container = ref<HTMLDivElement>()
-
 let mousedown = false
+let point = 0
 
 const onMouseMove = (event: MouseEvent) => {
-  if (mousedown && event.target instanceof HTMLElement && container.value) {
-    const shiftX = container.value.offsetLeft
-    const mouseX = event.clientX - event.target.getBoundingClientRect().left
-    // console.debug(event.clientX)
-    // console.debug(event.pageX)
-    console.debug(mouseX)
+  if (mousedown) {
+    if (!point) {
+      point = event.offsetX
+    }
 
-    event.target.style.left = event.pageX + (shiftX - mouseX) + "px"
+    const shiftX = container.value?.offsetLeft ?? 0
+    const value = event.pageX - shiftX - point
+    state.value.offset = value > -1 ? value : 0
   }
 }
 </script>
