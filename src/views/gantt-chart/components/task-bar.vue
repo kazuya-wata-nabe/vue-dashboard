@@ -19,15 +19,15 @@ let mousedown = false
 let point = 0
 
 const onMouseMove = (event: MouseEvent) => {
-  if (mousedown) {
-    if (!point) {
-      point = event.offsetX
-    }
-
-    const shiftX = container.value?.offsetLeft ?? 0
-    const value = event.pageX - shiftX - point
-    state.value.offset = value > -1 ? value : 0
+  if (!mousedown) return
+  if (!point) {
+    point = event.offsetX
   }
+  const parent = document.querySelector("#right")
+  const parentLeft = parent?.scrollLeft ?? 0
+  const shiftX = container.value?.offsetLeft ?? 0
+  const value = event.pageX - shiftX - point + parentLeft
+  state.value.offset = value > -1 ? value : 0
 }
 </script>
 
