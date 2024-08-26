@@ -5,7 +5,7 @@ const WARNING = Boolean(process.env.STRICT_LINT) === true ? "error" : "warn"
 
 module.exports = {
   root: true,
-  plugins: ["prefer-arrow-functions", "no-relative-import-paths"],
+  plugins: ["prefer-arrow-functions", "no-relative-import-paths", "@vitest"],
   extends: [
     "plugin:vue/vue3-essential",
     "eslint:recommended",
@@ -14,6 +14,7 @@ module.exports = {
     "plugin:unicorn/recommended",
     "plugin:storybook/recommended",
     "plugin:vuejs-accessibility/recommended",
+    "plugin:@vitest/legacy-recommended",
   ],
   parserOptions: {
     ecmaVersion: "latest",
@@ -21,6 +22,8 @@ module.exports = {
   ignorePatterns: ["src/assets", "*.config.ts", "*.json"],
   rules: {
     eqeqeq: "error",
+    "@vitest/consistent-test-it": ["error", { fn: "it" }],
+    "@vitest/max-nested-describe": ["error", { max: 2 }],
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": WARNING,
     "@typescript-eslint/no-non-null-assertion": "error",
