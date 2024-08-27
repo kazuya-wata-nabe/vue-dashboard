@@ -13,6 +13,7 @@ const state = ref({ width: props.width, offset: props.offset })
 const container = ref<HTMLDivElement>()
 const bar = ref<HTMLDivElement>()
 const east = ref<HTMLDivElement>()
+const west = ref<HTMLDivElement>()
 
 const size = computed(() => `${state.value.width / 100}px`)
 const left = computed(() => `${state.value.offset}px`)
@@ -20,6 +21,7 @@ const left = computed(() => `${state.value.offset}px`)
 let mode: "move" | "expand-west" | "expand-east" | ""
 let point = 0
 let temp = 0
+let temp2 = 0
 
 const onMouseMove = (event: MouseEvent) => {
   if (mode !== "move") return
@@ -38,25 +40,45 @@ const expand = (event: MouseEvent) => {
     if (!temp) {
       temp = bar.value.offsetWidth
     }
-    const shiftX = container.value?.offsetLeft ?? 0
-    const value = event.pageX - shiftX - temp
-    console.debug(value)
+    const value = event.pageX - bar.value.offsetLeft
     bar.value.style.width = `${value}px`
+  }
+  if (mode === "expand-west" && west.value && bar.value && container.value) {
+    if (!temp) {
+      temp = bar.value.offsetWidth
+    }
+    if (!temp2) {
+      temp2 = bar.value.offsetLeft
+    }
+    const value = bar.value.offsetLeft - event.pageX
+    const pos = event.pageX - container.value.offsetLeft
+    console.debug(value)
+    state.value.offset = pos
+    bar.value.style.width = `${temp}px`
   }
 }
 
 const onMouseUp = () => {
   mode = ""
   temp = 0
+  temp2 = 0
   point = 0
 }
 </script>
 
 <template>
-  <div class="task-bar-container" ref="container" @mousemove="expand" role="button" tabindex="0">
+  <div
+    class="task-bar-container"
+    ref="container"
+    @mousemove="expand"
+    @mouseup="onMouseUp"
+    role="button"
+    tabindex="0"
+  >
     <div
       class="position edge"
       role="button"
+      ref="west"
       tabindex="0"
       @mousedown="() => (mode = 'expand-west')"
       @mouseup="onMouseUp"
