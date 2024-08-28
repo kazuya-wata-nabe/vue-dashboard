@@ -9,7 +9,7 @@ export const attachCamera = async () => {
     return { error: "バーコードAPIが使えないブラウザです" }
   }
 
-  const facingMode = /iphone|ipod|android/i.test(navigator.userAgent)
+  const facingMode = /(iphone|ipod|android.*mobile)/i.test(navigator.userAgent)
     ? { exact: "environment" }
     : "user"
 
