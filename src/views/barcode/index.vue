@@ -9,8 +9,13 @@ defineOptions({ name: "BarCode" })
 const video = ref<HTMLVideoElement>()
 const barcodeValues = ref<string[]>([])
 
-const currentState = ref({ camera: false, delay: 500 })
-const label = computed(() => (currentState.value.camera ? "OFF" : "ON"))
+const currentState = ref({
+  camera: false,
+  delay: 500,
+  formats: new Array<BarcodeFormat>(),
+  exclude: false,
+})
+const label = computed(() => (currentState.value.camera ? "終了" : "開始"))
 
 const onClickReset = () => {
   barcodeValues.value = []
@@ -28,11 +33,9 @@ const loadedmetadata = async () => {
   while (currentState.value.camera) {
     await new Promise((resolve) => setTimeout(resolve, currentState.value.delay))
 
-    const result = await readCode(video.value)
+    const result = await readCode(video.value, currentState.value.formats)
     for (const barcode of result) {
-      if (barcode) {
-        barcodeValues.value.push(barcode.rawValue)
-      }
+      barcode && barcodeValues.value.push(barcode.rawValue)
     }
   }
 }
@@ -60,6 +63,9 @@ const cameraOff = async () => {
   currentState.value.camera = false
   video.value.removeEventListener("loadedmetadata", loadedmetadata)
 }
+
+const SPEEDS = Array.from({ length: 10 }, (_, i) => 500 * (i + 1))
+const FORMATS = ["code_128", "code_39", "qr_code"] as const
 </script>
 
 <template>
@@ -67,25 +73,35 @@ const cameraOff = async () => {
     <FlexRow>Barcode API サンプル</FlexRow>
 
     <FlexCol>
-      <label for="delay">
-        ディレイ
-        <input
-          id="delay"
-          type="number"
-          v-model.number="currentState.delay"
-          step="500"
-          min="500"
-        />ms
-      </label>
+      <FlexRow>特定フォーマットだけ読み込む</FlexRow>
+      <FlexRow wrap gap="8">
+        <FlexRow v-for="format in FORMATS" :key="format" style="width: fit-content">
+          <label :for="format">
+            <input type="checkbox" :id="format" :value="format" v-model="currentState.formats" />
+            {{ format }}
+          </label>
+        </FlexRow>
+      </FlexRow>
     </FlexCol>
+
+    <FlexRow>
+      <label for="delay">
+        読み込み速度(ms)
+        <select v-model="currentState.delay">
+          <option v-for="speed in SPEEDS" :key="speed">
+            {{ speed }}
+          </option>
+        </select>
+      </label>
+    </FlexRow>
 
     <FlexRow gap="8"> 読み取り結果 <button @click="onClickReset">リセット</button> </FlexRow>
 
     <FlexCol class="barcode">
-      <li v-for="value in barcodeValues" :key="value">{{ value }}</li>
+      <li v-for="(value, index) in barcodeValues" :key="`${value}-${index}`">{{ value }}</li>
     </FlexCol>
 
-    <button @click="onClickCameraToggle">カメラ{{ label }}</button>
+    <button @click="onClickCameraToggle">読み込み{{ label }}</button>
 
     <div class="reader">
       <video ref="video" autoplay playsinline><track kind="captions" /></video>
@@ -97,6 +113,7 @@ const cameraOff = async () => {
 .barcode {
   height: 100px;
   border: solid 1px;
+  overflow-y: scroll;
 
   & li::before {
     content: "・";

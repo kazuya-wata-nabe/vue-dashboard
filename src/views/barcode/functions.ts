@@ -1,5 +1,5 @@
-export const readCode = async (image: ImageBitmapSource) => {
-  const reader = new BarcodeDetector()
+export const readCode = async (image: ImageBitmapSource, formats: BarcodeFormat[]) => {
+  const reader = formats.length > 0 ? new BarcodeDetector({ formats }) : new BarcodeDetector()
   const result = await reader.detect(image)
   return result
 }
