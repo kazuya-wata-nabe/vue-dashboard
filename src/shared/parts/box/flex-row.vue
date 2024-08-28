@@ -3,10 +3,12 @@ import { computed } from "vue"
 
 const props = defineProps<{
   gap?: "8" | "16" | "24" | "32"
+  wrap?: boolean
 }>()
 
 const classes = computed(() => ({
   "flex-row": true,
+  wrap: props.wrap,
   [`gap${props.gap}`]: props.gap,
 }))
 </script>
@@ -33,6 +35,9 @@ const classes = computed(() => ({
   }
   &.gap32 {
     gap: 32px;
+  }
+  &.wrap {
+    flex-wrap: wrap;
   }
 }
 </style>
