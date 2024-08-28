@@ -12,8 +12,6 @@ const barcodeValues = ref<string[]>([])
 const currentState = ref({ camera: false, delay: 500 })
 const label = computed(() => (currentState.value.camera ? "OFF" : "ON"))
 
-let timerId: NodeJS.Timeout
-
 const onClickReset = () => {
   barcodeValues.value = []
 }
@@ -26,10 +24,16 @@ const loadedmetadata = async () => {
   if (!video.value) return
 
   await video.value?.play()
+
   while (currentState.value.camera) {
     await new Promise((resolve) => setTimeout(resolve, currentState.value.delay))
+
     const result = await readCode(video.value)
-    barcodeValues.value = (result ?? []).map((barcode) => barcode.rawValue)
+    for (const barcode of result) {
+      if (barcode) {
+        barcodeValues.value.push(barcode.rawValue)
+      }
+    }
   }
 }
 
@@ -55,7 +59,6 @@ const cameraOff = async () => {
   video.value.srcObject = null
   currentState.value.camera = false
   video.value.removeEventListener("loadedmetadata", loadedmetadata)
-  clearTimeout(timerId)
 }
 </script>
 
