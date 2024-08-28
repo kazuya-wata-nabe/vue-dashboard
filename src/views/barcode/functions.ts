@@ -4,20 +4,20 @@ export const readCode = async (image: ImageBitmapSource) => {
   return result
 }
 
-const constraints = {
-  audio: false,
-  video: {
-    width: 300,
-  },
-}
-
 export const attachCamera = async () => {
   if (!("BarcodeDetector" in window)) {
     return { error: "バーコードAPIが使えないブラウザです" }
   }
 
+  const facingMode = /iphone|ipod|android/i.test(navigator.userAgent)
+    ? { exact: "environment" }
+    : "user"
+
   try {
-    const stream = await navigator.mediaDevices.getUserMedia(constraints)
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: false,
+      video: { facingMode },
+    })
     return { stream }
   } catch (error) {
     return { error }
