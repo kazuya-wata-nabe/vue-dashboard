@@ -1,40 +1,79 @@
 <script lang="ts" setup>
-import { ref } from "vue"
+import { computed, ref } from "vue"
 import FlexCol from "@/shared/parts/box/flex-col.vue"
 import FlexRow from "@/shared/parts/box/flex-row.vue"
-import { readCode } from "./functions"
+import { attachCamera, readCode } from "./functions"
 
 defineOptions({ name: "BarCode" })
 
-const image = ref<HTMLImageElement>()
+const video = ref<HTMLVideoElement>()
+const barcodeValues = ref<string[]>([])
+const currentState = ref({ camera: false })
+const label = computed(() => (currentState.value.camera ? "OFF" : "ON"))
 
-const onSelect = async (event: Event) => {
-  if (!(event.target instanceof HTMLInputElement)) return
+const onClickReset = () => {
+  barcodeValues.value = []
+}
 
-  const [file] = event.target.files ?? []
+const onClickCameraToggle = async () => {
+  currentState.value.camera ? cameraOff() : cameraOn()
+}
 
-  const img = new Image()
-  if (file) {
-    img.src = URL.createObjectURL(file)
-    img.addEventListener("load", async () => {
-      const result = await readCode(img)
-      console.debug(result)
-    })
+const loadedmetadata = async () => {
+  if (!video.value) return
+
+  await video.value?.play()
+  const result = await readCode(video.value)
+  barcodeValues.value = (result ?? []).map((barcode) => barcode.rawValue)
+}
+
+const cameraOn = async () => {
+  const { stream, error } = await attachCamera()
+  if (stream && video.value) {
+    video.value.srcObject = stream
+    video.value.addEventListener("loadedmetadata", loadedmetadata)
+    currentState.value.camera = true
+  } else {
+    alert(error)
   }
 }
 
-const onClick = () => {
-  if (image.value) {
-    readCode(image.value).then((value) => console.debug(value))
+const cameraOff = async () => {
+  const stream = video.value?.srcObject
+  if (!video.value || !(stream instanceof MediaStream)) return
+
+  for (const track of stream.getTracks()) {
+    track.stop()
   }
+  // eslint-disable-next-line unicorn/no-null
+  video.value.srcObject = null
+  currentState.value.camera = false
+  video.value.removeEventListener("loadedmetadata", loadedmetadata)
 }
 </script>
 
 <template>
-  <FlexCol>
-    <FlexRow>サンプル</FlexRow>
-    <FlexRow>Barcode API</FlexRow>
-    <input type="file" aria-label="select" @change="onSelect" />
-    <button @click="onClick">click</button>
+  <FlexCol gap="8">
+    <FlexRow>Barcode API サンプル</FlexRow>
+    <FlexRow gap="8">読み取り結果 <button @click="onClickReset">リセット</button></FlexRow>
+    <FlexCol class="barcode">
+      <li v-for="value in barcodeValues" :key="value">{{ value }}</li>
+    </FlexCol>
+
+    <button @click="onClickCameraToggle">カメラ{{ label }}</button>
+
+    <div class="reader">
+      <video ref="video" autoplay playsinline><track kind="captions" /></video>
+    </div>
   </FlexCol>
 </template>
+
+<style scoped>
+.barcode {
+  height: 100px;
+  border: solid 1px;
+  & li::before {
+    content: "・";
+  }
+}
+</style>
