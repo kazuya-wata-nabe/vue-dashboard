@@ -23,8 +23,7 @@ let point = 0
 let temp = 0
 let temp2 = 0
 
-const onMouseMove = (event: MouseEvent) => {
-  if (mode !== "move") return
+const moveBar = (event: MouseEvent) => {
   if (!point) {
     point = event.offsetX
   }
@@ -35,26 +34,33 @@ const onMouseMove = (event: MouseEvent) => {
   state.value.offset = value > -1 ? value : 0
 }
 
-const expand = (event: MouseEvent) => {
-  if (mode === "expand-east" && east.value && bar.value) {
+const onMouseMove = (event: MouseEvent) => {
+  if (mode === "move") {
+    moveBar(event)
+  }
+  // TODO: 分割
+  else if (mode === "expand-east" && east.value && bar.value) {
     if (!temp) {
       temp = bar.value.offsetWidth
     }
     const value = event.pageX - bar.value.offsetLeft
     bar.value.style.width = `${value}px`
   }
-  if (mode === "expand-west" && west.value && bar.value && container.value) {
+  // TODO: 分割
+  else if (mode === "expand-west" && west.value && bar.value && container.value) {
     if (!temp) {
       temp = bar.value.offsetWidth
     }
     if (!temp2) {
       temp2 = bar.value.offsetLeft
     }
-    const value = bar.value.offsetLeft - event.pageX
+    const value = temp2 - bar.value.offsetLeft
     const pos = event.pageX - container.value.offsetLeft
-    console.debug(value)
+    // TODO: ガタガタするので対策したい
     state.value.offset = pos
-    bar.value.style.width = `${temp}px`
+    if (value > 0) {
+      bar.value.style.width = `${temp + value}px`
+    }
   }
 }
 
@@ -70,7 +76,7 @@ const onMouseUp = () => {
   <div
     class="task-bar-container"
     ref="container"
-    @mousemove="expand"
+    @mousemove="onMouseMove"
     @mouseup="onMouseUp"
     role="button"
     tabindex="0"
@@ -85,7 +91,6 @@ const onMouseUp = () => {
     ></div>
     <div
       class="task-bar position"
-      @mousemove="onMouseMove"
       @mousedown="() => (mode = 'move')"
       @mouseup="onMouseUp"
       role="button"
