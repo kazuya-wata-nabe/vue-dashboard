@@ -35,7 +35,7 @@ const loadedmetadata = async () => {
 
     const result = await readCode(video.value, currentState.value.formats)
     for (const barcode of result) {
-      barcode && barcodeValues.value.push(barcode.rawValue)
+      barcodeValues.value.unshift(barcode.rawValue)
     }
   }
 }
