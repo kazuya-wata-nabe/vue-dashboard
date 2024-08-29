@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, ref } from "vue"
-import { Html5Qrcode } from "html5-qrcode"
+import { Html5Qrcode, Html5QrcodeSupportedFormats as Formats } from "html5-qrcode"
 import FlexCol from "@/shared/parts/box/flex-col.vue"
 import FlexRow from "@/shared/parts/box/flex-row.vue"
 import { attachCamera } from "./functions"
@@ -13,10 +13,11 @@ const barcodeValues = ref<string[]>([])
 const currentState = ref({
   camera: false,
   delay: 500,
-  formats: new Array<BarcodeFormat>(),
+  formats: new Array<Formats>(),
   exclude: false,
 })
 const label = computed(() => (currentState.value.camera ? "終了" : "開始"))
+const fps = computed(() => 1000 / currentState.value.delay)
 
 const onClickReset = () => {
   barcodeValues.value = []
@@ -27,18 +28,21 @@ const onClickCameraToggle = async () => {
 }
 
 const cameraOn = async () => {
-  const { data, error } = await attachCamera("reader")
+  const { data, error } = await attachCamera("reader", currentState.value.formats)
   if (error) {
     alert(error)
   } else {
     scanner.value = data.scanner
     scanner.value.start(
       data.config,
-      { fps: 10 },
+      { fps: fps.value },
       (decodedText: string) => {
         barcodeValues.value.unshift(decodedText)
       },
-      console.warn,
+      (error) => {
+        cameraOff()
+        alert(error)
+      },
     )
     currentState.value.camera = true
   }
@@ -50,7 +54,7 @@ const cameraOff = async () => {
 }
 
 const SPEEDS = Array.from({ length: 10 }, (_, i) => 500 * (i + 1))
-const FORMATS = ["code_128", "code_39", "qr_code"] as const
+const FORMATS = [Formats.CODE_128, Formats.CODE_39, Formats.QR_CODE] as const
 </script>
 
 <template>
@@ -61,8 +65,13 @@ const FORMATS = ["code_128", "code_39", "qr_code"] as const
       <FlexRow>特定フォーマットだけ読み込む</FlexRow>
       <FlexRow wrap gap="8">
         <FlexRow v-for="format in FORMATS" :key="format" style="width: fit-content">
-          <label :for="format">
-            <input type="checkbox" :id="format" :value="format" v-model="currentState.formats" />
+          <label :for="`${format}`">
+            <input
+              type="checkbox"
+              :id="`${format}`"
+              :value="format"
+              v-model="currentState.formats"
+            />
             {{ format }}
           </label>
         </FlexRow>

@@ -1,25 +1,13 @@
-import { Html5Qrcode } from "html5-qrcode"
+import { Html5Qrcode, Html5QrcodeSupportedFormats } from "html5-qrcode"
 
-export const readCode = async (image: ImageBitmapSource, formats: BarcodeFormat[]) => {
-  const reader = formats.length > 0 ? new BarcodeDetector({ formats }) : new BarcodeDetector()
-  const result = await reader.detect(image)
-  return result
-}
-
-export const attachCamera = async (elementId: string) => {
+export const attachCamera = async (elementId: string, formats: Html5QrcodeSupportedFormats[]) => {
   const facingMode = /(iphone|ipod|android.*mobile)/i.test(navigator.userAgent)
     ? { exact: "environment" }
     : "user"
 
   try {
-    const cameras = await Html5Qrcode.getCameras()
-    console.debug(cameras)
-    const camera = cameras[0]
-    if (!camera) {
-      throw new Error("camera disabled")
-    }
-
-    const scanner = new Html5Qrcode(elementId)
+    const formatsToSupport = formats.length > 0 ? formats : undefined
+    const scanner = new Html5Qrcode(elementId, { verbose: undefined, formatsToSupport })
     const data = { scanner, config: { facingMode } }
     return { data }
   } catch (error) {
