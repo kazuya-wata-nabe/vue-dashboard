@@ -4,6 +4,10 @@
 
 #app {
   display: flex;
+
+  @media screen and (width <=480px) {
+    display: block;
+  }
 }
 
 .clickable {

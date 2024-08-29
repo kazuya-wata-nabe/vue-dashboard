@@ -104,7 +104,7 @@ const FORMATS_LABEL = {
 
     <button @click="onClickCameraToggle">読み込み{{ label }}</button>
 
-    <div id="reader" width="600px"></div>
+    <div id="reader"></div>
   </FlexCol>
 </template>
 
@@ -116,6 +116,14 @@ const FORMATS_LABEL = {
 
   & li::before {
     content: "・";
+  }
+}
+
+#reader {
+  /* width: 600px; */
+
+  @media screen and (min-width: 480px) {
+    width: 100%;
   }
 }
 </style>
