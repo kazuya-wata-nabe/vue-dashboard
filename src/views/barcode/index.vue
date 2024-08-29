@@ -39,9 +39,11 @@ const cameraOn = async () => {
       (decodedText: string) => {
         barcodeValues.value.unshift(decodedText)
       },
-      (error) => {
-        cameraOff()
-        alert(error)
+      (_, error) => {
+        if (error.type !== 0) {
+          cameraOff()
+          alert(error.errorMessage)
+        }
       },
     )
     currentState.value.camera = true
@@ -55,6 +57,11 @@ const cameraOff = async () => {
 
 const SPEEDS = Array.from({ length: 10 }, (_, i) => 500 * (i + 1))
 const FORMATS = [Formats.CODE_128, Formats.CODE_39, Formats.QR_CODE] as const
+const FORMATS_LABEL = {
+  [Formats.CODE_128]: "code_128",
+  [Formats.CODE_39]: "code_39",
+  [Formats.QR_CODE]: "qr_code",
+}
 </script>
 
 <template>
@@ -65,14 +72,14 @@ const FORMATS = [Formats.CODE_128, Formats.CODE_39, Formats.QR_CODE] as const
       <FlexRow>特定フォーマットだけ読み込む</FlexRow>
       <FlexRow wrap gap="8">
         <FlexRow v-for="format in FORMATS" :key="format" style="width: fit-content">
-          <label :for="`${format}`">
+          <label :for="`${FORMATS_LABEL[format]}`">
             <input
               type="checkbox"
-              :id="`${format}`"
+              :id="`${FORMATS_LABEL[format]}`"
               :value="format"
               v-model="currentState.formats"
             />
-            {{ format }}
+            {{ FORMATS_LABEL[format] }}
           </label>
         </FlexRow>
       </FlexRow>
