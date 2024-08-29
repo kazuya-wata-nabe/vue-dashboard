@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import { computed, ref } from "vue"
+import { Html5Qrcode } from "html5-qrcode"
 import FlexCol from "@/shared/parts/box/flex-col.vue"
 import FlexRow from "@/shared/parts/box/flex-row.vue"
-import { attachCamera, readCode } from "./functions"
+import { attachCamera } from "./functions"
 
 defineOptions({ name: "BarCode" })
 
-const video = ref<HTMLVideoElement>()
+const scanner = ref<Html5Qrcode>()
 const barcodeValues = ref<string[]>([])
 
 const currentState = ref({
@@ -25,43 +26,27 @@ const onClickCameraToggle = async () => {
   currentState.value.camera ? cameraOff() : cameraOn()
 }
 
-const loadedmetadata = async () => {
-  if (!video.value) return
-
-  await video.value?.play()
-
-  while (currentState.value.camera) {
-    await new Promise((resolve) => setTimeout(resolve, currentState.value.delay))
-
-    const result = await readCode(video.value, currentState.value.formats)
-    for (const barcode of result) {
-      barcodeValues.value.unshift(barcode.rawValue)
-    }
-  }
-}
-
 const cameraOn = async () => {
-  const { stream, error } = await attachCamera()
-  if (stream && video.value) {
-    video.value.srcObject = stream
-    video.value.addEventListener("loadedmetadata", loadedmetadata)
-    currentState.value.camera = true
-  } else {
+  const { data, error } = await attachCamera("reader")
+  if (error) {
     alert(error)
+  } else {
+    scanner.value = data.scanner
+    scanner.value.start(
+      data.config,
+      { fps: 10 },
+      (decodedText: string) => {
+        barcodeValues.value.unshift(decodedText)
+      },
+      console.warn,
+    )
+    currentState.value.camera = true
   }
 }
 
 const cameraOff = async () => {
-  const stream = video.value?.srcObject
-  if (!video.value || !(stream instanceof MediaStream)) return
-
-  for (const track of stream.getTracks()) {
-    track.stop()
-  }
-  // eslint-disable-next-line unicorn/no-null
-  video.value.srcObject = null
+  scanner.value?.stop()
   currentState.value.camera = false
-  video.value.removeEventListener("loadedmetadata", loadedmetadata)
 }
 
 const SPEEDS = Array.from({ length: 10 }, (_, i) => 500 * (i + 1))
@@ -103,9 +88,7 @@ const FORMATS = ["code_128", "code_39", "qr_code"] as const
 
     <button @click="onClickCameraToggle">読み込み{{ label }}</button>
 
-    <div class="reader">
-      <video ref="video" autoplay playsinline><track kind="captions" /></video>
-    </div>
+    <div id="reader" width="600px"></div>
   </FlexCol>
 </template>
 

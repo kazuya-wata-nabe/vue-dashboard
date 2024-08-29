@@ -129,6 +129,9 @@ importers:
       happy-dom:
         specifier: ^14.12.3
         version: 14.12.3
+      html5-qrcode:
+        specifier: ^2.3.8
+        version: 2.3.8
       husky:
         specifier: ^9.1.4
         version: 9.1.4
@@ -3389,6 +3392,9 @@ packages:
   html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
 
+  html5-qrcode@2.3.8:
+    resolution: {integrity: sha512-jsr4vafJhwoLVEDW3n1KvPnCCXWaQfRng0/EEYk1vNcQGcG/htAdhJX0be8YyqMoSz7+hZvOZSTAepsabiuhiQ==}
+
   htmlparser2@3.10.1:
     resolution: {integrity: sha512-IgieNijUMbkDovyoKObU1DUhm1iwNYE/fuifEoEHfd1oZKZDaONBSkal7Y01shxsM49R4XaMdGez3WnF9UfiCQ==}
 
@@ -5678,6 +5684,9 @@ packages:
   vue-component-type-helpers@2.0.29:
     resolution: {integrity: sha512-58i+ZhUAUpwQ+9h5Hck0D+jr1qbYl4voRt5KffBx8qzELViQ4XdT/Tuo+mzq8u63teAG8K0lLaOiL5ofqW38rg==}
 
+  vue-component-type-helpers@2.1.2:
+    resolution: {integrity: sha512-URuxnrOhO9lUG4LOAapGWBaa/WOLDzzyAbL+uKZqT7RS+PFy0cdXI2mUSh7GaMts6vtHaeVbGk7trd0FPJi65Q==}
+
   vue-docgen-api@4.79.2:
     resolution: {integrity: sha512-n9ENAcs+40awPZMsas7STqjkZiVlIjxIKgiJr5rSohDP0/JCrD9VtlzNojafsA1MChm/hz2h3PDtUedx3lbgfA==}
     peerDependencies:
@@ -7713,7 +7722,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.4.35(typescript@5.4.5)
-      vue-component-type-helpers: 2.0.29
+      vue-component-type-helpers: 2.1.2
 
   '@swc/core-darwin-arm64@1.5.7':
     optional: true
@@ -9920,6 +9929,8 @@ snapshots:
     optional: true
 
   html-escaper@2.0.2: {}
+
+  html5-qrcode@2.3.8: {}
 
   htmlparser2@3.10.1:
     dependencies:
@@ -12603,6 +12614,8 @@ snapshots:
       typescript: 5.4.5
 
   vue-component-type-helpers@2.0.29: {}
+
+  vue-component-type-helpers@2.1.2: {}
 
   vue-docgen-api@4.79.2(vue@3.4.35(typescript@5.4.5)):
     dependencies:
