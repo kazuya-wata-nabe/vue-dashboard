@@ -52,15 +52,11 @@ const onMouseMove = (event: MouseEvent) => {
       temp = bar.value.offsetWidth
     }
     if (!temp2) {
-      temp2 = bar.value.offsetLeft
+      temp2 = state.value.offset
     }
-    const value = temp2 - bar.value.offsetLeft
     const pos = event.pageX - container.value.offsetLeft
-    // TODO: ガタガタするので対策したい
     state.value.offset = pos
-    if (value > 0) {
-      bar.value.style.width = `${temp + value}px`
-    }
+    bar.value.style.width = `${temp + temp2 - pos}px`
   }
 }
 
@@ -70,6 +66,11 @@ const onMouseUp = () => {
   temp2 = 0
   point = 0
 }
+const mouseMoveReset = () => {
+  if (mode === "move") {
+    mode = ""
+  }
+}
 </script>
 
 <template>
@@ -78,6 +79,8 @@ const onMouseUp = () => {
     ref="container"
     @mousemove="onMouseMove"
     @mouseup="onMouseUp"
+    @mouseout="mouseMoveReset"
+    @blur="mouseMoveReset"
     role="button"
     tabindex="0"
   >
