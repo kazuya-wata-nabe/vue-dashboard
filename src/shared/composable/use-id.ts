@@ -1,6 +1,6 @@
-let internalId = 0
+import { useId as _useId } from "vue"
 
 export const useId = (prefix: string = ""): string => {
-  internalId += 1
-  return [prefix, `:${internalId}:`].filter((v) => v !== "").join("-")
+  const id = _useId() ?? ""
+  return [prefix, id].filter((v) => v !== "").join("-")
 }
