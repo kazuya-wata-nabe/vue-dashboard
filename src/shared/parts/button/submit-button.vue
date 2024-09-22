@@ -1,7 +1,13 @@
 <script lang="ts" setup>
-defineProps<{
-  isSubmitting: boolean
-}>()
+withDefaults(
+  defineProps<{
+    /** a */
+    size?: "small" | "medium" | "large"
+    /** bbbb */
+    isSubmitting: boolean
+  }>(),
+  { size: "medium" },
+)
 
 const emits = defineEmits<{
   click: []
@@ -9,22 +15,26 @@ const emits = defineEmits<{
 </script>
 
 <template>
-  <div class="button-container" :class="{ loading: isSubmitting }">
-    <button @click="emits('click')" :disabled="isSubmitting">
-      <div class="loader" v-show="isSubmitting"></div>
+  <div class="button-container" :class="{ loading: isSubmitting, [size]: true }">
+    <button @click="!isSubmitting && emits('click')" :disabled="isSubmitting">
       <slot></slot>
     </button>
+    <div class="loader-container">
+      <div class="loader" v-show="isSubmitting"></div>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .button-container {
+  position: relative;
   display: flex;
-  width: 100%;
-  margin-top: 8px;
 
   &.loading {
     opacity: 0.5;
+  }
+  &.medium {
+    width: 200px;
   }
 }
 
@@ -36,15 +46,18 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  position: relative;
 }
-
-.loader {
+.loader-container {
   position: absolute;
-  top: 6px;
-  left: 60px;
-  width: 30px;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+.loader {
   padding: 8px;
+  width: 30px;
   aspect-ratio: 1;
   border-radius: 50%;
   background: white;

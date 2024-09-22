@@ -9,6 +9,7 @@
     "postbuild": "rm dist/mockServiceWorker.js",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
+    "storybook:screenshot": "SCREEN_SHOT=true test-storybook",
     "test:unit": "vitest",
     "test:story": "test-storybook",
     "build-only": "vite build",
@@ -74,6 +75,7 @@
     "playwright": "^1.47.0",
     "prettier": "^3.3.3",
     "storybook": "^8.2.9",
+    "storycap-testrun": "^0.0.2",
     "typescript": "~5.4.5",
     "vite": "^5.4.3",
     "vitest": "^1.6.0",
@@ -86,6 +88,5 @@
     "workerDirectory": [
       "public"
     ]
-  },
-  "packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e"
+  }
 }

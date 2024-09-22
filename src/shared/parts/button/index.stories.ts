@@ -1,19 +1,12 @@
 import { type Meta, type StoryObj } from "@storybook/vue3"
-import { SubmitButton } from "./index"
+import SubmitButton from "./submit-button.vue"
 
 const meta = {
-  tags: ["!autodocs", "!dev", "!test"],
-  render: (args) => ({
-    components: { SubmitButton },
-    setup: () => {
-      return { args }
-    },
-    template: `
-    <div style="width: 200px">
-      <SubmitButton v-bind="args">Hoge</SubmitButton>
-    </div>
-    `,
-  }),
+  tags: ["autodocs", "!dev"],
+  component: SubmitButton,
+  args: {
+    default: "aaa",
+  },
 } satisfies Meta<typeof SubmitButton>
 
 export default meta

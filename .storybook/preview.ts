@@ -3,6 +3,7 @@ import { setup, type Preview } from "@storybook/vue3"
 import "@/app/assets/main.css"
 import { handlers } from "@/app/mocks/handlers"
 import { router } from "@/app/provider/router"
+import DocumentationTemplate from "./document-template.mdx"
 
 initialize(
   {
@@ -24,6 +25,9 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
+    },
+    docs: {
+      page: DocumentationTemplate,
     },
   },
   decorators: [() => ({ template: `<div id="app"><story /></div>` })],
