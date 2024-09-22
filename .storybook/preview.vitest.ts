@@ -18,16 +18,7 @@ setup((app) => {
 
 const preview: Preview = {
   loaders: [mswLoader],
-  parameters: {
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
-  },
   decorators: [() => ({ template: `<div id="app"><story /></div>` })],
-  tags: ["autodocs"],
 }
 
 export default preview

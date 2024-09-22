@@ -4,8 +4,8 @@
     "env.d.ts",
     "src/**/*",
     "src/**/*.vue",
-    ".storybook/preview.ts",
-    "setup-file.ts"
+    ".storybook/*.ts",
+    "setup-file.ts",
   ],
   "exclude": [
     "src/**/__tests__/*",
