@@ -19,7 +19,7 @@ export const createBook =
   }
 
 export const schema = createSchema({
-  title: required.string(),
+  title: required.string(["max", 50]),
   borrowDate: required.string(),
   returnDate: required.string(),
 })
