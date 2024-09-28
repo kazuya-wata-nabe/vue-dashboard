@@ -2,7 +2,6 @@ import { createApp, type App } from "vue"
 import { useRouter } from "vue-router"
 import { HttpHandler, HttpResponse, delay, http } from "msw"
 import { spyOn } from "@storybook/test"
-import type { Parameters } from "@storybook/vue3"
 import { router } from "@/app/provider/router"
 import { type paths } from "@/shared/api/v1.schema"
 import type { RouteNames } from "@/shared/routes"
@@ -95,7 +94,7 @@ export const mockRouteTransition =
   })
 
 type Meta = {
-  parameters?: Parameters
+  parameters?: { msw: { handlers: unknown[] } }
 }
 
 export const registerMockApi = (handlers: HttpHandler[]) => ({

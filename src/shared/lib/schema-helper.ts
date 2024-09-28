@@ -62,4 +62,16 @@ export const optional = {
 }
 
 type ZObjCustom<T extends ZodRawShape> = Omit<z.ZodObject<T>, OmitField>
-export const createSchema = <T extends ZodRawShape>(shape: T): ZObjCustom<T> => z.object(shape)
+type RefineArgs<T extends ZodRawShape, Key extends keyof T> = {
+  [K in Key]: z.TypeOf<T[K]>
+}
+export const createSchema = <T extends ZodRawShape>(
+  shape: T,
+  ...refines: [key: (keyof T)[], (value: RefineArgs<T, keyof T>) => boolean, message: string][]
+): ZObjCustom<T> => {
+  const schema = z.object(shape)
+  for (const [key, fn, message] of refines) {
+    z.object(shape).refine((value) => fn(value), { message, path: [key.toString()] })
+  }
+  return schema
+}

@@ -75,7 +75,7 @@ const routesAuthRequired = [
 ] as const satisfies Route<AuthRequiredRoutes>[]
 
 const authRequired = routesAuthRequired.map((route: RouteRecordRaw) => {
-  route.meta = { ...route.meta, layout: MainLayout, auth: true }
+  route.meta = { ...route.meta, layout: MainLayout, requiresAuth: true }
   return route
 })
 

@@ -15,9 +15,8 @@ const optionID = `${id}-option`
 
 const {
   state,
-  open,
+  controller,
   reset,
-  close,
   updateIndex,
   onListBoxFocus,
   onListBoxBlur,
@@ -42,7 +41,7 @@ const handleEnter = () => onKeyDownEnter((value) => value && (model.value = valu
 
 const handleSelect = (value: string) => {
   model.value = value
-  close()
+  controller.close()
 }
 </script>
 
@@ -56,7 +55,7 @@ const handleSelect = (value: string) => {
       aria-haspopup="listbox"
       :aria-activedescendant="activedescendant"
       :aria-controls="listBoxID"
-      @click="open"
+      @click="controller.open"
       @blur="onComboBoxBlur"
       @keydown.prevent.up="onKeyDownUp"
       @keydown.prevent.down="onKeyDownDown"

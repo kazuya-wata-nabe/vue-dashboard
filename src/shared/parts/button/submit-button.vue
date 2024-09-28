@@ -1,12 +1,10 @@
 <script lang="ts" setup>
 withDefaults(
   defineProps<{
-    /** a */
-    size?: "small" | "medium" | "large"
-    /** bbbb */
+    size?: "auto" | "small" | "medium" | "large"
     isSubmitting: boolean
   }>(),
-  { size: "medium" },
+  { size: "auto" },
 )
 
 const emits = defineEmits<{
@@ -19,8 +17,8 @@ const emits = defineEmits<{
     <button @click="!isSubmitting && emits('click')" :disabled="isSubmitting">
       <slot></slot>
     </button>
-    <div class="loader-container">
-      <div class="loader" v-show="isSubmitting"></div>
+    <div class="loader-container" v-show="isSubmitting">
+      <div class="loader"></div>
     </div>
   </div>
 </template>
