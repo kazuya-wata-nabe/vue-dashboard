@@ -18,10 +18,13 @@ export const createBook =
     }
   }
 
-export const schema = createSchema({
-  title: required.string(),
-  borrowDate: required.string(),
-  returnDate: required.string(),
-})
+export const schema = createSchema(
+  {
+    title: required.string(["max", 50]),
+    borrowDate: required.string(),
+    returnDate: required.string(),
+  },
+  [["borrowDate"], (value) => value.borrowDate === value.returnDate, "NG"],
+)
 
 export type BookWriteModel = ToSchema<typeof schema>

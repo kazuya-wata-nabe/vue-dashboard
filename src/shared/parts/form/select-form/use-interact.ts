@@ -20,8 +20,10 @@ export const useInteract = <T extends Options>(getOptions: () => T[]) => {
     currentIndex: currentIndex.value,
   }))
 
-  const open = () => (isOpen.value = !isOpen.value)
-  const close = () => (isOpen.value = false)
+  const controller = {
+    open: () => (isOpen.value = !isOpen.value),
+    close: () => (isOpen.value = false),
+  }
 
   const preAction = () => (isOpen.value = true)
   const updateIndex = (index?: number) => (currentIndex.value = index ?? OUT_OF_RANGE)
@@ -52,8 +54,7 @@ export const useInteract = <T extends Options>(getOptions: () => T[]) => {
 
   return {
     state,
-    open,
-    close,
+    controller,
     reset,
     updateIndex,
     onComboBoxBlur,

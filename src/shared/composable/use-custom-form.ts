@@ -7,8 +7,8 @@ import {
   type Path,
   type PathValue,
 } from "vee-validate"
-import type { ZodSchema } from "zod"
 import { toTypedSchema } from "@vee-validate/zod"
+import type { ZodSchema, WithRefine } from "@/shared/lib/schema-helper"
 
 type DefineFieldReturn<T extends GenericObject> = [
   Ref<PathValue<T, Path<T>>>,
@@ -43,7 +43,7 @@ export const useCustomForm = <T extends GenericObject>(schema: ZodSchema<T>): Us
     isSubmitting,
     errors,
   } = useForm<T>({
-    validationSchema: toTypedSchema(schema),
+    validationSchema: toTypedSchema(schema as WithRefine<T>),
   })
 
   const defineField = (path: Path<T>, handler?: Handlers): DefineFieldReturn<T> => {

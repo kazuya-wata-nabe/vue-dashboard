@@ -40,5 +40,5 @@ export const useAuth = () => {
   if (context === undefined) {
     throw new Error("inject failed")
   }
-  return context as Omit<AuthContext, "load">
+  return context
 }
