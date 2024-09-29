@@ -20,6 +20,10 @@ export const isAfter = (a: string | Date, b: string | Date) => {
   return dateFns.isAfter(a, b)
 }
 
+export const subMinutes = (date: string, value: number) => {
+  return dateFns.subMinutes(date, value)
+}
+
 export const today = () => {
   return startOfToday().toString()
 }

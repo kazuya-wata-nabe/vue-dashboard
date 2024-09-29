@@ -1,22 +1,32 @@
 <script lang="ts">
 import { ref } from "vue"
 import { router } from "@/app/provider/router"
-import { useAuthenticated } from "@/features/auth"
+import { authMiddleware, useAuthenticated } from "@/features/auth"
+import { refresh } from "@/features/auth/model"
 import type { UserRole } from "@/features/user-role"
-import { client } from "@/shared/api/client"
+import { client, clientMiddleware } from "@/shared/api/client"
 
 const role = ref<UserRole>()
 
 router.beforeResolve(async (to) => {
   const { isAuthenticated } = useAuthenticated()
-  const authenticated = await isAuthenticated()
-  if (to.meta.requiresAuth && !authenticated) {
+  const jwt = await isAuthenticated()
+  clientMiddleware.EJECT(authMiddleware(undefined, refresh))
+
+  if (!to.meta.requiresAuth) {
+    return true
+  }
+  if (!jwt) {
     return { name: "login" }
   }
+
+  clientMiddleware.USE(authMiddleware(jwt, refresh))
   const { data, error } = await client.GET("/me")
+
   if (error) {
     return { name: "login" }
   }
+
   role.value = data.role
   return true
 })
