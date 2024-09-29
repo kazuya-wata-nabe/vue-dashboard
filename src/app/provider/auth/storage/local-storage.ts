@@ -1,15 +1,17 @@
 import type { AuthStorage } from "@/features/auth"
+import type { JWT } from "@/features/auth/model"
 
 const KEY_AUTH = "auth"
 
-export class LocalStorage implements AuthStorage {
-  async load(): Promise<string> {
-    return localStorage.getItem(KEY_AUTH) ?? ""
-  }
-  async save() {
+export const LocalStorage = (): Readonly<AuthStorage> => ({
+  load: async (): Promise<JWT | undefined> => {
+    const value = localStorage.getItem(KEY_AUTH) ?? ""
+    return value ? JSON.parse(value) : undefined
+  },
+  save: async () => {
     localStorage.setItem(KEY_AUTH, "ok")
-  }
-  async remove() {
+  },
+  remove: async () => {
     localStorage.removeItem(KEY_AUTH)
-  }
-}
+  },
+})

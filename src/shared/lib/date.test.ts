@@ -1,3 +1,4 @@
+import { isAfter } from "date-fns"
 import { describe, expect, it } from "vitest"
 import { isValid } from "./date"
 
@@ -24,5 +25,14 @@ describe("parseの入力形式", () => {
     const value = "2021.01.03"
     const actual = isValid(value)
     expect(actual).toBeFalsy()
+  })
+})
+
+describe("is after", () => {
+  it("a: 2021-01-03, b: 2021-01-02", () => {
+    const a = "2021-01-03"
+    const b = "2021-01-02"
+    const actual = isAfter(a, b)
+    expect(actual).toBeTruthy()
   })
 })

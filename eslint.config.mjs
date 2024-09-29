@@ -1,6 +1,6 @@
 import noRelativeImportPaths from "eslint-plugin-no-relative-import-paths"
 import preferArrowFunctions from "eslint-plugin-prefer-arrow-functions"
-import unicorn from "eslint-plugin-unicorn"
+import eslintPluginUnicorn from "eslint-plugin-unicorn"
 import vuejsA11y from "eslint-plugin-vuejs-accessibility"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
@@ -23,8 +23,9 @@ const WARN = process.env.STRICT_LINT === "true" ? "error" : "warn"
 export default [
   includeIgnoreFile(gitignorePath),
   {
-    ignores: ["src/assets", "**/*.config.ts", "**/*.json", "eslint.config.mjs"],
+    ignores: ["src/assets", "**/*.config.ts", "**/*.json", "**/*.js", "eslint.config.mjs"],
   },
+  eslintPluginUnicorn.configs["flat/recommended"],
   ...fixupConfigRules(
     compat.extends(
       "plugin:vue/vue3-essential",
@@ -39,7 +40,6 @@ export default [
       "prefer-arrow-functions": preferArrowFunctions,
       "no-relative-import-paths": noRelativeImportPaths,
       "vuejs-accessibility": vuejsA11y,
-      unicorn,
     },
 
     languageOptions: {
