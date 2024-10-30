@@ -8,8 +8,8 @@ export const LocalStorage = (): Readonly<AuthStorage> => ({
     const value = localStorage.getItem(KEY_AUTH) ?? ""
     return value ? JSON.parse(value) : undefined
   },
-  save: async () => {
-    localStorage.setItem(KEY_AUTH, "ok")
+  save: async (data) => {
+    localStorage.setItem(KEY_AUTH, JSON.stringify(data))
   },
   remove: async () => {
     localStorage.removeItem(KEY_AUTH)

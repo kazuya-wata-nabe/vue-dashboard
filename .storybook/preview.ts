@@ -27,7 +27,7 @@ const preview: Preview = {
     },
   },
   decorators: [() => ({ template: `<div id="app"><story /></div>` })],
-  tags: ["autodocs"],
+  tags: [],
 }
 
 export default preview
