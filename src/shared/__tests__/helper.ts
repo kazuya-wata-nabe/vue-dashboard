@@ -108,7 +108,7 @@ export const extendMockApi = (meta: Meta, ...handlers: unknown[]) => ({
 export const mockDate = (date: `${string}-${string}-${string}`) => () => ({
   setup: (args: unknown) => {
     const now = new Date(date).getTime()
-    spyOn(global.Date, "now").mockReturnValue(now)
+    spyOn(globalThis.Date, "now").mockReturnValue(now)
     return { args }
   },
   template: `<story v-bind="args" />`,
