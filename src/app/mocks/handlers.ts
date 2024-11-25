@@ -29,7 +29,9 @@ const http = createOpenApiHttp<paths>()
  */
 export const handlers = [
   http.get("/books", ({ response }) => {
-    return response(200).json([])
+    return response(200).json([
+      { id: "a", title: "sample", borrowDate: "2024-11-11", returnDate: "2024-11-11" },
+    ])
   }),
 
   http.get("/me", ({ response }) => {

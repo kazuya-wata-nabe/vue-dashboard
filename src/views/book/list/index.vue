@@ -19,9 +19,9 @@ const [date, dateAttrs] = defineField("date", {
   <div>book list</div>
   <RouterLink :to="{ name: 'book-add' }"> Add </RouterLink>
   <div class="date-container">
-    <DatePicker v-model="date" size="small" label="" placeholder="日付を選択" v-bind="dateAttrs" />
+    <DatePicker v-model="date" label="" placeholder="日付を選択" size="small" v-bind="dateAttrs" />
   </div>
-  <GenericTable :items="books"> </GenericTable>
+  <GenericTable :items="books" />
 </template>
 
 <style scoped>

@@ -3,7 +3,9 @@ import type { RouteRecordRaw } from "vue-router"
 import type { AuthRequiredRoutes, NonAuthRequiredRoutes, Route } from "@/shared/routes"
 import { MainLayout, PublicLayout } from "@/views/_layout"
 import * as BookAdd from "@/views/book/add"
+import * as BookEdit from "@/views/book/edit"
 import * as BookList from "@/views/book/list"
+import * as BookShow from "@/views/book/show"
 import * as Chat from "@/views/chat"
 import * as Home from "@/views/home"
 import * as Login from "@/views/login"
@@ -69,9 +71,17 @@ const routesAuthRequired = [
         component: BookAdd.Component,
       },
       {
-        path: ":id",
+        path: ":id/show",
+        name: "book-show",
+        component: BookShow.Component,
+        props: (route) => ({
+          id: parsePathId(route),
+        }),
+      },
+      {
+        path: ":id/edit",
         name: "book-edit",
-        component: BookAdd.Component,
+        component: BookEdit.Component,
         props: (route) => ({
           id: parsePathId(route),
         }),

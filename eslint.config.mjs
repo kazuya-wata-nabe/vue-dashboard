@@ -50,7 +50,7 @@ export default [
       "@typescript-eslint/no-explicit-any": "error",
       "prettier/prettier": WARN,
       "prefer-arrow-functions/prefer-arrow-functions": ["error"],
-
+      "vue/attributes-order": ["warn", { alphabetical: true }],
       "vuejs-accessibility/label-has-for": [
         "error",
         {
