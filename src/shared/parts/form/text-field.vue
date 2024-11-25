@@ -23,14 +23,14 @@ const id = useId("text")
   <div class="input-container">
     <label :for="id">{{ label }}</label>
     <input
-      type="text"
       v-bind="$attrs"
       :id="id"
+      v-model="model"
+      type="text"
       :class="classes"
       :placeholder="placeholder"
-      v-model="model"
     />
-    <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
+    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
   </div>
 </template>
 

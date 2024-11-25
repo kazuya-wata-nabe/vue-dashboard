@@ -1,40 +1,34 @@
 import noRelativeImportPaths from "eslint-plugin-no-relative-import-paths"
 import preferArrowFunctions from "eslint-plugin-prefer-arrow-functions"
+import eslintPluginStorybook from "eslint-plugin-storybook"
 import eslintPluginUnicorn from "eslint-plugin-unicorn"
+import pluginVue from "eslint-plugin-vue"
 import vuejsA11y from "eslint-plugin-vuejs-accessibility"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import { fixupConfigRules, includeIgnoreFile } from "@eslint/compat"
-import { FlatCompat } from "@eslint/eslintrc"
-import js from "@eslint/js"
+import { includeIgnoreFile } from "@eslint/compat"
 import vitest from "@vitest/eslint-plugin"
+import eslintConfigPrettier from "@vue/eslint-config-prettier"
+import skipFormatting from "@vue/eslint-config-prettier/skip-formatting"
+import vueTsEslintConfig from "@vue/eslint-config-typescript"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const gitignorePath = path.resolve(__dirname, ".gitignore")
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-})
 
 const WARN = process.env.STRICT_LINT === "true" ? "error" : "warn"
 
 export default [
   includeIgnoreFile(gitignorePath),
   {
-    ignores: ["src/assets", "**/*.config.ts", "**/*.json", "**/*.js", "eslint.config.mjs"],
+    ignores: ["src/assets", "**/*.config.ts", "**/*.json", "**/*.js"],
   },
   eslintPluginUnicorn.configs["flat/recommended"],
-  ...fixupConfigRules(
-    compat.extends(
-      "plugin:vue/vue3-essential",
-      "eslint:recommended",
-      "@vue/eslint-config-typescript",
-      "@vue/eslint-config-prettier/skip-formatting",
-      "plugin:storybook/recommended",
-    ),
-  ),
+  eslintConfigPrettier,
+  skipFormatting,
+  ...pluginVue.configs["flat/essential"],
+  ...vueTsEslintConfig(),
+  ...eslintPluginStorybook.configs["flat/recommended"],
   {
     plugins: {
       "prefer-arrow-functions": preferArrowFunctions,
@@ -91,11 +85,16 @@ export default [
     },
   },
   {
-    files: ["**/*.test.ts", "**/*.stories.ts"],
+    files: ["**/*.stories.ts"],
+    rules: {
+      "@typescript-eslint/no-non-null-assertion": "off",
+    },
+  },
+  {
+    files: ["**/*.test.ts"],
     plugins: {
       vitest,
     },
-
     rules: {
       ...vitest.configs.recommended.rules,
       "@typescript-eslint/no-non-null-assertion": "off",

@@ -21,21 +21,21 @@ const [password, passwordAttrs] = defineField("password")
       </FlexCol>
       <InputForm id="login-form">
         <TextField
+          v-model="email"
           size="large"
           label="id"
           placeholder="hoge@example.com"
-          v-model="email"
           v-bind="emailAttrs"
         />
         <TextField
+          v-model="password"
           type="password"
           size="large"
           label="password"
           placeholder="password"
-          v-model="password"
           v-bind="passwordAttrs"
         />
-        <SubmitButton :isSubmitting="isSubmitting" @click="onClickSubmit">submit</SubmitButton>
+        <SubmitButton :is-submitting="isSubmitting" @click="onClickSubmit">submit</SubmitButton>
       </InputForm>
     </FlexCol>
   </main>

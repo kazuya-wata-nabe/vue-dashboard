@@ -32,7 +32,7 @@ export const Secondary: Story = {
     const canvas = within(canvasElement)
 
     const actual = await canvas.findByText("2021/03/10")
-    expect(actual).toBeInTheDocument()
-    expect(actual.classList).toContain("over")
+    await expect(actual).toBeInTheDocument()
+    await expect(actual.classList).toContain("over")
   },
 }

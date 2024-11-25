@@ -51,13 +51,13 @@ export const useAuth = () => {
 }
 
 export const authMiddleware = (jwt: JWT | undefined, refresh: Refresh): Middleware => ({
-  onRequest: async (req) => {
+  onRequest: async ({ request }) => {
     const newJwt = jwt && isExpired(jwt) ? await refresh(jwt) : jwt
 
     if (newJwt?.accessToken) {
-      req.headers.set("Authorization", `Bearer ${newJwt.accessToken}`)
+      request.headers.set("Authorization", `Bearer ${newJwt.accessToken}`)
     }
 
-    return req
+    return request
   },
 })

@@ -3,7 +3,7 @@ import * as Components from "./index"
 
 const meta = {
   tags: ["!autodocs", "!dev", "!test"],
-} satisfies Meta<{}>
+} satisfies Meta<object>
 
 export default meta
 

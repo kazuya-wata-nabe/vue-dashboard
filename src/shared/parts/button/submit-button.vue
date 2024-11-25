@@ -14,10 +14,10 @@ const emits = defineEmits<{
 
 <template>
   <div class="button-container" :class="{ loading: isSubmitting, [size]: true }">
-    <button @click="!isSubmitting && emits('click')" :disabled="isSubmitting">
+    <button :disabled="isSubmitting" @click="!isSubmitting && emits('click')">
       <slot></slot>
     </button>
-    <div class="loader-container" v-show="isSubmitting">
+    <div v-show="isSubmitting" class="loader-container">
       <div class="loader"></div>
     </div>
   </div>

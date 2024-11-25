@@ -17,27 +17,27 @@ const [returnDate, returnDateAttrs] = defineField("returnDate")
   <FlexCol class="input-container" gap="8">
     <p>本の登録</p>
     <TextField
+      v-model="title"
       size="medium"
       label="タイトル"
       placeholder="タイトル"
-      v-model="title"
       v-bind="titleAttrs"
     />
     <DatePicker
+      v-model="borrowDate"
       size="medium"
       label="貸出日"
       placeholder="日付を選択"
-      v-model="borrowDate"
       v-bind="borrowDateAttrs"
     />
     <DatePicker
+      v-model="returnDate"
       size="medium"
       label="返却日"
       placeholder="日付を選択"
-      v-model="returnDate"
       v-bind="returnDateAttrs"
     />
-    <SubmitButton :isSubmitting="isSubmitting" @click="onClickSubmit">登録</SubmitButton>
+    <SubmitButton :is-submitting="isSubmitting" @click="onClickSubmit">登録</SubmitButton>
   </FlexCol>
 </template>
 

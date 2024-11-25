@@ -7,7 +7,7 @@ const id = `form-${crypto.randomUUID()}`
 </script>
 
 <template>
-  <form @submit.prevent="emits('click')" :id="id">
+  <form :id="id" @submit.prevent="emits('click')">
     <slot></slot>
   </form>
 </template>

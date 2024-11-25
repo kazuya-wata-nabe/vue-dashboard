@@ -92,7 +92,7 @@ const handleUpdate = (value: string) => {
           :placeholder="placeholder"
           :value="model"
         />
-        <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
+        <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
       </div>
     </template>
   </VueDatePicker>

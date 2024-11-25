@@ -56,10 +56,10 @@ onUnmounted(() => {
 
 <template>
   <Transition>
-    <div class="overlay" v-if="isOpen" ref="overlay">
+    <div v-if="isOpen" ref="overlay" class="overlay">
       <div role="dialog">
         <div class="content">
-          <button @click="handleCloseModal" ref="button">X</button>
+          <button ref="button" @click="handleCloseModal">X</button>
           <slot name="content" v-bind="{ handleCloseModal }"> </slot>
         </div>
       </div>

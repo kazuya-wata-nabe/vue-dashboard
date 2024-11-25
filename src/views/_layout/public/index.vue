@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false, name: "PublicLayout" })
+defineOptions({ name: "PublicLayout", inheritAttrs: false })
 </script>
 
 <template>

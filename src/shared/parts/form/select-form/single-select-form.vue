@@ -92,9 +92,9 @@ const handleSelect = (value: string) => {
     >
       <template v-for="(option, index) in options" :key="option.value">
         <li
+          :id="`${optionID}-${index}`"
           role="option"
           tabindex="0"
-          :id="`${optionID}-${index}`"
           :value="option.value"
           :aria-selected="state.currentIndex === index"
           @click="handleSelect(option.value)"
