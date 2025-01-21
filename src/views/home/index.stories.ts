@@ -6,7 +6,7 @@ import Component from "@/views/home/index.vue"
 
 const meta = {
   component: Component,
-  tags: [""],
+  tags: ["autodocs"],
   decorators: [mockDate("2021-03-10")],
   parameters: {
     ...registerMockApi([

@@ -26,9 +26,9 @@ const id = useId("text")
       v-bind="$attrs"
       :id="id"
       v-model="model"
-      type="text"
       :class="classes"
       :placeholder="placeholder"
+      type="text"
     />
     <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
   </div>
