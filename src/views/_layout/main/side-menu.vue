@@ -23,7 +23,7 @@ const routes = [
     <FlexRow>
       <ul class="menu-list">
         <li v-for="route in routes" :key="route.name" class="menu-item">
-          <TypedLink :to="{ name: route.link }" class="link" active-class="active">
+          <TypedLink active-class="active" class="link" :to="{ name: route.link }">
             <IconSideItem :icon="route.icon" />
             <span v-if="!slim">{{ route.name }}</span>
           </TypedLink>

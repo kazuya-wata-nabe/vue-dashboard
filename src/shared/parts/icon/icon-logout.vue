@@ -7,5 +7,5 @@ const emits = defineEmits<{
 </script>
 
 <template>
-  <BaseIcon dark clickable @click="emits('click')">logout</BaseIcon>
+  <BaseIcon clickable dark @click="emits('click')">logout</BaseIcon>
 </template>

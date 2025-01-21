@@ -49,58 +49,58 @@ const handleSelect = (value: string) => {
   <div class="select-form">
     <div :id="labelID">{{ label }}</div>
     <div
-      role="combobox"
-      tabindex="0"
-      :aria-expanded="state.isOpen"
-      aria-haspopup="listbox"
       :aria-activedescendant="activedescendant"
       :aria-controls="listBoxID"
-      @click="controller.open"
+      :aria-expanded="state.isOpen"
+      aria-haspopup="listbox"
+      role="combobox"
+      tabindex="0"
       @blur="onComboBoxBlur"
-      @keydown.prevent.up="onKeyDownUp"
+      @click="controller.open"
       @keydown.prevent.down="onKeyDownDown"
       @keydown.prevent.enter="handleEnter"
       @keydown.prevent.esc="reset"
+      @keydown.prevent.up="onKeyDownUp"
     >
       <div>{{ displayValue }}</div>
       <svg
-        width="18"
-        height="16"
         aria-hidden="true"
         focusable="false"
+        height="16"
         style="forced-color-adjust: auto"
+        width="18"
       >
         <polygon
           class="arrow"
-          stroke-width="0"
-          fill-opacity="0.75"
           fill="currentcolor"
+          fill-opacity="0.75"
           points="3,6 15,6 9,14"
+          stroke-width="0"
         />
       </svg>
     </div>
     <ul
-      role="listbox"
-      tabindex="-1"
-      :aria-labelledby="labelID"
       :aria-expanded="state.isOpen"
       :aria-hidden="state.isOpen"
-      @mouseover="onListBoxFocus"
+      :aria-labelledby="labelID"
+      role="listbox"
+      tabindex="-1"
+      @blur="onListBoxBlur"
       @focus="onListBoxFocus"
       @mouseleave="onListBoxBlur"
-      @blur="onListBoxBlur"
+      @mouseover="onListBoxFocus"
     >
       <template v-for="(option, index) in options" :key="option.value">
         <li
           :id="`${optionID}-${index}`"
+          :aria-selected="state.currentIndex === index"
           role="option"
           tabindex="0"
           :value="option.value"
-          :aria-selected="state.currentIndex === index"
           @click="handleSelect(option.value)"
+          @focus="updateIndex(index)"
           @keydown.prevent.enter="handleSelect(option.value)"
           @mouseover="updateIndex(index)"
-          @focus="updateIndex(index)"
         >
           {{ option.name }}
         </li>

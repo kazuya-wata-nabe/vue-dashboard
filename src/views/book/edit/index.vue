@@ -18,23 +18,23 @@ const [returnDate, returnDateAttrs] = defineField("returnDate")
     <p>本の登録</p>
     <TextField
       v-model="title"
-      size="medium"
       label="タイトル"
       placeholder="タイトル"
+      size="medium"
       v-bind="titleAttrs"
     />
     <DatePicker
       v-model="borrowDate"
-      size="medium"
       label="貸出日"
       placeholder="日付を選択"
+      size="medium"
       v-bind="borrowDateAttrs"
     />
     <DatePicker
       v-model="returnDate"
-      size="medium"
       label="返却日"
       placeholder="日付を選択"
+      size="medium"
       v-bind="returnDateAttrs"
     />
     <SubmitButton :is-submitting="isSubmitting" @click="onClickSubmit">登録</SubmitButton>
