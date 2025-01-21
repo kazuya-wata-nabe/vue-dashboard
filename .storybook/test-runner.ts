@@ -5,7 +5,15 @@ const config: TestRunnerConfig = {
   postVisit: async (page, context) => {
     if (!process.env.SCREEN_SHOT) return
     await screenshot(page, context, {
-      /* some options */
+      flakiness: {
+        metrics: {
+          retries: 3000,
+        },
+        retake: {
+          interval: 500,
+          retries: 20,
+        },
+      },
     })
   },
 }

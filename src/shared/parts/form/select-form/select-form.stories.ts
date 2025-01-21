@@ -24,6 +24,11 @@ export const Primary: Story = {
   args: {
     label: "ユーザ一覧",
   },
+  parameters: {
+    screenshot: {
+      delay: 1000,
+    },
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
 

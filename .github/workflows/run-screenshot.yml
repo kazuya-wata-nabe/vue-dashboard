@@ -40,14 +40,6 @@ jobs:
           pnpm playwright install --with-deps &&
           pnpm playwright install-deps
 
-      - name: Restore Cache VRT snapshots
-        uses: actions/cache/restore@v4
-        with:
-          path: __screenshots__
-          key: storybook-vrt-snapshots-${{ github.sha }}-${{ github.run_id }}
-          restore-keys: |
-            storybook-vrt-snapshots-
-
       - name: Build Storybook
         run: pnpm storybook:build --quiet
 
@@ -57,10 +49,9 @@ jobs:
             "pnpm dlx http-server storybook-static --port 6006 --silent" \
             "pnpm dlx wait-on tcp:6006 && pnpm storybook:screenshot"
 
-      - name: Store Artifacts
-        if: failure()
-        uses: actions/upload-artifact@v4
+      - name: Update Cache VRT snapshots
+        if: success()
+        uses: actions/cache/save@v4
         with:
-          name: vrt-report
-          path: playwright-report/
-          retention-days: 7
+          path: __screenshots__
+          key: storybook-vrt-snapshots-${{ github.sha }}-${{ github.run_id }}

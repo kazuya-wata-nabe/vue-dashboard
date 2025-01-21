@@ -53,7 +53,12 @@ export const LoginSuccess: Story = {
 
 export const LoginFailure: Story = {
   name: "ログイン失敗したらモーダルが表示される",
-  ...registerMockApi([mockApi.POST("/login", [], { status: "400" })]),
+  parameters: {
+    ...registerMockApi([mockApi.POST("/login", [], { status: "400" })]),
+    screenshot: {
+      delay: 1000,
+    },
+  },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
