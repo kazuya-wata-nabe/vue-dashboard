@@ -1,0 +1,57 @@
+name: Storybook Tests
+
+on:
+  workflow_dispatch:
+  # push:
+  # pull_request:
+  #   branches:
+  #     - main
+  #   types:
+  #     - opened
+  #     - reopened
+  #     - synchronize
+  #     - ready_for_review
+
+jobs:
+  test:
+    # if: github.event.pull_request.draft == false
+    timeout-minutes: 3
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node
+      # playwrightのcacheを保存して高速化
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm list @playwright/test | grep @playwright | sed 's/.* //')" >> $GITHUB_ENV
+
+      - name: Cache playwright binaries
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+
+      - name: Install Playwright
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: |
+          pnpm playwright install --with-deps &&
+          pnpm playwright install-deps
+
+      - name: Build Storybook
+        run: pnpm storybook:build --quiet
+
+      - name: Serve Storybook and run tests
+        run: |
+          pnpm dlx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "pnpm dlx http-server storybook-static --port 6006 --silent" \
+            "pnpm dlx wait-on tcp:6006 && pnpm storybook:screenshot"
+
+      - name: Update Cache VRT snapshots
+        if: success()
+        uses: actions/cache/save@v4
+        with:
+          path: __screenshots__
+          key: storybook-vrt-snapshots-${{ github.sha }}-${{ github.run_id }}
