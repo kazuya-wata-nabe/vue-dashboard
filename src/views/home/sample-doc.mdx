@@ -1,0 +1,18 @@
+import { Canvas, Meta, Story } from "@storybook/blocks"
+import * as BookListSearchFormStories from "./components/book-list-search-form/index.stories.ts"
+import * as PageStories from "./index.stories"
+
+<Meta of={PageStories} />
+
+# ホーム画面
+
+- ログイン後に遷移するページ
+- aaaa
+
+<Canvas of={PageStories.Primary} />
+
+## 項目
+
+検索フォーム
+
+<Story of={BookListSearchFormStories.Primary} />

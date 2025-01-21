@@ -1,21 +1,25 @@
 <script lang="ts" setup>
+import { useId } from "@/shared/composable/use-id"
+
 const emits = defineEmits<{
   click: []
 }>()
 
-const id = `form-${crypto.randomUUID()}`
+const id = useId("form")
 </script>
 
 <template>
-  <form :id="id" @submit.prevent="emits('click')">
+  <form :id="id" class="form-container" @submit.prevent="emits('click')">
     <slot></slot>
   </form>
 </template>
 
 <style scoped>
-form {
+.form-container {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 16px;
+  border: solid 1px;
 }
 </style>
