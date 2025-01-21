@@ -1,4 +1,4 @@
-name: Storybook Tests
+name: VRT
 
 on:
   workflow_dispatch:
