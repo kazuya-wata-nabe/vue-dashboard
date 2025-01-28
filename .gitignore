@@ -31,3 +31,5 @@ __screenshots__
 *.tsbuildinfo
 
 *storybook.log
+
+docs/.vitepress/cache
