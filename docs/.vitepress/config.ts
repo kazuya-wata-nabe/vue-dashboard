@@ -24,15 +24,14 @@ export default defineConfig({
       {
         text: "認証いらないやつ",
         items: [
-          { text: "ログイン", link: "/login/" }, //
+          { text: "トップ", link: "/認証不要/トップ/" },
+          { text: "ログイン", link: "/認証不要/ログイン/" },
+          { text: "蔵書検索（簡易）", link: "/認証不要/蔵書検索（簡易）/" },
         ],
       },
       {
         text: "認証いるやつ",
-        items: [
-          { text: "ホーム画面", link: "/home/" }, //
-          { text: "蔵書検索（簡易）", link: "/蔵書検索（簡易）/" }, //
-        ],
+        items: [{ text: "ホーム", link: "/認証要/ホーム/" }],
       },
     ],
 

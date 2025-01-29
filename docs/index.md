@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 画面一覧
-      link: /login
+      link: /認証不要/トップ/
     - theme: alt
       text: API仕様書
       link: /api-examples
