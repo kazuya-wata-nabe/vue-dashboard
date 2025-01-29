@@ -31,7 +31,7 @@ export default defineConfig({
         text: "認証いるやつ",
         items: [
           { text: "ホーム画面", link: "/home/" }, //
-          { text: "aaa", link: "/book/list" }, //
+          { text: "蔵書検索（簡易）", link: "/蔵書検索（簡易）/" }, //
         ],
       },
     ],
