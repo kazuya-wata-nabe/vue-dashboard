@@ -6,14 +6,18 @@ export default defineConfig({
   description: "This is sample",
   lang: "ja-JP",
   themeConfig: {
+    // https://vitepress.dev/reference/default-theme-search#algolia-search
+    search: {
+      provider: "local",
+    },
     outline: {
       level: "deep",
       label: "目次",
     },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "Home", link: "/" },
-      { text: "Examples", link: "/markdown-examples" },
+      { text: "画面遷移図", link: "/画面遷移図" },
+      // { text: "Examples", link: "/markdown-examples" },
     ],
 
     sidebar: [
@@ -26,11 +30,12 @@ export default defineConfig({
       {
         text: "認証いるやつ",
         items: [
-          { text: "書籍画面", link: "/home/" }, //
+          { text: "ホーム画面", link: "/home/" }, //
+          { text: "aaa", link: "/book/list" }, //
         ],
       },
     ],
 
-    socialLinks: [{ icon: "github", link: "https://github.com/vuejs/vitepress" }],
+    // socialLinks: [{ icon: "github", link: "https://github.com/vuejs/vitepress" }],
   },
 })
