@@ -3,9 +3,9 @@
 layout: home
 
 hero:
-  name: "Documents"
-  text: "This is sample"
-  tagline: My great project tagline
+  name: "〇〇システム"
+  text: "サンプルです"
+  tagline: ああああああ
   actions:
     - theme: brand
       text: 画面一覧
@@ -16,9 +16,14 @@ hero:
 
 features:
   - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: |
+      要件定義はこちら
+
   - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit
+
   - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
