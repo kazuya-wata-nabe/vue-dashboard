@@ -1,3 +1,4 @@
+import { JSDOM } from "jsdom"
 import { writeFile, readFile, readdir } from "node:fs/promises"
 
 type Dto = {
@@ -15,44 +16,34 @@ const getHtmlFileRecursive = async (source: string): Promise<Dto[]> => {
   }))
 }
 
-const replaceTag = (reg: RegExp, prefix: string, content: string): string => {
-  const matched = reg.exec(content)
-  if (matched === null) return content
-
-  const [tag = "", oldPath, _] = matched
-  const newPath = prefix + oldPath
-  const styleTag = tag.replace(oldPath, newPath)
-  return replaceTag(reg, prefix, content.replace(tag, styleTag))
-}
-
-const replaceTag2 = (reg: RegExp, prefix: string, content: string): string => {
-  const matched = reg.exec(content)
-  if (matched === null) return content
-
-  const [tag = "", oldPath, _] = matched
-  console.debug(tag)
-  const newPath = prefix + oldPath + "index.html"
-  const styleTag = tag.replace(oldPath, newPath)
-  return replaceTag(reg, prefix, content.replace(tag, styleTag))
-}
-
 const convert = async (dto: Dto) => {
-  const assetsRegex = /[href|src]="(\/assets\/.*?)"*[^>]*>/
   const prefix = Array.from({ length: dto.depth }).fill("..").join("/")
-  let content = await readFile(dto.path, "utf8")
+  const content = await readFile(dto.path, "utf8")
+  const dom = new JSDOM(content, { contentType: "text/html" })
+  const getAll = <T extends HTMLElement>(selector: string) =>
+    dom.window.document.querySelectorAll<T>(selector) ?? []
 
-  const asideRegex = /<aside class="VPSidebar"(.*)<\/aside>/
-  const aside = asideRegex.exec(content)
-  content = replaceTag(/href="\/"/, prefix, content)
-  // const assetsReplaced = replaceTag(assetsRegex, prefix, "", content)
-  // const asideReplaced = replaceTag2(asideRegex, prefix, content)
-  // await writeFile(dto.path, asideReplaced)
+  for (const element of getAll<HTMLLinkElement>("head > link")) {
+    element.href = prefix + element.href
+  }
+
+  for (const element of getAll<HTMLAnchorElement>("a.VPLink")) {
+    const hasExt = element.href.endsWith(".html")
+    const href = hasExt ? element.href : element.href + "index.html"
+    element.href = prefix + href
+  }
+
+  for (const element of getAll<HTMLImageElement>("main img")) {
+    element.src = prefix + element.src
+  }
+
+  await writeFile(dto.path, dom.serialize())
+  // await writeFile(dto.path + "2.html", dom.serialize())
 }
 
 const dir = import.meta.dirname + "/.vitepress/dist"
 const dtos = await getHtmlFileRecursive(dir)
 
-await convert(dtos[1])
-// for (const dto of dtos) {
-//   await convert(dto)
-// }
+for (const dto of dtos) {
+  await convert(dto)
+}
