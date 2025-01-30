@@ -8,7 +8,7 @@ type Dto = {
 
 const getHtmlFileRecursive = async (source: string): Promise<Dto[]> => {
   const fileList = await readdir(source, { recursive: true })
-  const htmlList = fileList.filter((file) => file.endsWith("index.html"))
+  const htmlList = fileList.filter((file) => file.endsWith(".html"))
 
   return htmlList.map((html) => ({
     path: source + "/" + html,
@@ -17,7 +17,7 @@ const getHtmlFileRecursive = async (source: string): Promise<Dto[]> => {
 }
 
 const convert = async (dto: Dto) => {
-  const prefix = Array.from({ length: dto.depth }).fill("..").join("/")
+  const prefix = dto.depth > 0 ? Array.from({ length: dto.depth }).fill("..").join("/") : "."
   const content = await readFile(dto.path, "utf8")
   const dom = new JSDOM(content, { contentType: "text/html" })
   const getAll = <T extends HTMLElement>(selector: string) =>
@@ -29,8 +29,8 @@ const convert = async (dto: Dto) => {
 
   for (const element of getAll<HTMLAnchorElement>("a.VPLink")) {
     const hasExt = element.href.endsWith(".html")
-    const href = hasExt ? element.href : element.href + "index.html"
-    element.href = prefix + href
+    const href = hasExt ? element.href.slice(0, -5) + "/" : element.href
+    element.href = prefix + href + "index.html"
   }
 
   for (const element of getAll<HTMLImageElement>("main img")) {
@@ -38,12 +38,12 @@ const convert = async (dto: Dto) => {
   }
 
   await writeFile(dto.path, dom.serialize())
-  // await writeFile(dto.path + "2.html", dom.serialize())
 }
 
 const dir = import.meta.dirname + "/.vitepress/dist"
 const dtos = await getHtmlFileRecursive(dir)
 
 for (const dto of dtos) {
+  // console.debug(dto.path)
   await convert(dto)
 }
