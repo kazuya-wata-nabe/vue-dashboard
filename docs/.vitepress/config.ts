@@ -2,7 +2,7 @@ import { defineConfig } from "vitepress"
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Documents",
+  title: "画面一覧",
   description: "This is sample",
   lang: "ja-JP",
   themeConfig: {
@@ -17,7 +17,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "画面遷移図", link: "/画面遷移図" },
-      // { text: "Examples", link: "/markdown-examples" },
+      { text: "Tips", link: "/Tips" },
     ],
 
     sidebar: [
@@ -31,7 +31,10 @@ export default defineConfig({
       },
       {
         text: "認証いるやつ",
-        items: [{ text: "ホーム", link: "/認証要/ホーム/" }],
+        items: [
+          { text: "共通部の説明", link: "/認証要/_共通部の説明/" },
+          { text: "ホーム", link: "/認証要/ホーム/" },
+        ],
       },
     ],
 
