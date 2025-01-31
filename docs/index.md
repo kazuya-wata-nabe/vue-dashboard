@@ -21,7 +21,7 @@ features:
 
   - title: Feature B
     details: |
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit
+      お仕事依頼はこちら
 
   - title: Feature C
     details: |

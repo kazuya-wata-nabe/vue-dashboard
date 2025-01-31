@@ -35,7 +35,7 @@ const run = () => {
 
 <template>
   <div class="toggle-wrapper">
-    <button @click="run">grid</button>
+    <button @click="run">縦横チェンジ</button>
   </div>
 </template>
 
