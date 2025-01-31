@@ -37,11 +37,11 @@ async function handleRequest({ next, request }) {
     const user = decoded.substring(0, index);
     const pass = decoded.substring(index + 1);
 
-    if (env.BASIC_AUTH_USER !== user) {
+    if (context.cloudflare.env.BASIC_AUTH_USER !== user) {
       return new Response('Invalid credentials.', { status: 401 })
     }
 
-    if (env.BASIC_AUTH_PASSWORD !== pass) {
+    if (context.cloudflare.env.BASIC_AUTH_PASSWORD !== pass) {
       return new Response('Invalid credentials.', { status: 401 })
     }
 
