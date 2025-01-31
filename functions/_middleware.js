@@ -1,6 +1,3 @@
-const BASIC_AUTH_USER = 'admin'
-const BASIC_AUTH_PASSWORD = 'admin'
-
 async function errorHandling(context) {
   try {
     return await context.next()
@@ -40,11 +37,11 @@ async function handleRequest({ next, request }) {
     const user = decoded.substring(0, index);
     const pass = decoded.substring(index + 1);
 
-    if (BASIC_AUTH_USER !== user) {
+    if (env.BASIC_AUTH_USER !== user) {
       return new Response('Invalid credentials.', { status: 401 })
     }
 
-    if (BASIC_AUTH_PASSWORD !== pass) {
+    if (env.BASIC_AUTH_PASSWORD !== pass) {
       return new Response('Invalid credentials.', { status: 401 })
     }
 
