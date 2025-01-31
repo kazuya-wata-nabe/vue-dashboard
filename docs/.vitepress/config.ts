@@ -17,23 +17,32 @@ export default defineConfig({
     },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "画面遷移図", link: "/画面遷移図.drawio.svg", target: "blank" },
-      { text: "Tips", link: "/Tips", target: "blank" },
+      { text: "画面遷移図", link: "/画面遷移図.drawio.svg", target: "_blank" },
+      { text: "Tips", link: "/Tips", target: "_blank" },
+      { component: "CustomDoc" },
     ],
     sidebar: [
       {
         text: "認証いらないやつ",
         items: [
-          { text: "トップ", link: "/認証不要/トップ/" },
-          { text: "ログイン", link: "/認証不要/ログイン/" },
-          { text: "蔵書検索（簡易）", link: "/認証不要/蔵書検索（簡易）/" },
+          {
+            items: [
+              { text: "トップ", link: "/認証不要/トップ/" },
+              { text: "ログイン", link: "/認証不要/ログイン/" },
+              { text: "蔵書検索（簡易）", link: "/認証不要/蔵書検索（簡易）/" },
+            ],
+          },
         ],
       },
       {
         text: "認証いるやつ",
         items: [
-          { text: "共通部の説明", link: "/認証要/_共通部の説明/" },
-          { text: "ホーム", link: "/認証要/ホーム/" },
+          {
+            items: [
+              { text: "共通部の説明", link: "/認証要/_共通部の説明/" },
+              { text: "ホーム", link: "/認証要/ホーム/" },
+            ],
+          },
         ],
       },
     ],

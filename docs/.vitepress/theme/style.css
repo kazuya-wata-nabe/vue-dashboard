@@ -132,14 +132,3 @@
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
-
-/**
-* Customize
-*/
-/* :root {
-  --vp-layout-max-width: 1920px
-}
-
-.content-container {
-  max-width: 1200px !important
-} */
