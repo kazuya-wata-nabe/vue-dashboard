@@ -18,12 +18,17 @@ const getHtmlFileRecursive = async (source: string): Promise<Dto[]> => {
   }))
 }
 
-const convert = async (dto: Dto) => {
+const convert = async (dto: Dto, command: string) => {
   const prefix = dto.depth > 0 ? Array.from({ length: dto.depth }).fill("..").join("/") : "."
   const content = await readFile(dto.path, "utf8")
   const dom = new JSDOM(content, { contentType: "text/html" })
+
   const getAll = <T extends HTMLElement>(selector: string) =>
     dom.window.document.querySelectorAll<T>(selector) ?? []
+
+  const script = dom.window.document.createElement("script")
+  script.innerHTML = command
+  dom.window.document.body.append(script)
 
   for (const element of getAll<HTMLLinkElement>("head > link")) {
     element.href = prefix + element.href
@@ -47,12 +52,27 @@ const convert = async (dto: Dto) => {
   await writeFile(dto.path, dom.serialize())
 }
 
-const dir = import.meta.dirname + "/.vitepress/dist"
-const items = await getHtmlFileRecursive(dir)
+const dir = import.meta.dirname + "/.vitepress"
+const items = await getHtmlFileRecursive(dir + "/dist")
 const ignores = new Set(["404.html", "README.html"])
 const dtos = items.filter((item) => !ignores.has(item.source))
+let command = `
+`
+
+const source = await readFile(dir + "/theme/custom-doc.vue", "utf8")
+const lines = source.split("\n")
+const scriptEnd = lines.findIndex((s) => s.startsWith("</script>"))
+for (let line of lines.slice(1, scriptEnd)) {
+  line = line.replace(/\((.*): .*\)/, "($1)")
+  command += line + "\n"
+}
+command += `
+document
+ .querySelector(".toggle-wrapper > button")
+ ?.addEventListener("click", run)
+`
 
 for (const dto of dtos) {
   console.debug(dto.source)
-  await convert(dto)
+  await convert(dto, command)
 }
