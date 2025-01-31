@@ -7,7 +7,6 @@ const toGrid = (doc: Element) => {
   left.classList.add("left")
   right.classList.add("right")
 
-  // backup = [...doc.childNodes].map((node) => node.cloneNode(true))
   const children = [...doc.childNodes]
   const leftChildren = children.slice(0, 2)
   const rightChildren = children.slice(2)
@@ -18,32 +17,18 @@ const toGrid = (doc: Element) => {
     right.append(child)
   }
   container.append(left, right)
-  doc.replaceWith(container)
-}
-
-const toBlock = (doc: Element) => {
-  const container = document.createElement("div")
-  const left = doc.querySelector(".left")
-  const right = document.querySelector(".right")
-
-  for (const child of left?.children ?? []) {
-    container.append(child)
-  }
-  for (const child of right?.children ?? []) {
-    container.append(child)
-  }
-  doc.replaceWith(container)
+  doc.append(container)
 }
 
 const run = () => {
   const doc = document.querySelector(".vp-doc > div")
   if (!doc) return
 
-  if (!doc.classList.contains("grid")) {
+  const docContainer = doc?.querySelector(".doc-container")
+  if (docContainer) {
+    docContainer.classList.toggle("grid")
+  } else {
     toGrid(doc)
-  }
-  if (doc.classList.contains("grid")) {
-    toBlock(doc)
   }
 }
 </script>
