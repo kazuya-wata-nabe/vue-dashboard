@@ -30,9 +30,12 @@
   },
   "dependencies": {
     "@vee-validate/zod": "^4.15.0",
+    "@vercel/edge": "^1.2.1",
     "@vuepic/vue-datepicker": "^10.0.0",
+    "basic-auth": "^2.0.1",
     "date-fns": "^4.1.0",
     "openapi-fetch": "^0.13.4",
+    "static-auth": "^2.1.2",
     "vee-validate": "^4.15.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
