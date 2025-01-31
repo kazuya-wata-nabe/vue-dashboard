@@ -6,7 +6,7 @@ async function errorHandling(context) {
   }
 }
 
-async function handleRequest({ next, request }) {
+async function handleRequest({ next, request, env }) {
   // The "Authorization" header is sent when authenticated.
   if (request.headers.has("Authorization")) {
     const Authorization = request.headers.get('Authorization')
@@ -37,11 +37,11 @@ async function handleRequest({ next, request }) {
     const user = decoded.substring(0, index);
     const pass = decoded.substring(index + 1);
 
-    if (context.cloudflare.env.BASIC_AUTH_USER !== user) {
+    if (env.BASIC_AUTH_USER !== user) {
       return new Response('Invalid credentials.', { status: 401 })
     }
 
-    if (context.cloudflare.env.BASIC_AUTH_PASSWORD !== pass) {
+    if (env.BASIC_AUTH_PASSWORD !== pass) {
       return new Response('Invalid credentials.', { status: 401 })
     }
 
