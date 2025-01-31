@@ -18,7 +18,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "画面遷移図", link: "/画面遷移図.drawio.svg", target: "_blank" },
-      { text: "Tips", link: "/Tips", target: "_blank" },
+      { text: "Tips", link: "/Tips/", target: "_blank" },
       { component: "CustomDoc" },
     ],
     sidebar: [
