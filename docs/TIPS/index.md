@@ -12,8 +12,25 @@
 |予約中|返却されたら借りられる状態|
 |取り置き中|本を確保した状態|
 
-## メッセージ
+## markdown記法
 
-### E-101-蔵書検索失敗
+::: info
+This is an info box.
+:::
 
-検索条件を入力してください
+::: tip
+This is a tip.
+:::
+
+::: warning
+This is a warning.
+:::
+
+::: danger
+This is a dangerous warning.
+:::
+
+::: details
+This is a details block.
+:::
+

@@ -3,23 +3,23 @@ import { defineConfig } from "vitepress"
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "画面一覧",
-  description: "This is sample",
+  description: "サンプルです",
   lang: "ja-JP",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-search#algolia-search
     search: {
       provider: "local",
     },
+    aside: false,
     outline: {
       level: "deep",
       label: "目次",
     },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "画面遷移図", link: "/画面遷移図" },
-      { text: "Tips", link: "/Tips" },
+      { text: "画面遷移図", link: "/画面遷移図.drawio.svg", target: "blank" },
+      { text: "Tips", link: "/Tips", target: "blank" },
     ],
-
     sidebar: [
       {
         text: "認証いらないやつ",
