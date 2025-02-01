@@ -8,8 +8,9 @@ const toGrid = (doc: Element) => {
   right.classList.add("right")
 
   const children = [...doc.childNodes]
-  const leftChildren = children.slice(0, 2)
-  const rightChildren = children.slice(2)
+  const index = children.findIndex((child) => child.nodeName === "H2")
+  const leftChildren = children.slice(0, index)
+  const rightChildren = children.slice(index)
   for (const child of leftChildren) {
     left.append(child)
   }
