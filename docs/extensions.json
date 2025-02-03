@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "hediet.vscode-drawio",
+    "yzhang.markdown-all-in-one",
+    "DavidAnson.vscode-markdownlint",
+    "taichi.vscode-textlint",
+    "streetsidesoftware.code-spell-checker",
+  ]
+}
