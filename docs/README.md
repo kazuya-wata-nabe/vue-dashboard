@@ -7,3 +7,7 @@
 ```sh
 npx vitepress dev docs
 ```
+
+## Drawioセットアップ
+
+![](setup-drawio.gif)
