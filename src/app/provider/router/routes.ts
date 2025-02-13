@@ -6,7 +6,6 @@ import * as BookAdd from "@/views/book/add"
 import * as BookEdit from "@/views/book/edit"
 import * as BookList from "@/views/book/list"
 import * as BookShow from "@/views/book/show"
-import * as Chat from "@/views/chat"
 import * as Home from "@/views/home"
 import * as Login from "@/views/login"
 import { parsePathId, strOrEmpty } from "./helper"
@@ -48,11 +47,6 @@ const routesAuthRequired = [
     props: (route): Home.Props => ({
       date: strOrEmpty(route, "date"),
     }),
-  },
-  {
-    path: "/chat",
-    name: "chat",
-    component: Chat.Component,
   },
   {
     path: "/book",
