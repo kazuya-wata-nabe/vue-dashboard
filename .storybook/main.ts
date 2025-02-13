@@ -6,8 +6,6 @@ const config: StorybookConfig = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "@storybook/addon-mdx-gfm",
-    // "@storybook/experimental-addon-test",
   ],
   framework: {
     name: "@storybook/vue3-vite",
