@@ -4,6 +4,7 @@
 - パッケージマネージャはpnpmを使ってください
 
 ## コマンド
+
 - 初回
   - pnpm install
 
@@ -11,6 +12,7 @@
   - pnpm dev
 
 ## アーキテクチャ
+
 - レイヤードアーキテクチャです
 - レイヤー
   - app: アプリ全体の設定
@@ -19,6 +21,7 @@
   - shared: プロジェクト/ビジネスの詳細に依存しない再利用可能な機能
 
 ## 実装ルール
+
 ※ プロジェクトにあわせて適宜カスタムしてください
 
 - モジュールの依存は一方方向にしてください
@@ -40,7 +43,7 @@ import ddd from "@/views/ddd"
 - 最初から無理に共通化せず必要になったら共通化してください
   - 最初はviewsに重複する状態で作成し、共通化できる場合はfeaturesに移動してください
   - 参考  
-    - https://zenn.dev/ishiyama/articles/a0c5a7504b856f#%E7%84%A1%E7%90%86%E3%81%AB%E5%85%B1%E9%80%9A%E5%8C%96%E3%81%97%E3%81%AA%E3%81%84
+    - <https://zenn.dev/ishiyama/articles/a0c5a7504b856f#%E7%84%A1%E7%90%86%E3%81%AB%E5%85%B1%E9%80%9A%E5%8C%96%E3%81%97%E3%81%AA%E3%81%84>
 
 - .vscode/extensions.jsonで推奨しているプラグインは全て導入してください
   - typoを減らしたいため
@@ -56,7 +59,7 @@ export default { hoge: 1 }
 
 - ディレクトリ、ファイル名はkebab-caseにしてください
   - gitが大文字、小文字を区別しないため
-    - https://zenn.dev/soma3134/articles/20220726_folder_case_sensitive
+    - <https://zenn.dev/soma3134/articles/20220726_folder_case_sensitive>
 
 - importは基本的に絶対パスにしてください
   - 自分の配下のソースは相対パスにしてください
@@ -90,12 +93,15 @@ function hoge() {}
   - 遷移先名のtypoによる実行時エラーを防ぐため
 
 ## テストについて
+
 - storybookにテストを書いてください
 - 要素の取得はgetByRoleを使ってください
   - それ以外の方法は原則NG
 
 ## その他
+
 ### apiについて
+
 - api clientはfetchです
 - パス、リクエスト、レスポンスの型はopenapiから自動生成しています
   - openapiを介してバックエンド、フロントエンド間のコミュニケーションをスムーズにしたいため
@@ -106,12 +112,14 @@ function hoge() {}
     - repositoryパターンとかはせず、直接クライアント使ってリクエストしてください
 
 ### mockについて
+
 - mock serverにmsw使っています
   - openapi-msw使っているため、openapiに定義されているパス、レスポンス以外は登録できません
 - レスポンスは`src/app/mocks/handlers.ts`で設定しているので適宜更新してください
   - レスポンスにopenapiのexamplesを使う場合はredoclyでjsonを出力してください
 
 ### vscodeの設定
+
 - 推奨
 
 ```sh
