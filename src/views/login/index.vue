@@ -28,12 +28,12 @@ const [password, passwordAttrs] = defineField("password")
           size="large"
         />
         <TextField
+          mask
           v-bind="passwordAttrs"
           v-model="password"
           label="password"
           placeholder="password"
           size="large"
-          type="password"
         />
         <SubmitButton :is-submitting="isSubmitting" @click="onClickSubmit"> submit </SubmitButton>
       </InputForm>

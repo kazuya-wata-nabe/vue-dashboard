@@ -7,6 +7,7 @@ const props = defineProps<{
   label: string
   placeholder: string
   errorMessage: string | undefined
+  mask?: boolean
 }>()
 
 const model = defineModel<T | undefined>({ required: true })
@@ -17,6 +18,7 @@ const classes = computed(() => ({
 }))
 
 const id = useId("text")
+const type = computed(() => (props.mask ? "password" : "text"))
 </script>
 
 <template>
@@ -28,7 +30,7 @@ const id = useId("text")
       v-model="model"
       :class="classes"
       :placeholder="placeholder"
-      type="text"
+      :type="type"
     />
     <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
   </div>
