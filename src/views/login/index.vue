@@ -28,10 +28,10 @@ const [password, passwordAttrs] = defineField("password")
           size="large"
         />
         <TextField
-          mask
           v-bind="passwordAttrs"
           v-model="password"
           label="password"
+          mask
           placeholder="password"
           size="large"
         />
