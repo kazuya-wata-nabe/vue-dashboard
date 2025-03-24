@@ -1,10 +1,12 @@
-<script lang="ts">
+<script lang="ts" setup>
 import { ref } from "vue"
 import { router } from "@/app/provider/router"
 import { authMiddleware, useAuthenticated } from "@/features/auth"
 import { refresh } from "@/features/auth/model"
 import type { UserRole } from "@/features/user-role"
 import { client, clientMiddleware } from "@/shared/api/client"
+
+defineOptions({ inheritAttrs: false })
 
 const role = ref<UserRole>()
 
@@ -30,10 +32,6 @@ router.beforeResolve(async (to) => {
   role.value = data.role
   return true
 })
-</script>
-
-<script lang="ts" setup>
-defineOptions({ inheritAttrs: false })
 </script>
 
 <template>
