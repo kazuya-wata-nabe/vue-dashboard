@@ -64,6 +64,10 @@ const getDayClass = (date: Date) => {
 const handleUpdate = (value: string) => {
   emits("update", { target: { value } })
 }
+
+const handleCalender = (value: string) => {
+  emits("update", { target: { value } })
+}
 </script>
 
 <template>
@@ -71,6 +75,7 @@ const handleUpdate = (value: string) => {
     v-bind="config"
     v-model="model"
     :day-class="getDayClass"
+    @change="handleCalender"
     @update:model-value="handleUpdate"
   >
     <template #year="year">{{ year.text }}年</template>
