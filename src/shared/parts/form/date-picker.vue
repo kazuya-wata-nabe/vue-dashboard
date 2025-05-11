@@ -3,6 +3,7 @@
  * @see {@link https://vue3datepicker.com/installation/}
  */
 import { computed } from "vue"
+import { format } from "date-fns"
 import VueDatePicker, { type VueDatePickerProps } from "@vuepic/vue-datepicker"
 import "@vuepic/vue-datepicker/dist/main.css"
 
@@ -66,7 +67,7 @@ const handleUpdate = (value: string) => {
 }
 
 const handleCalendar = (value: string) => {
-  emits("update", { target: { value } })
+  emits("update", { target: { value: format(value, "yyyy/MM/dd") } })
 }
 </script>
 
