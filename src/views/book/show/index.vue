@@ -1,14 +1,22 @@
 <script setup lang="ts">
-import { onMounted } from "vue"
+import { onMounted, reactive } from "vue"
 import { FlexCol } from "@/shared/parts"
+import SubComponent from "./SubComponent.vue"
 import type { Props } from "./types"
 
-defineOptions({ name: "BookAdd" })
-defineProps<Props>()
+defineOptions({ name: "BookShow" })
+const props = defineProps<{
+  id: string
+}>()
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const book = reactive<any>({})
 
 onMounted(() => {
-  const { back } = globalThis.history.state
-  console.debug("state:", back)
+  fetch("/books/" + props.id)
+    .then((res) => res.json())
+    .then((json) => (book.value = json))
+    .catch((error) => alert(error))
 })
 </script>
 
@@ -16,6 +24,9 @@ onMounted(() => {
   <FlexCol class="input-container" gap="8">
     <p>本の登録</p>
     <div>タイトル</div>
+    <div>返却期限</div>
+    <sub-component :date="book.date"></sub-component>
+
     <RouterLink :to="{ name: 'home' }">戻る</RouterLink>
   </FlexCol>
 </template>
