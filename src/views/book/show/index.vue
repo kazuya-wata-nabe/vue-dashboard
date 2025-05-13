@@ -13,7 +13,7 @@ const props = defineProps<{
 const book = reactive<any>({})
 
 onMounted(() => {
-  fetch("/books/" + props.id)
+  fetch('/books/' + props.id)
     .then((res) => res.json())
     .then((json) => (book.value = json))
     .catch((error) => alert(error))

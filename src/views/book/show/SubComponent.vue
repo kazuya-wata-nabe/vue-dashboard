@@ -1,11 +1,11 @@
 <template>
-  <div class="date">
+  <div class="date-container">
     {{ date.substring(0, 4) }}年 {{ date.substring(4, 6) }}月 {{ date.substring(6, 8) }}日
   </div>
 </template>
 
-<style scoped>
-.container {
+<style>
+.date-container {
   display: flex;
 }
 </style>
