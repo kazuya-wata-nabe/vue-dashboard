@@ -3,6 +3,7 @@
  * @see {@link https://vue3datepicker.com/installation/}
  */
 import { computed } from "vue"
+import { format } from "date-fns"
 import VueDatePicker, { type VueDatePickerProps } from "@vuepic/vue-datepicker"
 import "@vuepic/vue-datepicker/dist/main.css"
 
@@ -64,6 +65,10 @@ const getDayClass = (date: Date) => {
 const handleUpdate = (value: string) => {
   emits("update", { target: { value } })
 }
+
+const handleCalendar = (value: string) => {
+  emits("update", { target: { value: format(value, "yyyy/MM/dd") } })
+}
 </script>
 
 <template>
@@ -71,6 +76,7 @@ const handleUpdate = (value: string) => {
     v-bind="config"
     v-model="model"
     :day-class="getDayClass"
+    @change="handleCalendar"
     @update:model-value="handleUpdate"
   >
     <template #year="year">{{ year.text }}年</template>
