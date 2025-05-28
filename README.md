@@ -1,15 +1,20 @@
 # README
 
-- node管理ツールは[volta](https://volta.sh/)を使ってください
-- パッケージマネージャはpnpmを使ってください
+- node管理ツールは[mise](https://mise.jdx.dev)を使ってください
 
 ## コマンド
 
 - 初回
-  - pnpm install
+
+```sh
+mise i
+```
 
 - 起動
-  - pnpm dev
+
+```sh
+pnpm dev
+```
 
 ## アーキテクチャ
 
@@ -22,101 +27,19 @@
 
 ## 実装ルール
 
-※ プロジェクトにあわせて適宜カスタムしてください
-
-- モジュールの依存は一方方向にしてください
-  - 自分より下位のレイヤーのimportのみOK
-  - 同レイヤー同士のimportは原則NG
-
-```ts
-// OK
-// @/app/hoge.ts
-import fuga from "@/shared"
-// NG
-// @/features/aaa
-import bbb from "@/views"
-// NG
-// @/views/ccc
-import ddd from "@/views/ddd"
-```
-
 - 最初から無理に共通化せず必要になったら共通化してください
   - 最初はviewsに重複する状態で作成し、共通化できる場合はfeaturesに移動してください
-  - 参考  
+  - 参考
     - <https://zenn.dev/ishiyama/articles/a0c5a7504b856f#%E7%84%A1%E7%90%86%E3%81%AB%E5%85%B1%E9%80%9A%E5%8C%96%E3%81%97%E3%81%AA%E3%81%84>
 
-- .vscode/extensions.jsonで推奨しているプラグインは全て導入してください
-  - typoを減らしたいため
-  
-- exportはnamed exportにしてください
-
-```ts
-// OK
-export const hoge = { hoge: 1 }
-// NG
-export default { hoge: 1 }
-```
-
-- ディレクトリ、ファイル名はkebab-caseにしてください
-  - gitが大文字、小文字を区別しないため
-    - <https://zenn.dev/soma3134/articles/20220726_folder_case_sensitive>
-
-- importは基本的に絶対パスにしてください
-  - 自分の配下のソースは相対パスにしてください
-  - importの順番をキレイにしたいため
-
-```ts
-// OK
-import hoge from "@/xxxx"
-import hoge from "./xxxx"
-// NG
-import hoge from "../xxxx"
-```
-
-- 関数はアロー関数で定義してください
-
-```ts
-// OK
-const hoge = () => {}
-// NG
-function hoge() {}
-```
-
-- 使っていないimport, 変数は削除してからpushしてください
-  - 上記が残っているとエラーになります
-  - push前は試行錯誤しやすいよう警告だけにしてます
-
-- `eslint`のルールは`.eslintrc`で定義しています
+- `eslint`のルールは`eslint.config.ts`で定義しています
   - 追加したい or 削除したいルールがあれば適宜カスタムしてください
-
-- RouterLinkは使わず `@/shared/parts/link/typed-link.vue`を使ってください
-  - 遷移先名のtypoによる実行時エラーを防ぐため
 
 ## テストについて
 
 - storybookにテストを書いてください
-- 要素の取得はgetByRoleを使ってください
-  - それ以外の方法は原則NG
 
 ## その他
-
-### apiについて
-
-- api clientはfetchです
-- パス、リクエスト、レスポンスの型はopenapiから自動生成しています
-  - openapiを介してバックエンド、フロントエンド間のコミュニケーションをスムーズにしたいため
-  - 自動生成のコマンドは`pnpm gen:schema`
-  - 自動生成の元ネタなので積極的にopenapiをメンテナンスしてください
-    - フロント用に自動生成しやすい書き方は[こちら](https://openapi-ts.pages.dev/advanced#styleguide)
-  - 自動生成するのでapiディレクトリは作っていません
-    - repositoryパターンとかはせず、直接クライアント使ってリクエストしてください
-
-### mockについて
-
-- mock serverにmsw使っています
-  - openapi-msw使っているため、openapiに定義されているパス、レスポンス以外は登録できません
-- レスポンスは`src/app/mocks/handlers.ts`で設定しているので適宜更新してください
-  - レスポンスにopenapiのexamplesを使う場合はredoclyでjsonを出力してください
 
 ### vscodeの設定
 

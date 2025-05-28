@@ -10,7 +10,7 @@ on:
 
 jobs:
   cache:
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     name: Cache NodeModules
     runs-on: ubuntu-latest
 
