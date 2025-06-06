@@ -27,6 +27,7 @@ const emits = defineEmits<{
 .button-container {
   position: relative;
   display: flex;
+  word-break: break-all;
 
   &.loading {
     opacity: 0.5;
