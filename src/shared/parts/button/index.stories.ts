@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from "@storybook/vue3"
+import { type Meta, type StoryObj } from "@storybook/vue3-vite"
 import SubmitButton from "./submit-button.vue"
 
 /**

@@ -1,5 +1,5 @@
-import { expect, userEvent, within } from "@storybook/test"
-import { type Meta, type StoryObj } from "@storybook/vue3"
+import { expect, userEvent, within } from "storybook/test"
+import { type Meta, type StoryObj } from "@storybook/vue3-vite"
 import Component from "./single-select-form.vue"
 
 const meta = {

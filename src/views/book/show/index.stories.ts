@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/vue3"
+import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import Component from "@/views/book/edit/index.vue"
 
 /** 登録フォーム */

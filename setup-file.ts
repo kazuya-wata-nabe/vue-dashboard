@@ -1,8 +1,8 @@
 import { afterAll, afterEach, beforeAll } from "vitest"
-import { setProjectAnnotations } from "@storybook/vue3"
+import { setProjectAnnotations } from "@storybook/vue3-vite"
 import "@testing-library/jest-dom/vitest"
 import { server } from "@/app/mocks/server"
-import globalStorybookConfig from ".storybook/preview"
+import * as globalStorybookConfig from "./.storybook/preview"
 
 beforeAll(() => server.listen({ onUnhandledRequest: "error" }))
 afterEach(() => server.resetHandlers())
