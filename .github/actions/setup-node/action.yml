@@ -5,16 +5,15 @@ description: Setup Environment Variables for Django Project
 runs:
   using: composite
   steps:
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
+    - name: Install mise
+      uses: jdx/mise-action@156251fcc627ac4e26cb0f93dd47d1d4979abf24 # v3.3.0
       with:
-        version: 10
+        version: "2025.10.2"
+        install: false
 
-    - name: Install Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version-file: package.json
-        cache: pnpm
+    - name: Install tools
+      shell: bash
+      run: mise i node pnpm
 
     - name: Install dependencies
       shell: bash

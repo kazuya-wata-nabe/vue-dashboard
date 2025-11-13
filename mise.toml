@@ -1,4 +1,6 @@
 [tools]
-lefthook = "1.11.12"
+lefthook = "latest"
+gitleaks = "latest"
+jq = "latest"
 node = "24.0.1"
 pnpm = "10.8.1"
